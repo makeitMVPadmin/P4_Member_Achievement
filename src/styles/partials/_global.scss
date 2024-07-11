@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 a {
@@ -10,5 +9,8 @@ a {
 
 html,
 body {
-  height: 100vh;
+  min-height: 100vh;
+  background: #E1F0FB;
+  width: 100%;
+  margin: 0;
 }

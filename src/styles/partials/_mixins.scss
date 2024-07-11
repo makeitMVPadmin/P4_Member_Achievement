@@ -1,0 +1,48 @@
+@use "./_variables" as *;
+@use "./_typography" as *;
+
+
+@mixin tablet {
+  @media (min-width: $tablet-breakpoint) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $desktop-breakpoint) {
+    @content;
+  }
+}
+
+@mixin library-textFormat($size, $weight){
+color: #000;
+font-family: Gilroy;
+font-size: $size;
+font-style: normal;
+font-weight: $weight;
+line-height: normal;
+}
+
+
+@mixin letters-fonts($size, $weight, $color){
+  font-size: $size rem;
+  font-weight: $weight;
+  color: $color;
+}
+
+ @mixin flex-box( $display, $direction, $content, $items) { 
+    display: $direction;
+    flex-direction: $direction;
+    justify-content: $content;
+    align-items: $items;
+}
+
+@mixin dimensions( $w, $h){
+  width: $w;
+  height: $h;
+}
+
+@mixin margin-padding ($mt, $mr, $mb, $ml, $pt, $pr, $pb, $pl) {
+   margin: mt, $mr, $mb, $ml;
+   padding: $pt, $pr, $pb, $pl;
+}

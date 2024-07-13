@@ -6,9 +6,10 @@
 .resource {
   margin: 0.75rem;
   margin-right: 0;
-  padding-bottom: 1rem;
-  // width: 45%;
-  border-bottom: 0.5px solid grey;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  box-shadow: 4px 4px 0 black;
+  padding: 0.5rem;
 
   &__heading-top {
     display: flex;
@@ -21,7 +22,7 @@
   }
 
   &__title {
-    font-weight: 900;
+    font-weight: 600;
     color: $black;
     font-size: 1.15rem;
     width: 60%;
@@ -43,7 +44,7 @@
   &__timer {
     display: flex;
     align-items: center;
-    width: 3.75rem;
+    width: 3.5rem;
     color: $black;
   }
 
@@ -52,7 +53,7 @@
   }
 
   &__timer-icon {
-    width: 33.5%;
+    width: 30.5%;
     margin-left: 0.45rem;
   }
 

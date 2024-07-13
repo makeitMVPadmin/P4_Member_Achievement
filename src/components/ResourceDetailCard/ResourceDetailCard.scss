@@ -6,7 +6,10 @@
 .resource-details {
   margin: 0.75rem 0;
   padding-bottom: 1rem;
-  // width: 45%;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  box-shadow: 4px 4px 0 black;
+  padding: 0.5rem;
 
   &__heading-top-container {
     display: flex;
@@ -23,7 +26,7 @@
   }
 
   &__title {
-    font-weight: 900;
+    font-weight: 600;
     color: $black;
     font-size: 1.65rem;
     letter-spacing: -0.05rem;
@@ -91,7 +94,7 @@
 
   &__preview {
     color: black;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
   }
 
   &__link {

@@ -1,3 +1,4 @@
+import NavBar from "../../components/NavBar/NavBar";
 import ResourceCard from "../../components/ResourceCard/ResourceCard";
 import ResourceDetailCard from "../../components/ResourceDetailCard/ResourceDetailCard";
 import "./ResourcePage.scss";
@@ -5,6 +6,9 @@ import "./ResourcePage.scss";
 export default function ResourcePage() {
   return (
     <div className="resource__container">
+      <div className="resource__navbar-container">
+        <NavBar />
+      </div>
       <div className="resource__cards">
         <ResourceCard />
         <ResourceCard />

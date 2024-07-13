@@ -5,6 +5,7 @@ import uploadIcon2 from "../../assets/icons/upload-folder-svgrepo-com2.png";
 import savedIcon from "../../assets/icons/saved-svgrepo-com.png";
 import libraryIcon from "../../assets/icons/library-book-svgrepo-com.png";
 import { useState } from "react";
+import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer"
 
 export default function NavBar() {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
@@ -58,10 +59,11 @@ export default function NavBar() {
         )}
       </div>
       <div className="nav__container-bottom">
-        <button className="nav__button">
+        {/* <button className="nav__button">
           <img src={uploadIcon} alt="upload file icon" className="nav__icon" />
           <p className="nav__button-name">Upload Resource</p>
-        </button>
+        </button> */}
+       <SubmissionDrawer />
       </div>
     </ul>
   );

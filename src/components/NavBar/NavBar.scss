@@ -24,7 +24,8 @@
       margin-left: 0.5rem;
     }
 
-    &:hover {
+    &:hover,
+    &.active {
       cursor: pointer;
       background-color: $black;
       color: $white;

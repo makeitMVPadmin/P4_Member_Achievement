@@ -32,7 +32,10 @@ export default function NavBar() {
           />
           <p className="nav__item-name">Bookmarked</p>
         </li>
-        <li className="nav__item" onClick={toggleLibraryMenu}>
+        <li
+          className={`nav__item ${isLibraryOpen ? "active" : ""}`}
+          onClick={toggleLibraryMenu}
+        >
           <img
             src={libraryIcon}
             alt="library books icon"

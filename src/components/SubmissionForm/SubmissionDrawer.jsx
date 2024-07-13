@@ -16,18 +16,23 @@ function SubmissionDrawer() {
           <img src={uploadIcon} alt="upload file icon" className="nav__icon" />
           <p className="nav__button-name">Upload Resource</p>
         </button>
+
+      <div>
       <Drawer
         isOpen={isOpen}
         placement='right'
         initialFocusRef={firstField}
         onClose={onClose}
-        
+        size="lg"  
       >
-        <DrawerOverlay className="drawer" />
-        <DrawerContent>
+        <DrawerOverlay />
+        <DrawerContent 
+        sx={{ 
+          borderRadius: "30px 0px 0px 30px"
+           }}>
           <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth='1px'>
-            Suggest a Resource
+          <DrawerHeader>
+            <b>Suggest a Resource</b>
             <p className="small-text">Share your learning resources with the community!</p>
           </DrawerHeader>
 
@@ -46,27 +51,45 @@ function SubmissionDrawer() {
                 <FormLabel htmlFor='type'>Type</FormLabel>
                 <Select id='type' defaultValue='select'>
                   <option value='select'>Select</option>
+                  <option value='select'>Article</option>
+                  <option value='select'>Blog</option>
+                  <option value='select'>Video</option>
+                  <option value='select'>Course</option>
+                  <option value='select'>Quiz</option>
                 </Select>
               </Box>
 
               <Box>
                 <FormLabel htmlFor='owner'>Skill Level</FormLabel>
                 <Select id='owner' defaultValue='skill'>
-                  <option value='skill'>Easy</option>
+                  <option value='skill'>Beginner</option>
+                  <option value='skill'>Advanced</option>
+                  <option value='skill'>Intermediate</option>
+
                 </Select>
               </Box>
 
               <Box>
                 <FormLabel htmlFor='owner'>Tags</FormLabel>
                 <Select id='owner' defaultValue='1'>
-                  <option value='1'>Enter Tags</option>
+                  <option value='1'>Select Tags</option>
+                  <option value='2'>UX/UI</option>
+                  <option value='3'>Software Engineering</option>
+                  <option value='4'>Bootcamp Grad</option>
+                  <option value='5'>Project Management</option>
+                  <option value='6'>Product Manager</option>
                 </Select>
               </Box>
 
               <Box>
                 <FormLabel htmlFor='owner'>Estimated Duration</FormLabel>
-                <Select id='owner' defaultValue='a'>
-                  <option value='a'>30 min</option>
+                <Select id='owner' defaultValue='c'>
+                  <option value='a'>10 min</option>
+                  <option value='b'>20 min</option>
+                  <option value='c'>30 min</option>
+                  <option value='d'>40 min</option>
+                  <option value='e'>50 min</option>
+                  <option value='f'>60 min</option>
                 </Select>
               </Box>
 
@@ -101,15 +124,16 @@ function SubmissionDrawer() {
             </Stack>
           </DrawerBody>
 
-          <DrawerFooter borderTopWidth='1px'>
+          <DrawerFooter>
             <Button variant='outline' mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme='blue' className="
+            <Button bg='black' color="white" _hover={{ bg: 'gray.500' }} className="
             submit-button">Submit</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
+      </div>
     </>
   )
 }

@@ -1,0 +1,155 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+
+$font-stack-gilroy-bl: 'Gilroy-ExtraBold', serif;
+
+.header {
+  align-items: center;
+  display: flex;
+  height: 8vh;
+  justify-content: space-between;
+  width: 100%;
+  background: #FFF;
+
+  &__main-icon {
+    margin-left: 5px;
+  }  
+
+  &__main-image {
+    height: 4vh;
+  }
+
+  @media (min-width: $tablet-breakpoint) {
+    width: 100%;
+
+    &__navigation {
+      align-items: center;
+      display: flex;
+      justify-content: space-evenly;
+      width: 75vw;
+    }
+
+    &__main-icon {
+      margin-left: -20px;
+    }  
+
+    &__main-image {
+      height: 3vh;
+    }
+
+    &__icons {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__images {
+      height: 2vh;
+    }
+
+    &__icon-titles {
+      font: 100% $font-stack-gilroy-bl;
+      font-size: .5rem;
+    }
+    
+    &__icon-titles-forum {
+      font: 100% $font-stack-gilroy-bl;
+      font-size: .6rem;
+      color: black;
+    }
+
+    &__user-container {
+      align-items: center;
+      display: flex;
+      justify-content: space-evenly;
+      width: 7vw;
+    }
+
+    &__user-pic {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+    }
+
+    &__down-carrot {
+      height: .75vh;
+    }
+  }
+
+  @media (min-width: $desktop-breakpoint) {
+    height: 13vh;
+    width: 100%;
+
+    &__navigation {
+      align-items: center;
+      display: flex;
+      justify-content: space-evenly;
+      width: 65vw;
+    }
+
+    &__main-icon {
+      margin-left: -15px;
+    }  
+
+    &__main-image {
+      height: 5vh;
+    }
+
+    &__icons {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__images {
+      height: 2.8vh;
+    }
+
+    &__icon-titles {
+      font: 100% $font-stack-gilroy-bl;
+      font-size: .8rem;
+    }
+
+    &__icon-titles-forum {
+      font: 100% $font-stack-gilroy-bl;
+      font-size: .8rem;
+      color: #0754b0;
+    }
+
+    &__user-container {
+      align-items: center;
+      display: flex;
+      justify-content: space-evenly;
+      width: 7vw;
+    }
+
+    &__user-pic {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+    }
+
+    &__down-carrot {
+      height: 1.5vh;
+    }
+  }
+
+  &__icons--mobile-hide {
+    display: none;
+
+    @include tablet {
+      display: flex;
+    }
+  }
+
+  &__icons--mobile-show {
+    display: flex;
+
+    @include tablet {
+      display: none; 
+    }
+  }
+
+}
+.forum {
+  color: black;
+}

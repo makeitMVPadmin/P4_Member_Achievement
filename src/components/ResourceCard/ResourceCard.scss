@@ -6,10 +6,8 @@
 .resource {
   margin: 0.75rem;
   margin-right: 0;
-  border: 1px solid black;
-  border-radius: 0.25rem;
-  box-shadow: 4px 4px 0 black;
   padding: 0.5rem;
+  @include border;
 
   &__heading-top {
     display: flex;

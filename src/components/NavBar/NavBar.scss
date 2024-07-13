@@ -38,4 +38,13 @@
       margin-top: auto;
     }
   }
+
+  &__button {
+    @include button;
+
+    &-name {
+      font-size: 0.55rem;
+      margin-left: 0.05rem;
+    }
+  }
 }

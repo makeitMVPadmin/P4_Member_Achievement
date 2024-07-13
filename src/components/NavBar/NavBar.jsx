@@ -34,10 +34,10 @@ export default function NavBar() {
         </li>
       </div>
       <div className="nav__container-bottom">
-        <li className="nav__item">
+        <button className="nav__button">
           <img src={uploadIcon} alt="upload file icon" className="nav__icon" />
-          <p className="nav__item-name">Upload Resource</p>
-        </li>
+          <p className="nav__button-name">Upload Resource</p>
+        </button>
       </div>
     </ul>
   );

@@ -146,9 +146,9 @@
   }
 
   &__button {
-    margin-bottom: 0.5rem;
-    padding: 0.25rem 0.1rem;
-    display: flex;
-    justify-content: space-evenly;
+    @include button;
+
+    font-size: 0.65rem;
+    @include thin-border;
   }
 }

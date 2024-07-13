@@ -13,6 +13,10 @@ export default function NavBar() {
     setIsLibraryOpen(!isLibraryOpen);
   };
 
+  const handleMouseEnter = () => {
+    setIsLibraryOpen(true);
+  };
+
   return (
     <ul className="nav__list">
       <div className="nav__container-top">
@@ -35,6 +39,7 @@ export default function NavBar() {
         <li
           className={`nav__item ${isLibraryOpen ? "active" : ""}`}
           onClick={toggleLibraryMenu}
+          onMouseEnter={handleMouseEnter}
         >
           <img
             src={libraryIcon}

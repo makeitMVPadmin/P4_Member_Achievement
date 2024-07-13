@@ -1,11 +1,11 @@
 import "./HomePage.scss";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div className="home">
-      <h1 className="home__title"> Welcome !</h1>
+   <h1>welcome to the community library</h1>
     </div>
   );
 };
 
-export default Home;
+export default HomePage;

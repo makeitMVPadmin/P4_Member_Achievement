@@ -1,0 +1,20 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.resource {
+  &__container {
+    display: flex;
+  }
+
+  &__cards {
+    border-right: 0.75px solid grey;
+    margin-right: 0.75rem;
+  }
+
+  &-details__container {
+    width: 85%;
+    margin: 0 0.75rem 0.75rem 0;
+  }
+}

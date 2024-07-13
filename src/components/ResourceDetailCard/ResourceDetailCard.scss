@@ -1,0 +1,153 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.resource-details {
+  margin: 0.75rem 0;
+  padding-bottom: 1rem;
+  // width: 45%;
+
+  &__heading-top-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__type {
+    color: grey;
+    font-size: 0.85rem;
+  }
+
+  &__saved-icon {
+    width: 5.5%;
+  }
+
+  &__title {
+    font-weight: 900;
+    color: $black;
+    font-size: 1.65rem;
+    letter-spacing: -0.05rem;
+  }
+
+  &__rating-timer-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+  }
+
+  &__timer {
+    display: flex;
+    align-items: center;
+    width: 3.75rem;
+    color: $black;
+  }
+
+  &__duration {
+    font-size: 0.75rem;
+  }
+
+  &__rainting-star-container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__rating {
+    font-size: 0.75rem;
+    text-decoration: underline;
+  }
+
+  &__stars {
+    width: 4.5rem;
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__star-icon {
+    width: 19%;
+    height: 65%;
+    // margin-left: 0.45rem;
+  }
+
+  &__timer-icon {
+    width: 33.5%;
+    margin-left: 0.45rem;
+  }
+
+  &__heading-bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__about {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+  }
+
+  &__level {
+    color: grey;
+    font-size: 0.75rem;
+  }
+
+  &__preview {
+    color: black;
+    font-size: 0.85rem;
+  }
+
+  &__link {
+    width: 2rem;
+  }
+
+  &__forward-arrow-icon {
+    width: 9.5%;
+  }
+
+  &__tags-container {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+
+  &__tag {
+    // border: 0.75px solid black;
+    border-radius: 0.25rem;
+    background-color: #dddddd;
+    padding: 0.2rem 0.5rem;
+    margin: 0.75rem 0.75rem 0.75rem 0;
+    font-size: 0.55rem;
+  }
+
+  &__bottom-container {
+    display: flex;
+  }
+
+  &__author-container {
+    display: flex;
+    // align-items: center;
+  }
+
+  &__author {
+    font-size: 0.75rem;
+  }
+
+  &__avatar {
+    background-color: #e1e1e1;
+    border-radius: 50%;
+    height: 2.25rem;
+    width: 2.25rem;
+    margin-right: 1rem;
+  }
+
+  &__buttons-container {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    margin-left: auto;
+  }
+
+  &__button {
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0.1rem;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}

@@ -3,6 +3,8 @@ import ResourceCard from "../../components/ResourceCard/ResourceCard";
 import ResourceDetailCard from "../../components/ResourceDetailCard/ResourceDetailCard";
 import "./ResourcePage.scss";
 
+
+
 export default function ResourcePage() {
   return (
     <div className="resource__container">

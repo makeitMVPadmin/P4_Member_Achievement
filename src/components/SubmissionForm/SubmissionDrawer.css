@@ -1,0 +1,15 @@
+.submit-button {
+  color: gray;
+  border: 1px black;
+}
+
+
+.small-text {
+  color: grey;
+  font-size: 14px;
+}
+
+.drawer {
+  border-radius: 20px;
+  border: 3px black;
+}

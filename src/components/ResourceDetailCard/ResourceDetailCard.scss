@@ -21,6 +21,10 @@
 
   &__saved-icon {
     width: 5.5%;
+
+    @include desktop {
+      width: 3.5%;
+    }
   }
 
   &__title {
@@ -101,6 +105,10 @@
 
   &__forward-arrow-icon {
     width: 9.5%;
+
+    @include desktop {
+      width: 7.5%;
+    }
   }
 
   &__tags-container {

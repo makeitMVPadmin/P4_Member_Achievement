@@ -1,0 +1,87 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.resource {
+  margin: 0.75rem;
+  margin-right: 0;
+  padding: 0.5rem;
+  @include border;
+
+  &__heading-top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__type {
+    color: grey;
+    font-size: 0.85rem;
+  }
+
+  &__title {
+    font-weight: 600;
+    color: $black;
+    font-size: 1.15rem;
+    width: 60%;
+    letter-spacing: -0.05rem;
+  }
+
+  &__rating {
+    width: 4.5rem;
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__star-icon {
+    width: 19%;
+    height: 29%;
+    // margin-left: 0.45rem;
+  }
+
+  &__timer {
+    display: flex;
+    align-items: center;
+    width: 3.5rem;
+    color: $black;
+  }
+
+  &__duration {
+    font-size: 0.75rem;
+  }
+
+  &__timer-icon {
+    width: 30.5%;
+    margin-left: 0.45rem;
+  }
+
+  &__heading-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  &__about {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+  }
+
+  &__level {
+    color: grey;
+    font-size: 0.65rem;
+  }
+
+  &__preview {
+    color: black;
+    font-size: 0.75rem;
+  }
+
+  &__link {
+    width: 2rem;
+  }
+
+  &__forward-arrow-icon {
+    width: 85.5%;
+  }
+}

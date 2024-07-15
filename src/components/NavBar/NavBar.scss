@@ -1,0 +1,97 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.nav {
+  &__list {
+    margin: 0.75rem;
+    margin-right: 0;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 0 0.5rem;
+    @include border;
+  }
+
+  &__item {
+    display: flex;
+    padding: 0.5rem 0.25rem;
+    align-items: center;
+
+    &-name {
+      font-size: 0.65rem;
+      margin-left: 0.5rem;
+    }
+
+    &:hover,
+    &.active {
+      cursor: pointer;
+      background-color: $black;
+      color: $white;
+      @include thin-border;
+      box-shadow: none;
+
+      .nav__icon {
+        filter: invert(1);
+      }
+    }
+  }
+
+  &__icon {
+    width: 14%;
+
+    @include desktop {
+      width: 11%;
+    }
+  }
+
+  &__container {
+    &-top {
+      flex-grow: 1;
+    }
+
+    &-bottom {
+      margin-top: auto;
+    }
+  }
+
+  &__button {
+    @include button;
+    background: $black;
+    color: white;
+    border: 1px solid black;
+    border-radius: 0.25rem;
+
+    &-name {
+      font-size: 0.65rem;
+      margin-left: 0.05rem;
+      letter-spacing: -0.015rem;
+    }
+  }
+
+  &__library {
+    &-sublist {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      margin-left: 2rem;
+      padding: 0 0 0 0.5rem;
+    }
+
+    &-subitem {
+      font-size: 0.65rem;
+      letter-spacing: -0.025rem;
+      margin: 0.25rem 0;
+      padding: 0.35rem;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $black;
+        color: $white;
+        @include thin-border;
+        box-shadow: none;
+      }
+    }
+  }
+}

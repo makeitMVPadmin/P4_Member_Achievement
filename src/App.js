@@ -4,7 +4,7 @@ import ResourcePage from "./pages/ResourcePage/ResourcePage.jsx";
 import { ChakraProvider } from '@chakra-ui/react'
 
 
-function App() {
+const App = () =>  {
   return (
     <>
       <ChakraProvider>
@@ -19,4 +19,5 @@ function App() {
     </>
   );
 }
+
 export default App;

@@ -1,0 +1,23 @@
+.rewards_container {
+  display: flex;
+}
+
+.rewards-redemption-title {
+  font-size: 25px;
+  font-weight: 600;
+  margin: 15px;
+  margin-left: 30px;
+}
+
+.rewards-redemption-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.rewards-redemption__container {
+display:flex;
+flex-direction: column;
+flex: 2;
+}
+

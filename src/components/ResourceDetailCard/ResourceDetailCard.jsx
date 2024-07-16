@@ -4,12 +4,12 @@ import timerIcon from "../../assets/icons/timer-svgrepo-com.png";
 import savedIcon from "../../assets/icons/saved-svgrepo-com.png";
 import starIcon from "../../assets/icons/star-svgrepo-com.png";
 
-export default function ResourceDetailCard() {
+export default function ResourceDetailCard({ selectedResource }) {
   return (
     <section className="resource-details">
       <div className="resource-details__heading-top">
         <div className="resource-details__heading-top-container">
-          <p className="resource-details__type">Course</p>
+          <p className="resource-details__type">{selectedResource.type}</p>
           <img
             src={savedIcon}
             alt="saved icon"
@@ -18,11 +18,9 @@ export default function ResourceDetailCard() {
         </div>
       </div>
       <div className="resource-details__heading-bottom">
-        <h1 className="resource-details__title">
-          Build a Machine Learning Model
-        </h1>
+        <h1 className="resource-details__title">{selectedResource.title}</h1>
       </div>
-      <p className="resource-details__level">Intermediate Level</p>
+      <p className="resource-details__level">{selectedResource.level}</p>
 
       <div className="resource-details__rating-timer-container">
         <div className="resource-details__rainting-star-container">
@@ -56,7 +54,9 @@ export default function ResourceDetailCard() {
           <p className="resource-details__rating">15 ratings</p>
         </div>
         <div className="resource-details__timer">
-          <p className="resource-details__duration">8 min</p>
+          <p className="resource-details__duration">
+            {selectedResource.duration}
+          </p>
           <img
             src={timerIcon}
             alt="timer icon"
@@ -66,48 +66,20 @@ export default function ResourceDetailCard() {
       </div>
 
       <div className="resource-details__about">
-        <p className="resource-details__preview">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita,
-          facilis eius accusantium quia voluptas cum ex quo, dolores, quam harum
-          quae impedit. Harum, possimus tenetur commodi nam et odit labore!
-          Praesentium, a! Animi odio distinctio rerum! Distinctio ut eum eius,
-          ipsa asperiores obcaecati possimus deserunt mollitia ea voluptatibus.
-          Iusto adipisci facilis tenetur dolor unde, aspernatur voluptate
-          laudantium commodi sit natus, harum necessitatibus voluptatem modi
-          laboriosam quisquam eaque, facere praesentium veniam omnis rem!
-          Debitis facilis accusantium atque dolor et laudantium accusamus sint
-          aliquam ad sed molestiae quibusdam facere ut consequuntur repellat,
-          beatae excepturi fugit eos veniam? Voluptatem, officia. Minus vitae
-          facere beatae placeat adipisci doloremque iure iusto ad est
-          voluptatum! Ab, dicta eius, quisquam alias voluptatum in possimus vero
-          reiciendis atque enim quasi, beatae inventore! Quam placeat, quas
-          commodi rem itaque quasi assumenda, nam nemo voluptates ea excepturi
-          magnam possimus, laborum eum voluptatem est laboriosam doloremque.
-          Aliquam animi eum velit amet fugit minus. Eveniet neque, eaque tempora
-          ullam nemo repellat optio porro beatae soluta corporis labore nostrum
-          excepturi deserunt, molestiae hic velit vitae eum ipsum aut quia.
-          Quasi praesentium iste nihil reprehenderit. Nobis recusandae debitis
-          ab atque mollitia accusamus ipsum eveniet, possimus impedit inventore,
-          animi sequi aperiam incidunt aliquam veniam aspernatur. Quia veniam
-          laboriosam iste illo mollitia. Sapiente ex vero, voluptate modi
-          consectetur non ratione asperiores quisquam perspiciatis harum
-          possimus laborum, rem maxime est iusto cum vel odio quasi fugiat?
-          Quibusdam magni, illum reiciendis minima labore ducimus vel aliquam
-          vitae.
-        </p>
+        <p className="resource-details__preview">{selectedResource.preview}</p>
       </div>
       <div className="resource-details__tags-container">
-        <p className="resource-details__tag">Python</p>
-        <p className="resource-details__tag">Machine Learning</p>
-        <p className="resource-details__tag">Regression</p>
-        <p className="resource-details__tag">Big Data</p>
+        <p className="resource-details__tag">{selectedResource.tag1}</p>
+        <p className="resource-details__tag">{selectedResource.tag2}</p>
+        <p className="resource-details__tag">{selectedResource.tag3}</p>
+        <p className="resource-details__tag">{selectedResource.tag4}</p>
       </div>
       <div className="resource-details__bottom-container">
         <div className="resource-details__author-container">
           <div className="resource-details__avatar"></div>
           <div className="resource-details__author">
             <p>Submitted by:</p>
-            <p>Anna Lei</p>
+            <p>{selectedResource.contributor}</p>
           </div>
         </div>
         <div className="resource-details__buttons-container">

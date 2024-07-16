@@ -1,23 +1,40 @@
+import { useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
-import ResourceCard from "../../components/ResourceCard/ResourceCard";
 import ResourceDetailCard from "../../components/ResourceDetailCard/ResourceDetailCard";
+import ResourceList from "../../components/ResourceList/ResourceList";
 import "./ResourcePage.scss";
-
-
+import resourceData from "../../data/resource.json";
+import resourceDetailsData from "../../data/resource-details.json";
 
 export default function ResourcePage() {
+  const [resources, setResources] = useState(resourceData);
+  const [selectedResource, setSelectedResource] = useState(
+    resourceDetailsData[0]
+  );
+
+  const handleSelectResource = (clickedId) => {
+    const foundResource = resourceDetailsData.find(
+      (resource) => clickedId === resource.id
+    );
+
+    setSelectedResource(foundResource);
+  };
+
+  const allResources = resources;
+
   return (
     <div className="resource__container">
       <div className="resource__navbar-container">
         <NavBar />
       </div>
       <div className="resource__cards">
-        <ResourceCard />
-        <ResourceCard />
-        <ResourceCard />
+        <ResourceList
+          resources={allResources}
+          selectResource={handleSelectResource}
+        />
       </div>
       <div className="resource-details__container">
-        <ResourceDetailCard />
+        <ResourceDetailCard selectedResource={selectedResource} />
       </div>
     </div>
   );

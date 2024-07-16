@@ -1,0 +1,41 @@
+[
+  {
+    "id": "1",
+    "type": "Course",
+    "duration": "8 min",
+    "title": "Build a Machine Learning Model",
+    "level": "Intermediate Level",
+    "preview": "Learn to build machine learning models using regression, classification, and clustering. Debitis facilis accusantium atque dolor et laudantium accusamus sint aliquam ad sed molestiae quibusdam facere ut consequuntur repellat, beatae excepturi fugit eos veniam? Voluptatem, officia. Minus vitae facere beatae placeat adipisci doloremque iure iusto ad est voluptatum! Ab, dicta eius, quisquam alias voluptatum in possimus vero reiciendis atque enim quasi, beatae inventore! Quam placeat, quas commodi rem itaque quasi assumenda, nam nemo voluptates ea excepturi magnam possimus, laborum eum voluptatem est laboriosam doloremque.",
+    "contributor": "Anna Lei",
+    "tag1": "Python",
+    "tag2": "Machine Learning",
+    "tag3": "Regression",
+    "tag4": "Big Data"
+  },
+  {
+    "id": "2",
+    "type": "Article",
+    "duration": "5 min",
+    "title": "Quibusdam magni",
+    "level": "Beginner Level",
+    "preview": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita, facilis eius accusantium quia voluptas cum ex quo, dolores, quam harum quae impedit. Harum, possimus tenetur commodi nam et odit labore! Praesentium, a! Animi odio distinctio rerum! Distinctio ut eum eius, ipsa asperiores obcaecati possimus deserunt mollitia ea voluptatibus. Iusto adipisci facilis tenetur dolor unde, aspernatur voluptate laudantium commodi sit natus, harum necessitatibus voluptatem modi laboriosam quisquam eaque, facere praesentium veniam omnis rem!",
+    "contributor": "Jon H",
+    "tag1": "Lorem",
+    "tag2": "Dolor Sit",
+    "tag3": "Amet",
+    "tag4": "Expedita"
+  },
+  {
+    "id": "3",
+    "type": "Course",
+    "duration": "7 min",
+    "title": "The Interactive Guide to Rendering in React",
+    "level": "Advanced Level",
+    "preview": "React, in its purest form, is a library for building user interfaces. It's so simple that the entire mental model can be represented as a formula, v = f(s) – where your view is simply a function of your state. When React renders a component, two things happen. First, React creates a snapshot of your component which captures everything React needs to update the view at that particular moment in time. props, state, event handlers, and a description of the UI (based on those props and state) are all captured in this snapshot. From there, React takes that description of the UI and uses it to update the View. In order to get the starting UI for your application, React will do an initial render, starting at the root of your application.",
+    "contributor": "Bella M",
+    "tag1": "React",
+    "tag2": "Rendering",
+    "tag3": "State",
+    "tag4": "Event Handler"
+  }
+]

@@ -20,10 +20,10 @@
     "level": "Beginner Level",
     "preview": "When embarking on a new React project, developers often face the decision of which tool to use for bootstrapping their application. Two popular choices are Create React App (CRA) and Vite. Both have their own strengths and cater to different needs, making it crucial to understand their differences and use cases. Create React App (CRA) Overview: Create React App is a well-established tool created by Facebook to simplify the process of setting up a new React project. It provides a boilerplate with a predefined structure and configuration, allowing developers to start coding without worrying about the build setup. Vite Overview: Vite, developed by Evan You (creator of Vue.js), is a newer build tool that aims to provide a faster and leaner development experience. It leverages native ES modules and modern JavaScript capabilities to enhance performance. Choosing between Create React App and Vite depends largely on the specific needs of your project. If you prioritize ease of use and a well-established ecosystem, CRA is a reliable choice. However, if performance and modern build capabilities are critical for your project, Vite offers a compelling alternative with its speed and flexibility. As the landscape of web development tools continues to evolve, both tools will likely continue to improve, providing even more options for developers in the future.",
     "contributor": "Jon H",
-    "tag1": "Lorem",
-    "tag2": "Dolor Sit",
-    "tag3": "Amet",
-    "tag4": "Expedita"
+    "tag1": "Create-React-App",
+    "tag2": "Vite",
+    "tag3": "React",
+    "tag4": "Web Development"
   },
   {
     "id": "3",

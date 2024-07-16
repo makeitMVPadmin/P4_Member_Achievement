@@ -1,8 +1,16 @@
 
 .small-text {
   color: grey;
-  font-size: 14px;
   margin-top: 15px;
 }
 
+.submission__upload {
+  /* text-align: center; */
+  font-size: 14px;
+  margin-bottom: 0px;
+  color: grey;
+}
 
+.submission__file-button {
+  color: grey;
+}

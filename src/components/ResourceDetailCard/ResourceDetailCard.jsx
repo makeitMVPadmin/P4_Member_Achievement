@@ -83,7 +83,7 @@ export default function ResourceDetailCard({ selectedResource }) {
       </div>
 
       <div className="resource-details__about">
-        <p className="resource-details__preview">{selectedResource.preview}</p>
+        <p className="resource-details__preview">{selectedResource.preview} </p>
       </div>
       <div className="resource-details__tags-container">
         <p className="resource-details__tag">{selectedResource.tag1}</p>
@@ -96,7 +96,9 @@ export default function ResourceDetailCard({ selectedResource }) {
           <div className="resource-details__avatar"></div>
           <div className="resource-details__author">
             <p>Submitted by:</p>
-            <p>{selectedResource.contributor}</p>
+            <p className="resource-details__author-name">
+              {selectedResource.contributor}
+            </p>
           </div>
         </div>
         <div className="resource-details__buttons-container">

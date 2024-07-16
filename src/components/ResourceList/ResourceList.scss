@@ -1,0 +1,10 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.resourceList {
+  &__wrapper {
+    cursor: pointer;
+  }
+}

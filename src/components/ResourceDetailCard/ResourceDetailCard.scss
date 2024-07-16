@@ -178,10 +178,10 @@
     }
 
     &--read {
-      background-color: #c1d0b5;
+      background-color: $mark-as-read;
 
       &:hover {
-        background-color: #99a98f;
+        background-color: $read-hover;
       }
     }
 

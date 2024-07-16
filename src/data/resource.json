@@ -11,9 +11,9 @@
     "id": "2",
     "type": "Article",
     "duration": "5 min",
-    "title": "Quibusdam magni",
+    "title": "Create React App vs. Vite: A Comparative Overview",
     "level": "Beginner Level",
-    "preview": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita, facilis eius accusantium quia voluptas cum ex quo, dolores, quam harum quae impedit."
+    "preview": "When embarking on a new React project, developers often face the decision of which tool to use for bootstrapping their application."
   },
   {
     "id": "3",

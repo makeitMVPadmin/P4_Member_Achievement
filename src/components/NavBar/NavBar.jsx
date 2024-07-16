@@ -59,6 +59,7 @@ export default function NavBar() {
         )}
       </div>
       <div className="nav__container-bottom">
+        {/* replace button with submission drawer to connect  */}
         {/* <button className="nav__button">
           <img src={uploadIcon} alt="upload file icon" className="nav__icon" />
           <p className="nav__button-name">Upload Resource</p>

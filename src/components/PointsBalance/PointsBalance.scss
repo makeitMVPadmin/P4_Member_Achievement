@@ -1,0 +1,10 @@
+@use "../../styles/partials/_mixins" as *;
+
+.reward {
+  &__icon {
+    width: 2%;
+    @include desktop {
+      width: 3%;
+    }
+  }
+}

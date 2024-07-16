@@ -1,0 +1,69 @@
+
+.reward {
+  border-radius: 10px;
+  border: 3px solid black;
+  width: 350px;
+  margin-bottom: 20px;
+  height: 200px;
+}
+
+.reward__title {
+  text-align: left;
+  font-weight: 900;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.reward__description {
+  font-size: 16px;
+  margin-left: 10px;
+  margin-top: 10px;
+  color: #505050;
+
+}
+
+.reward__point-container {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.coin-icon {
+  width: 22px;
+  height: 22px;
+  vertical-align: middle;
+}
+
+.reward__required-points {
+  margin-left: 8px;
+font-size: 16px;
+}
+
+.reward__button-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.reward__claim-button-error {
+  background-color: #606060;
+  color: white;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 5px;
+  width: 95%;
+}
+
+.reward__claim-button-approve {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 5px;
+  width: 95%;
+  margin-bottom: 10px;
+}

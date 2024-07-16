@@ -1,0 +1,46 @@
+.option-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.points {
+  font-weight: bold;
+  color: gray;
+  font-size: 12px;
+  text-align: right;
+}
+
+.option-title {
+  font-size: 14px;
+}
+
+
+.item-text {
+    flex-grow: 1;
+}
+
+.redemption-options-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+  width: 50%;
+  height: fit-content;
+}
+
+.option-point-limits {
+  text-align: right;
+  font-size: 12px;
+}
+
+.redemption-options-cards {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 20px;
+  margin: 20px;
+  height: 220px;
+}

@@ -4,13 +4,22 @@ import timerIcon from "../../assets/icons/timer-svgrepo-com.png";
 import savedIcon from "../../assets/icons/saved-svgrepo-com.png";
 import starIcon from "../../assets/icons/star-svgrepo-com.png";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function ResourceDetailCard({ selectedResource }) {
   const [isRead, setIsRead] = useState(false);
 
+  useEffect(() => {
+    const savedReadState = localStorage.getItem(selectedResource.id);
+    if (savedReadState) {
+      setIsRead(JSON.parse(savedReadState));
+    }
+  }, [selectedResource.id]);
+
   const handleToggleRead = () => {
-    setIsRead((prevIsRead) => !prevIsRead);
+    const newReadState = !isRead;
+    setIsRead(newReadState);
+    localStorage.setItem(selectedResource.id, JSON.stringify(newReadState));
   };
 
   return (

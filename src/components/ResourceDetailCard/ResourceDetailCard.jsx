@@ -31,6 +31,7 @@ export default function ResourceDetailCard({ selectedResource }) {
             src={savedIcon}
             alt="saved icon"
             className="resource-details__saved-icon"
+            aria-hidden="true"
           />
         </div>
       </div>
@@ -46,26 +47,31 @@ export default function ResourceDetailCard({ selectedResource }) {
               src={starIcon}
               alt="star icon"
               className="resource-details__star-icon"
+              aria-hidden="true"
             />
             <img
               src={starIcon}
               alt="star icon"
               className="resource-details__star-icon"
+              aria-hidden="true"
             />
             <img
               src={starIcon}
               alt="star icon"
               className="resource-details__star-icon"
+              aria-hidden="true"
             />
             <img
               src={starIcon}
               alt="star icon"
               className="resource-details__star-icon"
+              aria-hidden="true"
             />
             <img
               src={starIcon}
               alt="star icon"
               className="resource-details__star-icon"
+              aria-hidden="true"
             />
           </p>
           <p className="resource-details__rating">15 ratings</p>
@@ -78,6 +84,7 @@ export default function ResourceDetailCard({ selectedResource }) {
             src={timerIcon}
             alt="timer icon"
             className="resource-details__timer-icon"
+            aria-hidden="true"
           />
         </div>
       </div>
@@ -85,15 +92,25 @@ export default function ResourceDetailCard({ selectedResource }) {
       <div className="resource-details__about">
         <p className="resource-details__preview">{selectedResource.preview} </p>
       </div>
-      <div className="resource-details__tags-container">
-        <p className="resource-details__tag">{selectedResource.tag1}</p>
+      <div className="resource-details__tags-container" role="list">
+        {[
+          selectedResource.tag1,
+          selectedResource.tag2,
+          selectedResource.tag3,
+          selectedResource.tag4,
+        ].map((tag, index) => (
+          <p key={index} className="resource-details__tag" role="listitem">
+            {tag}
+          </p>
+        ))}
+        {/* <p className="resource-details__tag">{selectedResource.tag1}</p>
         <p className="resource-details__tag">{selectedResource.tag2}</p>
         <p className="resource-details__tag">{selectedResource.tag3}</p>
-        <p className="resource-details__tag">{selectedResource.tag4}</p>
+        <p className="resource-details__tag">{selectedResource.tag4}</p> */}
       </div>
       <div className="resource-details__bottom-container">
         <div className="resource-details__author-container">
-          <div className="resource-details__avatar"></div>
+          <div className="resource-details__avatar" aria-hidden="true"></div>
           <div className="resource-details__author">
             <p>Submitted by:</p>
             <p className="resource-details__author-name">
@@ -103,12 +120,16 @@ export default function ResourceDetailCard({ selectedResource }) {
         </div>
         <div className="resource-details__buttons-container">
           <Link to="" key="">
-            <button className="resource-details__button">
+            <button
+              className="resource-details__button"
+              aria-label="Go to Resource"
+            >
               Go to Resource
               <img
                 src={arrowForwardIcon}
                 alt="arrow forward"
                 className="resource-details__forward-arrow-icon"
+                aria-hidden="true"
               />
             </button>
           </Link>
@@ -117,6 +138,8 @@ export default function ResourceDetailCard({ selectedResource }) {
               isRead ? "resource-details__button--read" : ""
             }`}
             onClick={handleToggleRead}
+            aria-pressed={isRead}
+            aria-label={isRead ? "Mark as Unread" : "Mark as Read"}
           >
             {isRead ? "Mark as Unread" : "Mark as Read"}
           </button>

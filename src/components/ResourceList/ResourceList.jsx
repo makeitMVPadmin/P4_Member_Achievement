@@ -5,8 +5,8 @@ export default function ResourceList(props) {
   const { resources, selectResource } = props;
 
   return (
-    <section className="resourceList">
-      <div className="resourceList__wrapper">
+    <section className="resourceList" aria-label="Resource List">
+      <div className="resourceList__wrapper" role="list">
         {resources.map((resource) => (
           <ResourceCard
             key={resource.id}

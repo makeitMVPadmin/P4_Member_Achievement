@@ -10,10 +10,15 @@
 
   &__cards {
     margin-right: 0.75rem;
+    width: 65%;
+
+    @include desktop {
+      width: 55%;
+    }
   }
 
   &-details__container {
-    width: 85%;
+    width: 90%;
     margin: 0 0.75rem 0.75rem 0;
   }
 

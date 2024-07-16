@@ -3,8 +3,16 @@ import arrowForwardIcon from "../../assets/icons/arrow-forward-svgrepo-com.png";
 import timerIcon from "../../assets/icons/timer-svgrepo-com.png";
 import savedIcon from "../../assets/icons/saved-svgrepo-com.png";
 import starIcon from "../../assets/icons/star-svgrepo-com.png";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function ResourceDetailCard({ selectedResource }) {
+  const [isRead, setIsRead] = useState(false);
+
+  const handleToggleRead = () => {
+    setIsRead((prevIsRead) => !prevIsRead);
+  };
+
   return (
     <section className="resource-details">
       <div className="resource-details__heading-top">
@@ -83,15 +91,24 @@ export default function ResourceDetailCard({ selectedResource }) {
           </div>
         </div>
         <div className="resource-details__buttons-container">
-          <button className="resource-details__button">
-            Go to Resource
-            <img
-              src={arrowForwardIcon}
-              alt="arrow forward"
-              className="resource-details__forward-arrow-icon"
-            />
+          <Link to="" key="">
+            <button className="resource-details__button">
+              Go to Resource
+              <img
+                src={arrowForwardIcon}
+                alt="arrow forward"
+                className="resource-details__forward-arrow-icon"
+              />
+            </button>
+          </Link>
+          <button
+            className={`resource-details__button ${
+              isRead ? "resource-details__button--read" : ""
+            }`}
+            onClick={handleToggleRead}
+          >
+            {isRead ? "Mark as Unread" : "Mark as Read"}
           </button>
-          <button className="resource-details__button">Mark as Read</button>
         </div>
       </div>
     </section>

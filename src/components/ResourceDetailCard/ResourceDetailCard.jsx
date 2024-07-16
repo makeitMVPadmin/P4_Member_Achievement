@@ -41,7 +41,7 @@ export default function ResourceDetailCard({ selectedResource }) {
       <p className="resource-details__level">{selectedResource.level}</p>
 
       <div className="resource-details__rating-timer-container">
-        <div className="resource-details__rainting-star-container">
+        <div className="resource-details__rating-star-container">
           <p className="resource-details__stars">
             <img
               src={starIcon}

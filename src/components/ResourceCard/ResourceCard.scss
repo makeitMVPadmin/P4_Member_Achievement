@@ -27,14 +27,14 @@
     font-weight: 600;
     color: $black;
     font-size: 1.15rem;
-    width: 60%;
     letter-spacing: -0.05rem;
   }
 
   &__rating {
-    width: 4.5rem;
-    display: flex;
-    flex-direction: row;
+    max-width: 3rem;
+    @include tablet {
+      width: 4.5rem;
+    }
   }
 
   &__star-icon {
@@ -62,7 +62,7 @@
   &__heading-bottom {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    gap: 0.5rem;
   }
 
   &__about {

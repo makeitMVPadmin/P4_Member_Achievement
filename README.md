@@ -122,7 +122,7 @@ The Learning Hub offers a centralized and community-driven platform for continuo
 **Developers**<br>
 Justin Ma | [LinkedIn](https://www.linkedin.com/in/justin-x-ma/) | [GitHub]()<br>
 Hilary Chen | [LinkedIn](https://www.linkedin.com/in/hilarykhc/) | [GitHub]()<br>
-Mario Miralles | [LinkedIn](https://www.linkedin.com/in/mariofmiralles/) | [GitHub]()<br>
+Mario Miralles | [LinkedIn](https://www.linkedin.com/in/mariofmiralles/) | [GitHub](https://www.github.com/MarioMiralles)<br>
 Yaira Velez | [LinkedIn](https://www.linkedin.com/in/yaira-velez-6b216719b/) | [GitHub]()<br>
 Samantha Lugtu | [LinkedIn](https://www.linkedin.com/in/samantha-lugtu-968b872a7/) | [GitHub]()<br>
 Adiam Ahmed | [LinkedIn](https://www.linkedin.com/in/adiamahmed/) | [GitHub]()<br>

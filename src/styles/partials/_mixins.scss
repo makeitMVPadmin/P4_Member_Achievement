@@ -28,8 +28,8 @@
   color: $color;
 }
 
-@mixin flex-box($display, $direction, $content, $items) {
-  display: $direction;
+@mixin flex-box($direction, $content, $items) {
+  display: flex;
   flex-direction: $direction;
   justify-content: $content;
   align-items: $items;

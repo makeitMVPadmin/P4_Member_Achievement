@@ -4,8 +4,25 @@ import RedemptionCard from "../../components/RedemptionCard/RedemptionCard";
 import RedemptionCardTest from "../../components/RedemptionCard/RedemptionCardTest";
 import "./Rewardspage.scss";
 import RedemptionOptions from "../../components/RedemptionOptions/RedemptionOptions";
+import {
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  VStack,
+  Box,
+  Circle,
+} from "@chakra-ui/react";
+import { useState } from "react";
 
 export default function RewardsPage() {
+  const [points, setPoints] = useState(280);
+  const maxPoints = 1000;
+
+  const handleSliderChange = (value) => {
+    setPoints(value);
+  };
+
   return (
     <div className="rewards_container">
       <div className="resource__navbar-container">
@@ -13,10 +30,54 @@ export default function RewardsPage() {
       </div>
 
       <div className="rewards-right-container">
-        {/* <div className="points-balance-container">
-          <h2>Your Points</h2>
-        <PointsBalance />
-        </div> */}
+        <PointsBalance points={points} maxPoints={maxPoints} />
+        <VStack
+          spacing={4}
+          align="center"
+          mt={4}
+          width="80%"
+          className="pointsBar"
+        >
+          <Box position="relative" width="90%">
+            <Slider
+              aria-label="points-slider"
+              defaultValue={points}
+              min={0}
+              max={maxPoints}
+              step={10}
+              onChange={handleSliderChange}
+            >
+              <SliderTrack>
+                <SliderFilledTrack />
+              </SliderTrack>
+              <SliderThumb />
+            </Slider>
+            {[0, 200, 400, 600, 800, 1000].map((value) => (
+              <Box
+                key={value}
+                position="absolute"
+                left={`${(value / maxPoints) * 100}%`}
+                top="20px"
+                transform="translateX(-50%)"
+                color="teal.500"
+                fontSize="sm"
+              >
+                {value}
+              </Box>
+            ))}
+            {[200, 400, 600, 800, 1000].map((value) => (
+              <Circle
+                key={value}
+                size="10px"
+                bg="teal.500"
+                position="absolute"
+                left={`${(value / maxPoints) * 100}%`}
+                top="50%"
+                transform="translate(-50%, -50%)"
+              />
+            ))}
+          </Box>
+        </VStack>
 
         <div className="daily-redemption-options-container">
           <h1 className="rewards-redemption-title">Daily Redemption Options</h1>

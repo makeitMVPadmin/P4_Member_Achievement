@@ -1,5 +1,5 @@
-import "./SubmissionDrawer.css"
-import React from 'react';
+import "./SubmissionDrawer.scss"
+import React, {useState} from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
@@ -22,15 +22,26 @@ const options = [
   { value: 'wireframes', label: 'Wireframes' },
 ]
 
+
+
 export default function SelectTags() {
+
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
   return (
     <Select
+      color='grey'
+      fontSize='18px'
       closeMenuOnSelect={false}
       components={animatedComponents}
       isMulti
+      value={selectedOptions}
       options={options}
       defaultValue='select'
-      className='submission__tags'
+      onChange={(o) => setSelectedOptions(o)}
+      id='tags'
+      isOptionDisabled={() => selectedOptions.length >= 4}
+      placeholder="Select up to 4 tags"
     />
   );
 }

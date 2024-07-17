@@ -18,22 +18,23 @@ import {
   Textarea,
   DrawerFooter,
   FormControl,
-  FormHelperText,
-  FormErrorMessage,
-  useToast} from "@chakra-ui/react"
+  // FormHelperText,
+  // FormErrorMessage,
+  // useToast
+} from "@chakra-ui/react"
 import uploadIcon from "../../assets/icons/upload-folder-svgrepo-com.png";
-import "./SubmissionDrawer.css"
-import { useForm } from "react-hook-form";
+import "./SubmissionDrawer.scss"
+// import { useForm } from "react-hook-form";
 
 function SubmissionDrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = React.useRef()
-  const { submission, handleSubmit, formState: { errors } } = useForm();
+  // const { submission, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = data => {
-    console.log(data);
-    onClose();
-  };
+  // const onSubmit = data => {
+  //   console.log(data);
+  //   onClose();
+  // };
 
   return (
     <>
@@ -48,37 +49,40 @@ function SubmissionDrawer() {
         placement='right'
         initialFocusRef={firstField}
         onClose={onClose}
-        size="lg"  
+        size="sm"
       >
         <DrawerOverlay />
         <DrawerContent 
         sx={{ 
-          borderRadius: "30px 0px 0px 30px"
+          borderRadius: "30px 0px 0px 30px",
+          border: '4px solid black'
            }}>
           <DrawerCloseButton />
           <DrawerHeader>
-            <b>Suggest a Resource</b>
-            <p className="small-text">Share your learning resources with the community!</p>
+            <b className="submission__header-title">Submit a <br />Resource</b>
+            <p className="submission__small-text">Share your learning resources with the community!</p>
+            <p className="submission__small-text"><span>*</span>  Required</p>
+
           </DrawerHeader>
 
           <DrawerBody>
             <Stack spacing='24px'>
               <Box>
-            
               <FormControl isRequired>
-                <FormLabel>Title</FormLabel>
+                <FormLabel className="submission__title" fontSize='20px' fontWeight='bold' >Title</FormLabel>
                 <Input
                 ref={firstField}
                 id='title' 
-                placeholder='Enter a resource title.' />
+                placeholder='Enter a resource title.'
+                border='4px solid black'
+                />
               </FormControl>
-                
               </Box>
 
-              <Box>
+              <Box >
                 <FormControl isRequired>
-                <FormLabel htmlFor='type'>Type</FormLabel>
-                <Select id='type' defaultValue='select'>
+                <FormLabel htmlFor='type' className="submission__title" fontSize='20px' fontWeight='bold' >Type</FormLabel>
+                <Select id='type' defaultValue='select' className="submission__form-border" color='grey'>
                   <option value='select'>Select</option>
                   <option value='select'>Article</option>
                   <option value='select'>Blog</option>
@@ -91,8 +95,8 @@ function SubmissionDrawer() {
 
               <Box>
                 <FormControl isRequired>
-                <FormLabel htmlFor='owner'>Skill Level</FormLabel>
-                <Select id='owner' defaultValue='select'>
+                <FormLabel htmlFor='owner' className="submission__title" fontSize='20px' fontWeight='bold'>Skill Level</FormLabel>
+                <Select id='level' defaultValue='select' color='grey'>
                   <option value='select'>Select</option>
                   <option value='skill'>Beginner</option>
                   <option value='skill'>Advanced</option>
@@ -103,16 +107,15 @@ function SubmissionDrawer() {
 
               <Box>
                 <FormControl isRequired>
-                  <FormLabel htmlFor='owner'>Tags</FormLabel>
+                  <FormLabel htmlFor='owner' className="submission__title" fontSize='20px' fontWeight='bold'>Tags</FormLabel>
                     <SelectTags />
-                  <FormHelperText>Select up to 4 tags.</FormHelperText>
                 </FormControl>
               </Box>
 
               <Box>
                 <FormControl isRequired>
-                  <FormLabel htmlFor='owner'>Estimated Duration</FormLabel>
-                  <Select id='owner' defaultValue='c'>
+                  <FormLabel htmlFor='owner' className="submission__title" fontSize='20px' fontWeight='bold'>Estimated Duration</FormLabel>
+                  <Select id='duration' defaultValue='select' color='grey'>
                     <option value='select'>Select</option>
                     <option value='a'>10 min</option>
                     <option value='b'>20 min</option>
@@ -125,20 +128,21 @@ function SubmissionDrawer() {
                 </FormControl>
               </Box>
 
-              <Box>
+              <Box  >
                 <FormControl isRequired>
-                  <FormLabel htmlFor='desc'>Description</FormLabel>
-                  <Textarea id='desc' />
+                  <FormLabel htmlFor='desc'fontSize='20px' fontWeight='bold' >Description</FormLabel>
+                  <Textarea id='desc' placeholder="The clearer and shorter the better." />
                 </FormControl>
               </Box>
               <Box>
                 <FormControl isRequired>
                 <p className="submission__upload">Only one of these fields is required.</p>
-                  <FormLabel htmlFor='url'>Url</FormLabel>
+                  <FormLabel htmlFor='url' className="submission__title" fontSize='20px' fontWeight='bold'>Url</FormLabel>
                   <Input
                     type='url'
                     id='url'
                     placeholder='Paste Url'
+                    color='grey'
                   />
                 </FormControl>
               </Box>
@@ -152,10 +156,11 @@ function SubmissionDrawer() {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
+            <Button mr={3} bg='white' fontSize='24px' marginTop='20px' border='4px solid black' color="black" _hover={{ bg: 'gray.600' }} onClick={onClose} className="
+            submit-button">
               Cancel
             </Button>
-            <Button bg='black' color="white" _hover={{ bg: 'gray.500' }} className="
+            <Button bg='white' fontSize='24px' marginTop='20px' border='4px solid black' color="black" _hover={{ bg: 'gray.600' }} className="
             submit-button">Submit</Button>
           </DrawerFooter>
         </DrawerContent>

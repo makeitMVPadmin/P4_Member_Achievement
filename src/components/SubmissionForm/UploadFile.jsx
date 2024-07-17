@@ -1,7 +1,7 @@
 
 import React, {useState} from 'react';
 import axios from 'axios';
-import "./SubmissionDrawer.css"
+import "./SubmissionDrawer.scss"
 import { FormLabel, FormControl } from '@chakra-ui/react';
 
 function UploadFile() {
@@ -30,15 +30,12 @@ function UploadFile() {
   }
 
   return (
-    <div className="App">
       <FormControl isRequired>
-        <FormLabel onSubmit={handleSubmit}>
+        <FormLabel onSubmit={handleSubmit} className="submission__title">
           File Upload
         </FormLabel>
         <input className='submission__file-button' type="file" onChange={handleChange}/>
         </FormControl>
-
-    </div>
   );
 }
 

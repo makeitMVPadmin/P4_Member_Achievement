@@ -7,20 +7,12 @@ import starIcon from "../../assets/icons/star-svgrepo-com.png";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-export default function ResourceDetailCard({ selectedResource }) {
+export default function ResourceDetailCard({ selectedResource, handleToggleBookmarked, savedBookmarks, isBookmarked }) {
   const [isRead, setIsRead] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
-
   useEffect(() => {
     const savedReadState = localStorage.getItem(selectedResource.id);
     if (savedReadState) {
       setIsRead(JSON.parse(savedReadState));
-    }
-    const savedBookmarks = localStorage.getItem('bookmarks');
-    if (savedBookmarks) {
-      const bookmarks = JSON.parse(savedBookmarks);
-      const isBookmarked = bookmarks.some(bookmark => bookmark.id === selectedResource.id);
-      setIsBookmarked(isBookmarked);
     }
   }, [selectedResource.id]);
 
@@ -28,21 +20,6 @@ export default function ResourceDetailCard({ selectedResource }) {
     const newReadState = !isRead;
     setIsRead(newReadState);
     localStorage.setItem(selectedResource.id, JSON.stringify(newReadState));
-  };
-
-  const handleToggleBookmarked = () => {
-    const newBookmarkedState = !isBookmarked;
-    setIsBookmarked(newBookmarkedState);
-    let bookmarks = localStorage.getItem('bookmarks');
-    bookmarks = bookmarks ? JSON.parse(bookmarks) : [];
-
-    if (newBookmarkedState) {
-      bookmarks.push(selectedResource);
-    } else {
-      bookmarks = bookmarks.filter(bookmark => bookmark.id !== selectedResource.id);
-    }
-
-    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
   };
 
   return (

@@ -1,11 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/HomePage/HomePage.jsx";
 import ResourcePage from "./pages/ResourcePage/ResourcePage.jsx";
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from "@chakra-ui/react";
 import RewardsPage from "./pages/RewardsPage/RewardsPage.jsx";
 
-
-const App = () =>  {
+function App() {
   return (
     <>
       <ChakraProvider>
@@ -21,5 +20,4 @@ const App = () =>  {
     </>
   );
 }
-
 export default App;

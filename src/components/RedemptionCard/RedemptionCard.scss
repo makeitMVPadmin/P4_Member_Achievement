@@ -1,0 +1,168 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.reward {
+  border-radius: 10px;
+  border: 3px solid black;
+  width: 15rem;
+  height: 9rem;
+  margin-bottom: 1rem;
+
+  @include desktop {
+    width: 16rem;
+    height: 10rem;
+  }
+
+  @include large-desktop {
+    width: 21rem;
+    height: 13rem;
+  }
+
+  &__title {
+    font-size: 0.85rem;
+    letter-spacing: -0.025rem;
+    text-align: left;
+    font-weight: 900;
+    margin-top: 6px;
+    margin-left: 6px;
+
+    @include desktop {
+      font-size: 14px;
+    }
+
+    @include large-desktop {
+      font-size: 19px;
+      margin-top: 0.65rem;
+      margin-left: 0.75rem;
+    }
+  }
+
+  &__description {
+    font-size: 0.65rem;
+    margin-left: 7px;
+    margin-top: 7px;
+    color: #505050;
+
+    @include desktop {
+      font-size: 11px;
+    }
+
+    @include large-desktop {
+      font-size: 15px;
+      margin-left: 0.75rem;
+    }
+  }
+
+  &__point-container {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 10px;
+
+    @include large-desktop {
+      margin-left: 0.75rem;
+    }
+  }
+}
+
+// .reward__title {
+//   text-align: left;
+//   font-weight: 900;
+//   margin-top: 10px;
+//   margin-left: 10px;
+//   font-size: 20px;
+// }
+
+// .reward__description {
+//   font-size: 16px;
+//   margin-left: 10px;
+//   margin-top: 10px;
+//   color: #505050;
+
+// }
+
+// .reward__point-container {
+//   display: inline-flex;
+//   align-items: center;
+//   margin-top: 10px;
+//   margin-left: 10px;
+// }
+
+.coin-icon {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+
+  @include large-desktop {
+    width: 24px;
+    heigth: 24px;
+  }
+}
+
+.reward__required-points {
+  margin-left: 8px;
+  font-size: 0.75rem;
+
+  @include desktop {
+    font-size: 12px;
+  }
+
+  @include large-desktop {
+    font-size: 18px;
+  }
+}
+
+.reward__button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.reward__claim-button-error {
+  background-color: #606060;
+  color: white;
+  padding: 7px;
+  font-size: 0.75rem;
+  border-radius: 5px;
+  width: 93%;
+  margin-bottom: 1px;
+
+  @include desktop {
+    font-size: 15px;
+    width: 90%;
+    margin-bottom: 2px;
+  }
+
+  @include large-desktop {
+    font-size: 18px;
+    width: 92%;
+    margin-top: 0.75rem;
+    padding: 8px;
+  }
+}
+
+.reward__claim-button-approve {
+  background-color: black;
+  color: white;
+  padding: 7px;
+  font-size: 0.75rem;
+  border-radius: 5px;
+  width: 93%;
+  margin-bottom: 1px;
+
+  @include desktop {
+    font-size: 15px;
+    width: 90%;
+    margin-bottom: 2px;
+  }
+
+  @include large-desktop {
+    font-size: 18px;
+    width: 92%;
+    margin-top: 0.75rem;
+    padding: 8px;
+  }
+}

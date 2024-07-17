@@ -1,0 +1,69 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.rewards_container {
+  display: flex;
+}
+
+.options-description {
+  font-size: 0.75rem;
+  color: gray;
+  margin-right: 0.75rem;
+}
+
+.rewards-redemption-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.5rem;
+
+  @include desktop {
+    font-size: 1.5rem;
+  }
+}
+
+.rewards-redemption-title2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+
+  @include desktop {
+    font-size: 1.5rem;
+  }
+}
+
+.rewards-right-container {
+  width: 70rem;
+
+  @include desktop {
+    width: 95rem;
+  }
+
+  @include large-desktop {
+    width: 125rem;
+    margin: 0 1rem;
+  }
+}
+
+.rewards-redemption-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 0 0.5rem 0 0;
+}
+
+.points-balance-container {
+  background-color: green;
+}
+
+/* .daily-redemption-options-container {
+ 
+} */
+
+.rewards-redemption__container {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  /* background-color: blue; */
+}

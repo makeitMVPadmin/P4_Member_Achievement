@@ -2,9 +2,8 @@ import NavBar from "../../components/NavBar/NavBar";
 import PointsBalance from "../../components/PointsBalance/PointsBalance";
 import RedemptionCard from "../../components/RedemptionCard/RedemptionCard";
 import RedemptionCardTest from "../../components/RedemptionCard/RedemptionCardTest";
-import "./Rewardspage.css"
+import "./Rewardspage.scss";
 import RedemptionOptions from "../../components/RedemptionOptions/RedemptionOptions";
-
 
 export default function RewardsPage() {
   return (
@@ -21,24 +20,31 @@ export default function RewardsPage() {
 
         <div className="daily-redemption-options-container">
           <h1 className="rewards-redemption-title">Daily Redemption Options</h1>
-          <p className="options-description">Earn points by completing any of the actions listed below! Please note: certain actions have daily restrictions. You are welcome to continue completing these actions, but will only accumulate points up to the daily restriction. </p>
-            <div className="redemption-options">
-              <RedemptionOptions />
-            </div>
+          <p className="options-description">
+            Earn points by completing any of the actions listed below! Please
+            note: certain actions have daily restrictions. You are welcome to
+            continue completing these actions, but will only accumulate points
+            up to the daily restriction.{" "}
+          </p>
+          <div className="redemption-options">
+            <RedemptionOptions />
+          </div>
         </div>
-      
+
         <div className="rewards-redemption__container">
-          <h2 className="rewards-redemption-title">Reward Redemption Options</h2>
+          <h2 className="rewards-redemption-title2">
+            Reward Redemption Options
+          </h2>
           <div className="rewards-redemption-cards">
-          <RedemptionCardTest />
-          <RedemptionCard />
-          <RedemptionCard />
-          <RedemptionCard />
-          <RedemptionCard />
-          <RedemptionCard />
-          <RedemptionCard />
-          <RedemptionCard />
-          <RedemptionCard />
+            <RedemptionCardTest />
+            <RedemptionCard />
+            <RedemptionCard />
+            <RedemptionCard />
+            <RedemptionCard />
+            <RedemptionCard />
+            <RedemptionCard />
+            <RedemptionCard />
+            <RedemptionCard />
           </div>
         </div>
       </div>

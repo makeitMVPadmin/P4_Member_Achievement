@@ -15,20 +15,24 @@
   font-size: 14px;
 }
 
-
 .item-text {
-    flex-grow: 1;
+  flex-grow: 1;
+  font-size: 0.75rem;
 }
 
 .redemption-options-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 0.5rem;
   border-radius: 8px;
   background-color: #f8f8f8;
-  width: 50%;
+  width: 49%;
   height: fit-content;
+}
+
+.redemption__img {
+  width: 1rem;
 }
 
 .option-point-limits {
@@ -40,7 +44,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  gap: 20px;
-  margin: 20px;
-  height: 220px;
+  gap: 0.5rem;
+  margin: 0.5rem 1rem -1.25rem 0;
+  height: 13rem;
 }

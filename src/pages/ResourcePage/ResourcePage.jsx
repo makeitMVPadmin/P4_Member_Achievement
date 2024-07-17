@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import ResourceDetailCard from "../../components/ResourceDetailCard/ResourceDetailCard";
 import ResourceList from "../../components/ResourceList/ResourceList";
@@ -58,7 +57,6 @@ export default function ResourcePage() {
         <ResourceList
           resources={allResources}
           selectResource={handleSelectResource}
-          
         />
       </div>
       <div className="resource-details__container">

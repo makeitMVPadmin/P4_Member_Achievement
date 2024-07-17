@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Home from "./pages/HomePage/HomePage.jsx";
 import ResourcePage from "./pages/ResourcePage/ResourcePage.jsx";
 import { ChakraProvider } from '@chakra-ui/react'
@@ -7,10 +7,13 @@ import RewardsPage from "./pages/RewardsPage/RewardsPage.jsx";
 import BookMarkedPage from "./pages/BookMarkedPage/BookMarkedPage.jsx";
 
 const App = () =>  {
+  const [savedBookmarks, setSavedBookmarks] = useState([]);
 
-  const [savedBookmarks, setSavedBookmarks] = useState(
-    JSON.parse(localStorage.getItem("bookmarks")) || []
-  );
+  useEffect(() => {
+    const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    setSavedBookmarks(bookmarks);
+  }, []);
+
   return (
     <>
       <ChakraProvider>

@@ -1,7 +1,7 @@
 import "./ResourceDetailCard.scss";
 import arrowForwardIcon from "../../assets/icons/arrow-forward-svgrepo-com.png";
 import timerIcon from "../../assets/icons/timer-svgrepo-com.png";
-import bookmarkIcon from "../../assets/bookmark-svgrepo-com.svg";
+import bookmarkIcon from "../../assets/icons/bookmark-svgrepo-com.svg";
 import bookmarkedIcon from "../../assets/icons/bookmarked.svg";
 import starIcon from "../../assets/icons/star-svgrepo-com.png";
 import { Link } from "react-router-dom";

@@ -1,18 +1,26 @@
 import "./ResourceDetailCard.scss";
 import arrowForwardIcon from "../../assets/icons/arrow-forward-svgrepo-com.png";
 import timerIcon from "../../assets/icons/timer-svgrepo-com.png";
-import savedIcon from "../../assets/icons/saved-svgrepo-com.png";
+import bookmarkIcon from "../../assets/bookmark-svgrepo-com.svg";
+import bookmarkedIcon from "../../assets/icons/bookmarked.svg";
 import starIcon from "../../assets/icons/star-svgrepo-com.png";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export default function ResourceDetailCard({ selectedResource }) {
   const [isRead, setIsRead] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
   useEffect(() => {
     const savedReadState = localStorage.getItem(selectedResource.id);
     if (savedReadState) {
       setIsRead(JSON.parse(savedReadState));
+    }
+    const savedBookmarks = localStorage.getItem('bookmarks');
+    if (savedBookmarks) {
+      const bookmarks = JSON.parse(savedBookmarks);
+      const isBookmarked = bookmarks.some(bookmark => bookmark.id === selectedResource.id);
+      setIsBookmarked(isBookmarked);
     }
   }, [selectedResource.id]);
 
@@ -22,14 +30,30 @@ export default function ResourceDetailCard({ selectedResource }) {
     localStorage.setItem(selectedResource.id, JSON.stringify(newReadState));
   };
 
+  const handleToggleBookmarked = () => {
+    const newBookmarkedState = !isBookmarked;
+    setIsBookmarked(newBookmarkedState);
+    let bookmarks = localStorage.getItem('bookmarks');
+    bookmarks = bookmarks ? JSON.parse(bookmarks) : [];
+
+    if (newBookmarkedState) {
+      bookmarks.push(selectedResource);
+    } else {
+      bookmarks = bookmarks.filter(bookmark => bookmark.id !== selectedResource.id);
+    }
+
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+  };
+
   return (
     <section className="resource-details">
       <div className="resource-details__heading-top">
         <div className="resource-details__heading-top-container">
           <p className="resource-details__type">{selectedResource.type}</p>
           <img
-            src={savedIcon}
-            alt="saved icon"
+            src={isBookmarked ? bookmarkedIcon : bookmarkIcon}
+            onClick={handleToggleBookmarked}
+            alt="bookmark icon"
             className="resource-details__saved-icon"
             aria-hidden="true"
           />
@@ -134,9 +158,8 @@ export default function ResourceDetailCard({ selectedResource }) {
             </button>
           </Link>
           <button
-            className={`resource-details__button ${
-              isRead ? "resource-details__button--read" : ""
-            }`}
+            className={`resource-details__button ${isRead ? "resource-details__button--read" : ""
+              }`}
             onClick={handleToggleRead}
             aria-pressed={isRead}
             aria-label={isRead ? "Mark as Unread" : "Mark as Read"}

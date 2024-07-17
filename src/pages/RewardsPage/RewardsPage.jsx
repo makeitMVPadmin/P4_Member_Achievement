@@ -23,6 +23,10 @@ export default function RewardsPage() {
     setPoints(value);
   };
 
+  const deductPoints = (deduction) => {
+    setPoints((prevPoints) => Math.max(prevPoints - deduction, 0));
+  };
+
   return (
     <div className="rewards_container">
       <div className="resource__navbar-container">
@@ -41,7 +45,7 @@ export default function RewardsPage() {
           <Box position="relative" width="90%">
             <Slider
               aria-label="points-slider"
-              defaultValue={points}
+              value={points}
               min={0}
               max={maxPoints}
               step={10}
@@ -97,7 +101,7 @@ export default function RewardsPage() {
             Reward Redemption Options
           </h2>
           <div className="rewards-redemption-cards">
-            <RedemptionCardTest />
+            <RedemptionCardTest deductPoints={deductPoints} />
             <RedemptionCard />
             <RedemptionCard />
             <RedemptionCard />

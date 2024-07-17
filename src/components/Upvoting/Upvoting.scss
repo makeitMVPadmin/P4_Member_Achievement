@@ -1,0 +1,20 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.voting {
+    @include flex-box(column, flex-start, center);
+    padding-top: 0.5rem;
+    gap: 0.5rem;
+    @include tablet {
+        @include flex-box(row, center, flex-start);
+        gap: 0.25rem;
+    }
+
+    &__container {
+        @include flex-box(row, center, center);
+        gap: 0.0125rem;
+        font-size: 0.825rem;
+    }
+}

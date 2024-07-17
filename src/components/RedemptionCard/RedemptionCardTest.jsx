@@ -3,9 +3,9 @@ import "./RedemptionCard.scss";
 import RedemptionToast from "./RedemptionToast";
 
 export default function RedemptionCardTest({ deductPoints }) {
-  const handleClaimReward = () => {
-    deductPoints(200);
-  };
+  // const handleClaimReward = () => {
+  //   deductPoints(200);
+  // };
 
   return (
     <section className="reward">

@@ -16,8 +16,8 @@
   }
 
   @include large-desktop {
-    width: 21rem;
-    height: 13rem;
+    width: 20rem;
+    height: 12rem;
   }
 
   &__title {
@@ -33,7 +33,7 @@
     }
 
     @include large-desktop {
-      font-size: 19px;
+      font-size: 18px;
       margin-top: 0.65rem;
       margin-left: 0.75rem;
     }
@@ -94,11 +94,6 @@
   width: 18px;
   height: 18px;
   vertical-align: middle;
-
-  @include large-desktop {
-    width: 24px;
-    heigth: 24px;
-  }
 }
 
 .reward__required-points {
@@ -110,7 +105,7 @@
   }
 
   @include large-desktop {
-    font-size: 18px;
+    font-size: 17px;
   }
 }
 
@@ -137,10 +132,10 @@
   }
 
   @include large-desktop {
-    font-size: 18px;
+    font-size: 17px;
     width: 92%;
-    margin-top: 0.75rem;
-    padding: 8px;
+    margin-top: 0.5rem;
+    padding: 7px;
   }
 }
 
@@ -160,9 +155,9 @@
   }
 
   @include large-desktop {
-    font-size: 18px;
+    font-size: 17px;
     width: 92%;
-    margin-top: 0.75rem;
-    padding: 8px;
+    margin-top: 0.5rem;
+    padding: 7px;
   }
 }

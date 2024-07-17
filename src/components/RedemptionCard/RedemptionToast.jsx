@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { Button, useToast } from "@chakra-ui/react";
+import Confetti from "react-confetti";
 import "./RedemptionCard.scss";
 
 function RedemptionToast({ onClick }) {
   const toast = useToast();
+  const [showConfetti, setShowConfetti] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const examplePromise = new Promise((resolve, reject) => {
       setTimeout(() => {
         onClick();
@@ -23,12 +26,32 @@ function RedemptionToast({ onClick }) {
       },
       loading: { title: "Claiming Reward", description: "Please wait" },
     });
+
+    try {
+      await examplePromise;
+      setShowConfetti(true);
+      setTimeout(() => {
+        setShowConfetti(false);
+      }, 5000);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <button className="reward__claim-button-approve" onClick={handleClick}>
-      Claim
-    </button>
+    <>
+      {showConfetti && (
+        <Confetti
+          width={window.width}
+          height={window.height}
+          recycle={false}
+          numberOfPieces={600}
+        />
+      )}
+      <button className="reward__claim-button-approve" onClick={handleClick}>
+        Claim
+      </button>
+    </>
   );
 }
 

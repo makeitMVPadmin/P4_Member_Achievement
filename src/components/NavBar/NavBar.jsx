@@ -1,11 +1,12 @@
-import "./NavBar.scss";
 import trophyIcon from "../../assets/icons/trophy-01-svgrepo-com.png";
 import uploadIcon from "../../assets/icons/upload-folder-svgrepo-com.png";
 import uploadIcon2 from "../../assets/icons/upload-folder-svgrepo-com2.png";
 import savedIcon from "../../assets/icons/saved-svgrepo-com.png";
 import libraryIcon from "../../assets/icons/library-book-svgrepo-com.png";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer"
+import "./NavBar.scss";
 
 export default function NavBar() {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
@@ -14,21 +15,25 @@ export default function NavBar() {
     setIsLibraryOpen(!isLibraryOpen);
   };
 
-  const handleMouseEnter = () => {
-    setIsLibraryOpen(true);
-  };
+  // const handleMouseEnter = () => {
+  //   setIsLibraryOpen(true);
+  // };
 
   return (
     <ul className="nav__list">
       <div className="nav__container-top">
-        <li className="nav__item">
-          <img src={trophyIcon} alt="trophy icon" className="nav__icon" />
-          <p className="nav__item-name">Rewards</p>
-        </li>
-        <li className="nav__item">
-          <img src={uploadIcon2} alt="upload file icon" className="nav__icon" />
-          <p className="nav__item-name">Contributions</p>
-        </li>
+        <NavLink to='/rewards'>
+          <li className="nav__item">
+            <img src={trophyIcon} alt="trophy icon" className="nav__icon" />
+            <p className="nav__item-name">Rewards</p>
+          </li>
+        </NavLink>
+        <NavLink to="/resource">
+          <li className="nav__item">
+            <img src={uploadIcon2} alt="upload file icon" className="nav__icon" />
+            <p className="nav__item-name">Contributions</p>
+          </li>
+        </NavLink>
         <li className="nav__item">
           <img
             src={savedIcon}
@@ -40,7 +45,7 @@ export default function NavBar() {
         <li
           className={`nav__item ${isLibraryOpen ? "active" : ""}`}
           onClick={toggleLibraryMenu}
-          onMouseEnter={handleMouseEnter}
+        // onMouseEnter={handleMouseEnter}
         >
           <img
             src={libraryIcon}
@@ -64,7 +69,7 @@ export default function NavBar() {
           <img src={uploadIcon} alt="upload file icon" className="nav__icon" />
           <p className="nav__button-name">Upload Resource</p>
         </button> */}
-       <SubmissionDrawer />
+        <SubmissionDrawer />
       </div>
     </ul>
   );

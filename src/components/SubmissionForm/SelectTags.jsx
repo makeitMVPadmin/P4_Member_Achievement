@@ -1,3 +1,4 @@
+import { Box,FormControl,FormLabel } from "@chakra-ui/react";
 import "./SubmissionDrawer.scss"
 import React, {useState} from 'react';
 import Select from 'react-select';
@@ -29,19 +30,51 @@ export default function SelectTags() {
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   return (
-    <Select
-      color='grey'
-      fontSize='18px'
-      closeMenuOnSelect={false}
-      components={animatedComponents}
-      isMulti
-      value={selectedOptions}
-      options={options}
-      defaultValue='select'
-      onChange={(o) => setSelectedOptions(o)}
-      id='tags'
-      isOptionDisabled={() => selectedOptions.length >= 4}
-      placeholder="Select up to 4 tags"
-    />
+
+    <Box>
+      <FormControl>
+        <FormLabel htmlFor='owner' className="submission__title" fontSize='20px' fontWeight='bold'
+        _after={{ content: '" *"', color: 'black'}}>Tags</FormLabel>
+          <Select
+            closeMenuOnSelect={false}
+            components={animatedComponents}
+            isMulti
+            value={selectedOptions}
+            options={options}
+            onChange={(o) => setSelectedOptions(o)}
+            isOptionDisabled={() => selectedOptions.length >= 4}
+            placeholder="Select up to 4 tags"
+            id='tags'
+            styles={{
+              control: (base, state) => ({
+                ...base,
+                border: '3px solid black',
+                boxShadow: '4px 4px 0px black',
+                '&:hover': { borderColor: 'black'},
+                '&:focus': { outline: 'none' },
+              }),
+              valueContainer: (base) => ({
+                ...base,
+                fontSize:'16px',
+                color: 'grey',
+                fontWeight: 'bolder'
+              }),
+              indicatorSeparator: (base) => ({
+                ...base,
+                display: 'none'
+              }),
+              dropdownIndicator: (base) => ({
+                ...base,
+                color: 'grey',
+                '& svg': {
+                  width: '20px',
+                  height: '20px',
+                },
+              }),
+            }}
+            // className='submission__inputField' 
+        />
+    </FormControl>
+    </Box>
   );
 }

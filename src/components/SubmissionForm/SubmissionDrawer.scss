@@ -20,120 +20,43 @@
 .submission {
   &__upload {
     font-size: 16px;
-  margin-top: 20px;
-  color: black;
-  // font-family: "Corben";
-  margin-bottom: 10px;
+    margin-top: 20px;
+    // margin-bottom: 10px;
+    color: darkblue;
   }
   
   &__header-title {
     font-family: "Corben";
     font-weight: bold;
-    font-size: 28px;
+    font-size: 26px;
   }
 
   &__small-text {
     color: black;
     margin-top: 15px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bolder;
   }
 
 
   &__file-button {
     color: grey;
+    font-weight: bold;
+    font-size: 16px
   }
 
-  &__title {
+  &__inputField {
+    border-radius: 0.25rem;
+    box-shadow: 4px 4px 0 black;
     font-weight: bolder;
-    font-size: 20px;
   }
 
-  &__form-border {
-    border: 3px solid black;
+  &__inputField::placeholder {
+    color: grey;
+  }
+
+  &__inputField::selection {
+    color: black;
   }
 }
-
-#title { 
-    @include border;
-  transition: transform 0.3s ease,  0.3s ease;
-}
-
-#title::placeholder {
-  color: grey;
-}
-
-#type {
-  border: 3px solid black;
-  // font-family: "Corben";
-    font-weight: bold;
-    @include border;
-  transition: transform 0.3s ease,  0.3s ease;
-}
-
-#level {
-  border: 3px solid black;
-  // font-family: "Corben";
-    font-weight: bold;
-    @include border;
-  transition: transform 0.3s ease,  0.3s ease;
-    
-}
-
-#tags {
-  border: 3px solid black;
-  border-radius: 5px;
-  color: black;
-  // font-family: "Corben";
-    font-weight: bold;
-    @include border;
-  transition: transform 0.3s ease,  0.3s ease;
-    
-}
-
-#duration {
-  border: 3px solid black;
-  // font-family: "Corben";
-  font-weight: bold;
-  @include border;
-  transition: transform 0.3s ease,  0.3s ease;
-  
-}
-
-#duration::placeholder {
-  color: grey;
-  font-weight: bolder;
-  font-size: 16px;
-  
-}
-
-#desc {
-  // font-family: "Corben";
-  // font-weight: bolder;
-  color: black;
-  margin-right: 0;
-  @include border;
-  transition: transform 0.3s ease,  0.3s ease;
-}
-
-#desc::placeholder {
-  color: grey;
-  font-weight: bolder;
-  font-size: 16px;
-}
-
-#url {
-  // font-weight: bolder;
-  color: black;
-  margin-right: 0;
-  @include border;
-  transition: transform 0.3s ease,  0.3s ease;
-}
-
-#url::placeholder {
-  color: grey;
-  font-weight: bolder;
-  font-size: 16px;
-}
-
 

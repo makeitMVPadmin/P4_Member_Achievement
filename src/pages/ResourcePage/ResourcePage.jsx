@@ -2,6 +2,8 @@ import NavBar from "../../components/NavBar/NavBar";
 import ResourceCard from "../../components/ResourceCard/ResourceCard";
 import ResourceDetailCard from "../../components/ResourceDetailCard/ResourceDetailCard";
 import "./ResourcePage.scss";
+import { Comments } from "../../components/Comments/Comments";
+
 
 
 
@@ -18,6 +20,7 @@ export default function ResourcePage() {
       </div>
       <div className="resource-details__container">
         <ResourceDetailCard />
+        <Comments/>
       </div>
     </div>
   );

@@ -82,7 +82,6 @@ function SubmissionDrawer() {
 //  }
 
   return (
-    
     <>
     {/* Upload Resource Button - pulled from navbar component */}
       <button className="nav__button" onClick={onOpen}>

@@ -34,7 +34,7 @@ export const Comments = () => {
     return (
         <div className="comments">
 
-
+            
             {/*static comment*/}
             <div className="commentDivs">
                 <img className="commentImg" src={blankProfile} alt="userprofile" />

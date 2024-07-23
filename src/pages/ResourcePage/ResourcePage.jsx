@@ -3,10 +3,6 @@ import NavBar from "../../components/NavBar/NavBar";
 import ResourceDetailCard from "../../components/ResourceDetailCard/ResourceDetailCard";
 import ResourceList from "../../components/ResourceList/ResourceList";
 import "./ResourcePage.scss";
-import { Comments } from "../../components/Comments/Comments";
-
-
-
 import resourceData from "../../data/resource.json";
 import resourceDetailsData from "../../data/resource-details.json";
 
@@ -38,7 +34,7 @@ export default function ResourcePage() {
         />
       </div>
       <div className="resource-details__container">
-        <ResourceDetailCard />
+        <ResourceDetailCard selectedResource={selectedResource} />
       </div>
     </div>
   );

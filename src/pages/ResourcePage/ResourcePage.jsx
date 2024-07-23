@@ -8,28 +8,42 @@ import resourceDetailsData from "../../data/resource-details.json";
 
 export default function ResourcePage() {
   const [resources, setResources] = useState(resourceData);
+  const [resourceDetails, setResourceDetails] = useState(resourceDetailsData)
   const [selectedResource, setSelectedResource] = useState(
     resourceDetailsData[0]
   );
+  const [category, setCategory] = useState("All");
+
+  const sortedResources = category === "All"
+    ? resources
+    : resources.filter(resource =>
+      [resource.tag].includes(category)
+    );
+
+  const sortedResourcesDetails = category === "All"
+    ? resourceDetails
+    : resourceDetails.filter(resource =>
+      [resource.tag1, resource.tag2, resource.tag3, resource.tag4].includes(category)
+    );
 
   const handleSelectResource = (clickedId) => {
-    const foundResource = resourceDetailsData.find(
+    const foundResources = resourceDetailsData.find(
       (resource) => clickedId === resource.id
     );
 
-    setSelectedResource(foundResource);
+    setSelectedResource(foundResources);
   };
 
-  const allResources = resources;
+  // const allResources = resources;
 
   return (
     <div className="resource__container">
       <div className="resource__navbar-container">
-        <NavBar />
+        <NavBar onCategoryChange={setCategory} />
       </div>
       <div className="resource__cards">
         <ResourceList
-          resources={allResources}
+          resources={sortedResources}
           selectResource={handleSelectResource}
         />
       </div>

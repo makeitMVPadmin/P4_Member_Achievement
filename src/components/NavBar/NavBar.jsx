@@ -4,20 +4,43 @@ import uploadIcon2 from "../../assets/icons/upload-folder-svgrepo-com2.png";
 import savedIcon from "../../assets/icons/saved-svgrepo-com.png";
 import libraryIcon from "../../assets/icons/library-book-svgrepo-com.png";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer"
 import "./NavBar.scss";
 
-export default function NavBar() {
+export default function NavBar({ onCategoryChange }) {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
 
   const toggleLibraryMenu = () => {
     setIsLibraryOpen(!isLibraryOpen);
   };
 
-  // const handleMouseEnter = () => {
-  //   setIsLibraryOpen(true);
-  // };
+  const handleMouseEnter = () => {
+    setIsLibraryOpen(true);
+  };
+
+  const [category, setCategory] = useState("All");
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleSelectCategory = (category) => {
+    if (location.pathname != "/resource") {
+      navigate("/resource")
+    }
+    if (typeof onCategoryChange === 'function') {
+      onCategoryChange(category);
+    }
+    // onCategoryChange(category);
+    setCategory(category);
+  }
+
+  const checkLocation = () => {
+    if (location.pathname != "/resource") {
+      navigate("/resource")
+    }
+  }
+
 
   return (
     <ul className="nav__list">
@@ -28,12 +51,10 @@ export default function NavBar() {
             <p className="nav__item-name">Rewards</p>
           </li>
         </NavLink>
-        <NavLink to="/resource">
-          <li className="nav__item">
-            <img src={uploadIcon2} alt="upload file icon" className="nav__icon" />
-            <p className="nav__item-name">Contributions</p>
-          </li>
-        </NavLink>
+        <li className="nav__item">
+          <img src={uploadIcon2} alt="upload file icon" className="nav__icon" />
+          <p className="nav__item-name">Contributions</p>
+        </li>
         <li className="nav__item">
           <img
             src={savedIcon}
@@ -45,21 +66,21 @@ export default function NavBar() {
         <li
           className={`nav__item ${isLibraryOpen ? "active" : ""}`}
           onClick={toggleLibraryMenu}
-        // onMouseEnter={handleMouseEnter}
+          onMouseEnter={handleMouseEnter}
         >
           <img
             src={libraryIcon}
             alt="library books icon"
             className="nav__icon"
           />
-          <p className="nav__item-name">Learning Library</p>
+          <p className="nav__item-name" onClick={checkLocation}>Learning Library</p>
         </li>
         {isLibraryOpen && (
           <ul className="nav__library-sublist">
-            <li className="nav__library-subitem">Software Engineering</li>
-            <li className="nav__library-subitem">UX/UI Design</li>
-            <li className="nav__library-subitem">Product</li>
-            <li className="nav__library-subitem">Data Science</li>
+            <li className={`nav__library-subitem ${category === "Software Engineering" ? "active" : ""}`} onClick={() => handleSelectCategory("Software Engineering")}>Software Engineering</li>
+            <li className={`nav__library-subitem ${category === "UX/UI Design" ? "active" : ""}`} onClick={() => handleSelectCategory("UX/UI Design")}>UX/UI Design</li>
+            <li className={`nav__library-subitem ${category === "Product" ? "active" : ""}`} onClick={() => handleSelectCategory("Product")}>Product</li>
+            <li className={`nav__library-subitem ${category === "Data Science" ? "active" : ""}`} onClick={() => handleSelectCategory("Data Science")}>Data Science</li>
           </ul>
         )}
       </div>

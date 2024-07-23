@@ -1,0 +1,139 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+@font-face {
+  font-family: "Corben";
+  src: url('../../assets/fonts/Corben-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Corben";
+  src: url('../../assets/fonts/Corben-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.submission {
+  &__upload {
+    font-size: 16px;
+  margin-top: 20px;
+  color: black;
+  // font-family: "Corben";
+  margin-bottom: 10px;
+  }
+  
+  &__header-title {
+    font-family: "Corben";
+    font-weight: bold;
+    font-size: 28px;
+  }
+
+  &__small-text {
+    color: black;
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bolder;
+  }
+
+
+  &__file-button {
+    color: grey;
+  }
+
+  &__title {
+    font-weight: bolder;
+    font-size: 20px;
+  }
+
+  &__form-border {
+    border: 3px solid black;
+  }
+}
+
+#title { 
+    @include border;
+  transition: transform 0.3s ease,  0.3s ease;
+}
+
+#title::placeholder {
+  color: grey;
+}
+
+#type {
+  border: 3px solid black;
+  // font-family: "Corben";
+    font-weight: bold;
+    @include border;
+  transition: transform 0.3s ease,  0.3s ease;
+}
+
+#level {
+  border: 3px solid black;
+  // font-family: "Corben";
+    font-weight: bold;
+    @include border;
+  transition: transform 0.3s ease,  0.3s ease;
+    
+}
+
+#tags {
+  border: 3px solid black;
+  border-radius: 5px;
+  color: black;
+  // font-family: "Corben";
+    font-weight: bold;
+    @include border;
+  transition: transform 0.3s ease,  0.3s ease;
+    
+}
+
+#duration {
+  border: 3px solid black;
+  // font-family: "Corben";
+  font-weight: bold;
+  @include border;
+  transition: transform 0.3s ease,  0.3s ease;
+  
+}
+
+#duration::placeholder {
+  color: grey;
+  font-weight: bolder;
+  font-size: 16px;
+  
+}
+
+#desc {
+  // font-family: "Corben";
+  // font-weight: bolder;
+  color: black;
+  margin-right: 0;
+  @include border;
+  transition: transform 0.3s ease,  0.3s ease;
+}
+
+#desc::placeholder {
+  color: grey;
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+#url {
+  // font-weight: bolder;
+  color: black;
+  margin-right: 0;
+  @include border;
+  transition: transform 0.3s ease,  0.3s ease;
+}
+
+#url::placeholder {
+  color: grey;
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+

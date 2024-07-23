@@ -4,8 +4,10 @@ import timerIcon from "../../assets/icons/timer-svgrepo-com.png";
 import bookmarkIcon from "../../assets/icons/bookmark-svgrepo-com.svg";
 import bookmarkedIcon from "../../assets/icons/bookmarked.svg";
 import starIcon from "../../assets/icons/star-svgrepo-com.png";
+import savedIcon from "../../assets/icons/saved-svgrepo-com.png";
+import Upvoting from "../Upvoting/Upvoting";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function ResourceDetailCard({ selectedResource, handleToggleBookmarked, savedBookmarks, isBookmarked }) {
   const [isRead, setIsRead] = useState(false);
@@ -44,36 +46,7 @@ export default function ResourceDetailCard({ selectedResource, handleToggleBookm
       <div className="resource-details__rating-timer-container">
         <div className="resource-details__rating-star-container">
           <p className="resource-details__stars">
-            <img
-              src={starIcon}
-              alt="star icon"
-              className="resource-details__star-icon"
-              aria-hidden="true"
-            />
-            <img
-              src={starIcon}
-              alt="star icon"
-              className="resource-details__star-icon"
-              aria-hidden="true"
-            />
-            <img
-              src={starIcon}
-              alt="star icon"
-              className="resource-details__star-icon"
-              aria-hidden="true"
-            />
-            <img
-              src={starIcon}
-              alt="star icon"
-              className="resource-details__star-icon"
-              aria-hidden="true"
-            />
-            <img
-              src={starIcon}
-              alt="star icon"
-              className="resource-details__star-icon"
-              aria-hidden="true"
-            />
+            <Upvoting />
           </p>
           <p className="resource-details__rating">15 ratings</p>
         </div>

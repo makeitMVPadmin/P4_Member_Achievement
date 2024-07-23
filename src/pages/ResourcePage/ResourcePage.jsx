@@ -38,7 +38,7 @@ export default function ResourcePage() {
         />
       </div>
       <div className="resource-details__container">
-        <ResourceDetailCard />
+        <ResourceDetailCard selectedResource={selectedResource} />      
       </div>
     </div>
   );

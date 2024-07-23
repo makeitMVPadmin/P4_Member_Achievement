@@ -49,26 +49,38 @@ export default function SelectTags() {
               control: (base, state) => ({
                 ...base,
                 border: '3px solid black',
-                boxShadow: '4px 4px 0px black',
+                // borderRadius: '10px',
+                boxShadow: '1px 1px 0 black',
                 '&:hover': { borderColor: 'black'},
                 '&:focus': { outline: 'none' },
               }),
               valueContainer: (base) => ({
                 ...base,
-                fontSize:'16px',
+                fontSize:'20px',
                 color: 'grey',
-                fontWeight: 'bolder'
+                fontWeight: 'bold',
+                fontFamily: "Poppins",
+                
               }),
               indicatorSeparator: (base) => ({
                 ...base,
                 display: 'none'
               }),
+              menu: (base) => ({
+                ...base,
+                backgroundColor:'#FFFFFF',
+                borderRadius: '10px',
+                border: '4px solid black',
+                // fontFamily: 'Corben',
+                fontWeight: 'bold',
+                
+              }),
               dropdownIndicator: (base) => ({
                 ...base,
-                color: 'grey',
+                color: "#0099FF",
                 '& svg': {
-                  width: '20px',
-                  height: '20px',
+                  width: '30px',
+                  height: '30px',
                 },
               }),
             }}

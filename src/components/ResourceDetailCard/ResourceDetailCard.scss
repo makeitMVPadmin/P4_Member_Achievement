@@ -21,6 +21,8 @@
 
   &__saved-icon {
     width: 5.5%;
+    cursor: pointer;
+    fill: aqua;
 
     @include desktop {
       width: 3.5%;
@@ -28,7 +30,7 @@
   }
 
   &__title {
-    font-weight: 600;
+    font-weight: 600; 
     color: $black;
     font-size: 1.65rem;
     letter-spacing: -0.05rem;

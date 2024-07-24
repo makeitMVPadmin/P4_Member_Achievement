@@ -1,10 +1,38 @@
 @use "../../styles/partials/_mixins" as *;
 
-.reward {
-  &__icon {
-    width: 2%;
-    @include desktop {
-      width: 3%;
-    }
+.rewards {
+  &__points-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 23rem;
+    margin-top: 0.75rem;
+  }
+
+  &__points-img {
+    width: 2.5rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+  }
+
+  &__points-balance-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__points-subtitle {
+    font-size: 0.85rem;
+  }
+
+  &__points-number {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  &__points-next-level {
+    font-size: 0.65rem;
+    margin-left: 1rem;
+    color: grey;
   }
 }

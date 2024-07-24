@@ -17,123 +17,83 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Poppins";
+  src: url('../../assets/fonts/Poppins-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url('../../assets/fonts/Poppins-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
 .submission {
+
+  &__title {
+    font-family: "Poppins";
+  }
+
   &__upload {
-    font-size: 16px;
-  margin-top: 20px;
-  color: black;
-  // font-family: "Corben";
-  margin-bottom: 10px;
+    font-size: 20px;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    font-family: "Poppins"; 
   }
   
   &__header-title {
     font-family: "Corben";
     font-weight: bold;
-    font-size: 28px;
+    font-size: 24px;
   }
 
   &__small-text {
     color: black;
     margin-top: 15px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bolder;
+    font-family: "Poppins";
   }
 
 
   &__file-button {
     color: grey;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: "Poppins";
+    border: 3px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 1px 0 black;
+    width: 390px;
   }
 
-  &__title {
+ 
+
+  &__inputField {
+    // border-radius: 0.25rem;
+    box-shadow: 1px 1px 0 black;
     font-weight: bolder;
     font-size: 20px;
+    // color: black;
   }
 
-  &__form-border {
-    border: 3px solid black;
+  &__inputField::placeholder {
+    color: gray;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Poppins";
+  
+  }
+
+  &__inputField::selection {
+    color: black;
   }
 }
-
-#title { 
-    @include border;
-  transition: transform 0.3s ease,  0.3s ease;
-}
-
-#title::placeholder {
-  color: grey;
-}
-
-#type {
-  border: 3px solid black;
-  // font-family: "Corben";
-    font-weight: bold;
-    @include border;
-  transition: transform 0.3s ease,  0.3s ease;
-}
-
-#level {
-  border: 3px solid black;
-  // font-family: "Corben";
-    font-weight: bold;
-    @include border;
-  transition: transform 0.3s ease,  0.3s ease;
-    
-}
-
-#tags {
-  border: 3px solid black;
-  border-radius: 5px;
-  color: black;
-  // font-family: "Corben";
-    font-weight: bold;
-    @include border;
-  transition: transform 0.3s ease,  0.3s ease;
-    
-}
-
-#duration {
-  border: 3px solid black;
-  // font-family: "Corben";
-  font-weight: bold;
-  @include border;
-  transition: transform 0.3s ease,  0.3s ease;
-  
-}
-
-#duration::placeholder {
-  color: grey;
-  font-weight: bolder;
-  font-size: 16px;
-  
-}
-
-#desc {
-  // font-family: "Corben";
-  // font-weight: bolder;
-  color: black;
-  margin-right: 0;
-  @include border;
-  transition: transform 0.3s ease,  0.3s ease;
-}
-
-#desc::placeholder {
-  color: grey;
-  font-weight: bolder;
-  font-size: 16px;
-}
-
-#url {
-  // font-weight: bolder;
-  color: black;
-  margin-right: 0;
-  @include border;
-  transition: transform 0.3s ease,  0.3s ease;
-}
-
-#url::placeholder {
-  color: grey;
-  font-weight: bolder;
-  font-size: 16px;
-}
-
 

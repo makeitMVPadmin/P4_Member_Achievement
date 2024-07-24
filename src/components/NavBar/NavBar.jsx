@@ -10,19 +10,22 @@ import "./NavBar.scss";
 
 export default function NavBar({ onCategoryChange }) {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
+  const [category, setCategory] = useState("All");
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleLibraryMenu = () => {
+    if (typeof onCategoryChange === 'function') {
+      onCategoryChange(category)
+    }
+    setCategory("All")
     setIsLibraryOpen(!isLibraryOpen);
   };
 
   const handleMouseEnter = () => {
     setIsLibraryOpen(true);
   };
-
-  const [category, setCategory] = useState("All");
-
-  const location = useLocation();
-  const navigate = useNavigate();
 
   const handleSelectCategory = (category) => {
     if (location.pathname != "/resource") {
@@ -31,7 +34,7 @@ export default function NavBar({ onCategoryChange }) {
     if (typeof onCategoryChange === 'function') {
       onCategoryChange(category);
     }
-    // onCategoryChange(category);
+
     setCategory(category);
   }
 
@@ -40,7 +43,6 @@ export default function NavBar({ onCategoryChange }) {
       navigate("/resource")
     }
   }
-
 
   return (
     <ul className="nav__list">

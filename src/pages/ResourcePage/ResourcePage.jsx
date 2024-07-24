@@ -1,30 +1,52 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import ResourceDetailCard from "../../components/ResourceDetailCard/ResourceDetailCard";
 import ResourceList from "../../components/ResourceList/ResourceList";
-import "./ResourcePage.scss";
+import { Comments } from "../../components/Comments/Comments";
 import resourceData from "../../data/resource.json";
 import resourceDetailsData from "../../data/resource-details.json";
+import "./ResourcePage.scss";
 
 export default function ResourcePage() {
   const [resources, setResources] = useState(resourceData);
-  const [resourceDetails, setResourceDetails] = useState(resourceDetailsData)
-  const [selectedResource, setSelectedResource] = useState(
-    resourceDetailsData[0]
-  );
+  // const [resourceDetails, setResourceDetails] = useState(resourceDetailsData)
+  const [selectedResource, setSelectedResource] = useState(resourceDetailsData[0]);
+  const [savedBookmarks, setSavedBookmarks] = useState([])
+  const [isBookmarked, setIsBookmarked] = useState(false);
   const [category, setCategory] = useState("All");
 
-  const sortedResources = category === "All"
+  useEffect(() => {
+    const savedBookmarks = localStorage.getItem('bookmarks');
+    if (savedBookmarks) {
+      const bookmarks = JSON.parse(savedBookmarks);
+      const isBookmarked = bookmarks.some(bookmark => bookmark.id === selectedResource.id);
+      setIsBookmarked(isBookmarked);
+      setSavedBookmarks(bookmarks);
+    }
+  }, [selectedResource.id]);
+
+
+  const filteredResources = category === "All"
     ? resources
     : resources.filter(resource =>
-      [resource.tag].includes(category)
+      [resource.discipline].includes(category)
     );
 
-  const sortedResourcesDetails = category === "All"
-    ? resourceDetails
-    : resourceDetails.filter(resource =>
-      [resource.tag1, resource.tag2, resource.tag3, resource.tag4].includes(category)
-    );
+  const handleToggleBookmarked = () => {
+    const newBookmarkedState = !isBookmarked;
+    setIsBookmarked(newBookmarkedState);
+    let bookmarks = localStorage.getItem('bookmarks');
+    bookmarks = bookmarks ? JSON.parse(bookmarks) : [];
+
+    if (newBookmarkedState) {
+      bookmarks.push(selectedResource);
+    } else {
+      bookmarks = bookmarks.filter(bookmark => bookmark.id !== selectedResource.id);
+    }
+
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    setSavedBookmarks(bookmarks)
+  };
 
   const handleSelectResource = (clickedId) => {
     const foundResources = resourceDetailsData.find(
@@ -43,12 +65,17 @@ export default function ResourcePage() {
       </div>
       <div className="resource__cards">
         <ResourceList
-          resources={sortedResources}
+          resources={filteredResources}
           selectResource={handleSelectResource}
         />
       </div>
       <div className="resource-details__container">
-        <ResourceDetailCard selectedResource={selectedResource} />
+        <ResourceDetailCard
+          selectedResource={selectedResource}
+          handleToggleBookmarked={handleToggleBookmarked}
+          savedBookmarks={savedBookmarks}
+          isBookmarked={isBookmarked}
+        />
       </div>
     </div>
   );

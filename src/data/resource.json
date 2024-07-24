@@ -6,7 +6,7 @@
     "title": "Build a Machine Learning Model",
     "level": "Intermediate Level",
     "preview": "Learn to build machine learning models using regression, classification, and clustering.",
-    "tag": "Software Engineering"
+    "discipline": "Software Engineering"
   },
   {
     "id": "2",
@@ -15,7 +15,7 @@
     "title": "Create React App vs. Vite: A Comparative Overview",
     "level": "Beginner Level",
     "preview": "When embarking on a new React project, developers often face the decision of which tool to use for bootstrapping their application.",
-    "tag": "Software Engineering"
+    "discipline": "Software Engineering"
   },
   {
     "id": "3",
@@ -24,6 +24,6 @@
     "title": "The Interactive Guide to Rendering in React",
     "level": "Advanced Level",
     "preview": "React, in its purest form, is a library for building user interfaces. It's so simple that the entire mental model can be represented as a formula, v = f(s) – where your view is simply a function of your state.",
-    "tag": "UX/UI Design"
+    "discipline": "UX/UI Design"
   }
 ]

@@ -13,6 +13,12 @@
   }
 }
 
+@mixin large-desktop {
+  @media (min-width: $large-desktop-breakpoint) {
+    @content;
+  }
+}
+
 @mixin library-textFormat($size, $weight) {
   color: #000;
   font-family: Gilroy;

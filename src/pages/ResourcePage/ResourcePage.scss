@@ -23,13 +23,14 @@
   }
 
   &__navbar-container {
-    width: 35%;
+    // width: 35%;
+    width: 19rem;
     display: flex;
     flex-direction: column;
     height: 100vh;
 
     @include desktop {
-      width: 28%;
+      width: 25rem;
     }
   }
 }

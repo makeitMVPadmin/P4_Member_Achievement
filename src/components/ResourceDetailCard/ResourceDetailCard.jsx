@@ -1,15 +1,17 @@
 import "./ResourceDetailCard.scss";
 import arrowForwardIcon from "../../assets/icons/arrow-forward-svgrepo-com.png";
 import timerIcon from "../../assets/icons/timer-svgrepo-com.png";
+import bookmarkIcon from "../../assets/icons/bookmark-svgrepo-com.svg";
+import bookmarkedIcon from "../../assets/icons/bookmarked.svg";
+import starIcon from "../../assets/icons/star-svgrepo-com.png";
 import savedIcon from "../../assets/icons/saved-svgrepo-com.png";
 import Upvoting from "../Upvoting/Upvoting";
 import { Link } from "react-router-dom";
 import { Comments } from "../Comments/Comments";
 import React, { useState, useEffect } from "react";
 
-export default function ResourceDetailCard({ selectedResource }) {
+export default function ResourceDetailCard({ selectedResource, handleToggleBookmarked, savedBookmarks, isBookmarked }) {
   const [isRead, setIsRead] = useState(false);
-
   useEffect(() => {
     const savedReadState = localStorage.getItem(selectedResource.id);
     if (savedReadState) {
@@ -41,8 +43,9 @@ export default function ResourceDetailCard({ selectedResource }) {
         <div className="resource-details__heading-top-container">
           <p className="resource-details__type">{selectedResource.type}</p>
           <img
-            src={savedIcon}
-            alt="saved icon"
+            src={isBookmarked ? bookmarkedIcon : bookmarkIcon}
+            onClick={handleToggleBookmarked}
+            alt="bookmark icon"
             className="resource-details__saved-icon"
             aria-hidden="true"
           />
@@ -118,9 +121,8 @@ export default function ResourceDetailCard({ selectedResource }) {
             </button>
           </Link>
           <button
-            className={`resource-details__button ${
-              isRead ? "resource-details__button--read" : ""
-            }`}
+            className={`resource-details__button ${isRead ? "resource-details__button--read" : ""
+              }`}
             onClick={handleToggleRead}
             aria-pressed={isRead}
             aria-label={isRead ? "Mark as Unread" : "Mark as Read"}

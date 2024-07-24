@@ -1,0 +1,35 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.resource {
+  &__container {
+    display: flex;
+  }
+
+  &__cards {
+    margin-right: 0.75rem;
+    width: 65%;
+
+    @include desktop {
+      width: 55%;
+    }
+  }
+
+  &-details__container {
+    width: 90%;
+    margin: 0 0.75rem 0.75rem 0;
+  }
+
+  &__navbar-container {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    @include desktop {
+      width: 28%;
+    }
+  }
+}

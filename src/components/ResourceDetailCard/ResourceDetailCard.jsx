@@ -16,10 +16,21 @@ export default function ResourceDetailCard({ selectedResource }) {
     }
   }, [selectedResource.id]);
 
+  const updatePoints = (pointsToAdd) => {
+    const currentPoints = parseInt(localStorage.getItem("userPoints")) || 0;
+    const newPoints = currentPoints + pointsToAdd;
+    localStorage.setItem("userPoints", newPoints);
+  };
+
   const handleToggleRead = () => {
     const newReadState = !isRead;
     setIsRead(newReadState);
     localStorage.setItem(selectedResource.id, JSON.stringify(newReadState));
+    // if (newReadState) {
+    //   updatePoints(10);
+    // } else {
+    //   updatePoints(-10);
+    // }
   };
 
   return (

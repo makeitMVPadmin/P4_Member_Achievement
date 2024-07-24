@@ -9,10 +9,17 @@
   width: 15rem;
   height: 9rem;
   margin-bottom: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.025);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
 
   @include desktop {
     width: 16rem;
-    height: 10rem;
+    height: 9.5rem;
   }
 
   @include large-desktop {

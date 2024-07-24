@@ -12,6 +12,7 @@
 }
 
 .comments {
+    position: relative;
     overflow: auto;
     height: 30rem;
     -webkit-overflow-scrolling: touch;
@@ -49,7 +50,7 @@
 }
 
 .commenter {
-    color: #020817;
+    color: #0099FF;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;

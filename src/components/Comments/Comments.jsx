@@ -4,6 +4,7 @@ import { Input } from '@chakra-ui/react'
 import './Comments.scss'
 import blankProfile from "../../assets/icons/BlankProfile.png";
 import thumbsUpComments from "../../assets/icons/thumbsUpComments.svg"
+import { CommentModal } from "../CommentModal/CommentModal";
 
 
 
@@ -12,6 +13,7 @@ export const Comments = () => {
     const [comment, setComment] = useState('');
     const [postedComments, setpostedComments] = useState([]);
     const [isClicked, setIsClicked] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
 
     const CommentValue = (e) => {
@@ -23,6 +25,7 @@ export const Comments = () => {
         if (comment.trim()) {
             setpostedComments([...postedComments, comment])
             setComment('')
+            setShowModal(true)
         }
     }
 
@@ -30,6 +33,9 @@ export const Comments = () => {
         setIsClicked(!isClicked);
       }
 
+    const closeModal = () => {
+        setShowModal(false)
+    }
 
     return (
         <div className="comments">
@@ -85,7 +91,7 @@ export const Comments = () => {
                         borderRadius: '50px'
                     }} />
             </form>
-
+            {/* <CommentModal/>    */}
         </div>
     )
 }

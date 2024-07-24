@@ -7,13 +7,17 @@ export default function ResourceList(props) {
   return (
     <section className="resourceList" aria-label="Resource List">
       <div className="resourceList__wrapper" role="list">
-        {resources.map((resource) => (
-          <ResourceCard
-            key={resource.id}
-            resource={resource}
-            selectResource={selectResource}
-          />
-        ))}
+        {resources.length > 0 ? (
+          resources.map((resource) => (
+            <ResourceCard
+              key={resource.id}
+              resource={resource}
+              selectResource={selectResource}
+            />
+          ))
+        ) : (
+          <p>No resources available for this category.</p>
+        )}
       </div>
     </section>
   );

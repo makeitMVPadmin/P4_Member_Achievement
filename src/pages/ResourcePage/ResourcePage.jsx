@@ -2,19 +2,18 @@ import { useState, useEffect } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import ResourceDetailCard from "../../components/ResourceDetailCard/ResourceDetailCard";
 import ResourceList from "../../components/ResourceList/ResourceList";
-import "./ResourcePage.scss";
 import { Comments } from "../../components/Comments/Comments";
-
-
-
 import resourceData from "../../data/resource.json";
 import resourceDetailsData from "../../data/resource-details.json";
+import "./ResourcePage.scss";
 
 export default function ResourcePage() {
   const [resources, setResources] = useState(resourceData);
+  // const [resourceDetails, setResourceDetails] = useState(resourceDetailsData)
   const [selectedResource, setSelectedResource] = useState(resourceDetailsData[0]);
-  const [savedBookmarks , setSavedBookmarks]= useState([])
+  const [savedBookmarks, setSavedBookmarks] = useState([])
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [category, setCategory] = useState("All");
 
   useEffect(() => {
     const savedBookmarks = localStorage.getItem('bookmarks');
@@ -22,9 +21,16 @@ export default function ResourcePage() {
       const bookmarks = JSON.parse(savedBookmarks);
       const isBookmarked = bookmarks.some(bookmark => bookmark.id === selectedResource.id);
       setIsBookmarked(isBookmarked);
-      setSavedBookmarks(bookmarks); 
+      setSavedBookmarks(bookmarks);
     }
   }, [selectedResource.id]);
+
+
+  const filteredResources = category === "All"
+    ? resources
+    : resources.filter(resource =>
+      [resource.discipline].includes(category)
+    );
 
   const handleToggleBookmarked = () => {
     const newBookmarkedState = !isBookmarked;
@@ -43,23 +49,23 @@ export default function ResourcePage() {
   };
 
   const handleSelectResource = (clickedId) => {
-    const foundResource = resourceDetailsData.find(
+    const foundResources = resourceDetailsData.find(
       (resource) => clickedId === resource.id
     );
 
-    setSelectedResource(foundResource);
+    setSelectedResource(foundResources);
   };
 
-  const allResources = resources;
+  // const allResources = resources;
 
   return (
     <div className="resource__container">
       <div className="resource__navbar-container">
-        <NavBar />
+        <NavBar onCategoryChange={setCategory} />
       </div>
       <div className="resource__cards">
         <ResourceList
-          resources={allResources}
+          resources={filteredResources}
           selectResource={handleSelectResource}
         />
       </div>

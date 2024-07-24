@@ -4,6 +4,7 @@ import timerIcon from "../../assets/icons/timer-svgrepo-com.png";
 import savedIcon from "../../assets/icons/saved-svgrepo-com.png";
 import Upvoting from "../Upvoting/Upvoting";
 import { Link } from "react-router-dom";
+import { Comments } from "../Comments/Comments";
 import React, { useState, useEffect } from "react";
 
 export default function ResourceDetailCard({ selectedResource }) {
@@ -34,6 +35,7 @@ export default function ResourceDetailCard({ selectedResource }) {
   };
 
   return (
+    <>
     <section className="resource-details">
       <div className="resource-details__heading-top">
         <div className="resource-details__heading-top-container">
@@ -127,6 +129,9 @@ export default function ResourceDetailCard({ selectedResource }) {
           </button>
         </div>
       </div>
+      
     </section>
+    <Comments/>
+    </>
   );
 }

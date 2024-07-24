@@ -1,0 +1,54 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+
+.modal {
+    z-index: 1;
+    position: fixed;
+    bottom: 0;
+    right: 11px;
+    width: 51%;
+    height: 152px;
+    padding: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-radius: 8px;
+    border-top: 3px solid var(--Black, #000);
+    border-right: 10px solid var(--Black, #000);
+    border-bottom: 10px solid var(--Black, #000);
+    border-left: 3px solid var(--Black, #000);
+    background: var(--White, #FFF);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.modalHeader {
+    color: var(--Black, #000);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Poppins;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 115.645%;
+}
+
+.modalText {
+    color: var(--Black, #000);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 115.645%;
+}
+
+.modalX {
+    display: flex;
+width: 24px;
+height: 24px;
+padding: 2px;
+justify-content: center;
+align-items: center;
+}

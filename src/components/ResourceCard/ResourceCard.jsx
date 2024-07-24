@@ -5,6 +5,7 @@ import timerIcon from "../../assets/icons/timer-svgrepo-com.png";
 import Upvoting from "../Upvoting/Upvoting";
 import "./ResourceCard.scss";
 
+
 export default function ResourceCard(props) {
   const { resource, selectResource } = props;
 

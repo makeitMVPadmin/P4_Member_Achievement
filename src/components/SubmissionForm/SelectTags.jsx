@@ -1,9 +1,90 @@
+import { Box,FormControl,FormLabel,Icon, position } from "@chakra-ui/react";
 import "./SubmissionDrawer.scss"
+import { ChevronDownIcon } from '@chakra-ui/icons';
 import React, {useState} from 'react';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 import makeAnimated from 'react-select/animated';
+import { color } from "framer-motion";
+import { hover } from "@testing-library/user-event/dist/hover";
 
-const animatedComponents = makeAnimated();
+// const animatedComponents = makeAnimated();
+const CustomDropdownIndicator = (props) => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <Icon as={ChevronDownIcon} boxSize={5} />
+    </components.DropdownIndicator>
+  );
+};
+
+const customComponents = {
+  DropdownIndicator: CustomDropdownIndicator,
+};
+
+const customStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    border: '3px solid black',
+    boxShadow: '1px 1px 0 black',
+    borderRadius: '6px',
+    // height: '43px',
+    '&:hover': { borderColor: 'black' },
+    '&:focus': { outline: 'none' },
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    padding: '0px',
+    fontSize:'20px',
+    color: 'grey',
+    fontWeight: 'bold',
+    fontFamily: "Poppins",
+    marginLeft: "14px",
+    // marginBottom: '5px'
+   
+  }),
+  indicatorsContainer: (provided) => ({
+    ...provided,
+   
+    // display: 'flex',
+    // alignItems: 'center',
+  }),
+  dropdownIndicator: (provided) => ({
+    ...provided,
+    color: '#0099FF',
+    padding: 0,
+    '& svg': {
+      position: 'relative',
+      right: '-5px',
+      // bottom: '4px',
+      width: '45px',
+      height: '45px',
+      hover: 'none',
+    },
+  }),
+  indicatorSeparator: (base) => ({
+    ...base,
+    display: 'none'
+  }),
+  menu: (base) => ({
+    ...base,
+    backgroundColor:'#FFFFFF',
+    borderRadius: '10px',
+    border: '4px solid black',
+    // fontFamily: 'Corben',
+    fontWeight: 'bold',
+    
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    color: 'grey',
+    fontWeight: 'bold',
+  }),
+  input: (provided) => ({
+    ...provided,
+    margin: 0,
+  }),
+};
+
+
 const options = [
   { value: 'ai', label: 'AI' },
   { value: 'angular', label: 'Angular' },
@@ -22,26 +103,31 @@ const options = [
   { value: 'wireframes', label: 'Wireframes' },
 ]
 
-
-
 export default function SelectTags() {
 
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   return (
-    <Select
-      color='grey'
-      fontSize='18px'
-      closeMenuOnSelect={false}
-      components={animatedComponents}
-      isMulti
-      value={selectedOptions}
-      options={options}
-      defaultValue='select'
-      onChange={(o) => setSelectedOptions(o)}
-      id='tags'
-      isOptionDisabled={() => selectedOptions.length >= 4}
-      placeholder="Select up to 4 tags"
-    />
+
+    <Box>
+      <FormControl>
+        <FormLabel htmlFor='owner' className="submission__title" fontSize='20px' fontWeight='bold'
+        _after={{ content: '" *"', color: 'black'}}>Tags</FormLabel>
+          <Select
+            closeMenuOnSelect={false}
+            components={customComponents}
+            isMulti
+            value={selectedOptions}
+            options={options}
+            onChange={(o) => setSelectedOptions(o)}
+            isOptionDisabled={() => selectedOptions.length >= 4}
+            placeholder="Select up to 4 tags"
+            id='tags'
+            styles={customStyles}
+            // className='submission__inputField' 
+        />
+    </FormControl>
+    </Box>
   );
 }
+

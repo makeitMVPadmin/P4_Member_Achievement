@@ -7,6 +7,7 @@ import starIcon from "../../assets/icons/star-svgrepo-com.png";
 import savedIcon from "../../assets/icons/saved-svgrepo-com.png";
 import Upvoting from "../Upvoting/Upvoting";
 import { Link } from "react-router-dom";
+import { Comments } from "../Comments/Comments";
 import React, { useState, useEffect } from "react";
 
 export default function ResourceDetailCard({ selectedResource, handleToggleBookmarked, savedBookmarks, isBookmarked }) {
@@ -25,6 +26,7 @@ export default function ResourceDetailCard({ selectedResource, handleToggleBookm
   };
 
   return (
+    <>
     <section className="resource-details">
       <div className="resource-details__heading-top">
         <div className="resource-details__heading-top-container">
@@ -118,6 +120,9 @@ export default function ResourceDetailCard({ selectedResource, handleToggleBookm
           </button>
         </div>
       </div>
+      
     </section>
+    <Comments/>
+    </>
   );
 }

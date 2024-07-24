@@ -1,10 +1,90 @@
-import { Box,FormControl,FormLabel } from "@chakra-ui/react";
+import { Box,FormControl,FormLabel,Icon, position } from "@chakra-ui/react";
 import "./SubmissionDrawer.scss"
+import { ChevronDownIcon } from '@chakra-ui/icons';
 import React, {useState} from 'react';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 import makeAnimated from 'react-select/animated';
+import { color } from "framer-motion";
+import { hover } from "@testing-library/user-event/dist/hover";
 
-const animatedComponents = makeAnimated();
+// const animatedComponents = makeAnimated();
+const CustomDropdownIndicator = (props) => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <Icon as={ChevronDownIcon} boxSize={5} />
+    </components.DropdownIndicator>
+  );
+};
+
+const customComponents = {
+  DropdownIndicator: CustomDropdownIndicator,
+};
+
+const customStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    border: '3px solid black',
+    boxShadow: '1px 1px 0 black',
+    borderRadius: '6px',
+    // height: '43px',
+    '&:hover': { borderColor: 'black' },
+    '&:focus': { outline: 'none' },
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    padding: '0px',
+    fontSize:'20px',
+    color: 'grey',
+    fontWeight: 'bold',
+    fontFamily: "Poppins",
+    marginLeft: "14px",
+    // marginBottom: '5px'
+   
+  }),
+  indicatorsContainer: (provided) => ({
+    ...provided,
+   
+    // display: 'flex',
+    // alignItems: 'center',
+  }),
+  dropdownIndicator: (provided) => ({
+    ...provided,
+    color: '#0099FF',
+    padding: 0,
+    '& svg': {
+      position: 'relative',
+      right: '-5px',
+      // bottom: '4px',
+      width: '45px',
+      height: '45px',
+      hover: 'none',
+    },
+  }),
+  indicatorSeparator: (base) => ({
+    ...base,
+    display: 'none'
+  }),
+  menu: (base) => ({
+    ...base,
+    backgroundColor:'#FFFFFF',
+    borderRadius: '10px',
+    border: '4px solid black',
+    // fontFamily: 'Corben',
+    fontWeight: 'bold',
+    
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    color: 'grey',
+    fontWeight: 'bold',
+  }),
+  input: (provided) => ({
+    ...provided,
+    margin: 0,
+  }),
+};
+
+
 const options = [
   { value: 'ai', label: 'AI' },
   { value: 'angular', label: 'Angular' },
@@ -23,8 +103,6 @@ const options = [
   { value: 'wireframes', label: 'Wireframes' },
 ]
 
-
-
 export default function SelectTags() {
 
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -37,7 +115,7 @@ export default function SelectTags() {
         _after={{ content: '" *"', color: 'black'}}>Tags</FormLabel>
           <Select
             closeMenuOnSelect={false}
-            components={animatedComponents}
+            components={customComponents}
             isMulti
             value={selectedOptions}
             options={options}
@@ -45,48 +123,11 @@ export default function SelectTags() {
             isOptionDisabled={() => selectedOptions.length >= 4}
             placeholder="Select up to 4 tags"
             id='tags'
-            styles={{
-              control: (base, state) => ({
-                ...base,
-                border: '3px solid black',
-                // borderRadius: '10px',
-                boxShadow: '1px 1px 0 black',
-                '&:hover': { borderColor: 'black'},
-                '&:focus': { outline: 'none' },
-              }),
-              valueContainer: (base) => ({
-                ...base,
-                fontSize:'20px',
-                color: 'grey',
-                fontWeight: 'bold',
-                fontFamily: "Poppins",
-                
-              }),
-              indicatorSeparator: (base) => ({
-                ...base,
-                display: 'none'
-              }),
-              menu: (base) => ({
-                ...base,
-                backgroundColor:'#FFFFFF',
-                borderRadius: '10px',
-                border: '4px solid black',
-                // fontFamily: 'Corben',
-                fontWeight: 'bold',
-                
-              }),
-              dropdownIndicator: (base) => ({
-                ...base,
-                color: "#0099FF",
-                '& svg': {
-                  width: '30px',
-                  height: '30px',
-                },
-              }),
-            }}
+            styles={customStyles}
             // className='submission__inputField' 
         />
     </FormControl>
     </Box>
   );
 }
+

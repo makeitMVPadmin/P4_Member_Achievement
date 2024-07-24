@@ -29,8 +29,11 @@ import { color } from "framer-motion";
 // import { useForm } from "react-hook-form";
 
 function SubmissionDrawer() {
+  
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = React.useRef()
+  
 
   // const { submission, handleSubmit, formState: { errors } } = useForm();
 
@@ -156,7 +159,7 @@ function SubmissionDrawer() {
                 </FormLabel>      
                 <Select
                 id='type' 
-                className='submission__inputField'
+                className='submission__inputFieldSelect'
                 border='3px solid black' 
                 _hover='none'
                 color='grey'
@@ -167,7 +170,9 @@ function SubmissionDrawer() {
                 icon={<ChevronDownIcon />}
                 iconSize="45px"
                 iconColor="#0099FF"
-                focusBorderColor="black" >
+                focusBorderColor="black"
+                
+                 >
                   <option value='select'>Article</option>
                   <option value='select'>Blog</option>
                   <option value='select'>Video</option>
@@ -286,8 +291,11 @@ function SubmissionDrawer() {
                   />
                 </FormControl>
               </Box>
-              <p className="submission__upload">OR</p>
 
+              <div>
+              <p className="submission__upload">OR</p>
+              </div>
+              
             {/* UPLOAD FILE  */}
               <Box>
                 <UploadFile />

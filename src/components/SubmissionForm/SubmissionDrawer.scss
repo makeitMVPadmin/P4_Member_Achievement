@@ -45,7 +45,7 @@
     text-align: center;
     color: black;
     font-weight: bold;
-    font-family: "Poppins";  
+    font-family: "Poppins"; 
   }
   
   &__header-title {
@@ -80,14 +80,16 @@
     // border-radius: 0.25rem;
     box-shadow: 1px 1px 0 black;
     font-weight: bolder;
-    font-size: 30px;
+    font-size: 20px;
+    // color: black;
   }
 
   &__inputField::placeholder {
-    color: grey;
+    color: gray;
     font-size: 20px;
     font-weight: bold;
     font-family: "Poppins";
+  
   }
 
   &__inputField::selection {

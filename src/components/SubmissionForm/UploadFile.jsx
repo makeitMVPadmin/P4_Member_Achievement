@@ -36,6 +36,7 @@ function UploadFile() {
         className="submission__title" 
         fontSize='20px' 
         fontWeight='bold'
+        marginTop='-10px'
         _after={{ content: '" *"', color: 'black'}}>File Upload
         </FormLabel>
         <input className='submission__file-button' type="file" onChange={handleChange}/>

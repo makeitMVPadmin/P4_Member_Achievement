@@ -17,6 +17,7 @@ export default function ResourcePage() {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [category, setCategory] = useState("All");
   const [activeResourceId, setActiveResourceId] = useState(null);
+  // const [comments, setComments] = useState([]);
 
   useEffect(() => {
     if (resources.length > 0) {
@@ -70,8 +71,10 @@ export default function ResourcePage() {
       (resource) => clickedId === resource.id
     );
 
-    setSelectedResource(foundResources);
-    setActiveResourceId(clickedId);
+    if (foundResources) {
+      setSelectedResource(foundResources);
+      setActiveResourceId(clickedId);
+    }
   };
 
   // const allResources = resources;
@@ -94,6 +97,7 @@ export default function ResourcePage() {
           handleToggleBookmarked={handleToggleBookmarked}
           savedBookmarks={savedBookmarks}
           isBookmarked={isBookmarked}
+          // comments={comments}
         />
       </div>
     </div>

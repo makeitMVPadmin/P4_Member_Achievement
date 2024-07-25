@@ -1,97 +1,99 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Input } from '@chakra-ui/react'
-import './Comments.scss'
+import { Input } from "@chakra-ui/react";
+import "./Comments.scss";
 import blankProfile from "../../assets/icons/BlankProfile.png";
-import thumbsUpComments from "../../assets/icons/thumbsUpComments.svg"
+import thumbsUpComments from "../../assets/icons/thumbsUpComments.svg";
 import { CommentModal } from "../CommentModal/CommentModal";
+import { formatDistanceToNow } from "date-fns";
 
+export const Comments = ({ selectedResource }) => {
+  const [comment, setComment] = useState("");
+  const [postedComments, setPostedComments] = useState(
+    selectedResource.comments || []
+  );
+  const [isClicked, setIsClicked] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
+  useEffect(() => {
+    setPostedComments(selectedResource.comments || []);
+  }, [selectedResource.comments]);
 
-export const Comments = () => {
+  const CommentValue = (e) => {
+    setComment(e.target.value);
+  };
 
-    const [comment, setComment] = useState('');
-    const [postedComments, setpostedComments] = useState([]);
-    const [isClicked, setIsClicked] = useState(false);
-    const [showModal, setShowModal] = useState(false);
-
-
-    const CommentValue = (e) => {
-        setComment(e.target.value);
+  const submitComment = (e) => {
+    e.preventDefault();
+    if (comment.trim()) {
+      const newComment = {
+        id: Date.now().toString(),
+        name: "Anonymous",
+        comment: comment,
+        likes: 0,
+        timestamp: Date.now(),
+      };
+      setPostedComments([...postedComments, newComment]);
+      setComment("");
+      setShowModal(true);
     }
+  };
 
-    const submitComment = (e) => {
-        e.preventDefault()
-        if (comment.trim()) {
-            setpostedComments([...postedComments, comment])
-            setComment('')
-            setShowModal(true)
-        }
-    }
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  };
 
-    const handleClick = () => {
-        setIsClicked(!isClicked);
-      }
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
-    const closeModal = () => {
-        setShowModal(false)
-    }
-
-    return (
-        <div className="comments">
-
-            
-            {/*static comment*/}
-            <div className="commentDivs">
-                <img className="commentImg" src={blankProfile} alt="userprofile" />
-                <div className="commentContext">
-                    <div className="commentHeader">
-                        <div className="commenter">Sarah Lee</div>
-                        <div className="commentDate">5 days ago</div>
-                        <div className="thumbsup">
-                            <img className="commentLikes" src={thumbsUpComments} alt="thumbsUp" />
-                        </div>
-                    </div>
-                    <div className="commentText">em maxime est iusto cum vel odio
-                        quasi fugiat? Quibusdam magni, illum reiciendis
-                        minima labore ducimus v lkdj lasdia  lasi leanrning ikinilknoiwing</div>
+  return (
+    <div className="comments">
+      {postedComments.length > 0 ? (
+        postedComments.map((postedComments) => (
+          <div key={postedComments.id} className="commentDivs">
+            <img className="commentImg" src={blankProfile} alt="userprofile" />
+            <div className="commentContext">
+              <div className="commentHeader">
+                <div className="commenter">{postedComments.name}</div>
+                <div className="commentDate">
+                  {formatDistanceToNow(new Date(postedComments.timestamp), {
+                    addSuffix: true,
+                  })}
                 </div>
+                <div className="thumbsup">
+                  <img
+                    className="commentLikes"
+                    src={thumbsUpComments}
+                    alt="thumbsUp"
+                    onClick={handleClick}
+                  />
+                </div>
+              </div>
+              <div className="commentText">{postedComments.comment}</div>
             </div>
+          </div>
+        ))
+      ) : (
+        <p>No comments yet.</p>
+      )}
 
-            {postedComments.map((postedComment, index) => (
-                <div key={index} className="commentDivs">
-                    <img 
-                    className="commentImg" src={blankProfile} alt="userprofile" />
-                    <div className="commentContext">
-                        <div className="commentHeader">
-                            <div className="commenter">Anonymous</div>
-                            <div className="commentDate">Just now</div>
-                            <div className="thumbsup">
-                                <img 
-                                className="commentLikes" 
-                                src={thumbsUpComments} 
-                                alt="thumbsUp"
-                                onClick={handleClick} />
-                            </div>
-                        </div>
-                        <div className="commentText">{postedComment}</div>
-                    </div>
-                </div>
-            ))}
+      <form className="newComment" onSubmit={submitComment}>
+        <img className="commentImg" src={blankProfile} alt="userprofile" />
+        <Input
+          maxLength={800}
+          value={comment}
+          onChange={CommentValue}
+          placeholder="Contribute your experience"
+          size="md"
+          sx={{
+            borderRadius: "50px",
+          }}
+        />
+        <button type="submit">Post</button>
+      </form>
 
-            <form className="newComment" onSubmit={submitComment}>
-                <img className="commentImg" src={blankProfile} alt="userprofile" />
-                <Input
-                    maxLength={800}
-                    value={comment}
-                    onChange={CommentValue}
-                    placeholder='Contribute your experience'
-                    size='md'
-                    sx={{
-                        borderRadius: '50px'
-                    }} />
-            </form>
-            {/* <CommentModal/>    */}
-        </div>
-    )
-}
+      {/* {showModal && <CommentModal closeModal={closeModal} />} */}
+    </div>
+  );
+};

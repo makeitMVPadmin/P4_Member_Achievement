@@ -15,6 +15,7 @@ export default function ResourceDetailCard({
   handleToggleBookmarked,
   savedBookmarks,
   isBookmarked,
+  // comments,
 }) {
   const [isRead, setIsRead] = useState(false);
   useEffect(() => {
@@ -139,7 +140,7 @@ export default function ResourceDetailCard({
           </div>
         </div>
       </section>
-      <Comments />
+      <Comments selectedResource={selectedResource} />
     </>
   );
 }

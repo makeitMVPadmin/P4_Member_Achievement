@@ -35,9 +35,23 @@
 
 
 .submission {
+  // &__form-container {
+  //   // display: flex;
+  //   // flex-wrap: wrap;
+  //   // max-height: 600px;
+  //   // justify-content: space-between;
+  // }
+
+  &__form-column {
+    flex: 1;
+    // min-width: 410px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+  }
 
   &__title {
     font-family: "Poppins";
+    
   }
 
   &__upload {
@@ -51,7 +65,8 @@
   &__header-title {
     font-family: "Corben";
     font-weight: bold;
-    font-size: 24px;
+    font-size: 25px;
+    // margin-left: 40px;
   }
 
   &__small-text {
@@ -60,6 +75,7 @@
     font-size: 18px;
     font-weight: bolder;
     font-family: "Poppins";
+    // margin-left: 40px;
   }
 
 
@@ -71,18 +87,24 @@
     border: 3px solid black;
     border-radius: 5px;
     box-shadow: 1px 1px 0 black;
-    width: 390px;
+    width:375px;
   }
 
  
 
   &__inputField {
-    // border-radius: 0.25rem;
+    border-radius: 0.25rem;
     box-shadow: 1px 1px 0 black;
     font-weight: bolder;
     font-size: 20px;
-    // color: black;
+    // width: 100%;
+    // max-width: 500px;
   }
+
+  &__OR {
+    margin-top: -20px;
+    margin-bottom: 10px;
+  }  
 
   &__inputField::placeholder {
     color: gray;

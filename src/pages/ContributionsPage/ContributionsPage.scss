@@ -1,0 +1,24 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.contributions {
+  &__container {
+    display: flex;
+  }
+
+  &__cards {
+    margin-right: 0.75rem;
+    width: 65%;
+
+    @include desktop {
+      width: 55%;
+    }
+  }
+
+  &__details-container {
+    width: 90%;
+    margin: 0 0.75rem 0.75rem 0;
+  }
+}

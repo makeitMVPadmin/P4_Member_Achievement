@@ -5,6 +5,7 @@ import ResourcePage from "./pages/ResourcePage/ResourcePage.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
 import RewardsPage from "./pages/RewardsPage/RewardsPage.jsx";
 import BookMarkedPage from "./pages/BookMarkedPage/BookMarkedPage.jsx";
+import ContributionsPage from "./pages/ContributionsPage/ContributionsPage.jsx";
 
 const App = () => {
   const [savedBookmarks, setSavedBookmarks] = useState([]);
@@ -30,6 +31,7 @@ const App = () => {
               element={<BookMarkedPage bookmarkedResources={savedBookmarks} />}
             />
             <Route path="/rewards" element={<RewardsPage />} />
+            <Route path="/contributions" element={<ContributionsPage />} />
           </Routes>
         </BrowserRouter>
       </ChakraProvider>

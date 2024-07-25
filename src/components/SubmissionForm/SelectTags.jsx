@@ -26,6 +26,7 @@ const customStyles = {
     // this changes width of entire container
     // maxWidth:"450px",
     border: '3px solid black',
+    borderRadius: '0.25rem',
     boxShadow: '1px 1px 0 black',
     borderRadius: '6px',
     // height: '43px',

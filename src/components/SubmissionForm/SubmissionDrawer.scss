@@ -93,7 +93,7 @@
  
 
   &__inputField {
-    // border-radius: 0.25rem;
+    border-radius: 0.25rem;
     box-shadow: 1px 1px 0 black;
     font-weight: bolder;
     font-size: 20px;
@@ -103,6 +103,7 @@
 
   &__OR {
     margin-top: -20px;
+    margin-bottom: 10px;
   }  
 
   &__inputField::placeholder {

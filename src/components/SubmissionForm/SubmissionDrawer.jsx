@@ -142,11 +142,45 @@ function SubmissionDrawer() {
                     className='submission__inputField'
                     _hover='none'
                     focusBorderColor="black"
+                    fontSize="20px"
       
                     />
                   <FormErrorMessage>Title is required for submission</FormErrorMessage>
                 </FormControl>
               </Box>
+
+            {/* DISCIPLINE  */}
+              <Box className="submission__form-column" >
+                <FormControl>
+                <FormLabel htmlFor='discipline'
+                className="submission__title"
+                fontSize='20px'
+                fontWeight='bold'
+                _after={{ content: '" *"', color: 'black'}}>Discipline
+                </FormLabel>      
+                <Select
+                id='discipline' 
+                className='submission__inputField'
+                border='3px solid black' 
+                _hover='none'
+                color='grey'
+                fontFamily="Poppins"
+                fontWeight='bold'
+                placeholder="Select"
+                fontSize='20px'
+                icon={<ChevronDownIcon />}
+                iconSize="45px"
+                iconColor="#0099FF"
+                focusBorderColor="black"
+                 >
+                  <option value='1'>Software Engineering</option>
+                  <option value='2'>UX/UI Design</option>
+                  <option value='3'>Product Management</option>
+                  <option value='4'>Data Science</option>
+                </Select>
+                </FormControl>
+              </Box>
+
           {/* TYPE  */}
               <Box className="submission__form-column" >
                 <FormControl>
@@ -158,7 +192,7 @@ function SubmissionDrawer() {
                 </FormLabel>      
                 <Select
                 id='type' 
-                className='submission__inputFieldSelect'
+                className='submission__inputField'
                 border='3px solid black' 
                 _hover='none'
                 color='grey'
@@ -180,7 +214,6 @@ function SubmissionDrawer() {
                 </Select>
                 </FormControl>
               </Box>
-
 
             {/* TAGS */}
               <Box className="submission__form-column">
@@ -234,22 +267,22 @@ function SubmissionDrawer() {
                   fontSize='20px' 
                   _hover='none'
                   color='grey'
-                  
                   iconColor="#0099FF"
                   focusBorderColor="black"
                   fontFamily="Poppins"
                   fontWeight='bold'
                   icon={<ChevronDownIcon />}
                   iconSize="45px"
-
                   >
-                    <option value='a'>10 min</option>
-                    <option value='b'>20 min</option>
-                    <option value='c'>30 min</option>
-                    <option value='d'>40 min</option>
-                    <option value='e'>50 min</option>
-                    <option value='f'>60 min</option>
-                    <option value='f'>90 min</option>
+                      <option value='a'>3 min</option>
+                    <option value='b'>5 min</option>
+                    <option value='c'>7 min</option>
+                    <option value='d'>10 min</option>
+                    <option value='f'>20 min</option>
+                    <option value='g'>30 min</option>
+                    <option value='h'>40 min</option>
+                    <option value='i'>50 min</option>
+                    <option value='j'>60 min</option>
                   </Select>
                 </FormControl>
               </Box>
@@ -269,10 +302,12 @@ function SubmissionDrawer() {
                   border='3px solid black' 
                   _hover='none'
                   focusBorderColor="black"
+                  fontSize="20px"
                   height='200px'/>
                   
                 </FormControl>
               </Box>
+
             {/* URL  */}
               <Box className="submission__form-column">
                 <FormControl>
@@ -285,6 +320,7 @@ function SubmissionDrawer() {
                   <Input
                     type='url'
                     id='url'
+                    fontSize='20px'
                     placeholder='Enter the resource URL'
                     className='submission__inputField' 
                     border='3px solid black' 
@@ -303,7 +339,6 @@ function SubmissionDrawer() {
                 <UploadFile />
               </Box>
 
-              
             </Stack>
           </DrawerBody>
 

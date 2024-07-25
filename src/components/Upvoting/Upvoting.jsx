@@ -12,7 +12,7 @@ import "./Upvoting.scss";
 const getIconSize = () => {
   const width = window.innerWidth;
   if (width < 768) return { width: "1rem", height: "1rem" }; // Mobile
-  return { width: "1rem", height: "1rem" }; // Tablet & Desktop
+  return { width: "1.25rem", height: "1.25rem" }; // Tablet & Desktop
 };
 
 function Upvoting() {

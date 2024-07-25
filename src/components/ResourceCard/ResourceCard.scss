@@ -88,6 +88,7 @@
     display: flex;
     justify-content: space-between;
     align-items: end;
+    margin-bottom: 0.75rem;
   }
 
   &__level {
@@ -106,7 +107,6 @@
     width: 100%;
     line-height: 1.1;
     letter-spacing: -0.03rem;
-    margin-bottom: 0.75rem;
 
     @include desktop {
       font-size: 0.75rem;

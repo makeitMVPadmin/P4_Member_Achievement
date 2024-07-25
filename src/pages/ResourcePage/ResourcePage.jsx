@@ -10,42 +10,60 @@ import "./ResourcePage.scss";
 export default function ResourcePage() {
   const [resources, setResources] = useState(resourceData);
   // const [resourceDetails, setResourceDetails] = useState(resourceDetailsData)
-  const [selectedResource, setSelectedResource] = useState(resourceDetailsData[0]);
-  const [savedBookmarks, setSavedBookmarks] = useState([])
+  const [selectedResource, setSelectedResource] = useState(
+    resourceDetailsData[0]
+  );
+  const [savedBookmarks, setSavedBookmarks] = useState([]);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [category, setCategory] = useState("All");
+  const [activeResourceId, setActiveResourceId] = useState(null);
+  // const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    const savedBookmarks = localStorage.getItem('bookmarks');
+    if (resources.length > 0) {
+      const firstResourceId = resources[0].id;
+      setActiveResourceId(firstResourceId);
+      setSelectedResource(
+        resourceDetailsData.find((resource) => resource.id === firstResourceId)
+      );
+    }
+  }, [resources]);
+
+  useEffect(() => {
+    const savedBookmarks = localStorage.getItem("bookmarks");
     if (savedBookmarks) {
       const bookmarks = JSON.parse(savedBookmarks);
-      const isBookmarked = bookmarks.some(bookmark => bookmark.id === selectedResource.id);
+      const isBookmarked = bookmarks.some(
+        (bookmark) => bookmark.id === selectedResource.id
+      );
       setIsBookmarked(isBookmarked);
       setSavedBookmarks(bookmarks);
     }
   }, [selectedResource.id]);
 
-
-  const filteredResources = category === "All"
-    ? resources
-    : resources.filter(resource =>
-      [resource.discipline].includes(category)
-    );
+  const filteredResources =
+    category === "All"
+      ? resources
+      : resources.filter((resource) =>
+          [resource.discipline].includes(category)
+        );
 
   const handleToggleBookmarked = () => {
     const newBookmarkedState = !isBookmarked;
     setIsBookmarked(newBookmarkedState);
-    let bookmarks = localStorage.getItem('bookmarks');
+    let bookmarks = localStorage.getItem("bookmarks");
     bookmarks = bookmarks ? JSON.parse(bookmarks) : [];
 
     if (newBookmarkedState) {
       bookmarks.push(selectedResource);
     } else {
-      bookmarks = bookmarks.filter(bookmark => bookmark.id !== selectedResource.id);
+      bookmarks = bookmarks.filter(
+        (bookmark) => bookmark.id !== selectedResource.id
+      );
     }
 
-    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-    setSavedBookmarks(bookmarks)
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+    setSavedBookmarks(bookmarks);
   };
 
   const handleSelectResource = (clickedId) => {
@@ -53,7 +71,10 @@ export default function ResourcePage() {
       (resource) => clickedId === resource.id
     );
 
-    setSelectedResource(foundResources);
+    if (foundResources) {
+      setSelectedResource(foundResources);
+      setActiveResourceId(clickedId);
+    }
   };
 
   // const allResources = resources;
@@ -67,6 +88,7 @@ export default function ResourcePage() {
         <ResourceList
           resources={filteredResources}
           selectResource={handleSelectResource}
+          activeResourceId={activeResourceId}
         />
       </div>
       <div className="resource-details__container">
@@ -75,6 +97,7 @@ export default function ResourcePage() {
           handleToggleBookmarked={handleToggleBookmarked}
           savedBookmarks={savedBookmarks}
           isBookmarked={isBookmarked}
+          // comments={comments}
         />
       </div>
     </div>

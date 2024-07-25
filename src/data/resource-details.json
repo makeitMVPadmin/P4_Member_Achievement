@@ -10,7 +10,30 @@
     "tag1": "Python",
     "tag2": "Machine Learning",
     "tag3": "Regression",
-    "tag4": "Big Data"
+    "tag4": "Big Data",
+    "comments": [
+      {
+        "id": "1",
+        "name": "Fahd",
+        "comment": "Great course! Highly recommend.",
+        "likes": 0,
+        "timestamp": 1699964398000
+      },
+      {
+        "id": "2",
+        "name": "Jay Li",
+        "comment": "This article was incredibly insightful! I learned so much about machine learning",
+        "likes": 0,
+        "timestamp": 1699572798000
+      },
+      {
+        "id": "3",
+        "name": "Sam L.",
+        "comment": "Fantastic read! The article was very engaging",
+        "likes": 0,
+        "timestamp": 1699233998000
+      }
+    ]
   },
   {
     "id": "2",
@@ -23,7 +46,30 @@
     "tag1": "Create-React-App",
     "tag2": "Vite",
     "tag3": "React",
-    "tag4": "Web Development"
+    "tag4": "Web Development",
+    "comments": [
+      {
+        "id": "1",
+        "name": "Dayana",
+        "comment": "Awesome.",
+        "likes": 0,
+        "timestamp": 1699964398000
+      },
+      {
+        "id": "2",
+        "name": "Adiam",
+        "comment": "Greaaaat!",
+        "likes": 0,
+        "timestamp": 1699572798000
+      },
+      {
+        "id": "3",
+        "name": "Carolina",
+        "comment": "Highly recommend!",
+        "likes": 0,
+        "timestamp": 1699233998000
+      }
+    ]
   },
   {
     "id": "3",

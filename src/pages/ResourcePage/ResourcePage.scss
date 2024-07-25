@@ -10,10 +10,10 @@
 
   &__cards {
     margin-right: 0.75rem;
-    width: 65%;
+    width: 55%;
 
     @include desktop {
-      width: 55%;
+      width: 45%;
     }
   }
 

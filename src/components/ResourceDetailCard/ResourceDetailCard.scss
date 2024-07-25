@@ -15,8 +15,13 @@
   }
 
   &__type {
-    color: grey;
-    font-size: 0.85rem;
+    color: $dark-blue;
+    font-size: 1rem;
+    font-weight: 900;
+
+    @include desktop {
+      font-size: 1.25rem;
+    }
   }
 
   &__saved-icon {
@@ -30,10 +35,14 @@
   }
 
   &__title {
-    font-weight: 600; 
+    font-weight: 900;
     color: $black;
-    font-size: 1.65rem;
+    font-size: 1.35rem;
     letter-spacing: -0.05rem;
+
+    @include desktop {
+      font-size: 1.65rem;
+    }
   }
 
   &__rating-timer-container {
@@ -92,13 +101,17 @@
   }
 
   &__level {
-    color: grey;
+    color: $dark-blue;
     font-size: 0.75rem;
+    font-weight: 800;
   }
 
   &__preview {
     color: black;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    font-weight: 500;
+    margin-bottom: 1rem;
   }
 
   &__link {
@@ -121,10 +134,12 @@
   &__tag {
     // border: 0.75px solid black;
     border-radius: 0.25rem;
-    background-color: #dddddd;
+    background-color: $tag-blue;
     padding: 0.2rem 0.5rem;
     margin: 0.75rem 0.75rem 0.75rem 0;
-    font-size: 0.55rem;
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: -0.01rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 
     &:hover {
@@ -135,18 +150,23 @@
 
   &__bottom-container {
     display: flex;
+    align-items: end;
   }
 
   &__author-container {
     display: flex;
-    // align-items: center;
+    align-items: center;
   }
 
   &__author {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: row;
 
     &-name {
-      text-decoration: underline;
+      color: $light-blue;
+      font-weight: 900;
+      margin-left: 0.5rem;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
 
       &:hover {
@@ -171,23 +191,36 @@
     margin-left: auto;
   }
 
+  &__resource-button {
+    @include button;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: $yellow;
+    width: 100%;
+    font-size: 0.84rem;
+
+    &:hover {
+      transform: scale(1.025);
+    }
+
+    @include thin-border;
+  }
+
   &__button {
     @include button;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 0;
 
     &:hover {
       transform: scale(1.025);
     }
 
     &--read {
-      background-color: $mark-as-read;
+      background-color: $light-blue;
 
-      &:hover {
-        background-color: $read-hover;
-      }
+      // &:hover {
+      //   // background-color: $yellow;
+      // }
     }
-
-    font-size: 0.65rem;
     @include thin-border;
   }
 }

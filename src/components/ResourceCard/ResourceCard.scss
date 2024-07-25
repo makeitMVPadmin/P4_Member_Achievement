@@ -7,10 +7,22 @@
   margin: 0.75rem 0;
   padding: 0.5rem;
   @include border;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  // transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &--active {
+    background-color: $cream;
+    @include border-active;
+
+    .resource__title {
+      font-weight: 800;
+    }
+  }
 
   &:hover {
-    transform: scale(1.025);
+    // transform: scale(1.025);
+    .resource__title {
+      text-decoration: underline;
+    }
   }
 
   &__heading-top {
@@ -19,15 +31,21 @@
   }
 
   &__type {
-    color: grey;
+    color: $dark-blue;
     font-size: 0.85rem;
+    font-weight: 800;
   }
 
   &__title {
-    font-weight: 600;
+    font-weight: 700;
     color: $black;
-    font-size: 1.15rem;
+    font-size: 0.95rem;
     letter-spacing: -0.05rem;
+    line-height: 1.2;
+
+    @include desktop {
+      font-size: 1.15rem;
+    }
   }
 
   &__rating {
@@ -63,23 +81,36 @@
     display: flex;
     justify-content: space-between;
     gap: 0.5rem;
+    align-items: center;
   }
 
   &__about {
     display: flex;
     justify-content: space-between;
     align-items: end;
+    margin-bottom: 0.75rem;
   }
 
   &__level {
-    color: grey;
-    font-size: 0.65rem;
+    color: $dark-blue;
+    font-size: 0.55rem;
+    margin: 0.75rem 0;
+
+    @include desktop {
+      font-size: 0.65rem;
+    }
   }
 
   &__preview {
     color: black;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     width: 100%;
+    line-height: 1.1;
+    letter-spacing: -0.03rem;
+
+    @include desktop {
+      font-size: 0.75rem;
+    }
   }
 
   &__link {

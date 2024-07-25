@@ -1,24 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import arrowForwardIcon from "../../assets/icons/arrow-forward-svgrepo-com.png";
-import timerIcon from "../../assets/icons/timer-svgrepo-com.png";
+import arrowForwardIcon from "../../assets/icons/blue-arrow-forward-svgrepo-com.png";
+import timerIcon from "../../assets/icons/timer-2-svgrepo-com.png";
 import Upvoting from "../Upvoting/Upvoting";
 import "./ResourceCard.scss";
 
-
 export default function ResourceCard(props) {
-  const { resource, selectResource } = props;
+  const { resource, selectResource, isActive } = props;
+
+  const handleClickCard = () => {
+    selectResource(resource.id);
+  };
 
   return (
     <section
-      className="resource"
-      onClick={() => selectResource(resource.id)}
+      className={`resource ${isActive ? "resource--active" : ""}`}
+      onClick={handleClickCard}
       tabIndex="0"
       role="button"
-      aria-pressed="false"
-      onKeyPress={(e) => {
+      aria-pressed={isActive ? "true" : "false"}
+      onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
-          selectResource(resource.id);
+          handleClickCard();
         }
       }}
     >

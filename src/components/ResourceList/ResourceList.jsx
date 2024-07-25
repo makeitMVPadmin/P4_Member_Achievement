@@ -2,7 +2,7 @@ import ResourceCard from "../ResourceCard/ResourceCard";
 import "./ResourceList.scss";
 
 export default function ResourceList(props) {
-  const { resources, selectResource } = props;
+  const { resources, selectResource, activeResourceId } = props;
 
   return (
     <section className="resourceList" aria-label="Resource List">
@@ -13,6 +13,7 @@ export default function ResourceList(props) {
               key={resource.id}
               resource={resource}
               selectResource={selectResource}
+              isActive={resource.id === activeResourceId}
             />
           ))
         ) : (

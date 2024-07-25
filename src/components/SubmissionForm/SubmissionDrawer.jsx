@@ -102,7 +102,6 @@ function SubmissionDrawer() {
         initialFocusRef={firstField}
         onClose={onClose}
         size="sm"
-        
       >
         <DrawerOverlay />
         <DrawerContent 
@@ -118,15 +117,15 @@ function SubmissionDrawer() {
             iconColor: "#0099FF"
           }}
           >
-            <b className="submission__header-title">Submit a <br />Resource</b>
+            <h1 className="submission__header-title">Submit a Resource </h1>
             <p className="submission__small-text">Share your learning resources with the community!</p>
             <p className="submission__small-text"><span>*</span>  Required</p>
           </DrawerHeader>
 
-          <DrawerBody>
-            <Stack spacing='24px'>
+          <DrawerBody className="submission__form-container">
+            <Stack className="submission__form-container">
           {/* TITLE */}
-              <Box as="form">
+              <Box as="form" className="submission__form-column">
                 <FormControl>
                   <FormLabel
                   className="submission__title" 
@@ -149,7 +148,7 @@ function SubmissionDrawer() {
                 </FormControl>
               </Box>
           {/* TYPE  */}
-              <Box >
+              <Box className="submission__form-column" >
                 <FormControl>
                 <FormLabel htmlFor='type'
                 className="submission__title"
@@ -182,8 +181,14 @@ function SubmissionDrawer() {
                 </FormControl>
               </Box>
 
+
+            {/* TAGS */}
+              <Box className="submission__form-column">
+                <SelectTags />
+              </Box>
+
             {/* SKILL LEVEL */}
-              <Box>
+              <Box className="submission__form-column"> 
                 <FormControl>
                 <FormLabel htmlFor='owner' 
                 className="submission__title" 
@@ -213,13 +218,8 @@ function SubmissionDrawer() {
                 </FormControl>
               </Box>
 
-            {/* TAGS */}
-              <Box>
-                <SelectTags />
-              </Box>
-
             {/* ESTIMATED DURATION */}
-              <Box>
+              <Box className="submission__form-column">
                 <FormControl>
                   <FormLabel htmlFor='owner'
                   className="submission__title" 
@@ -255,7 +255,7 @@ function SubmissionDrawer() {
               </Box>
 
             {/* DESCRIPTION */}
-              <Box  >
+              <Box className="submission__form-column" >
                 <FormControl>
                   <FormLabel htmlFor='desc'
                   className="submission__title"
@@ -268,11 +268,13 @@ function SubmissionDrawer() {
                   className='submission__inputField' 
                   border='3px solid black' 
                   _hover='none'
-                  focusBorderColor="black"/>
+                  focusBorderColor="black"
+                  height='200px'/>
+                  
                 </FormControl>
               </Box>
             {/* URL  */}
-              <Box>
+              <Box className="submission__form-column">
                 <FormControl>
                   <FormLabel htmlFor='url' 
                   className="submission__title" 
@@ -292,12 +294,12 @@ function SubmissionDrawer() {
                 </FormControl>
               </Box>
 
-              <div>
+              <div className="submission__OR">
               <p className="submission__upload">OR</p>
               </div>
               
             {/* UPLOAD FILE  */}
-              <Box>
+              <Box className="submission__form-column">
                 <UploadFile />
               </Box>
 

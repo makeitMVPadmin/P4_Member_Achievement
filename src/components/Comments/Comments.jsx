@@ -6,6 +6,9 @@ import blankProfile from "../../assets/icons/BlankProfile.png";
 import thumbsUpComments from "../../assets/icons/thumbsUpComments.svg";
 import { CommentModal } from "../CommentModal/CommentModal";
 import { formatDistanceToNow } from "date-fns";
+import Upvoting from "../Upvoting/Upvoting";
+
+
 
 export const Comments = ({ selectedResource }) => {
   const [comment, setComment] = useState("");
@@ -62,12 +65,7 @@ export const Comments = ({ selectedResource }) => {
                   })}
                 </div>
                 <div className="thumbsup">
-                  <img
-                    className="commentLikes"
-                    src={thumbsUpComments}
-                    alt="thumbsUp"
-                    onClick={handleClick}
-                  />
+                <Upvoting />
                 </div>
               </div>
               <div className="commentText">{postedComments.comment}</div>
@@ -93,7 +91,7 @@ export const Comments = ({ selectedResource }) => {
         <button type="submit">Post</button>
       </form>
 
-      {/* {showModal && <CommentModal closeModal={closeModal} />} */}
+      {showModal && <CommentModal closeModal={closeModal} />}
     </div>
   );
 };

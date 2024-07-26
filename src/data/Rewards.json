@@ -1,0 +1,72 @@
+[
+  {
+    "id": "EMsz7ETiv8ByI5dzP0g7",
+    "rewardName": "Reward Generic Name",
+    "pointsRequired": 11,
+    "rewardID": "EMsz7ETiv8ByI5dzP0g7",
+    "description": "Description about the reward and all that contains"
+  },
+  {
+    "id": "GiQkQJghIDFVf6tz6C0n",
+    "rewardName": "Reward Generic Name",
+    "pointsRequired": 29,
+    "description": "Description about the reward and all that contains",
+    "rewardID": "GiQkQJghIDFVf6tz6C0n"
+  },
+  {
+    "id": "JpiHoNleKIjcR1ZjcVzo",
+    "pointsRequired": 28,
+    "rewardID": "JpiHoNleKIjcR1ZjcVzo",
+    "description": "Description about the reward and all that contains",
+    "rewardName": "Reward Generic Name"
+  },
+  {
+    "id": "MmmcWw80kxeofNV6qPD6",
+    "rewardID": "MmmcWw80kxeofNV6qPD6",
+    "description": "Description about the reward and all that contains",
+    "pointsRequired": 9,
+    "rewardName": "Reward Generic Name"
+  },
+  {
+    "id": "XALrHmPVwVCGlUHQ8mn2",
+    "rewardID": "XALrHmPVwVCGlUHQ8mn2",
+    "rewardName": "Reward Generic Name",
+    "pointsRequired": 23,
+    "description": "Description about the reward and all that contains"
+  },
+  {
+    "id": "a7lUSE1k4GIB9UMWaH0r",
+    "pointsRequired": 13,
+    "rewardID": "a7lUSE1k4GIB9UMWaH0r",
+    "rewardName": "Reward Generic Name",
+    "description": "Description about the reward and all that contains"
+  },
+  {
+    "id": "dWrv6p5jEhWjbrDBd1Di",
+    "rewardName": "Reward Generic Name",
+    "description": "Description about the reward and all that contains",
+    "rewardID": "dWrv6p5jEhWjbrDBd1Di",
+    "pointsRequired": 10
+  },
+  {
+    "id": "eFYoEEO0QMrE6RRAYJM8",
+    "rewardID": "eFYoEEO0QMrE6RRAYJM8",
+    "pointsRequired": 9,
+    "description": "Description about the reward and all that contains",
+    "rewardName": "Reward Generic Name"
+  },
+  {
+    "id": "gNoqGya9uv38OynyRPsD",
+    "rewardID": "gNoqGya9uv38OynyRPsD",
+    "description": "Description about the reward and all that contains",
+    "pointsRequired": 23,
+    "rewardName": "Reward Generic Name"
+  },
+  {
+    "id": "pGe0fXpknQKqCzYL2LdV",
+    "pointsRequired": 28,
+    "rewardID": "pGe0fXpknQKqCzYL2LdV",
+    "description": "Description about the reward and all that contains",
+    "rewardName": "Reward Generic Name"
+  }
+]

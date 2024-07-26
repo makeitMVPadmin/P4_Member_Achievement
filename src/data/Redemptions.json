@@ -1,0 +1,112 @@
+[
+  {
+    "id": "2LwtVyCt0SherSPR0D82",
+    "redemptionDate": {
+      "seconds": 1696824000,
+      "nanoseconds": 0
+    },
+    "redemptionID": "2LwtVyCt0SherSPR0D82",
+    "userID": "RwllAMynDyhdkRV2YnHT",
+    "pointsRedeemed": 9,
+    "rewardID": "JpiHoNleKIjcR1ZjcVzo"
+  },
+  {
+    "id": "68cPIMpRPfz1CgqzvmAq",
+    "rewardID": "XALrHmPVwVCGlUHQ8mn2",
+    "redemptionID": "68cPIMpRPfz1CgqzvmAq",
+    "redemptionDate": {
+      "seconds": 1705554000,
+      "nanoseconds": 0
+    },
+    "userID": "ZLoVcBerVSUC82gsmutI",
+    "pointsRedeemed": 5
+  },
+  {
+    "id": "8jaFevWp5UHlov6zhzGy",
+    "pointsRedeemed": 11,
+    "userID": "YKeqljKYUikclc9zOfId",
+    "rewardID": "gNoqGya9uv38OynyRPsD",
+    "redemptionDate": {
+      "seconds": 1689480000,
+      "nanoseconds": 0
+    },
+    "redemptionID": "8jaFevWp5UHlov6zhzGy"
+  },
+  {
+    "id": "Sw0NFVJ5Ha5p6GuHreuD",
+    "redemptionID": "Sw0NFVJ5Ha5p6GuHreuD",
+    "pointsRedeemed": 0,
+    "rewardID": "MmmcWw80kxeofNV6qPD6",
+    "redemptionDate": {
+      "seconds": 1705208400,
+      "nanoseconds": 0
+    },
+    "userID": "q9P3zbj9TGaPyFQ8FWRj"
+  },
+  {
+    "id": "T3dje3DaLB6gjopArhIm",
+    "redemptionDate": {
+      "seconds": 1722312000,
+      "nanoseconds": 0
+    },
+    "pointsRedeemed": 1,
+    "rewardID": "eFYoEEO0QMrE6RRAYJM8",
+    "redemptionID": "T3dje3DaLB6gjopArhIm",
+    "userID": "3RP7QXm2MYibnSQhfpaF"
+  },
+  {
+    "id": "TS5s1jK5WctHEHSmfZNp",
+    "redemptionID": "TS5s1jK5WctHEHSmfZNp",
+    "pointsRedeemed": 16,
+    "redemptionDate": {
+      "seconds": 1697774400,
+      "nanoseconds": 0
+    },
+    "userID": "eOZHy5xhDRGKBFw1W1h6",
+    "rewardID": "GiQkQJghIDFVf6tz6C0n"
+  },
+  {
+    "id": "UYF1ojv1mQLf1bL4xvEx",
+    "redemptionID": "UYF1ojv1mQLf1bL4xvEx",
+    "rewardID": "a7lUSE1k4GIB9UMWaH0r",
+    "redemptionDate": {
+      "seconds": 1724212800,
+      "nanoseconds": 0
+    },
+    "userID": "Om8fDmJNdIGRsvIZFhnr",
+    "pointsRedeemed": 1
+  },
+  {
+    "id": "WW1Y1AolVYYVBWHYoPn0",
+    "rewardID": "pGe0fXpknQKqCzYL2LdV",
+    "redemptionDate": {
+      "seconds": 1706677200,
+      "nanoseconds": 0
+    },
+    "redemptionID": "WW1Y1AolVYYVBWHYoPn0",
+    "pointsRedeemed": 10,
+    "userID": "IyGG5cUggo1ytmRJN7af"
+  },
+  {
+    "id": "bBxj6tcefOiuI6dcASOR",
+    "redemptionDate": {
+      "seconds": 1699070400,
+      "nanoseconds": 0
+    },
+    "pointsRedeemed": 15,
+    "redemptionID": "bBxj6tcefOiuI6dcASOR",
+    "userID": "TAvb0pv0Ca5AjK2hoTDF",
+    "rewardID": "EMsz7ETiv8ByI5dzP0g7"
+  },
+  {
+    "id": "fpzQnxvL1i9QvMcZu7XU",
+    "redemptionDate": {
+      "seconds": 1728705600,
+      "nanoseconds": 0
+    },
+    "userID": "hBjmp10XxbqHMLQLv9Ko",
+    "pointsRedeemed": 2,
+    "redemptionID": "fpzQnxvL1i9QvMcZu7XU",
+    "rewardID": "dWrv6p5jEhWjbrDBd1Di"
+  }
+]

@@ -1,0 +1,192 @@
+[
+  {
+    "id": "BWjyIqMNwvKGggb31Fr2",
+    "type": "file",
+    "estDuration": 4,
+    "resourceID": "BWjyIqMNwvKGggb31Fr2",
+    "role": "Frontend Developer",
+    "file": {
+      "name": "baseObject",
+      "description": "Little Description about the File"
+    },
+    "title": "Resource uploaded N#1",
+    "likedByUser": [],
+    "upvote": 1050,
+    "downvote": 1258,
+    "userID": "RwllAMynDyhdkRV2YnHT",
+    "description": "A simple description for a resource about an experience",
+    "url": "http://www.google.com",
+    "skillLevel": "Mid-Level"
+  },
+  {
+    "id": "NxiQICnH2su0RjprjNPp",
+    "userID": "IyGG5cUggo1ytmRJN7af",
+    "estDuration": 3,
+    "description": "A simple description for a resource about an experience",
+    "downvote": 880,
+    "role": "Frontend Developer",
+    "type": "Image",
+    "url": "http://www.google.com",
+    "likedByUser": [],
+    "upvote": 277,
+    "title": "Resource uploaded N#1",
+    "skillLevel": "Senior",
+    "file": {
+      "name": "baseObject",
+      "description": "Little Description about the File"
+    },
+    "resourceID": "NxiQICnH2su0RjprjNPp"
+  },
+  {
+    "id": "P60eO4Q1x0Mv1NbbLyGN",
+    "title": "Resource uploaded N#1",
+    "skillLevel": "Senior",
+    "role": "Backend Developer",
+    "description": "A simple description for a resource about an experience",
+    "upvote": 2315,
+    "file": {
+      "name": "baseObject",
+      "description": "Little Description about the File"
+    },
+    "likedByUser": [],
+    "type": "URL",
+    "downvote": 421,
+    "estDuration": 7,
+    "resourceID": "P60eO4Q1x0Mv1NbbLyGN",
+    "userID": "hBjmp10XxbqHMLQLv9Ko",
+    "url": "http://www.google.com"
+  },
+  {
+    "id": "QSAOeGuPhScJUhfO9S5F",
+    "upvote": 4038,
+    "type": "Image",
+    "estDuration": 10,
+    "title": "Resource uploaded N#1",
+    "downvote": 1359,
+    "file": {
+      "description": "Little Description about the File",
+      "name": "baseObject"
+    },
+    "userID": "ZLoVcBerVSUC82gsmutI",
+    "skillLevel": "Senior",
+    "url": "http://www.google.com",
+    "role": "Backend Developer",
+    "likedByUser": [],
+    "resourceID": "QSAOeGuPhScJUhfO9S5F",
+    "description": "A simple description for a resource about an experience"
+  },
+  {
+    "id": "Uhl1GezhdpqNeEWrUX2S",
+    "description": "A simple description for a resource about an experience",
+    "downvote": 1495,
+    "title": "Resource uploaded N#1",
+    "likedByUser": [],
+    "skillLevel": "Mid-Level",
+    "url": "http://www.google.com",
+    "upvote": 1325,
+    "resourceID": "Uhl1GezhdpqNeEWrUX2S",
+    "estDuration": 6,
+    "type": "Image",
+    "role": "Frontend Developer",
+    "userID": "eOZHy5xhDRGKBFw1W1h6",
+    "file": {
+      "description": "Little Description about the File",
+      "name": "baseObject"
+    }
+  },
+  {
+    "id": "WraiUIjpXt74ozrZ5Jut",
+    "likedByUser": [],
+    "resourceID": "WraiUIjpXt74ozrZ5Jut",
+    "estDuration": 0,
+    "title": "Resource uploaded N#1",
+    "skillLevel": "Mid-Level",
+    "file": {
+      "name": "baseObject",
+      "description": "Little Description about the File"
+    },
+    "role": "Frontend Developer",
+    "userID": "Om8fDmJNdIGRsvIZFhnr",
+    "upvote": 996,
+    "description": "A simple description for a resource about an experience",
+    "type": "URL",
+    "url": "http://www.google.com",
+    "downvote": 1420
+  },
+  {
+    "id": "XSGQsftlwsfhlL9dlQCC",
+    "likedByUser": [],
+    "type": "Image",
+    "file": {
+      "name": "baseObject",
+      "description": "Little Description about the File"
+    },
+    "skillLevel": "Senior",
+    "estDuration": 10,
+    "role": "Frontend Developer",
+    "description": "A simple description for a resource about an experience",
+    "downvote": 529,
+    "resourceID": "XSGQsftlwsfhlL9dlQCC",
+    "userID": "3RP7QXm2MYibnSQhfpaF",
+    "url": "http://www.google.com",
+    "upvote": 2422,
+    "title": "Resource uploaded N#1"
+  },
+  {
+    "id": "faFkCPTJnlwYeFRKSUYk",
+    "downvote": 509,
+    "title": "Resource uploaded N#1",
+    "file": {
+      "description": "Little Description about the File",
+      "name": "baseObject"
+    },
+    "skillLevel": "Junior",
+    "likedByUser": [],
+    "estDuration": 9,
+    "role": "Designer",
+    "description": "A simple description for a resource about an experience",
+    "resourceID": "faFkCPTJnlwYeFRKSUYk",
+    "type": "URL",
+    "userID": "q9P3zbj9TGaPyFQ8FWRj",
+    "url": "http://www.google.com",
+    "upvote": 4045
+  },
+  {
+    "id": "jwToLkn35xTaTwGD0MuM",
+    "type": "file",
+    "userID": "TAvb0pv0Ca5AjK2hoTDF",
+    "description": "A simple description for a resource about an experience",
+    "downvote": 1011,
+    "url": "http://www.google.com",
+    "estDuration": 4,
+    "file": {
+      "name": "baseObject",
+      "description": "Little Description about the File"
+    },
+    "upvote": 4781,
+    "likedByUser": [],
+    "role": "Backend Developer",
+    "skillLevel": "Junior",
+    "resourceID": "jwToLkn35xTaTwGD0MuM",
+    "title": "Resource uploaded N#1"
+  },
+  {
+    "id": "ukn6EzZroeUQ9GAWFibU",
+    "upvote": 295,
+    "file": {
+      "description": "Little Description about the File",
+      "name": "baseObject"
+    },
+    "type": "Image",
+    "title": "Resource uploaded N#1",
+    "likedByUser": [],
+    "skillLevel": "Senior",
+    "url": "http://www.google.com",
+    "role": "Backend Developer",
+    "downvote": 40,
+    "description": "A simple description for a resource about an experience",
+    "estDuration": 6,
+    "resourceID": "ukn6EzZroeUQ9GAWFibU",
+    "userID": "YKeqljKYUikclc9zOfId"
+  }
+]

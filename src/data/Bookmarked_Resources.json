@@ -1,0 +1,102 @@
+[
+  {
+    "id": "0b8XyFN7qOOsYoQMNWeX",
+    "createdAt": {
+      "seconds": 1721799380,
+      "nanoseconds": 682000000
+    },
+    "userId": "IyGG5cUggo1ytmRJN7af",
+    "bookmarkID": "0b8XyFN7qOOsYoQMNWeX",
+    "resourceID": "NxiQICnH2su0RjprjNPp"
+  },
+  {
+    "id": "3a98cV2SboqGk6c3nY18",
+    "bookmarkID": "3a98cV2SboqGk6c3nY18",
+    "resourceID": "Uhl1GezhdpqNeEWrUX2S",
+    "createdAt": {
+      "seconds": 1721799382,
+      "nanoseconds": 7000000
+    },
+    "userId": "eOZHy5xhDRGKBFw1W1h6"
+  },
+  {
+    "id": "KEfLrz5GNHroilx0ZUxg",
+    "bookmarkID": "KEfLrz5GNHroilx0ZUxg",
+    "userId": "3RP7QXm2MYibnSQhfpaF",
+    "resourceID": "XSGQsftlwsfhlL9dlQCC",
+    "createdAt": {
+      "seconds": 1721799372,
+      "nanoseconds": 378000000
+    }
+  },
+  {
+    "id": "XYoeN5yydvAC5yTu4WMV",
+    "bookmarkID": "XYoeN5yydvAC5yTu4WMV",
+    "resourceID": "P60eO4Q1x0Mv1NbbLyGN",
+    "createdAt": {
+      "seconds": 1721799375,
+      "nanoseconds": 306000000
+    },
+    "userId": "hBjmp10XxbqHMLQLv9Ko"
+  },
+  {
+    "id": "YoNWY3dsTFLp6huOWBqj",
+    "userId": "YKeqljKYUikclc9zOfId",
+    "createdAt": {
+      "seconds": 1721799370,
+      "nanoseconds": 840000000
+    },
+    "bookmarkID": "YoNWY3dsTFLp6huOWBqj",
+    "resourceID": "ukn6EzZroeUQ9GAWFibU"
+  },
+  {
+    "id": "bYJm2IPe7jsgCkfwE7aZ",
+    "userId": "RwllAMynDyhdkRV2YnHT",
+    "resourceID": "BWjyIqMNwvKGggb31Fr2",
+    "createdAt": {
+      "seconds": 1721799373,
+      "nanoseconds": 833000000
+    },
+    "bookmarkID": "bYJm2IPe7jsgCkfwE7aZ"
+  },
+  {
+    "id": "gKeph7pVbhzVQKIUtsWu",
+    "resourceID": "faFkCPTJnlwYeFRKSUYk",
+    "createdAt": {
+      "seconds": 1721799378,
+      "nanoseconds": 36000000
+    },
+    "bookmarkID": "gKeph7pVbhzVQKIUtsWu",
+    "userId": "q9P3zbj9TGaPyFQ8FWRj"
+  },
+  {
+    "id": "m1e5lxQKi4TQoZdHlWJZ",
+    "createdAt": {
+      "seconds": 1721799376,
+      "nanoseconds": 638000000
+    },
+    "userId": "Om8fDmJNdIGRsvIZFhnr",
+    "bookmarkID": "m1e5lxQKi4TQoZdHlWJZ",
+    "resourceID": "WraiUIjpXt74ozrZ5Jut"
+  },
+  {
+    "id": "qi9xrge1poH8507xwKPZ",
+    "userId": "TAvb0pv0Ca5AjK2hoTDF",
+    "resourceID": "jwToLkn35xTaTwGD0MuM",
+    "bookmarkID": "qi9xrge1poH8507xwKPZ",
+    "createdAt": {
+      "seconds": 1721799369,
+      "nanoseconds": 216000000
+    }
+  },
+  {
+    "id": "yFJhYy8ExPTtUuVQgUlG",
+    "bookmarkID": "yFJhYy8ExPTtUuVQgUlG",
+    "createdAt": {
+      "seconds": 1721799379,
+      "nanoseconds": 359000000
+    },
+    "resourceID": "QSAOeGuPhScJUhfO9S5F",
+    "userId": "ZLoVcBerVSUC82gsmutI"
+  }
+]

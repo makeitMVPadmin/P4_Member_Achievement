@@ -1,15 +1,21 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import arrowForwardIcon from "../../assets/icons/blue-arrow-forward-svgrepo-com.png";
+import React, { useState } from 'react';
+import Upvoting from '../Upvoting/Upvoting';
+import "../ResourceCard/ResourceCard.scss"
 import timerIcon from "../../assets/icons/timer-2-svgrepo-com.png";
-import Upvoting from "../Upvoting/Upvoting";
-import "./ResourceCard.scss";
+import arrowForwardIcon from "../../assets/icons/blue-arrow-forward-svgrepo-com.png";
+import { Link } from "react-router-dom";
 
-export default function ResourceCard(props) {
-  const { resource, selectResource, isActive } = props;
+
+const Contribution = () => {
+  
+  const formData = JSON.parse(localStorage.getItem('formData')) || {};
+  console.log (formData)
+
+  const { resource, selectResource, isActive } = formData;
+  
 
   const handleClickCard = () => {
-    selectResource(resource.id);
+    selectResource(resource.title);
   };
 
   return (
@@ -27,10 +33,10 @@ export default function ResourceCard(props) {
     >
       <div className="resource__heading-top">
         <div className="resource__heading-top-container">
-          <p className="resource__type">{resource.type}</p>
+          <p className="resource__type">{formData.type}</p>
         </div>
         <div className="resource__timer">
-          <p className="resource__duration">{resource.duration}</p>
+          <p className="resource__duration">{formData.duration}</p>
           <img
             src={timerIcon}
             alt="timer icon"
@@ -40,12 +46,12 @@ export default function ResourceCard(props) {
         </div>
       </div>
       <div className="resource__heading-bottom">
-        <h1 className="resource__title">{resource.title}</h1>
+        <h1 className="resource__title">{formData.title}</h1>
         <Upvoting />
       </div>
-      <p className="resource__level">{resource.level}</p>
+      <p className="resource__level">{formData.skillLevel}</p>
       <div className="resource__about">
-        <p className="resource__preview">{resource.preview}</p>
+        <p className="resource__preview">{formData.description}</p>
         <Link
           to=""
           className="resource__link"
@@ -62,3 +68,6 @@ export default function ResourceCard(props) {
     </section>
   );
 }
+
+export default Contribution
+

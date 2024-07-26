@@ -66,8 +66,7 @@ const customStyles = {
     padding: 0,
     '& svg': {
       position: 'relative',
-      right: '-5px',
-      // bottom: '4px',
+      right: '-5px',  
       width: '45px',
       height: '45px',
       hover: 'none',

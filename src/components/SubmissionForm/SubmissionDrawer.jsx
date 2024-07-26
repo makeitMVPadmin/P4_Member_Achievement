@@ -2,6 +2,7 @@ import SelectTags from "./SelectTags";
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import UploadFile from "./UploadFile";
 import React, { useState } from "react"
+import { useNavigate } from 'react-router-dom';
 import uploadIcon from "../../assets/icons/upload-folder-svgrepo-com.png";
 import "./SubmissionDrawer.scss"
 import { 
@@ -25,29 +26,34 @@ import {
   // useToast - will use when user tested and upload successful
 } from "@chakra-ui/react"
 
-
-
 function SubmissionDrawer() {
   
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = React.useRef()
+  
   const [formData, setFormData] = useState({
     title: '',
     type: '',
     skillLevel: '',
-    tags: '',
     duration: '',
     description: '',
-    url:'',
-    });
+  });
+  const navigate = useNavigate();
 
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    console.log(formData)
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onClose();
+    localStorage.setItem('formData', JSON.stringify(formData));
+    console.log(formData)
+  };
     
-  
   return (
     <>
     {/* Upload Resource Button - pulled from navbar component */}
@@ -69,8 +75,8 @@ function SubmissionDrawer() {
         sx={{ 
           borderRadius: "30px 0px 0px 30px",
           border: '4px solid black',
-          
         }}>
+         
           <DrawerCloseButton sx={{ color: '#0099FF', fontSize: "20px", fontWeight: 'bolder'  }} />
           {/* HEADER */}
           <DrawerHeader
@@ -78,15 +84,16 @@ function SubmissionDrawer() {
             iconColor: "#0099FF"
           }}
           >
-            <h1 className="submission__header-title">Submit a Resource </h1>
+            <b className="submission__header-title">Submit a <br />Resource</b>
             <p className="submission__small-text">Share your learning resources with the community!</p>
             <p className="submission__small-text"><span>*</span>  Required</p>
           </DrawerHeader>
 
-          <DrawerBody className="submission__form-container">
-            <Stack className="submission__form-container">
+          <DrawerBody>
+          
+            <Stack spacing='24px'>
           {/* TITLE */}
-              <Box as="form" className="submission__form-column">
+              <Box as="form">
                 <FormControl>
                   <FormLabel
                   className="submission__title" 
@@ -96,54 +103,23 @@ function SubmissionDrawer() {
                   
                   </FormLabel>
                     <Input
+                    
                     ref={firstField}
+                    name="title"
                     id='title' 
                     placeholder='Enter a resource title.'
                     border='3px solid black'
                     className='submission__inputField'
                     _hover='none'
                     focusBorderColor="black"
-                    fontSize="20px"
-      
+                    value={formData.title}
+                    onChange={handleChange}
                     />
                   <FormErrorMessage>Title is required for submission</FormErrorMessage>
                 </FormControl>
               </Box>
-
-            {/* DISCIPLINE  */}
-              <Box className="submission__form-column" >
-                <FormControl>
-                <FormLabel htmlFor='discipline'
-                className="submission__title"
-                fontSize='20px'
-                fontWeight='bold'
-                _after={{ content: '" *"', color: 'black'}}>Discipline
-                </FormLabel>      
-                <Select
-                id='discipline' 
-                className='submission__inputField'
-                border='3px solid black' 
-                _hover='none'
-                color='grey'
-                fontFamily="Poppins"
-                fontWeight='bold'
-                placeholder="Select"
-                fontSize='20px'
-                icon={<ChevronDownIcon />}
-                iconSize="45px"
-                iconColor="#0099FF"
-                focusBorderColor="black"
-                 >
-                  <option value='1'>Software Engineering</option>
-                  <option value='2'>UX/UI Design</option>
-                  <option value='3'>Product Management</option>
-                  <option value='4'>Data Science</option>
-                </Select>
-                </FormControl>
-              </Box>
-
           {/* TYPE  */}
-              <Box className="submission__form-column" >
+              <Box >
                 <FormControl>
                 <FormLabel htmlFor='type'
                 className="submission__title"
@@ -153,7 +129,8 @@ function SubmissionDrawer() {
                 </FormLabel>      
                 <Select
                 id='type' 
-                className='submission__inputField'
+                name="type"
+                className='submission__inputFieldSelect'
                 border='3px solid black' 
                 _hover='none'
                 color='grey'
@@ -165,24 +142,20 @@ function SubmissionDrawer() {
                 iconSize="45px"
                 iconColor="#0099FF"
                 focusBorderColor="black"
-                
+                value={formData.type}
+                onChange={handleChange}
                  >
-                  <option value='select'>Article</option>
-                  <option value='select'>Blog</option>
-                  <option value='select'>Video</option>
-                  <option value='select'>Course</option>
-                  <option value='select'>Quiz</option>
+                  <option value='Article'>Article</option>
+                  <option value='Blog'>Blog</option>
+                  <option value='Video'>Video</option>
+                  <option value='Course'>Course</option>
+                  <option value='Quiz'>Quiz</option>
                 </Select>
                 </FormControl>
               </Box>
 
-            {/* TAGS */}
-              <Box className="submission__form-column">
-                <SelectTags />
-              </Box>
-
             {/* SKILL LEVEL */}
-              <Box className="submission__form-column"> 
+              <Box>
                 <FormControl>
                 <FormLabel htmlFor='owner' 
                 className="submission__title" 
@@ -191,6 +164,7 @@ function SubmissionDrawer() {
                 _after={{ content: '" *"', color: 'black'}}>Skill Level
                 </FormLabel>
                 <Select
+                name="skillLevel"
                 fontFamily="Poppins"
                 fontWeight='bold'
                 id='level' 
@@ -204,16 +178,23 @@ function SubmissionDrawer() {
                 icon={<ChevronDownIcon />}
                 iconSize="45px"
                 focusBorderColor="black"
+                value={formData.skillLevel}
+                onChange={handleChange}
                 >
-                  <option value='skill'>Beginner</option>
-                  <option value='skill'>Advanced</option>
-                  <option value='skill'>Intermediate</option>
+                  <option value='Beginner'>Beginner</option>
+                  <option value='Advanced'>Advanced</option>
+                  <option value='Intermediate'>Intermediate</option>
                 </Select>
                 </FormControl>
               </Box>
 
+            {/* TAGS */}
+              <Box>
+                <SelectTags />
+              </Box>
+
             {/* ESTIMATED DURATION */}
-              <Box className="submission__form-column">
+              <Box>
                 <FormControl>
                   <FormLabel htmlFor='owner'
                   className="submission__title" 
@@ -221,7 +202,9 @@ function SubmissionDrawer() {
                   fontWeight='bold'
                   _after={{ content: '" *"', color: 'black'}}>Estimated Duration
                   </FormLabel>
-                  <Select id='duration' 
+                  <Select 
+                  name="duration"
+                  id='duration' 
                   className='submission__inputField' 
                   border='3px solid black'
                   placeholder="Select"
@@ -234,22 +217,22 @@ function SubmissionDrawer() {
                   fontWeight='bold'
                   icon={<ChevronDownIcon />}
                   iconSize="45px"
+                  value={formData.duration}
+                  onChange={handleChange}
                   >
-                      <option value='a'>3 min</option>
-                    <option value='b'>5 min</option>
-                    <option value='c'>7 min</option>
-                    <option value='d'>10 min</option>
-                    <option value='f'>20 min</option>
-                    <option value='g'>30 min</option>
-                    <option value='h'>40 min</option>
-                    <option value='i'>50 min</option>
-                    <option value='j'>60 min</option>
+                    <option value='10 min'>10 min</option>
+                    <option value='20 min'>20 min</option>
+                    <option value='30 min'>30 min</option>
+                    <option value='40 min'>40 min</option>
+                    <option value='50 min'>50 min</option>
+                    <option value='60 min'>60 min</option>
+                    <option value='90 min'>90 min</option>
                   </Select>
                 </FormControl>
               </Box>
 
             {/* DESCRIPTION */}
-              <Box className="submission__form-column" >
+              <Box  >
                 <FormControl>
                   <FormLabel htmlFor='desc'
                   className="submission__title"
@@ -257,20 +240,19 @@ function SubmissionDrawer() {
                   fontWeight='bold'
                   _after={{ content: '" *"', color: 'black'}}>Description
                   </FormLabel>
-                  <Textarea id='desc' 
+                  <Textarea id='description'
+                  name="description" 
                   placeholder="The clearer and shorter the better." 
                   className='submission__inputField' 
                   border='3px solid black' 
                   _hover='none'
                   focusBorderColor="black"
-                  fontSize="20px"
-                  height='200px'/>
-                  
+                  value={formData.description}
+                  onChange={handleChange}/>
                 </FormControl>
               </Box>
-
             {/* URL  */}
-              <Box className="submission__form-column">
+              <Box>
                 <FormControl>
                   <FormLabel htmlFor='url' 
                   className="submission__title" 
@@ -279,9 +261,9 @@ function SubmissionDrawer() {
                   _after={{ content: '" *"', color: 'black'}}>Url
                   </FormLabel>
                   <Input
+                    name="url"
                     type='url'
                     id='url'
-                    fontSize='20px'
                     placeholder='Enter the resource URL'
                     className='submission__inputField' 
                     border='3px solid black' 
@@ -291,15 +273,16 @@ function SubmissionDrawer() {
                 </FormControl>
               </Box>
 
-              <div className="submission__OR">
+              <div>
               <p className="submission__upload">OR</p>
               </div>
               
             {/* UPLOAD FILE  */}
-              <Box className="submission__form-column">
+              <Box>
                 <UploadFile />
               </Box>
 
+              
             </Stack>
           </DrawerBody>
 
@@ -309,8 +292,9 @@ function SubmissionDrawer() {
               Cancel
             </Button>
             <Button bg='#0099FF' fontSize='18px' fontWeight="bold" fontFamily="Poppins" padding="6px" marginTop='20px' boxShadow='1px 1px 0px black' border='3px solid black' color="black"  _hover={{ bg: 'gray.600' }} className="
-            submission_form-button" type="submit">Submit</Button>
+            submission_form-button" type="submit" onClick={handleSubmit}>Submit</Button>
           </DrawerFooter>
+      
         </DrawerContent>
       </Drawer>
       </div>

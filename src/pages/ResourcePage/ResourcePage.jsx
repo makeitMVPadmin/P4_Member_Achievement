@@ -6,9 +6,11 @@ import { Comments } from "../../components/Comments/Comments";
 import resourceData from "../../data/resource.json";
 import resourceDetailsData from "../../data/resource-details.json";
 import "./ResourcePage.scss";
+import Contribution from "../../components/Contribution/Contribution"
 
 export default function ResourcePage() {
   const [resources, setResources] = useState(resourceData);
+  
   // const [resourceDetails, setResourceDetails] = useState(resourceDetailsData)
   const [selectedResource, setSelectedResource] = useState(
     resourceDetailsData[0]
@@ -90,6 +92,7 @@ export default function ResourcePage() {
           selectResource={handleSelectResource}
           activeResourceId={activeResourceId}
         />
+          <Contribution/>
       </div>
       <div className="resource-details__container">
         <ResourceDetailCard

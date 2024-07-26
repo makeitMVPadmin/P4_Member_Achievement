@@ -1,3 +1,4 @@
+import Contribution from "../../components/Contribution/Contribution";
 import NavBar from "../../components/NavBar/NavBar";
 import "./ContributionsPage.scss"
 
@@ -10,7 +11,8 @@ function ContributionsPage() {
     </div>
 
     <div className="contributions__cards">
-    <h1>These are the smaller resource cards</h1>
+    {/* <h1>These are the smaller resource cards</h1> */}
+    <Contribution/>
     </div>
 
     <div className="contributions__details-container">

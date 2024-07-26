@@ -6,6 +6,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import RewardsPage from "./pages/RewardsPage/RewardsPage.jsx";
 import BookMarkedPage from "./pages/BookMarkedPage/BookMarkedPage.jsx";
 import ContributionsPage from "./pages/ContributionsPage/ContributionsPage.jsx";
+import Contribution from "./components/Contribution/Contribution.jsx";
+import SubmissionDrawer from "./components/SubmissionForm/SubmissionDrawer.jsx";
 
 const App = () => {
   const [savedBookmarks, setSavedBookmarks] = useState([]);
@@ -14,6 +16,12 @@ const App = () => {
     const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
     setSavedBookmarks(bookmarks);
   }, []);
+
+  const [resources, setResources] = useState([]);
+
+  const addResource = (resource) => {
+    setResources([...resources, resource]);
+  };
 
   return (
     <>
@@ -24,14 +32,16 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route
               path="/resource"
-              element={<ResourcePage setSavedBookmarks={setSavedBookmarks} />}
+              element={<ResourcePage setSavedBookmarks={setSavedBookmarks} component={Contribution}   resources={resources}/>}
             />
             <Route
               path="/bookmarked"
               element={<BookMarkedPage bookmarkedResources={savedBookmarks} />}
             />
-            <Route path="/rewards" element={<RewardsPage />} />
-            <Route path="/contributions" element={<ContributionsPage />} />
+            <Route path="/rewards"
+              element={<RewardsPage />} 
+            />
+            <Route path="/contributions" element={<ContributionsPage />} onAddResource={addResource} />
           </Routes>
         </BrowserRouter>
       </ChakraProvider>

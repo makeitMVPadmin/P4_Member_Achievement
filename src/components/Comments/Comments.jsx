@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import { Input } from "@chakra-ui/react";
 import "./Comments.scss";
 import blankProfile from "../../assets/icons/BlankProfile.png";
-import thumbsUpComments from "../../assets/icons/thumbsUpComments.svg";
+import CommentVotes from '../CommentVotes/CommentVotes'
 import { CommentModal } from "../CommentModal/CommentModal";
 import { formatDistanceToNow } from "date-fns";
-import Upvoting from "../Upvoting/Upvoting";
 
 
 
@@ -65,7 +64,7 @@ export const Comments = ({ selectedResource }) => {
                   })}
                 </div>
                 <div className="thumbsup">
-                <Upvoting />
+                <CommentVotes />
                 </div>
               </div>
               <div className="commentText">{postedComments.comment}</div>

@@ -6,6 +6,8 @@ import { Comments } from "../../components/Comments/Comments";
 import resourceData from "../../data/resource.json";
 import resourceDetailsData from "../../data/resource-details.json";
 import "./ResourcePage.scss";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { database } from "../../config/firebase";
 
 export default function ResourcePage() {
   const [resources, setResources] = useState(resourceData);
@@ -18,6 +20,31 @@ export default function ResourcePage() {
   const [category, setCategory] = useState("All");
   const [activeResourceId, setActiveResourceId] = useState(null);
   // const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    const getAllResourcesAndRatings = async () => {
+      try {
+        const resourcesCollectionRef = collection(database, "Resources");
+        const resourcesSnapshot = await getDocs(resourcesCollectionRef);
+        if (!resourcesSnapshot.empty) {
+          const resourcesCollection = resourcesSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          console.log("Resources:");
+          console.log(resourcesCollection);
+          // Set your resources here, and don't forget to option chain any dependant data (ex: selectedResource?.id)
+          // setResources(resourcesCollection);
+        } else {
+          console.log("No collection for resources found.");
+        }
+      } catch (err) {
+        console.error("Error fetching resources: ", err);
+      }
+    };
+
+    getAllResourcesAndRatings();
+  }, []);
 
   useEffect(() => {
     if (resources.length > 0) {

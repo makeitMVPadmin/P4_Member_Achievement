@@ -52,7 +52,7 @@ export const Comments = ({ selectedResource }) => {
   return (
     <div className="comments">
       {postedComments.length > 0 ? (
-        postedComments.map((postedComments) => (
+        postedComments.sort((a, b) => b.timestamp - a.timestamp).map((postedComments) => (
           <div key={postedComments.id} className="commentDivs">
             <img className="commentImg" src={blankProfile} alt="userprofile" />
             <div className="commentContext">

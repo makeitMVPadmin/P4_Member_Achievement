@@ -24,58 +24,16 @@ export default function ResourcePage() {
   //   JSON.parse(localStorage.getItem("resources")) || resourceDetailsData;
 
   useEffect(() => {
-    // Load resources from localStorage
+    // load from local
     const savedResources = JSON.parse(localStorage.getItem("resources")) || [];
     setResources(savedResources);
   }, []);
-
-  // useEffect(() => {
-  //   const storedResources = JSON.parse(localStorage.getItem("resources")) || [];
-
-  //   if (storedResources.length > 0) {
-  //     setResources(storedResources);
-  //     setSelectedResource(storedResources[0]); // Set initial selected resource from stored data
-  //   } else {
-  //     localStorage.setItem("resources", JSON.stringify(resourceData));
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const storedResources =
-  //         JSON.parse(localStorage.getItem("resources")) || [];
-
-  //       if (storedResources.length === 0) {
-  //         const response = await fetch("../../data/resource-details.json");
-
-  //         if (!response.ok) {
-  //           throw new Error(`HTTP error! status: ${response.status}`);
-  //         }
-
-  //         const data = await response.json();
-  //         setResources(data);
-  //         localStorage.setItem("resources", JSON.stringify(data));
-  //       } else {
-  //         setResources(storedResources);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error loading resources:", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-  // const handleFormSubmit = (newResource) => {
-  //   setResources((prevResources) => [...prevResources, newResource]);
-  // };
 
   const handleFormSubmit = (newResource) => {
     const updatedResources = [...resources, newResource];
     setResources(updatedResources);
     localStorage.setItem("resources", JSON.stringify(updatedResources));
-    // Update selectedResource if it was previously null
+
     if (!selectedResource) {
       setSelectedResource(newResource);
       setActiveResourceId(newResource.id);

@@ -45,10 +45,10 @@ function SubmissionDrawer({ onFormSubmit }) {
       duration: formData.get("duration"),
       preview: formData.get("preview"),
       url: formData.get("url"),
-      id: Date.now(), // Unique ID for the new resource
+      id: Date.now(),
     };
 
-    // Save to localStorage
+    // save to local
     const existingResources =
       JSON.parse(localStorage.getItem("resources")) || [];
     existingResources.push(newResource);
@@ -60,58 +60,6 @@ function SubmissionDrawer({ onFormSubmit }) {
 
     onClose();
   };
-
-  // const { submission, handleSubmit, formState: { errors } } = useForm();
-
-  // const onSubmit = data => {
-  //   console.log(data);
-  //   onClose();
-  // };
-
-  //  const SubmitForm = () => {
-  //   const [formData, setFormData] = useState({
-  //     title: '',
-  //     type: '',
-  //     skillLevel: '',
-  //     tags: '',
-  //     estimatedDuration: '',
-  //     description: '',
-  //     url: '',
-  //   });
-
-  //   const [formErrors, setFormErrors] = useState({
-  //     title: false,
-  //     type: false,
-  //     skillLevel: false,
-  //     tags: false,
-  //     estimatedDuration: false,
-  //     description: false,
-  //     url: false,
-  //   });
-
-  //   const handleChange = (e) => {
-  //     const { name, value } = e.target;
-  //     setFormData({...formData, [name]: value });
-  //     setFormErrors({...formErrors, [name]: false});
-  //   };
-
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     const errors = {};
-
-  //     for (const field in formData) {
-  //       if (!formData[field]) {
-  //         errors[field] = true;
-  //       }
-  //     }
-
-  //     if (Object.keys(errors).length > 0) {
-  //       setFormErrors(errors);
-  //     } else {
-  //       console.log('Form submitted!', formData);
-  //     }
-  //   };
-  //  }
 
   return (
     <>

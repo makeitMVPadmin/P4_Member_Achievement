@@ -54,7 +54,7 @@ export const Comments = ({ selectedResource }) => {
       {postedComments.length > 0 ? (
         postedComments.sort((a, b) => b.timestamp - a.timestamp).map((postedComments) => (
           <div key={postedComments.id} className="commentDivs">
-            <img className="commentImg" src={blankProfile} alt="userprofile" />
+            <img className="commentImg" src={blankProfile} alt="userprofile" aria-label="user profile image" />
             <div className="commentContext">
               <div className="commentHeader">
                 <div className="commenter">{postedComments.name}</div>
@@ -63,7 +63,7 @@ export const Comments = ({ selectedResource }) => {
                     addSuffix: true,
                   })}
                 </div>
-                <div className="thumbsup">
+                <div className="thumbsup" aria-label="thumbs up Comment button">
                 <CommentVotes />
                 </div>
               </div>
@@ -76,8 +76,9 @@ export const Comments = ({ selectedResource }) => {
       )}
 
       <form className="newComment" onSubmit={submitComment}>
-        <img className="commentImg" src={blankProfile} alt="userprofile" />
+        <img className="commentImg" src={blankProfile} alt="userprofile" aria-label="your profile image" />
         <Input
+          aria-label="input comment"
           maxLength={800}
           value={comment}
           onChange={CommentValue}
@@ -87,7 +88,7 @@ export const Comments = ({ selectedResource }) => {
             borderRadius: "50px",
           }}
         />
-        <button type="submit">Post</button>
+        <button type="submit" aria-label="submit comment">Post</button>
       </form>
 
       {showModal && <CommentModal closeModal={closeModal} />}

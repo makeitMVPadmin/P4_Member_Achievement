@@ -53,18 +53,22 @@ export default function NavBar({ onCategoryChange }) {
             <p className="nav__item-name">Rewards</p>
           </li>
         </NavLink>
+        {/* <NavLink to="/contributions"> */}
         <li className="nav__item">
           <img src={uploadIcon2} alt="upload file icon" className="nav__icon" />
           <p className="nav__item-name">Contributions</p>
         </li>
-        <li className="nav__item">
-          <img
-            src={savedIcon}
-            alt="saved bookmark icon"
-            className="nav__icon"
-          />
-          <p className="nav__item-name">Bookmarked</p>
-        </li>
+        {/* </NavLink> */}
+        <NavLink to="/bookmarked">
+          <li className="nav__item">
+            <img
+              src={savedIcon}
+              alt="saved bookmark icon"
+              className="nav__icon"
+            />
+            <p className="nav__item-name">Bookmarked</p>
+          </li>
+        </NavLink>
         <li
           className={`nav__item ${isLibraryOpen ? "active" : ""}`}
           onClick={toggleLibraryMenu}

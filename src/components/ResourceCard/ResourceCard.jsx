@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+// import arrowForwardIcon from "../../assets/icons/blue-arrow-forward-svgrepo-com.png";
 import arrowForwardIcon from "../../assets/icons/blue-arrow-forward-svgrepo-com.png";
 import timerIcon from "../../assets/icons/timer-2-svgrepo-com.png";
 import Upvoting from "../Upvoting/Upvoting";

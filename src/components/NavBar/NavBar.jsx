@@ -6,10 +6,12 @@ import libraryIcon from "../../assets/icons/library-book-svgrepo-com.png";
 import { useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer"
+import { SettingsIcon } from "@chakra-ui/icons";
 import "./NavBar.scss";
 
 export default function NavBar({ onCategoryChange }) {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
+  const [isSortingOpen, setIsSortingOpen] = useState(false);
   const [category, setCategory] = useState("All");
 
   const location = useLocation();
@@ -23,9 +25,16 @@ export default function NavBar({ onCategoryChange }) {
     setIsLibraryOpen(!isLibraryOpen);
   };
 
-  const handleMouseEnter = () => {
-    setIsLibraryOpen(true);
+  const toggleSortingMenu = () => {
+    // if (typeof onCategoryChange === 'function') {
+    //   onCategoryChange(category)
+    // }
+    setIsSortingOpen(!isSortingOpen);
   };
+
+  // const handleMouseEnter = () => {
+  //   setIsLibraryOpen(true);
+  // };
 
   const handleSelectCategory = (category) => {
     if (location.pathname != "/resource") {
@@ -72,7 +81,7 @@ export default function NavBar({ onCategoryChange }) {
         <li
           className={`nav__item ${isLibraryOpen ? "active" : ""}`}
           onClick={toggleLibraryMenu}
-          onMouseEnter={handleMouseEnter}
+        // onMouseEnter={handleMouseEnter}
         >
           <img
             src={libraryIcon}
@@ -90,6 +99,7 @@ export default function NavBar({ onCategoryChange }) {
           </ul>
         )}
       </div>
+
       <div className="nav__container-bottom">
         {/* replace button with submission drawer to connect  */}
         {/* <button className="nav__button">

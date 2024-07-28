@@ -14,24 +14,30 @@ export default function ResourcePage() {
   const [selectedResource, setSelectedResource] = useState(
     resourceDetailsData[0]
   );
-  console.log(resourceDetailsData[0]);
+  console.log(resourceDetailsData);
   const [savedBookmarks, setSavedBookmarks] = useState([]);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [category, setCategory] = useState("All");
-  const [activeResourceId, setActiveResourceId] = useState(null);
+  const [activeResourceId, setActiveResourceId] = useState(
+    resourceDetailsData[0].id
+  );
   // const [comments, setComments] = useState([]);
   // const storedResources =
   //   JSON.parse(localStorage.getItem("resources")) || resourceDetailsData;
 
   useEffect(() => {
-    // load from local
     const savedResources = JSON.parse(localStorage.getItem("resources")) || [];
-    setResources(savedResources);
+    if (savedResources.length > 0) {
+      setResources(savedResources);
+      setSelectedResource(savedResources);
+      setActiveResourceId(savedResources.id);
+    }
   }, []);
 
   const handleFormSubmit = (newResource) => {
     const updatedResources = [...resources, newResource];
     setResources(updatedResources);
+    console.log("Updated Resources:", updatedResources);
     localStorage.setItem("resources", JSON.stringify(updatedResources));
 
     if (!selectedResource) {
@@ -88,7 +94,7 @@ export default function ResourcePage() {
   };
 
   const handleSelectResource = (clickedId) => {
-    const foundResources = resourceDetailsData.find(
+    const foundResources = resources.find(
       (resource) => clickedId === resource.id
     );
 
@@ -110,7 +116,7 @@ export default function ResourcePage() {
       </div>
       <div className="resource__cards">
         <ResourceList
-          resources={filteredResources}
+          resources={resources}
           selectResource={handleSelectResource}
           activeResourceId={activeResourceId}
         />

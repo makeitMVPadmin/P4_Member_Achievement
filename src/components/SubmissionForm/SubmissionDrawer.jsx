@@ -32,11 +32,14 @@ function SubmissionDrawer({ onFormSubmit }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = React.useRef();
   const formRef = useRef(null);
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData(formRef.current);
+    const tags = selectedOptions.map((option) => option.value);
+
     const newResource = {
       title: formData.get("title"),
       discipline: formData.get("discipline"),
@@ -46,6 +49,13 @@ function SubmissionDrawer({ onFormSubmit }) {
       preview: formData.get("preview"),
       url: formData.get("url"),
       id: Date.now(),
+      description: "",
+      contributor: "Anonymous",
+      tag1: tags[0] || "",
+      tag2: tags[1] || "",
+      tag3: tags[2] || "",
+      tag4: tags[3] || "",
+      comments: [],
     };
 
     // save to local
@@ -103,7 +113,7 @@ function SubmissionDrawer({ onFormSubmit }) {
             </DrawerHeader>
 
             <DrawerBody className="submission__form-container">
-              <Box as="form" ref={formRef} onSubmit={handleSubmit}>
+              <form as="form" ref={formRef} onSubmit={handleSubmit}>
                 <Stack className="submission__form-container">
                   {/* TITLE */}
                   <Box
@@ -218,7 +228,10 @@ function SubmissionDrawer({ onFormSubmit }) {
 
                   {/* TAGS */}
                   <Box className="submission__form-column">
-                    <SelectTags />
+                    <SelectTags
+                      selectedOptions={selectedOptions}
+                      setSelectedOptions={setSelectedOptions}
+                    />
                   </Box>
 
                   {/* SKILL LEVEL */}
@@ -361,7 +374,7 @@ function SubmissionDrawer({ onFormSubmit }) {
                     <UploadFile />
                   </Box>
                 </Stack>
-              </Box>
+              </form>
             </DrawerBody>
 
             <DrawerFooter>

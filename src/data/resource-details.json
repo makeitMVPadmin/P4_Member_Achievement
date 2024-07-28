@@ -13,6 +13,7 @@
     "tag2": "Machine Learning",
     "tag3": "Regression",
     "tag4": "Big Data",
+    "url": "https://www.codecademy.com/learn/paths/machine-learning",
     "comments": [
       {
         "id": "1",
@@ -51,6 +52,7 @@
     "tag2": "Vite",
     "tag3": "React",
     "tag4": "Web Development",
+    "url": "https://medium.com/@randularj97/comparing-create-react-app-and-vite-react-app-advantages-disadvantages-performance-and-63193ea4cd14",
     "comments": [
       {
         "id": "1",
@@ -88,6 +90,7 @@
     "tag1": "React",
     "tag2": "Rendering",
     "tag3": "State",
-    "tag4": "Event Handler"
+    "tag4": "Event Handler",
+    "url": "https://ui.dev/why-react-renders"
   }
 ]

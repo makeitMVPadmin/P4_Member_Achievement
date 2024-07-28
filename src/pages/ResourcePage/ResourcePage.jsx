@@ -77,6 +77,10 @@ export default function ResourcePage() {
     }
   };
 
+  const getCommentsForSpecificResource = () => {
+    return;
+  };
+
   // const allResources = resources;
 
   return (

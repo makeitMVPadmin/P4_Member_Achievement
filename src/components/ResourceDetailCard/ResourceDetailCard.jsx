@@ -114,7 +114,7 @@ export default function ResourceDetailCard({
             </div>
           </div>
           <div className="resource-details__buttons-container">
-            <Link to="" key="">
+            <Link to={selectedResource.url} key="">
               <button
                 className="resource-details__resource-button"
                 aria-label="Go to Resource"

@@ -47,11 +47,7 @@ export default function ResourceCard(props) {
       <p className="resource__level">{resource.level}</p>
       <div className="resource__about">
         <p className="resource__preview">{resource.preview}</p>
-        <Link
-          to=""
-          className="resource__link"
-          aria-label="Go to resource details"
-        >
+        <Link className="resource__link" aria-label="Go to resource details">
           <img
             src={arrowForwardIcon}
             alt="arrow forward"

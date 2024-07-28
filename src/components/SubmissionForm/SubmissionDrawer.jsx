@@ -25,6 +25,7 @@ import {
   // useToast - will use when user tested and upload successful
 } from "@chakra-ui/react"
 import { color } from "framer-motion";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase-storage";
 
 // import { useForm } from "react-hook-form";
 

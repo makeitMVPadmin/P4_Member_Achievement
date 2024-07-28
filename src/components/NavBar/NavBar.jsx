@@ -25,16 +25,9 @@ export default function NavBar({ onCategoryChange }) {
     setIsLibraryOpen(!isLibraryOpen);
   };
 
-  const toggleSortingMenu = () => {
-    // if (typeof onCategoryChange === 'function') {
-    //   onCategoryChange(category)
-    // }
-    setIsSortingOpen(!isSortingOpen);
+  const handleMouseEnter = () => {
+    setIsLibraryOpen(true);
   };
-
-  // const handleMouseEnter = () => {
-  //   setIsLibraryOpen(true);
-  // };
 
   const handleSelectCategory = (category) => {
     if (location.pathname != "/resource") {

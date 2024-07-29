@@ -9,7 +9,7 @@ import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer";
 import { SettingsIcon } from "@chakra-ui/icons";
 import "./NavBar.scss";
 
-export default function NavBar({ onCategoryChange, onFormSubmit }) {
+export default function NavBar({ onCategoryChange, onFormSubmit, onTypeChange }) {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   const [isSortingOpen, setIsSortingOpen] = useState(false);
   const [category, setCategory] = useState("All");
@@ -105,33 +105,29 @@ export default function NavBar({ onCategoryChange, onFormSubmit }) {
         {isLibraryOpen && (
           <ul className="nav__library-sublist">
             <li
-              className={`nav__library-subitem ${
-                category === "Software Engineering" ? "active" : ""
-              }`}
+              className={`nav__library-subitem ${category === "Software Engineering" ? "active" : ""
+                }`}
               onClick={() => handleSelectCategory("Software Engineering")}
             >
               Software Engineering
             </li>
             <li
-              className={`nav__library-subitem ${
-                category === "UX/UI Design" ? "active" : ""
-              }`}
+              className={`nav__library-subitem ${category === "UX/UI Design" ? "active" : ""
+                }`}
               onClick={() => handleSelectCategory("UX/UI Design")}
             >
               UX/UI Design
             </li>
             <li
-              className={`nav__library-subitem ${
-                category === "Product" ? "active" : ""
-              }`}
+              className={`nav__library-subitem ${category === "Product" ? "active" : ""
+                }`}
               onClick={() => handleSelectCategory("Product")}
             >
               Product
             </li>
             <li
-              className={`nav__library-subitem ${
-                category === "Data Science" ? "active" : ""
-              }`}
+              className={`nav__library-subitem ${category === "Data Science" ? "active" : ""
+                }`}
               onClick={() => handleSelectCategory("Data Science")}
             >
               Data Science

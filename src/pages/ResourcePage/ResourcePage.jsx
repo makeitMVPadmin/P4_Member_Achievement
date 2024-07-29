@@ -116,7 +116,7 @@ export default function ResourcePage() {
       </div>
       <div className="resource__cards">
         <ResourceList
-          resources={resources}
+          resources={filteredResources}
           selectResource={handleSelectResource}
           activeResourceId={activeResourceId}
         />

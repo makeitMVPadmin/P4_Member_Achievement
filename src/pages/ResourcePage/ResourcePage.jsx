@@ -167,28 +167,6 @@ export default function ResourcePage() {
     setSortAscending(!sortAscending);
   };
 
-  // const sortSkill = () => {
-  //   setSortField("skill")
-  //   const sortedResource = [...resources].sort((a, b) => {
-  //     const levelA = skillMap[a.level] || 0;
-  //     const levelB = skillMap[b.level] || 0;
-  //     return sortAscending ? levelA - levelB : levelB - levelA;
-  //   });
-  //   setResources(sortedResource);
-  //   setSortAscending(!sortAscending);
-  // }
-
-  // const sortDuration = () => {
-  //   setSortField("duration")
-  //   const sortedResource = [...resources].sort((a, b) => {
-  //     const durationA = durationMap[a.duration] || 0;
-  //     const durationB = durationMap[b.duration] || 0;
-  //     return sortAscending ? durationA - durationB : durationB - durationA;
-  //   });
-  //   setResources(sortedResource);
-  //   setSortAscending(!sortAscending);
-  // }
-
   // const allResources = resources;
 
   return (

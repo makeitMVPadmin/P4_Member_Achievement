@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+// import arrowForwardIcon from "../../assets/icons/blue-arrow-forward-svgrepo-com.png";
 import arrowForwardIcon from "../../assets/icons/blue-arrow-forward-svgrepo-com.png";
 import timerIcon from "../../assets/icons/timer-2-svgrepo-com.png";
 import Upvoting from "../Upvoting/Upvoting";
@@ -46,11 +47,7 @@ export default function ResourceCard(props) {
       <p className="resource__level">{resource.level}</p>
       <div className="resource__about">
         <p className="resource__preview">{resource.preview}</p>
-        <Link
-          to=""
-          className="resource__link"
-          aria-label="Go to resource details"
-        >
+        <Link className="resource__link" aria-label="Go to resource details">
           <img
             src={arrowForwardIcon}
             alt="arrow forward"

@@ -118,9 +118,9 @@ function SubmissionDrawer({ onFormSubmit }) {
                   {/* TITLE */}
                   <Box
                     className="submission__form-column"
-                    // as="form"
-                    // ref={formRef}
-                    // onSubmit={handleSubmit}
+                  // as="form"
+                  // ref={formRef}
+                  // onSubmit={handleSubmit}
                   >
                     <FormControl>
                       <FormLabel

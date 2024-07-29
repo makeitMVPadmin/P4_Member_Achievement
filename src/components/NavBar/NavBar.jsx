@@ -5,11 +5,13 @@ import savedIcon from "../../assets/icons/saved-svgrepo-com.png";
 import libraryIcon from "../../assets/icons/library-book-svgrepo-com.png";
 import { useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer";
+import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer"
+import { SettingsIcon } from "@chakra-ui/icons";
 import "./NavBar.scss";
 
 export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, sortBySkill, sortByDuration }) {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
+  const [isSortingOpen, setIsSortingOpen] = useState(false);
   const [category, setCategory] = useState("All");
   const [types, setTypes] = useState([]);
 
@@ -80,22 +82,26 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, s
             <p className="nav__item-name">Rewards</p>
           </li>
         </NavLink>
+        {/* <NavLink to="/contributions"> */}
         <li className="nav__item">
           <img src={uploadIcon2} alt="upload file icon" className="nav__icon" />
           <p className="nav__item-name">Contributions</p>
         </li>
-        <li className="nav__item">
-          <img
-            src={savedIcon}
-            alt="saved bookmark icon"
-            className="nav__icon"
-          />
-          <p className="nav__item-name">Bookmarked</p>
-        </li>
+        {/* </NavLink> */}
+        <NavLink to="/bookmarked">
+          <li className="nav__item">
+            <img
+              src={savedIcon}
+              alt="saved bookmark icon"
+              className="nav__icon"
+            />
+            <p className="nav__item-name">Bookmarked</p>
+          </li>
+        </NavLink>
         <li
           className={`nav__item ${isLibraryOpen ? "active" : ""}`}
           onClick={toggleLibraryMenu}
-          onMouseEnter={handleMouseEnter}
+        // onMouseEnter={handleMouseEnter}
         >
           <img
             src={libraryIcon}
@@ -171,6 +177,7 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, s
           </li>
         </ul>
       </div>
+
       <div className="nav__container-bottom">
         {/* replace button with submission drawer to connect  */}
         {/* <button className="nav__button">

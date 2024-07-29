@@ -8,12 +8,19 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer"
 import "./NavBar.scss";
 
+
+
 export default function NavBar({ onCategoryChange, onTypeChange }) {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   const [category, setCategory] = useState("All");
   const [types, setTypes] = useState([]);
-  // const [skill, setSkill] = useState('');
-  // const [tag, setTags] = useState('')
+  const [skill, setSkill] = useState("");
+
+  const skillLevelMap = {
+    "Beginner Level": 1,
+    "Intermediate Level": 2,
+    "Advanced Level": 3
+  }
 
   const location = useLocation();
   const navigate = useNavigate();

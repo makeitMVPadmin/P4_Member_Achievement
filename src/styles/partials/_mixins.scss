@@ -27,7 +27,14 @@
   font-weight: $weight;
   line-height: normal;
 }
-
+@mixin library-textFormat($size, $weight) {
+  color: #000;
+  font-family: Gilroy;
+  font-size: $size;
+  font-style: normal;
+  font-weight: $weight;
+  line-height: normal;
+}
 @mixin letters-fonts($size, $weight, $color) {
   font-size: $size rem;
   font-weight: $weight;

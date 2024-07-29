@@ -2,25 +2,26 @@
 @use "../../styles/partials/_variables" as *;
 @use "../../styles/partials/_mixins" as *;
 
-$font-stack-gilroy-bl: 'Gilroy-ExtraBold', serif;
+$font-stack-gilroy-bl: "PoppinsBold", serif;
 
 .header {
   align-items: center;
   display: flex;
   height: 8vh;
-  justify-content: space-between;
-  width: 100%;
-  background: #FFF;
+  justify-content: space-evenly;
+  background: #fff;
 
   &__main-icon {
     margin-left: 5px;
-  }  
+  }
 
   &__main-image {
     height: 4vh;
   }
-
-  @media (min-width: $tablet-breakpoint) {
+  // &__page__link {
+  
+  // }
+  @include tablet {
     width: 100%;
 
     &__navigation {
@@ -32,7 +33,7 @@ $font-stack-gilroy-bl: 'Gilroy-ExtraBold', serif;
 
     &__main-icon {
       margin-left: -20px;
-    }  
+    }
 
     &__main-image {
       height: 3vh;
@@ -49,13 +50,7 @@ $font-stack-gilroy-bl: 'Gilroy-ExtraBold', serif;
 
     &__icon-titles {
       font: 100% $font-stack-gilroy-bl;
-      font-size: .5rem;
-    }
-    
-    &__icon-titles-forum {
-      font: 100% $font-stack-gilroy-bl;
-      font-size: .6rem;
-      color: black;
+      font-size: 0.5rem;
     }
 
     &__user-container {
@@ -72,11 +67,11 @@ $font-stack-gilroy-bl: 'Gilroy-ExtraBold', serif;
     }
 
     &__down-carrot {
-      height: .75vh;
+      height: 0.75vh;
     }
   }
 
-  @media (min-width: $desktop-breakpoint) {
+  @include desktop {
     height: 13vh;
     width: 100%;
 
@@ -89,7 +84,8 @@ $font-stack-gilroy-bl: 'Gilroy-ExtraBold', serif;
 
     &__main-icon {
       margin-left: -15px;
-    }  
+      margin-right: 2rem;
+    }
 
     &__main-image {
       height: 5vh;
@@ -98,6 +94,7 @@ $font-stack-gilroy-bl: 'Gilroy-ExtraBold', serif;
     &__icons {
       display: flex;
       flex-direction: column;
+      margin: 0.6rem;
     }
 
     &__images {
@@ -106,50 +103,28 @@ $font-stack-gilroy-bl: 'Gilroy-ExtraBold', serif;
 
     &__icon-titles {
       font: 100% $font-stack-gilroy-bl;
-      font-size: .8rem;
+      font-size: 1rem;
     }
 
-    &__icon-titles-forum {
+    &__icon-titles-library {
       font: 100% $font-stack-gilroy-bl;
-      font-size: .8rem;
-      color: #0754b0;
+      font-size: 0.8rem;
     }
 
     &__user-container {
       align-items: center;
       display: flex;
-      justify-content: space-evenly;
-      width: 7vw;
+      justify-content: space-between;
     }
 
     &__user-pic {
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 50%;
+      width: 5rem;
+      height: 5rem;
     }
 
     &__down-carrot {
-      height: 1.5vh;
+      height: 1.2vh;
+      margin: 0 1rem;
     }
   }
-
-  &__icons--mobile-hide {
-    display: none;
-
-    @include tablet {
-      display: flex;
-    }
-  }
-
-  &__icons--mobile-show {
-    display: flex;
-
-    @include tablet {
-      display: none; 
-    }
-  }
-
-}
-.forum {
-  color: black;
 }

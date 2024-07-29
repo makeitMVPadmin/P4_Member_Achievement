@@ -5,6 +5,11 @@ import savedIcon from "../../assets/icons/saved-svgrepo-com.png";
 import libraryIcon from "../../assets/icons/library-book-svgrepo-com.png";
 import { useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer";
+import { SettingsIcon } from "@chakra-ui/icons";
+import "./NavBar.scss";
+
+export default function NavBar({ onCategoryChange, onFormSubmit, onTypeChange }) {
 import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer"
 import { SettingsIcon } from "@chakra-ui/icons";
 import "./NavBar.scss";
@@ -14,6 +19,8 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, s
   const [isSortingOpen, setIsSortingOpen] = useState(false);
   const [category, setCategory] = useState("All");
   const [types, setTypes] = useState([]);
+  // const [skill, setSkill] = useState('');
+  // const [tag, setTags] = useState('')
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -25,6 +32,8 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, s
     setCategory("All");
     setIsLibraryOpen(!isLibraryOpen);
   };
+
+
 
   const handleMouseEnter = () => {
     setIsLibraryOpen(true);

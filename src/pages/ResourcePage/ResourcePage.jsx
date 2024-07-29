@@ -38,10 +38,12 @@ export default function ResourcePage() {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [category, setCategory] = useState("All");
   const [type, setType] = useState([])
+
   const [activeResourceId, setActiveResourceId] = useState(null);
   // const [activeResourceId, setActiveResourceId] = useState(
   //   resourceDetailsData[0].id
   // );
+  
   // const [comments, setComments] = useState([]);
   // const storedResources =
   //   JSON.parse(localStorage.getItem("resources")) || resourceDetailsData;
@@ -95,7 +97,6 @@ export default function ResourcePage() {
     const currentCategory = category === "All" || resource.discipline === category;
     const currentType = type.length === 0 || type.includes(resource.type);
     return currentCategory && currentType;
-
   })
 
   // category === "All"

@@ -1,0 +1,54 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.onboarding {
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    bottom: 0.5rem;
+
+    button {
+      &:last-child {
+        margin-left: auto;
+      }
+      height: 1.5rem;
+      font-size: 0.65rem;
+      @include thin-border;
+      border: 1px solid black;
+      font-weight: 900;
+      width: 6rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: scale(1.025);
+        cursor: pointer;
+        background-color: $light-blue;
+      }
+    }
+  }
+
+  &__step {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    font-size: 0.65rem;
+    color: #a9a9a9;
+    font-family: Poppins;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__img {
+    width: 7.5rem;
+  }
+
+  &__right {
+    padding-right: 1.5rem;
+  }
+}

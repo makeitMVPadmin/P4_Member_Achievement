@@ -8,6 +8,25 @@ import resourceDetailsData from "../../data/resource-details.json";
 import "./ResourcePage.scss";
 import { useNavigate } from "react-router-dom";
 
+const skillMap = {
+  "Beginner Level": 1,
+  "Intermediate Level": 2,
+  "Advanced Level": 3,
+};
+
+const durationMap = {
+  '3 min': 3,
+  '5 min': 5,
+  '7 min': 7,
+  '8 min': 8,
+  '10 min': 10,
+  '20 min': 20,
+  '30 min': 30,
+  '40 min': 40,
+  '50 min': 50,
+  '60 min': 60
+};
+
 export default function ResourcePage() {
   const [resources, setResources] = useState(resourceDetailsData); //1
   // const [resourceDetails, setResourceDetails] = useState(resourceDetailsData)
@@ -26,6 +45,8 @@ export default function ResourcePage() {
   // const [comments, setComments] = useState([]);
   // const storedResources =
   //   JSON.parse(localStorage.getItem("resources")) || resourceDetailsData;
+  const [sortField, setSortField] = useState(null)
+  const [sortAscending, setSortAscending] = useState(true)
 
   useEffect(() => {
     const savedResources = JSON.parse(localStorage.getItem("resources")) || [];
@@ -74,6 +95,7 @@ export default function ResourcePage() {
     const currentCategory = category === "All" || resource.discipline === category;
     const currentType = type.length === 0 || type.includes(resource.type);
     return currentCategory && currentType;
+
   })
 
   // category === "All"
@@ -111,6 +133,62 @@ export default function ResourcePage() {
     }
   };
 
+  useEffect(() => {
+    const sortResources = () => {
+      let sortedResources = [...resources];
+
+      if (sortField === 'skill') {
+        sortedResources = sortedResources.sort((a, b) => {
+          const levelA = skillMap[a.level] || 0;
+          const levelB = skillMap[b.level] || 0;
+          return sortAscending ? levelA - levelB : levelB - levelA;
+        });
+      } else if (sortField === 'duration') {
+        sortedResources = sortedResources.sort((a, b) => {
+          const durationA = durationMap[a.duration] || 0;
+          const durationB = durationMap[b.duration] || 0;
+          return sortAscending ? durationA - durationB : durationB - durationA;
+        });
+      }
+
+      setResources(sortedResources);
+    };
+
+    sortResources();
+  }, [sortField, sortAscending, resources]);
+
+  const sortSkill = () => {
+    setSortField('skill');
+    setSortAscending(!sortAscending);
+  };
+
+  const sortDuration = () => {
+    setSortField('duration');
+    setSortAscending(!sortAscending);
+  };
+
+  // const sortSkill = () => {
+  //   setSortField("skill")
+  //   const sortedResource = [...resources].sort((a, b) => {
+  //     const levelA = skillMap[a.level] || 0;
+  //     const levelB = skillMap[b.level] || 0;
+  //     return sortAscending ? levelA - levelB : levelB - levelA;
+  //   });
+  //   setResources(sortedResource);
+  //   setSortAscending(!sortAscending);
+  // }
+
+  // const sortDuration = () => {
+  //   setSortField("duration")
+  //   const sortedResource = [...resources].sort((a, b) => {
+  //     const durationA = durationMap[a.duration] || 0;
+  //     const durationB = durationMap[b.duration] || 0;
+  //     return sortAscending ? durationA - durationB : durationB - durationA;
+  //   });
+  //   setResources(sortedResource);
+  //   setSortAscending(!sortAscending);
+  // }
+
   // const allResources = resources;
 
   return (
@@ -120,6 +198,8 @@ export default function ResourcePage() {
           onTypeChange={setType}
           onCategoryChange={setCategory}
           onFormSubmit={handleFormSubmit}
+          sortBySkill={sortSkill}
+          sortByDuration={sortDuration}
         />
       </div >
       <div className="resource__cards">

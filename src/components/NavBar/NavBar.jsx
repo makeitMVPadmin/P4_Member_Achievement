@@ -8,19 +8,10 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer";
 import "./NavBar.scss";
 
-
-
-export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit }) {
+export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, sortBySkill, sortByDuration }) {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   const [category, setCategory] = useState("All");
   const [types, setTypes] = useState([]);
-  const [skill, setSkill] = useState("");
-
-  const skillLevelMap = {
-    "Beginner Level": 1,
-    "Intermediate Level": 2,
-    "Advanced Level": 3
-  }
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -61,6 +52,19 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit })
 
     setTypes(currentTypes);
   }
+
+  const handleSortSkill = () => {
+    if (typeof sortBySkill === "function") {
+      sortBySkill();
+    }
+  }
+
+  const handleSortDuration = () => {
+    if (typeof sortByDuration === "function") {
+      sortByDuration();
+    }
+  }
+
   const checkLocation = () => {
     if (location.pathname != "/resource") {
       navigate("/resource");
@@ -160,10 +164,10 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit })
             </div>
           </li>
           <li className="nav__sorting-item">
-            <p className="nav__library-subitem">Skill</p>
+            <p className="nav__library-subitem" onClick={handleSortSkill}>Skill</p>
           </li>
           <li className="nav__sorting-item">
-            <p className="nav__library-subitem">Duration</p>
+            <p className="nav__library-subitem" onClick={handleSortDuration}>Duration</p>
           </li>
         </ul>
       </div>

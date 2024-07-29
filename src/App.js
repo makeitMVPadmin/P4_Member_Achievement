@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Header from "./components/Header/Header.jsx";
 import Home from "./pages/HomePage/HomePage.jsx";
 import ResourcePage from "./pages/ResourcePage/ResourcePage.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -19,7 +20,7 @@ const App = () => {
     <>
       <ChakraProvider>
         <BrowserRouter>
-          {/* <Header /> */}
+          <Header />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route

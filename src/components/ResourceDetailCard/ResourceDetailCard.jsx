@@ -23,6 +23,7 @@ export default function ResourceDetailCard({
     if (savedReadState) {
       setIsRead(JSON.parse(savedReadState));
     }
+    console.log(selectedResource.id);
   }, [selectedResource.id]);
 
   const updatePoints = (pointsToAdd) => {
@@ -113,7 +114,12 @@ export default function ResourceDetailCard({
             </div>
           </div>
           <div className="resource-details__buttons-container">
-            <Link to="" key="">
+            <Link
+              to={selectedResource.url}
+              key=""
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <button
                 className="resource-details__resource-button"
                 aria-label="Go to Resource"

@@ -9,7 +9,7 @@ import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer"
 import { SettingsIcon } from "@chakra-ui/icons";
 import "./NavBar.scss";
 
-export default function NavBar({ onCategoryChange }) {
+export default function NavBar({ onCategoryChange, onFormSubmit }) {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   const [isSortingOpen, setIsSortingOpen] = useState(false);
   const [category, setCategory] = useState("All");
@@ -18,10 +18,10 @@ export default function NavBar({ onCategoryChange }) {
   const navigate = useNavigate();
 
   const toggleLibraryMenu = () => {
-    if (typeof onCategoryChange === 'function') {
-      onCategoryChange(category)
+    if (typeof onCategoryChange === "function") {
+      onCategoryChange(category);
     }
-    setCategory("All")
+    setCategory("All");
     setIsLibraryOpen(!isLibraryOpen);
   };
 
@@ -31,25 +31,25 @@ export default function NavBar({ onCategoryChange }) {
 
   const handleSelectCategory = (category) => {
     if (location.pathname != "/resource") {
-      navigate("/resource")
+      navigate("/resource");
     }
-    if (typeof onCategoryChange === 'function') {
+    if (typeof onCategoryChange === "function") {
       onCategoryChange(category);
     }
 
     setCategory(category);
-  }
+  };
 
   const checkLocation = () => {
     if (location.pathname != "/resource") {
-      navigate("/resource")
+      navigate("/resource");
     }
-  }
+  };
 
   return (
     <ul className="nav__list">
       <div className="nav__container-top">
-        <NavLink to='/rewards'>
+        <NavLink to="/rewards">
           <li className="nav__item">
             <img src={trophyIcon} alt="trophy icon" className="nav__icon" />
             <p className="nav__item-name">Rewards</p>
@@ -81,14 +81,40 @@ export default function NavBar({ onCategoryChange }) {
             alt="library books icon"
             className="nav__icon"
           />
-          <p className="nav__item-name" onClick={checkLocation}>Learning Library</p>
+          <p className="nav__item-name" onClick={checkLocation}>
+            Learning Library
+          </p>
         </li>
         {isLibraryOpen && (
           <ul className="nav__library-sublist">
-            <li className={`nav__library-subitem ${category === "Software Engineering" ? "active" : ""}`} onClick={() => handleSelectCategory("Software Engineering")}>Software Engineering</li>
-            <li className={`nav__library-subitem ${category === "UX/UI Design" ? "active" : ""}`} onClick={() => handleSelectCategory("UX/UI Design")}>UX/UI Design</li>
-            <li className={`nav__library-subitem ${category === "Product" ? "active" : ""}`} onClick={() => handleSelectCategory("Product")}>Product</li>
-            <li className={`nav__library-subitem ${category === "Data Science" ? "active" : ""}`} onClick={() => handleSelectCategory("Data Science")}>Data Science</li>
+            <li
+              className={`nav__library-subitem ${category === "Software Engineering" ? "active" : ""
+                }`}
+              onClick={() => handleSelectCategory("Software Engineering")}
+            >
+              Software Engineering
+            </li>
+            <li
+              className={`nav__library-subitem ${category === "UX/UI Design" ? "active" : ""
+                }`}
+              onClick={() => handleSelectCategory("UX/UI Design")}
+            >
+              UX/UI Design
+            </li>
+            <li
+              className={`nav__library-subitem ${category === "Product" ? "active" : ""
+                }`}
+              onClick={() => handleSelectCategory("Product")}
+            >
+              Product
+            </li>
+            <li
+              className={`nav__library-subitem ${category === "Data Science" ? "active" : ""
+                }`}
+              onClick={() => handleSelectCategory("Data Science")}
+            >
+              Data Science
+            </li>
           </ul>
         )}
       </div>
@@ -99,7 +125,7 @@ export default function NavBar({ onCategoryChange }) {
           <img src={uploadIcon} alt="upload file icon" className="nav__icon" />
           <p className="nav__button-name">Upload Resource</p>
         </button> */}
-        <SubmissionDrawer />
+        <SubmissionDrawer onFormSubmit={onFormSubmit} />
       </div>
     </ul>
   );

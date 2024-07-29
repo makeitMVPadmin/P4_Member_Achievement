@@ -54,8 +54,6 @@ export default function NavBar({ onCategoryChange, onTypeChange }) {
       onTypeChange(currentTypes);
     }
 
-    console.log(currentTypes)
-
     setTypes(currentTypes);
   }
   const checkLocation = () => {

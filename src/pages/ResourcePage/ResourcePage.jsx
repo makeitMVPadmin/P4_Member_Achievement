@@ -6,19 +6,47 @@ import { Comments } from "../../components/Comments/Comments";
 import resourceData from "../../data/resource.json";
 import resourceDetailsData from "../../data/resource-details.json";
 import "./ResourcePage.scss";
+import { useNavigate } from "react-router-dom";
 
 export default function ResourcePage() {
-  const [resources, setResources] = useState(resourceData);
+  const [resources, setResources] = useState(resourceDetailsData); //1
   // const [resourceDetails, setResourceDetails] = useState(resourceDetailsData)
   const [selectedResource, setSelectedResource] = useState(
     resourceDetailsData[0]
   );
+  console.log(resourceDetailsData);
   const [savedBookmarks, setSavedBookmarks] = useState([]);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [category, setCategory] = useState("All");
   const [type, setType] = useState([])
   const [activeResourceId, setActiveResourceId] = useState(null);
+  // const [activeResourceId, setActiveResourceId] = useState(
+  //   resourceDetailsData[0].id
+  // );
   // const [comments, setComments] = useState([]);
+  // const storedResources =
+  //   JSON.parse(localStorage.getItem("resources")) || resourceDetailsData;
+
+  useEffect(() => {
+    const savedResources = JSON.parse(localStorage.getItem("resources")) || [];
+    if (savedResources.length > 0) {
+      setResources(savedResources);
+      setSelectedResource(savedResources);
+      setActiveResourceId(savedResources.id);
+    }
+  }, []);
+
+  const handleFormSubmit = (newResource) => {
+    const updatedResources = [...resources, newResource];
+    setResources(updatedResources);
+    console.log("Updated Resources:", updatedResources);
+    localStorage.setItem("resources", JSON.stringify(updatedResources));
+
+    if (!selectedResource) {
+      setSelectedResource(newResource);
+      setActiveResourceId(newResource.id);
+    }
+  };
 
   useEffect(() => {
     if (resources.length > 0) {
@@ -40,7 +68,7 @@ export default function ResourcePage() {
       setIsBookmarked(isBookmarked);
       setSavedBookmarks(bookmarks);
     }
-  }, [selectedResource.id]);
+  }, [selectedResource]);
 
   const filteredResources = resources.filter((resource) => {
     const currentCategory = category === "All" || resource.discipline === category;
@@ -73,7 +101,7 @@ export default function ResourcePage() {
   };
 
   const handleSelectResource = (clickedId) => {
-    const foundResources = resourceDetailsData.find(
+    const foundResources = resources.find(
       (resource) => clickedId === resource.id
     );
 
@@ -88,8 +116,12 @@ export default function ResourcePage() {
   return (
     <div className="resource__container">
       <div className="resource__navbar-container">
-        <NavBar onCategoryChange={setCategory} onTypeChange={setType} />
-      </div>
+        <NavBar
+          onTypeChange={setType}
+          onCategoryChange={setCategory}
+          onFormSubmit={handleFormSubmit}
+        />
+      </div >
       <div className="resource__cards">
         <ResourceList
           resources={filteredResources}
@@ -106,6 +138,6 @@ export default function ResourcePage() {
         // comments={comments}
         />
       </div>
-    </div>
+    </div >
   );
 }

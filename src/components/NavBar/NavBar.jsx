@@ -8,9 +8,12 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer"
 import "./NavBar.scss";
 
-export default function NavBar({ onCategoryChange }) {
+export default function NavBar({ onCategoryChange, onTypeChange }) {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   const [category, setCategory] = useState("All");
+  const [types, setTypes] = useState([]);
+  // const [skill, setSkill] = useState('');
+  // const [tag, setTags] = useState('')
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -22,6 +25,8 @@ export default function NavBar({ onCategoryChange }) {
     setCategory("All")
     setIsLibraryOpen(!isLibraryOpen);
   };
+
+
 
   const handleMouseEnter = () => {
     setIsLibraryOpen(true);
@@ -38,6 +43,21 @@ export default function NavBar({ onCategoryChange }) {
     setCategory(category);
   }
 
+  const handleSelectType = (type) => {
+    if (location.pathname != "/resource") {
+      navigate("/resource")
+    }
+    const currentTypes = types.includes(type)
+      ? types.filter(t => t !== type) : [...types, type]
+
+    if (typeof onTypeChange === 'function') {
+      onTypeChange(currentTypes);
+    }
+
+    console.log(currentTypes)
+
+    setTypes(currentTypes);
+  }
   const checkLocation = () => {
     if (location.pathname != "/resource") {
       navigate("/resource")
@@ -83,8 +103,33 @@ export default function NavBar({ onCategoryChange }) {
             <li className={`nav__library-subitem ${category === "UX/UI Design" ? "active" : ""}`} onClick={() => handleSelectCategory("UX/UI Design")}>UX/UI Design</li>
             <li className={`nav__library-subitem ${category === "Product" ? "active" : ""}`} onClick={() => handleSelectCategory("Product")}>Product</li>
             <li className={`nav__library-subitem ${category === "Data Science" ? "active" : ""}`} onClick={() => handleSelectCategory("Data Science")}>Data Science</li>
+
           </ul>
         )}
+        <ul className="nav__sorting">
+          <p className="nav__item-name">Sorting Options</p>
+          <li className="nav__sorting-item nav__sorting-types">
+            <p className="nav__sorting-type">Type</p>
+            <div>
+              <input id="article" type="checkbox" className={`nav__sorting-checkbox ${types.includes("Article") ? "active" : ""}`} onClick={() => handleSelectType("Article")} />
+              <label htmlFor="article" className="nav__sorting-subitem">Article</label>
+            </div>
+            <div>
+              <input id="course" type="checkbox" className={`nav__sorting-checkbox ${types.includes("Course") ? "active" : ""}`} onClick={() => handleSelectType("Course")} />
+              <label htmlFor="course" className="nav__sorting-subitem">Course</label>
+            </div>
+            <div>
+              <input id="video" type="checkbox" className={`nav__sorting-checkbox ${types.includes("Video") ? "active" : ""}`} onClick={() => handleSelectType("Video")} />
+              <label htmlFor="video" className="nav__sorting-subitem">Video</label>
+            </div>
+          </li>
+          <li className="nav__sorting-item">
+            <p className="nav__library-subitem">Skill</p>
+          </li>
+          <li className="nav__sorting-item">
+            <p className="nav__library-subitem">Duration</p>
+          </li>
+        </ul>
       </div>
       <div className="nav__container-bottom">
         {/* replace button with submission drawer to connect  */}

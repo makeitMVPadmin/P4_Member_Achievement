@@ -16,6 +16,7 @@ export default function ResourcePage() {
   const [savedBookmarks, setSavedBookmarks] = useState([]);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [category, setCategory] = useState("All");
+  const [type, setType] = useState([])
   const [activeResourceId, setActiveResourceId] = useState(null);
   // const [comments, setComments] = useState([]);
 
@@ -41,12 +42,17 @@ export default function ResourcePage() {
     }
   }, [selectedResource.id]);
 
-  const filteredResources =
-    category === "All"
-      ? resources
-      : resources.filter((resource) =>
-          [resource.discipline].includes(category)
-        );
+  const filteredResources = resources.filter((resource) => {
+    const currentCategory = category === "All" || resource.discipline === category;
+    const currentType = type.length === 0 || type.includes(resource.type);
+    return currentCategory && currentType;
+  })
+
+  // category === "All"
+  //   ? resources
+  //   : resources.filter((resource) =>
+  //     [resource.discipline].includes(category)
+  //   );
 
   const handleToggleBookmarked = () => {
     const newBookmarkedState = !isBookmarked;
@@ -82,7 +88,7 @@ export default function ResourcePage() {
   return (
     <div className="resource__container">
       <div className="resource__navbar-container">
-        <NavBar onCategoryChange={setCategory} />
+        <NavBar onCategoryChange={setCategory} onTypeChange={setType} />
       </div>
       <div className="resource__cards">
         <ResourceList
@@ -97,7 +103,7 @@ export default function ResourcePage() {
           handleToggleBookmarked={handleToggleBookmarked}
           savedBookmarks={savedBookmarks}
           isBookmarked={isBookmarked}
-          // comments={comments}
+        // comments={comments}
         />
       </div>
     </div>

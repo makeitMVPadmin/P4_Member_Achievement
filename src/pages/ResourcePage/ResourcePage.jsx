@@ -6,6 +6,15 @@ import { Comments } from "../../components/Comments/Comments";
 import resourceData from "../../data/resource.json";
 import resourceDetailsData from "../../data/resource-details.json";
 import "./ResourcePage.scss";
+import { database } from "../../config/firebase";
+import {
+  collection,
+  doc,
+  getDoc,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 
 export default function ResourcePage() {
   const [resources, setResources] = useState(resourceData);
@@ -77,8 +86,25 @@ export default function ResourcePage() {
     }
   };
 
-  const getCommentsForSpecificResource = () => {
-    return;
+  const getCommentsForSpecificResource = async (resourceId) => {
+    const q = query(
+      collection(database, "Comments"),
+      where("resourceID", "==", resourceId)
+    );
+
+    try {
+      const querySnapshot = await getDoc(q);
+
+      const results = [];
+
+      querySnapshot.forEach((doc) => {
+        results.push({ ...doc.data() });
+      });
+
+      return results;
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   // const allResources = resources;
@@ -101,7 +127,7 @@ export default function ResourcePage() {
           handleToggleBookmarked={handleToggleBookmarked}
           savedBookmarks={savedBookmarks}
           isBookmarked={isBookmarked}
-          // comments={comments}
+          comments={getCommentsForSpecificResource(selectedResource.id)}
         />
       </div>
     </div>

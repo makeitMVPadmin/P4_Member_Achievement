@@ -10,6 +10,11 @@ import { SettingsIcon } from "@chakra-ui/icons";
 import "./NavBar.scss";
 
 export default function NavBar({ onCategoryChange, onFormSubmit, onTypeChange }) {
+import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer"
+import { SettingsIcon } from "@chakra-ui/icons";
+import "./NavBar.scss";
+
+export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, sortBySkill, sortByDuration }) {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   const [isSortingOpen, setIsSortingOpen] = useState(false);
   const [category, setCategory] = useState("All");
@@ -58,6 +63,19 @@ export default function NavBar({ onCategoryChange, onFormSubmit, onTypeChange })
 
     setTypes(currentTypes);
   }
+
+  const handleSortSkill = () => {
+    if (typeof sortBySkill === "function") {
+      sortBySkill();
+    }
+  }
+
+  const handleSortDuration = () => {
+    if (typeof sortByDuration === "function") {
+      sortByDuration();
+    }
+  }
+
   const checkLocation = () => {
     if (location.pathname != "/resource") {
       navigate("/resource");
@@ -73,6 +91,7 @@ export default function NavBar({ onCategoryChange, onFormSubmit, onTypeChange })
             <p className="nav__item-name">Rewards</p>
           </li>
         </NavLink>
+        {/* <NavLink to="/contributions"> */}
         <li className="nav__item">
           <img src={uploadIcon2} alt="upload file icon" className="nav__icon" />
           <p className="nav__item-name">Contributions</p>
@@ -91,7 +110,7 @@ export default function NavBar({ onCategoryChange, onFormSubmit, onTypeChange })
         <li
           className={`nav__item ${isLibraryOpen ? "active" : ""}`}
           onClick={toggleLibraryMenu}
-          onMouseEnter={handleMouseEnter}
+        // onMouseEnter={handleMouseEnter}
         >
           <img
             src={libraryIcon}
@@ -160,10 +179,10 @@ export default function NavBar({ onCategoryChange, onFormSubmit, onTypeChange })
             </div>
           </li>
           <li className="nav__sorting-item">
-            <p className="nav__library-subitem">Skill</p>
+            <p className="nav__library-subitem" onClick={handleSortSkill}>Skill</p>
           </li>
           <li className="nav__sorting-item">
-            <p className="nav__library-subitem">Duration</p>
+            <p className="nav__library-subitem" onClick={handleSortDuration}>Duration</p>
           </li>
         </ul>
       </div>

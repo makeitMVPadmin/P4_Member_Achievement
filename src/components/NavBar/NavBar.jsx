@@ -143,8 +143,16 @@ export default function NavBar({ onCategoryChange, onFormSubmit, onTypeChange })
               <label htmlFor="article" className="nav__sorting-subitem">Article</label>
             </div>
             <div>
+              <input id="blog" type="checkbox" className={`nav__sorting-checkbox ${types.includes("Blog") ? "active" : ""}`} onClick={() => handleSelectType("Blog")} />
+              <label htmlFor="blog" className="nav__sorting-subitem">Blog</label>
+            </div>
+            <div>
               <input id="course" type="checkbox" className={`nav__sorting-checkbox ${types.includes("Course") ? "active" : ""}`} onClick={() => handleSelectType("Course")} />
               <label htmlFor="course" className="nav__sorting-subitem">Course</label>
+            </div>
+            <div>
+              <input id="quiz" type="checkbox" className={`nav__sorting-checkbox ${types.includes("Quiz") ? "active" : ""}`} onClick={() => handleSelectType("Quiz")} />
+              <label htmlFor="quiz" className="nav__sorting-subitem">Quiz</label>
             </div>
             <div>
               <input id="video" type="checkbox" className={`nav__sorting-checkbox ${types.includes("Video") ? "active" : ""}`} onClick={() => handleSelectType("Video")} />

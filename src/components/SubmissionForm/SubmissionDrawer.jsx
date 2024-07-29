@@ -25,68 +25,69 @@ import {
   // useToast - will use when user tested and upload successful
 } from "@chakra-ui/react"
 import { color } from "framer-motion";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase-storage";
+import { collection, doc, setDoc } from "firebase/firestore";
 
-// import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 function SubmissionDrawer() {
   
+ 
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = React.useRef()
   
 
-  // const { submission, handleSubmit, formState: { errors } } = useForm();
+  const { submission, handleSubmit, formState: { errors } } = useForm();
 
-  // const onSubmit = data => {
-  //   console.log(data);
-  //   onClose();
-  // };
+  const onSubmit = data => {
+    console.log(data);
+    onClose();
+  };
 
-//  const SubmitForm = () => {
-//   const [formData, setFormData] = useState({
-//     title: '',
-//     type: '',
-//     skillLevel: '',
-//     tags: '',
-//     estimatedDuration: '',
-//     description: '',
-//     url: '',
-//   });
+ const SubmitForm = () => {
+  const [formData, setFormData] = useState({
+    title: '',
+    type: '',
+    skillLevel: '',
+    tags: '',
+    estimatedDuration: '',
+    description: '',
+    url: '',
+  });
 
-//   const [formErrors, setFormErrors] = useState({
-//     title: false,
-//     type: false,
-//     skillLevel: false,
-//     tags: false,
-//     estimatedDuration: false,
-//     description: false,
-//     url: false,
-//   });
+  const [formErrors, setFormErrors] = useState({
+    title: false,
+    type: false,
+    skillLevel: false,
+    tags: false,
+    estimatedDuration: false,
+    description: false,
+    url: false,
+  });
 
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({...formData, [name]: value });
-//     setFormErrors({...formErrors, [name]: false});
-//   };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({...formData, [name]: value });
+    setFormErrors({...formErrors, [name]: false});
+  };
 
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     const errors = {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errors = {};
 
-//     for (const field in formData) {
-//       if (!formData[field]) {
-//         errors[field] = true; 
-//       }
-//     }
+    for (const field in formData) {
+      if (!formData[field]) {
+        errors[field] = true; 
+      }
+    }
     
-//     if (Object.keys(errors).length > 0) {
-//       setFormErrors(errors);
-//     } else {
-//       console.log('Form submitted!', formData);
-//     }
-//   };
-//  }
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+    } else {
+      console.log('Form submitted!', formData);
+    }
+  };
+ }
 
   return (
     <>

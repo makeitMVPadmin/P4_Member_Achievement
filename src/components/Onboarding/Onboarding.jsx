@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import "./Onboarding.scss";
 import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
   ModalBody,
   ModalFooter,
   Button,
@@ -63,7 +62,7 @@ export default function Onboarding({ isOpen, onClose }) {
             <img
               className="onboarding__img"
               src={documentImg}
-              alt="document file image"
+              alt="document file"
             />
           </div>
         );
@@ -95,7 +94,7 @@ export default function Onboarding({ isOpen, onClose }) {
             <img
               className="onboarding__img"
               src={checkImg}
-              alt="check mark image"
+              alt="check mark"
             />
           </div>
         );
@@ -127,7 +126,7 @@ export default function Onboarding({ isOpen, onClose }) {
             <img
               className="onboarding__img"
               src={trophyImg}
-              alt="trophy image"
+              alt="trophy"
             />
           </div>
         );

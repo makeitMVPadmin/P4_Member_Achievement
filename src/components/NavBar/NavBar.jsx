@@ -9,10 +9,6 @@ import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer";
 import { SettingsIcon } from "@chakra-ui/icons";
 import "./NavBar.scss";
 
-export default function NavBar({ onCategoryChange, onFormSubmit, onTypeChange }) {
-import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer"
-import { SettingsIcon } from "@chakra-ui/icons";
-import "./NavBar.scss";
 
 export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, sortBySkill, sortByDuration }) {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);

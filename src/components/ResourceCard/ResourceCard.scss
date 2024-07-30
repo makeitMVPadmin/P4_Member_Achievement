@@ -19,9 +19,9 @@
   }
 
   &:hover {
-    // transform: scale(1.025);
-    .resource__title {
-      text-decoration: underline;
+    .resource__title,
+    .resource__type {
+      color: $light-blue;
     }
   }
 

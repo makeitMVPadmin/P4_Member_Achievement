@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "type": "Course",
+    "type": "Video",
     "duration": "8 min",
     "title": "Build a Machine Learning Model",
     "level": "Intermediate Level",

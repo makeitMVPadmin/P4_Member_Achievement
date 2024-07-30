@@ -8,7 +8,6 @@ import "./ResourceCard.scss";
 
 export default function ResourceCard(props) {
   const { resource, selectResource, isActive } = props;
-  console.log(resource)
 
   const handleClickCard = () => {
     selectResource(resource.id);

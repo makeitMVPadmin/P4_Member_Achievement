@@ -36,7 +36,7 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, s
   };
 
   const handleSelectCategory = (category) => {
-    if (location.pathname != "/resource") {
+    if (location.pathname !== "/resource") {
       navigate("/resource");
     }
     if (typeof onCategoryChange === "function") {
@@ -47,7 +47,7 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, s
   };
 
   const handleSelectType = (type) => {
-    if (location.pathname != "/resource") {
+    if (location.pathname !== "/resource") {
       navigate("/resource");
     }
     const currentTypes = types.includes(type)
@@ -73,13 +73,13 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, s
   }
 
   const checkLocation = () => {
-    if (location.pathname != "/resource") {
+    if (location.pathname !== "/resource") {
       navigate("/resource");
     }
   };
 
   return (
-    <ul className="nav__list">
+    <nav className="nav__list">
       <div className="nav__container-top">
         <NavLink to="/rewards">
           <li className="nav__item">
@@ -191,6 +191,6 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, s
         </button> */}
         <SubmissionDrawer onFormSubmit={onFormSubmit} />
       </div>
-    </ul>
+    </nav>
   );
 }

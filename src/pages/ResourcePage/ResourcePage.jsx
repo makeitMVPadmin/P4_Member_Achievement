@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import ResourceDetailCard from "../../components/ResourceDetailCard/ResourceDetailCard";
 import ResourceList from "../../components/ResourceList/ResourceList";
-import { Comments } from "../../components/Comments/Comments";
-import resourceData from "../../data/resource.json";
-import resourceDetailsData from "../../data/resource-details.json";
 import "./ResourcePage.scss";
-import { useNavigate } from "react-router-dom";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { database } from "../../config/firebase";
+// import { Comments } from "../../components/Comments/Comments";
+// import resourceData from "../../data/resource.json";
+// import resourceDetailsData from "../../data/resource-details.json";
+// import { useNavigate } from "react-router-dom";
 
 const skillMap = {
   "Beginner Level": 1,
@@ -28,34 +30,58 @@ const durationMap = {
 };
 
 export default function ResourcePage() {
-  const [resources, setResources] = useState(resourceDetailsData); //1
   // const [resourceDetails, setResourceDetails] = useState(resourceDetailsData)
-  const [selectedResource, setSelectedResource] = useState(
-    resourceDetailsData[0]
-  );
-  // console.log(resourceDetailsData);
+  // const [resources, setResources] = useState(resourceDetailsData); //1
+  // const [selectedResource, setSelectedResource] = useState(resourceDetailsData[0]);
+  // const [activeResourceId, setActiveResourceId] = useState(resourceDetailsData[0].id);
+  // const [comments, setComments] = useState([]);
+  // const storedResources =JSON.parse(localStorage.getItem("resources")) || resourceDetailsData;
+
+
+  const [resources, setResources] = useState([]);
+  const [selectedResource, setSelectedResource] = useState(null);
   const [savedBookmarks, setSavedBookmarks] = useState([]);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [category, setCategory] = useState("All");
   const [type, setType] = useState([])
-
   const [activeResourceId, setActiveResourceId] = useState(null);
-  // const [activeResourceId, setActiveResourceId] = useState(
-  //   resourceDetailsData[0].id
-  // );
-  
-  // const [comments, setComments] = useState([]);
-  // const storedResources =
-  //   JSON.parse(localStorage.getItem("resources")) || resourceDetailsData;
   const [sortField, setSortField] = useState(null)
   const [sortAscending, setSortAscending] = useState(true)
+
+  useEffect(() => {
+    const getAllResourcesAndRatings = async () => {
+      try {
+        const resourcesCollectionRef = collection(database, "Resources");
+        const resourcesSnapshot = await getDocs(resourcesCollectionRef);
+        if (!resourcesSnapshot.empty) {
+          const resourcesCollection = resourcesSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setResources(resourcesCollection);
+          if (resourcesCollection.length > 0) {
+            setSelectedResource(resourcesCollection[0]);
+            setActiveResourceId(resourcesCollection[0].id);
+          }
+          // Set your resources here, and don't forget to option chain any dependant data (ex: selectedResource?.id)
+          // setResources(resourcesCollection);
+        } else {
+          console.log("No collection for resources found.");
+        }
+      } catch (err) {
+        console.error("Error fetching resources: ", err);
+      }
+    };
+
+    getAllResourcesAndRatings();
+  }, []);
 
   useEffect(() => {
     const savedResources = JSON.parse(localStorage.getItem("resources")) || [];
     if (savedResources.length > 0) {
       setResources(savedResources);
-      setSelectedResource(savedResources);
-      setActiveResourceId(savedResources.id);
+      setSelectedResource(savedResources[0]);
+      setActiveResourceId(savedResources[0]?.id);
     }
   }, []);
 
@@ -76,20 +102,19 @@ export default function ResourcePage() {
       const firstResourceId = resources[0].id;
       setActiveResourceId(firstResourceId);
       setSelectedResource(
-        resourceDetailsData.find((resource) => resource.id === firstResourceId)
+        resources.find((resource) => resource.id === firstResourceId)
       );
     }
   }, [resources]);
 
   useEffect(() => {
-    const savedBookmarks = localStorage.getItem("bookmarks");
-    if (savedBookmarks) {
-      const bookmarks = JSON.parse(savedBookmarks);
-      const isBookmarked = bookmarks.some(
+    if (selectedResource) {
+      const savedBookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+      const isBookmarked = savedBookmarks.some(
         (bookmark) => bookmark.id === selectedResource.id
       );
       setIsBookmarked(isBookmarked);
-      setSavedBookmarks(bookmarks);
+      setSavedBookmarks(savedBookmarks);
     }
   }, [selectedResource]);
 
@@ -108,8 +133,7 @@ export default function ResourcePage() {
   const handleToggleBookmarked = () => {
     const newBookmarkedState = !isBookmarked;
     setIsBookmarked(newBookmarkedState);
-    let bookmarks = localStorage.getItem("bookmarks");
-    bookmarks = bookmarks ? JSON.parse(bookmarks) : [];
+    let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
     if (newBookmarkedState) {
       bookmarks.push(selectedResource);
@@ -180,7 +204,7 @@ export default function ResourcePage() {
           sortBySkill={sortSkill}
           sortByDuration={sortDuration}
         />
-      </div >
+      </div>
       <div className="resource__cards">
         <ResourceList
           resources={filteredResources}
@@ -189,14 +213,16 @@ export default function ResourcePage() {
         />
       </div>
       <div className="resource-details__container">
-        <ResourceDetailCard
-          selectedResource={selectedResource}
-          handleToggleBookmarked={handleToggleBookmarked}
-          savedBookmarks={savedBookmarks}
-          isBookmarked={isBookmarked}
-        // comments={comments}
-        />
+        {selectedResource && (
+          <ResourceDetailCard
+            selectedResource={selectedResource}
+            handleToggleBookmarked={handleToggleBookmarked}
+            savedBookmarks={savedBookmarks}
+            isBookmarked={isBookmarked}
+            // comments = {comments}
+          />
+        )}
       </div>
-    </div >
+    </div>
   );
 }

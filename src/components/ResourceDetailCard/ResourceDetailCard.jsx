@@ -65,9 +65,9 @@ export default function ResourceDetailCard({
 
         <div className="resource-details__rating-timer-container">
           <div className="resource-details__rating-star-container">
-            <p className="resource-details__stars">
+            <div className="resource-details__stars">
               <Upvoting />
-            </p>
+            </div>
           </div>
           <div className="resource-details__timer">
             <p className="resource-details__duration">
@@ -94,9 +94,9 @@ export default function ResourceDetailCard({
             selectedResource.tag3,
             selectedResource.tag4,
           ].map((tag, index) => (
-            <p key={index} className="resource-details__tag" role="listitem">
+            <div key={index} className="resource-details__tag" role="listitem">
               {tag}
-            </p>
+            </div>
           ))}
           {/* <p className="resource-details__tag">{selectedResource.tag1}</p>
         <p className="resource-details__tag">{selectedResource.tag2}</p>

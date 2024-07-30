@@ -8,6 +8,7 @@ import "./ResourceCard.scss";
 
 export default function ResourceCard(props) {
   const { resource, selectResource, isActive } = props;
+  console.log(resource)
 
   const handleClickCard = () => {
     selectResource(resource.id);
@@ -31,7 +32,7 @@ export default function ResourceCard(props) {
           <p className="resource__type">{resource.type}</p>
         </div>
         <div className="resource__timer">
-          <p className="resource__duration">{resource.duration}</p>
+          <p className="resource__duration">{resource.estDuration}</p>
           <img
             src={timerIcon}
             alt="timer icon"
@@ -44,9 +45,9 @@ export default function ResourceCard(props) {
         <h1 className="resource__title">{resource.title}</h1>
         <Upvoting />
       </div>
-      <p className="resource__level">{resource.level}</p>
+      <p className="resource__level">{resource.skillLevel}</p>
       <div className="resource__about">
-        <p className="resource__preview">{resource.preview}</p>
+        <p className="resource__preview">{resource.description}</p>
         <Link className="resource__link" aria-label="Go to resource details">
           <img
             src={arrowForwardIcon}

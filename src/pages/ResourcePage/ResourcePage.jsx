@@ -33,7 +33,7 @@ export default function ResourcePage() {
   const [selectedResource, setSelectedResource] = useState(
     resourceDetailsData[0]
   );
-  console.log(resourceDetailsData);
+  // console.log(resourceDetailsData);
   const [savedBookmarks, setSavedBookmarks] = useState([]);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [category, setCategory] = useState("All");
@@ -134,29 +134,29 @@ export default function ResourcePage() {
     }
   };
 
-  useEffect(() => {
-    const sortResources = () => {
-      let sortedResources = [...resources];
+  // useEffect(() => {
+  //   const sortResources = () => {
+  //     let sortedResources = [...resources];
 
-      if (sortField === 'skill') {
-        sortedResources = sortedResources.sort((a, b) => {
-          const levelA = skillMap[a.level] || 0;
-          const levelB = skillMap[b.level] || 0;
-          return sortAscending ? levelA - levelB : levelB - levelA;
-        });
-      } else if (sortField === 'duration') {
-        sortedResources = sortedResources.sort((a, b) => {
-          const durationA = durationMap[a.duration] || 0;
-          const durationB = durationMap[b.duration] || 0;
-          return sortAscending ? durationA - durationB : durationB - durationA;
-        });
-      }
+  //     if (sortField === 'skill') {
+  //       sortedResources = sortedResources.sort((a, b) => {
+  //         const levelA = skillMap[a.level] || 0;
+  //         const levelB = skillMap[b.level] || 0;
+  //         return sortAscending ? levelA - levelB : levelB - levelA;
+  //       });
+  //     } else if (sortField === 'duration') {
+  //       sortedResources = sortedResources.sort((a, b) => {
+  //         const durationA = durationMap[a.duration] || 0;
+  //         const durationB = durationMap[b.duration] || 0;
+  //         return sortAscending ? durationA - durationB : durationB - durationA;
+  //       });
+  //     }
 
-      setResources(sortedResources);
-    };
+  //     setResources(sortedResources);
+  //   };
 
-    sortResources();
-  }, [sortField, sortAscending, resources]);
+  //   sortResources();
+  // }, [sortField, sortAscending, resources]);
 
   const sortSkill = () => {
     setSortField('skill');

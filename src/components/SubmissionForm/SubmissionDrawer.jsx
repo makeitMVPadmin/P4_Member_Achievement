@@ -22,7 +22,9 @@ import {
   DrawerFooter,
   FormControl,
   FormErrorMessage,
+  // useToast - will use when user tested and upload successful
 } from "@chakra-ui/react";
+import { color } from "framer-motion";
 import { collection, addDoc } from "firebase/firestore";
 import { storage, database } from "../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -34,11 +36,12 @@ function SubmissionDrawer() {
     register,
     handleSubmit,
     formState: { errors },
+    reset, 
     setValue,
     watch,
   } = useForm();
   const [file, setFile] = useState(null);
-  const fileUrl = watch("url"); // Watch URL field value
+  const fileUrl = watch("url"); 
 
   const onSubmit = async (data) => {
     try {
@@ -56,6 +59,10 @@ function SubmissionDrawer() {
       await addDoc(collection(database, "Resources"), data);
 
       console.log("Form submitted successfully:", data);
+      
+      // Clear the form and close the drawer
+      reset(); 
+      setFile(null); 
       onClose();
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -66,6 +73,12 @@ function SubmissionDrawer() {
     setFile(e.target.files[0]);
   };
 
+  const handleCancel = () => {
+    reset(); // Reset the form fields
+    setFile(null); 
+    onClose(); 
+  };
+
   return (
     <>
       {/* Upload Resource Button */}
@@ -74,7 +87,7 @@ function SubmissionDrawer() {
         <p className="nav__button-name">Upload Resource</p>
       </Button>
 
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="sm">
+      <Drawer isOpen={isOpen} placement="right" onClose={handleCancel} size="sm">
         <DrawerOverlay />
         <DrawerContent
           sx={{
@@ -212,9 +225,9 @@ function SubmissionDrawer() {
                 </Box>
 
                 {/* SKILL LEVEL */}
-                <FormControl isInvalid={errors.skillLevel}>
+                <FormControl isInvalid={errors.level}>
                   <FormLabel
-                    htmlFor="skillLevel"
+                    htmlFor="level"
                     fontSize="20px"
                     fontWeight="bold"
                     _after={{ content: '" *"', color: "black" }}
@@ -222,7 +235,7 @@ function SubmissionDrawer() {
                     Skill Level
                   </FormLabel>
                   <Select
-                    id="skillLevel"
+                    id="level"
                     className="submission__inputField"
                     border="3px solid black"
                     _hover="none"
@@ -234,21 +247,21 @@ function SubmissionDrawer() {
                     iconSize="45px"
                     iconColor="#0099FF"
                     focusBorderColor="black"
-                    {...register("skillLevel", { required: true })}
+                    {...register("level", { required: true })}
                   >
                     <option value="Beginner">Beginner</option>
                     <option value="Intermediate">Intermediate</option>
                     <option value="Advanced">Advanced</option>
                   </Select>
                   <FormErrorMessage>
-                    {errors.skillLevel && "Skill Level is required"}
+                    {errors.level && "Skill Level is required"}
                   </FormErrorMessage>
                 </FormControl>
 
                 {/* ESTIMATED DURATION */}
-                <FormControl isInvalid={errors.estimatedDuration}>
+                <FormControl isInvalid={errors.estDuration}>
                   <FormLabel
-                    htmlFor="estimatedDuration"
+                    htmlFor="estDuration"
                     fontSize="20px"
                     fontWeight="bold"
                     _after={{ content: '" *"', color: "black" }}
@@ -256,7 +269,7 @@ function SubmissionDrawer() {
                     Estimated Duration
                   </FormLabel>
                   <Select
-                    id="estimatedDuration"
+                    id="estDuration"
                     className="submission__inputField"
                     border="3px solid black"
                     _hover="none"
@@ -268,7 +281,7 @@ function SubmissionDrawer() {
                     iconSize="45px"
                     iconColor="#0099FF"
                     focusBorderColor="black"
-                    {...register("estimatedDuration", { required: true })}
+                    {...register("estDuration", { required: true })}
                   >
                     <option value="3 min">3 min</option>
                     <option value="5 min">5 min</option>
@@ -281,7 +294,7 @@ function SubmissionDrawer() {
                     <option value="60 min">60 min</option>
                   </Select>
                   <FormErrorMessage>
-                    {errors.estimatedDuration &&
+                    {errors.estDuration &&
                       "Estimated Duration is required"}
                   </FormErrorMessage>
                 </FormControl>
@@ -341,19 +354,9 @@ function SubmissionDrawer() {
                 <div className="submission__OR">
                   <p className="submission__upload">OR</p>
                 </div>
-
+                
                 {/* UPLOAD FILE */}
                 <UploadFile onFileChange={handleFileChange} />
-
-                <Button
-                  fontSize="20px"
-                  fontWeight="bold"
-                  marginTop="20px"
-                  _after={{ content: '" *"', color: "black" }}
-                  onClick={handleSubmit(onSubmit)}
-                >
-                  Submit
-                </Button>
               </Box>
             </Stack>
           </DrawerBody>
@@ -371,7 +374,7 @@ function SubmissionDrawer() {
               border="3px solid black"
               color="black"
               _hover={{ bg: "gray.600" }}
-              onClick={onClose}
+              onClick={handleCancel} 
               className="submission__form-button"
             >
               Cancel

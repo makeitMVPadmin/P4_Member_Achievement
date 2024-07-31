@@ -10,11 +10,21 @@
   @include tablet {
     @include flex-box(row, center, flex-start);
     gap: 0.25rem;
+    justify-content: space-between;
+    width: 100%;
   }
 
   &__container {
     @include flex-box(row, center, center);
     gap: 0.0125rem;
     font-size: 0.825rem;
+    
+    @include tablet {
+      gap: 0.75rem;
+    }
+  }
+
+  &__downvote {
+    rotate: 180deg;
   }
 }

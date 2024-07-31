@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import "./Upvoting.scss";
+import thumbUp from "../../assets/icons/thumbsUpComments.svg";
 
 /*=========================
     RESPONSIVE ICON SIZE
@@ -59,9 +60,9 @@ function Upvoting() {
     }
   };
 
-  /*=============
+  /*================
         DOWNVOTE
-    =============*/
+    ==============*/
   const handleDownvote = () => {
     if (voteStatus === "downvoted") {
       setDownvotes(downvotes - 1);
@@ -83,31 +84,11 @@ function Upvoting() {
   return (
     <section className="voting">
       <div className="voting__container">
-        <lord-icon
-          className="voting__icon"
-          src="https://cdn.lordicon.com/ysheqztl.json"
-          trigger="click"
-          state="hover-up"
-          stroke="bold"
-          colors={upvoteColors}
-          onClick={handleUpvote}
-          aria-label="Upvote"
-          style={iconSize}
-        ></lord-icon>
+       <img className="voting__upvote" src={thumbUp} />
         {upvotes}
       </div>
       <div className="voting__container">
-        <lord-icon
-          className="voting__icon"
-          src="https://cdn.lordicon.com/ysheqztl.json"
-          trigger="click"
-          state="hover-down"
-          stroke="bold"
-          colors={downvoteColors}
-          onClick={handleDownvote}
-          aria-label="Downvote"
-          style={iconSize}
-        ></lord-icon>
+        <img className="voting__downvote" src={thumbUp} />
         {downvotes}
       </div>
     </section>

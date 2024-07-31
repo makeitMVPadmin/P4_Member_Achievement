@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Input } from "@chakra-ui/react";
 import "./Comments.scss";
 import blankProfile from "../../assets/icons/BlankProfile.png";
@@ -88,10 +87,9 @@ export const Comments = ({ selectedResource }) => {
             borderRadius: "50px",
           }}
         />
-        <button type="submit" aria-label="submit comment">Post</button>
+        <button type="submit" aria-label="submit comment" style={{color:'#0099ff'}}>Post</button>
+        {showModal && <CommentModal closeModal={closeModal} />}
       </form>
-
-      {showModal && <CommentModal closeModal={closeModal} />}
     </div>
   );
 };

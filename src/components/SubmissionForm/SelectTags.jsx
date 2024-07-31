@@ -1,11 +1,11 @@
 import { Box, FormControl, FormLabel, Icon, position } from "@chakra-ui/react";
 import "./SubmissionDrawer.scss";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import React, { useState } from "react";
+import React from "react";
 import Select, { components } from "react-select";
-import makeAnimated from "react-select/animated";
-import { color, wrap } from "framer-motion";
-import { hover } from "@testing-library/user-event/dist/hover";
+// import makeAnimated from "react-select/animated";
+// import { color, wrap } from "framer-motion";
+// import { hover } from "@testing-library/user-event/dist/hover";
 
 // const animatedComponents = makeAnimated();
 const CustomDropdownIndicator = (props) => {
@@ -30,7 +30,9 @@ const customStyles = {
     boxShadow: "1px 1px 0 black",
     borderRadius: "6px",
     // height: '43px',
-    "hover": { borderColor: "black" },
+    ":hover": { 
+      borderColor: "black",
+    },
     "&:focus": { outline: "none" },
   }),
   valueContainer: (provided) => ({
@@ -69,7 +71,6 @@ const customStyles = {
       // bottom: '4px',
       width: "45px",
       height: "45px",
-      hover: "none",
     },
   }),
   indicatorSeparator: (base) => ({

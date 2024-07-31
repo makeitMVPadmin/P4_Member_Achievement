@@ -30,7 +30,7 @@ import { color } from "framer-motion";
 
 function SubmissionDrawer({ onFormSubmit }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const firstField = React.useRef();
+  const firstField = useRef(null);
   const formRef = useRef(null);
   const [selectedOptions, setSelectedOptions] = useState([]);
 
@@ -113,7 +113,7 @@ function SubmissionDrawer({ onFormSubmit }) {
             </DrawerHeader>
 
             <DrawerBody className="submission__form-container">
-              <form as="form" ref={formRef} onSubmit={handleSubmit}>
+              <form ref={formRef} onSubmit={handleSubmit}>
                 <Stack className="submission__form-container">
                   {/* TITLE */}
                   <Box
@@ -138,7 +138,7 @@ function SubmissionDrawer({ onFormSubmit }) {
                         placeholder="Enter a resource title."
                         border="3px solid black"
                         className="submission__inputField"
-                        _hover="none"
+                        _hover={{}}
                         focusBorderColor="black"
                         fontSize="20px"
                         htmlFor="title"
@@ -166,7 +166,7 @@ function SubmissionDrawer({ onFormSubmit }) {
                         name="discipline"
                         className="submission__inputField"
                         border="3px solid black"
-                        _hover="none"
+                        _hover={{ }}
                         color="grey"
                         fontFamily="Poppins"
                         fontWeight="bold"
@@ -206,7 +206,7 @@ function SubmissionDrawer({ onFormSubmit }) {
                         name="type"
                         className="submission__inputField"
                         border="3px solid black"
-                        _hover="none"
+                        _hover={{ }}
                         color="grey"
                         fontFamily="Poppins"
                         fontWeight="bold"
@@ -255,7 +255,7 @@ function SubmissionDrawer({ onFormSubmit }) {
                         iconColor="#0099FF"
                         className="submission__inputField"
                         border="3px solid black"
-                        _hover="none"
+                        _hover={{}}
                         placeholder="Select"
                         fontSize="20px"
                         color="grey"
@@ -289,7 +289,7 @@ function SubmissionDrawer({ onFormSubmit }) {
                         border="3px solid black"
                         placeholder="Select"
                         fontSize="20px"
-                        _hover="none"
+                        _hover={{ }}
                         color="grey"
                         iconColor="#0099FF"
                         focusBorderColor="black"
@@ -331,7 +331,7 @@ function SubmissionDrawer({ onFormSubmit }) {
                         placeholder="The clearer and shorter the better."
                         className="submission__inputField"
                         border="3px solid black"
-                        _hover="none"
+                        _hover={{ }}
                         focusBorderColor="black"
                         fontSize="20px"
                         height="200px"
@@ -359,7 +359,7 @@ function SubmissionDrawer({ onFormSubmit }) {
                         placeholder="Enter the resource URL"
                         className="submission__inputField"
                         border="3px solid black"
-                        _hover="none"
+                        _hover={{ }}
                         focusBorderColor="black"
                       />
                     </FormControl>

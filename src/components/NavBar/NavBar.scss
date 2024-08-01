@@ -94,4 +94,35 @@
       }
     }
   }
+
+  &__sorting {
+    &-item {
+      list-style-type: none;
+      padding-left: 0.5rem;
+    }
+
+    &-types {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-type {
+      font-size: 0.65rem;
+      letter-spacing: -0.025rem;
+      margin: 0.25rem 0 0 0;
+      padding: 0.35rem;
+      padding-bottom: 0;
+    }
+
+    &-subitem {
+      font-size: 0.55rem;
+      letter-spacing: -0.025rem;
+      padding-left: 0.3rem;
+    }
+
+    &-checkbox {
+      vertical-align: middle;
+      margin-left: 0.5rem;
+    }
+  }
 }

@@ -17,12 +17,14 @@ export default function ResourceDetailCard({
   isBookmarked,
   // comments,
 }) {
+
   const [isRead, setIsRead] = useState(false);
   useEffect(() => {
     const savedReadState = localStorage.getItem(selectedResource.id);
     if (savedReadState) {
       setIsRead(JSON.parse(savedReadState));
     }
+    // console.log(selectedResource.id);
   }, [selectedResource.id]);
 
   const updatePoints = (pointsToAdd) => {
@@ -60,17 +62,17 @@ export default function ResourceDetailCard({
         <div className="resource-details__heading-bottom">
           <h1 className="resource-details__title">{selectedResource.title}</h1>
         </div>
-        <p className="resource-details__level">{selectedResource.level}</p>
+        <p className="resource-details__level">{selectedResource.skillLevel}</p>
 
         <div className="resource-details__rating-timer-container">
           <div className="resource-details__rating-star-container">
-            <p className="resource-details__stars">
+            <div className="resource-details__stars">
               <Upvoting />
-            </p>
+            </div>
           </div>
           <div className="resource-details__timer">
             <p className="resource-details__duration">
-              {selectedResource.duration}
+              {selectedResource.estDuration}
             </p>
             <img
               src={timerIcon}
@@ -83,7 +85,7 @@ export default function ResourceDetailCard({
 
         <div className="resource-details__about">
           <p className="resource-details__preview">
-            {selectedResource.preview}{" "}
+            {selectedResource.description}{" "}
           </p>
         </div>
         <div className="resource-details__tags-container" role="list">
@@ -93,9 +95,9 @@ export default function ResourceDetailCard({
             selectedResource.tag3,
             selectedResource.tag4,
           ].map((tag, index) => (
-            <p key={index} className="resource-details__tag" role="listitem">
+            <div key={index} className="resource-details__tag" role="listitem">
               {tag}
-            </p>
+            </div>
           ))}
           {/* <p className="resource-details__tag">{selectedResource.tag1}</p>
         <p className="resource-details__tag">{selectedResource.tag2}</p>
@@ -108,12 +110,17 @@ export default function ResourceDetailCard({
             <div className="resource-details__author">
               <p>Submitted by: </p>
               <p className="resource-details__author-name">
-                {selectedResource.contributor}
+                {selectedResource.userID}
               </p>
             </div>
           </div>
           <div className="resource-details__buttons-container">
-            <Link to="" key="">
+            <Link
+              to={selectedResource.url}
+              key=""
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <button
                 className="resource-details__resource-button"
                 aria-label="Go to Resource"

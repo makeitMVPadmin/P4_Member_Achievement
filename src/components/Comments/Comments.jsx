@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Input } from "@chakra-ui/react";
 import "./Comments.scss";
 import blankProfile from "../../assets/icons/BlankProfile.png";
-import thumbsUpComments from "../../assets/icons/thumbsUpComments.svg";
+import CommentVotes from '../CommentVotes/CommentVotes'
 import { CommentModal } from "../CommentModal/CommentModal";
 import { formatDistanceToNow } from "date-fns";
+
+
 
 export const Comments = ({ selectedResource }) => {
   const [comment, setComment] = useState("");
@@ -50,9 +51,9 @@ export const Comments = ({ selectedResource }) => {
   return (
     <div className="comments">
       {postedComments.length > 0 ? (
-        postedComments.map((postedComments) => (
+        postedComments.sort((a, b) => b.timestamp - a.timestamp).map((postedComments) => (
           <div key={postedComments.id} className="commentDivs">
-            <img className="commentImg" src={blankProfile} alt="userprofile" />
+            <img className="commentImg" src={blankProfile} alt="userprofile" aria-label="user profile image" />
             <div className="commentContext">
               <div className="commentHeader">
                 <div className="commenter">{postedComments.name}</div>
@@ -61,13 +62,8 @@ export const Comments = ({ selectedResource }) => {
                     addSuffix: true,
                   })}
                 </div>
-                <div className="thumbsup">
-                  <img
-                    className="commentLikes"
-                    src={thumbsUpComments}
-                    alt="thumbsUp"
-                    onClick={handleClick}
-                  />
+                <div className="thumbsup" aria-label="thumbs up Comment button">
+                <CommentVotes />
                 </div>
               </div>
               <div className="commentText">{postedComments.comment}</div>
@@ -79,8 +75,9 @@ export const Comments = ({ selectedResource }) => {
       )}
 
       <form className="newComment" onSubmit={submitComment}>
-        <img className="commentImg" src={blankProfile} alt="userprofile" />
+        <img className="commentImg" src={blankProfile} alt="userprofile" aria-label="your profile image" />
         <Input
+          aria-label="input comment"
           maxLength={800}
           value={comment}
           onChange={CommentValue}
@@ -90,10 +87,9 @@ export const Comments = ({ selectedResource }) => {
             borderRadius: "50px",
           }}
         />
-        <button type="submit">Post</button>
+        <button type="submit" aria-label="submit comment" style={{color:'#0099ff'}}>Post</button>
+        {showModal && <CommentModal closeModal={closeModal} />}
       </form>
-
-      {/* {showModal && <CommentModal closeModal={closeModal} />} */}
     </div>
   );
 };

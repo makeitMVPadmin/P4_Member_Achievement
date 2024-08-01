@@ -3,6 +3,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import "./ContributionsPage.scss";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { database } from "../../config/firebase";
+import Contribution from "../../components/Contributions/Contribution";
 
 function ContributionsPage({ currentUser }) {
   const [contributions, setContributions] = useState([]);
@@ -42,7 +43,9 @@ function ContributionsPage({ currentUser }) {
       </div>
 
       <div className="contributions__cards">
-        <h1>These are the smaller resource cards</h1>
+        {/* <h1>These are the smaller resource cards</h1> */}
+        <Contribution /> 
+        {/* Contributions need to be rendered */}
       </div>
 
       <div className="contributions__details-container">

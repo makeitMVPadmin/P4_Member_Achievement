@@ -132,6 +132,8 @@ async function addUser(userNumber) {
 
   const state = states[Math.floor(Math.random() * states.length)];
 
+  const firstNames = [];
+
   try {
     const docRef = await addDoc(collection(database, "Users"), {
       firstName: "User" + userNumber,
@@ -185,16 +187,20 @@ async function addPoint(userId) {
 
 async function addResources(userId, resourceNumber) {
   const types = ["file", "URL", "Image"];
-  const roles = ["Frontend Developer", "Designer", "Backend Developer"];
-  const skillLevels = ["Junior", "Mid-Level", "Senior"];
+  const disciplines = ["Frontend Developer", "Designer", "Backend Developer"];
+  const skillLevels = [
+    "Beginner Level",
+    "Intermediate Level",
+    "Advanced Level",
+  ];
 
   try {
     const docRef = await addDoc(collection(database, "Resources"), {
       userID: userId,
       title: "Resource uploaded N#" + resourceNumber,
       type: types[Math.floor(Math.random() * types.length)],
-      role: roles[Math.floor(Math.random() * roles.length)],
-      skillLevel: skillLevels[Math.floor(Math.random() * skillLevels.length)],
+      discipline: disciplines[Math.floor(Math.random() * disciplines.length)],
+      level: skillLevels[Math.floor(Math.random() * skillLevels.length)],
       estDuration: Math.floor(Math.random() * 11),
       description: "A simple description for a resource about an experience",
       url: "http://www.google.com",

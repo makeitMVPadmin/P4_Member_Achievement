@@ -51,6 +51,13 @@ function ContributionsPage({ currentUser }) {
 
   return (
     <div className="contributions__container">
+      <div className="resource__background">
+        <img
+          className="resource__container__img"
+          src={blueWaveImg}
+          alt="blue wave background"
+        />
+      </div>
 
       <div className="resource__navbar-container">
         <NavBar />

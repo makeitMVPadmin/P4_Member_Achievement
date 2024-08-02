@@ -3,7 +3,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import ResourceDetailCard from "../../components/ResourceDetailCard/ResourceDetailCard";
 import ResourceList from "../../components/ResourceList/ResourceList";
 import "./ResourcePage.scss";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, setDoc, where, } from "firebase/firestore";
 import { database } from "../../config/firebase";
 // import { Comments } from "../../components/Comments/Comments";
 // import resourceData from "../../data/resource.json";
@@ -36,10 +36,8 @@ export default function ResourcePage() {
   // const [activeResourceId, setActiveResourceId] = useState(resourceDetailsData[0].id);
   // const [comments, setComments] = useState([]);
   // const storedResources =JSON.parse(localStorage.getItem("resources")) || resourceDetailsData;
-
-
   const [resources, setResources] = useState([]);
-  const [selectedResource, setSelectedResource] = useState(null);
+  const [selectedResource, setSelectedResource] = useState([]);
   const [savedBookmarks, setSavedBookmarks] = useState([]);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [category, setCategory] = useState("All");
@@ -47,6 +45,7 @@ export default function ResourcePage() {
   const [activeResourceId, setActiveResourceId] = useState(null);
   const [sortField, setSortField] = useState(null)
   const [sortAscending, setSortAscending] = useState(true)
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     const getAllResourcesAndRatings = async () => {
@@ -158,6 +157,43 @@ export default function ResourcePage() {
     }
   };
 
+
+  const getCommentsForSpecificResource = async (resourceId) => {
+    const q = query(
+      collection(database, "Comments"),
+      where("resourceID", "==", resourceId)
+    );
+
+    try {
+      const querySnapshot = await getDocs(q);
+
+      const results = [];
+      querySnapshot.forEach((doc) => {
+        results.push({ id: doc.id, ...doc.data() });
+      });
+
+      console.log(results);
+      return results;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // console.log(resources)
+  // console.log(selectedResource.id)
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      if (selectedResource.id) {
+        const comments = await getCommentsForSpecificResource(selectedResource.id);
+        setComments(comments);
+      }
+    };
+
+    fetchComments();
+  }, [selectedResource.id]);
+
+
   // useEffect(() => {
   //   const sortResources = () => {
   //     let sortedResources = [...resources];
@@ -192,6 +228,8 @@ export default function ResourcePage() {
     setSortAscending(!sortAscending);
   };
 
+
+
   // const allResources = resources;
 
   return (
@@ -219,7 +257,7 @@ export default function ResourcePage() {
             handleToggleBookmarked={handleToggleBookmarked}
             savedBookmarks={savedBookmarks}
             isBookmarked={isBookmarked}
-          // comments = {comments}
+            comments={comments}
           />
         )}
       </div>

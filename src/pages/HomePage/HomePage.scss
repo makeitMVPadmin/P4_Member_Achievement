@@ -2,3 +2,20 @@
 @use "../../styles/partials/_variables" as *;
 @use "../../styles/partials/_mixins" as *;
 @use "../../styles/partials/global" as *;
+
+.homepage {
+  display: flex;
+
+  &__title {
+    font-family: "Corben";
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin: 2rem auto;
+  }
+
+  &__img {
+    bottom: 0rem;
+    position: absolute;
+    width: 110%;
+  }
+}

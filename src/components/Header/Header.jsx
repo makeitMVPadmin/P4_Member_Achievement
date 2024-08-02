@@ -13,18 +13,22 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header__navigation">
-        <div className="header__main-icon">
-          <img
-            src={communitiLogo}
-            alt="Communiti"
-            className="header__main-image"
-          />
-        </div>
+        <Link to="/">
+          <div className="header__main-icon">
+            <img
+              src={communitiLogo}
+              alt="Communiti"
+              className="header__main-image"
+            />
+          </div>
+        </Link>
 
-        <div className="header__icons ">
-          <img src={homeLogo} alt="Home" className="header__images" />
-          <div className="header__icon-titles">Home</div>
-        </div>
+        <Link to="/">
+          <div className="header__icons ">
+            <img src={homeLogo} alt="Home" className="header__images" />
+            <div className="header__icon-titles">Home</div>
+          </div>
+        </Link>
         <div className="header__icons">
           <img
             src={communitiesLogo}
@@ -43,9 +47,14 @@ const Header = () => {
         </div>
         <Link to="/resource" className="page__link">
           <div className="header__icons">
-          <img src={learningHub} alt="LearningHub" className="header__images" />
-          <div className="header__icon-titles">Learning Hub</div>
-        </div></Link> 
+            <img
+              src={learningHub}
+              alt="LearningHub"
+              className="header__images"
+            />
+            <div className="header__icon-titles">Learning Hub</div>
+          </div>
+        </Link>
       </div>
       <div className="header__user-container">
         <img src={defaultUser} alt="Profile Pic" className="header__user-pic" />

@@ -15,9 +15,8 @@ export default function ResourceDetailCard({
   handleToggleBookmarked,
   savedBookmarks,
   isBookmarked,
-  // comments,
+  comments,
 }) {
-
   const [isRead, setIsRead] = useState(false);
   useEffect(() => {
     const savedReadState = localStorage.getItem(selectedResource.id);
@@ -43,6 +42,9 @@ export default function ResourceDetailCard({
     //   updatePoints(-10);
     // }
   };
+
+
+  console.log(comments)
 
   return (
     <>
@@ -110,7 +112,7 @@ export default function ResourceDetailCard({
             <div className="resource-details__author">
               <p>Submitted by: </p>
               <p className="resource-details__author-name">
-                {selectedResource.userID}
+                {selectedResource.name}
               </p>
             </div>
           </div>
@@ -147,7 +149,7 @@ export default function ResourceDetailCard({
           </div>
         </div>
       </section>
-      <Comments selectedResource={selectedResource} />
+      <Comments comments={comments} />
     </>
   );
 }

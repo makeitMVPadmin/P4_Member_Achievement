@@ -5,7 +5,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import blueWaveImg from "../../assets/images/blue-wave.png";
 
 const HomePage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(true); //
+  const [isModalOpen, setIsModalOpen] = useState(false); //
   const [resources, setResources] = useState([]);
   const [selectedResource, setSelectedResource] = useState(null);
   const [category, setCategory] = useState("All");
@@ -15,7 +15,7 @@ const HomePage = () => {
   const [sortAscending, setSortAscending] = useState(true);
 
   useEffect(() => {
-    const hasSeenModal = localStorage.getItem("hasSeenOnboardingModal");
+    const hasSeenModal = sessionStorage.getItem("hasSeenOnboardingModal");
 
     if (!hasSeenModal) {
       setIsModalOpen(true);
@@ -24,7 +24,7 @@ const HomePage = () => {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
-    localStorage.setItem("hasSeenOnboardingModal", "true");
+    sessionStorage.setItem("hasSeenOnboardingModal", "true");
   };
 
   const handleFormSubmit = (newResource) => {

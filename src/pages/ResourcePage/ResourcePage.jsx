@@ -219,7 +219,7 @@ export default function ResourcePage() {
             handleToggleBookmarked={handleToggleBookmarked}
             savedBookmarks={savedBookmarks}
             isBookmarked={isBookmarked}
-            // comments = {comments}
+          // comments = {comments}
           />
         )}
       </div>

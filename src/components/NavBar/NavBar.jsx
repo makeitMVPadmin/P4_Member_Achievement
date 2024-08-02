@@ -8,6 +8,7 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer";
 import { SettingsIcon } from "@chakra-ui/icons";
 import "./NavBar.scss";
+import FilterDrawer from "../FilterDrawer/FilterDrawer";
 
 
 export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, sortBySkill, sortByDuration }) {
@@ -80,6 +81,52 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, s
 
   return (
     <nav className="nav__list">
+      <li
+        className={`nav__item ${isLibraryOpen ? "active" : ""}`}
+        onClick={toggleLibraryMenu}
+      // onMouseEnter={handleMouseEnter}
+      >
+        <img
+          src={libraryIcon}
+          alt="library books icon"
+          className="nav__icon"
+        />
+        <p className="nav__item-name" onClick={checkLocation}>
+          Learning Library
+        </p>
+      </li>
+      {isLibraryOpen && (
+        <ul className="nav__library-sublist">
+          <li
+            className={`nav__library-subitem ${category === "Software Engineering" ? "active" : ""
+              }`}
+            onClick={() => handleSelectCategory("Software Engineering")}
+          >
+            Software Engineering
+          </li>
+          <li
+            className={`nav__library-subitem ${category === "UX/UI Design" ? "active" : ""
+              }`}
+            onClick={() => handleSelectCategory("UX/UI Design")}
+          >
+            UX/UI Design
+          </li>
+          <li
+            className={`nav__library-subitem ${category === "Product" ? "active" : ""
+              }`}
+            onClick={() => handleSelectCategory("Product")}
+          >
+            Product
+          </li>
+          <li
+            className={`nav__library-subitem ${category === "Data Science" ? "active" : ""
+              }`}
+            onClick={() => handleSelectCategory("Data Science")}
+          >
+            Data Science
+          </li>
+        </ul>
+      )}
       <div className="nav__container-top">
         <NavLink to="/rewards">
           <li className="nav__item">
@@ -103,53 +150,7 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, s
             <p className="nav__item-name">Bookmarked</p>
           </li>
         </NavLink>
-        <li
-          className={`nav__item ${isLibraryOpen ? "active" : ""}`}
-          onClick={toggleLibraryMenu}
-        // onMouseEnter={handleMouseEnter}
-        >
-          <img
-            src={libraryIcon}
-            alt="library books icon"
-            className="nav__icon"
-          />
-          <p className="nav__item-name" onClick={checkLocation}>
-            Learning Library
-          </p>
-        </li>
-        {isLibraryOpen && (
-          <ul className="nav__library-sublist">
-            <li
-              className={`nav__library-subitem ${category === "Software Engineering" ? "active" : ""
-                }`}
-              onClick={() => handleSelectCategory("Software Engineering")}
-            >
-              Software Engineering
-            </li>
-            <li
-              className={`nav__library-subitem ${category === "UX/UI Design" ? "active" : ""
-                }`}
-              onClick={() => handleSelectCategory("UX/UI Design")}
-            >
-              UX/UI Design
-            </li>
-            <li
-              className={`nav__library-subitem ${category === "Product" ? "active" : ""
-                }`}
-              onClick={() => handleSelectCategory("Product")}
-            >
-              Product
-            </li>
-            <li
-              className={`nav__library-subitem ${category === "Data Science" ? "active" : ""
-                }`}
-              onClick={() => handleSelectCategory("Data Science")}
-            >
-              Data Science
-            </li>
-          </ul>
-        )}
-        <ul className="nav__sorting">
+        {/* <ul className="nav__sorting">
           <p className="nav__item-name">Sorting Options</p>
           <li className="nav__sorting-item nav__sorting-types">
             <p className="nav__sorting-type">Type</p>
@@ -180,7 +181,10 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, s
           <li className="nav__sorting-item">
             <p className="nav__library-subitem" onClick={handleSortDuration}>Duration</p>
           </li>
-        </ul>
+        </ul> */}
+        <div className="nav__item">
+          <FilterDrawer />
+        </div>
       </div>
 
       <div className="nav__container-bottom">

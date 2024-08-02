@@ -47,6 +47,18 @@ export default function SubmissionDrawer({ onFormSubmit }) {
 
   const onSubmit = async (data) => {
     try {
+      console.log("Form data before processing:", data);
+
+      // if (
+      //   !data.title ||
+      //   !data.discipline ||
+      //   !data.type ||
+      //   !data.level ||
+      //   !data.duration
+      // ) {
+      //   throw new Error("All fields are required"); // Example validation logic
+      // }
+
       if (file) {
         const fileRef = ref(storage, `resourceUploads/${file.name}`);
         await uploadBytes(fileRef, file);
@@ -57,10 +69,32 @@ export default function SubmissionDrawer({ onFormSubmit }) {
         throw new Error("Upload a file or provide a URL");
       }
 
-      const docRef = await addDoc(collection(database, "Resources"), data);
-      onFormSubmit({ id: docRef.id, ...data });
+      const selectedTags = selectedOptions.map((option) => option.value);
 
-      console.log("Form submitted successfully:", data);
+      const newResource = {
+        title: data.title,
+        discipline: data.discipline,
+        type: data.type,
+        level: data.level,
+        duration: data.estDuration,
+        description: data.description || "",
+        url: data.url,
+        id: Date.now(),
+        name: "Anonymous", //data.name??
+        tag1: selectedTags[0] || "",
+        tag2: selectedTags[1] || "",
+        tag3: selectedTags[2] || "",
+        tag4: selectedTags[3] || "",
+        comments: [],
+      };
+
+      const docRef = await addDoc(
+        collection(database, "Resources"),
+        newResource
+      );
+      onFormSubmit({ id: docRef.id, ...newResource });
+
+      console.log("Form submitted successfully:", newResource);
 
       // Clear the form and close the drawer
       reset();

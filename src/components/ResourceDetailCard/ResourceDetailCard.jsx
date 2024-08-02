@@ -109,7 +109,7 @@ export default function ResourceDetailCard({
             <div className="resource-details__author">
               <p>Submitted by: </p>
               <p className="resource-details__author-name">
-                {selectedResource.userID}
+                {selectedResource.name}
               </p>
             </div>
           </div>

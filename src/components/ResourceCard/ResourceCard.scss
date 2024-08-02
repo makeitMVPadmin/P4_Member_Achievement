@@ -64,12 +64,13 @@
   &__timer {
     display: flex;
     align-items: center;
-    width: 3.5rem;
+    width: 4.2rem;
     color: $black;
   }
 
   &__duration {
     font-size: 0.75rem;
+    width: 3rem;
   }
 
   &__timer-icon {

@@ -76,7 +76,7 @@ export default function SubmissionDrawer({ onFormSubmit }) {
         discipline: data.discipline,
         type: data.type,
         level: data.level,
-        duration: data.estDuration,
+        estDuration: data.estDuration,
         description: data.description || "",
         url: data.url,
         id: Date.now(),

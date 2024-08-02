@@ -44,7 +44,7 @@ export default function ResourceCard(props) {
         <h1 className="resource__title">{resource.title}</h1>
         <Upvoting />
       </div>
-      <p className="resource__level">{resource.skillLevel}</p>
+      <p className="resource__level">{resource.level}</p>
       <div className="resource__about">
         <p className="resource__preview">{resource.description}</p>
         <Link className="resource__link" aria-label="Go to resource details">

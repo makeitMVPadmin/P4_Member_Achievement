@@ -17,7 +17,6 @@ export default function ResourceDetailCard({
   isBookmarked,
   // comments,
 }) {
-
   const [isRead, setIsRead] = useState(false);
   useEffect(() => {
     const savedReadState = localStorage.getItem(selectedResource.id);

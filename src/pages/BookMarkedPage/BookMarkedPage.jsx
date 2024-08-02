@@ -4,6 +4,7 @@ import ResourceList from "../../components/ResourceList/ResourceList";
 import "./BookMarkedPage.scss";
 import { collection, getDocs } from "firebase/firestore";
 import { database } from "../../config/firebase";
+import blueWaveImg from "../../assets/images/blue-wave.png";
 
 export default function BookMarkedPage({ bookmarkedResources }) {
   const [displayedBookmarks, setDisplayedBookmarks] = useState([]);
@@ -54,6 +55,11 @@ export default function BookMarkedPage({ bookmarkedResources }) {
 
   return (
     <div className="resource__container">
+      <img
+        className="resource__container__img"
+        src={blueWaveImg}
+        alt="blue wave background"
+      />
       <div className="resource__navbar-container">
         <NavBar />
       </div>

@@ -55,11 +55,13 @@ export default function BookMarkedPage({ bookmarkedResources }) {
 
   return (
     <div className="resource__container">
-      <img
-        className="resource__container__img"
-        src={blueWaveImg}
-        alt="blue wave background"
-      />
+      <div className="resource__background">
+        <img
+          className="resource__container__img"
+          src={blueWaveImg}
+          alt="blue wave background"
+        />
+      </div>
       <div className="resource__navbar-container">
         <NavBar />
       </div>

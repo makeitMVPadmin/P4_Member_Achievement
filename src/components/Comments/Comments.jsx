@@ -8,17 +8,17 @@ import { formatDistanceToNow } from "date-fns";
 
 
 
-export const Comments = ({ selectedResource }) => {
+export const Comments = ({ comments }) => {
   const [comment, setComment] = useState("");
   const [postedComments, setPostedComments] = useState(
-    selectedResource.comments || []
+    comments || []
   );
   const [isClicked, setIsClicked] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    setPostedComments(selectedResource.comments || []);
-  }, [selectedResource.comments]);
+    setPostedComments(comments || []);
+  }, [comments]);
 
   const CommentValue = (e) => {
     setComment(e.target.value);
@@ -58,7 +58,7 @@ export const Comments = ({ selectedResource }) => {
               <div className="commentHeader">
                 <div className="commenter">{postedComments.name}</div>
                 <div className="commentDate">
-                  {formatDistanceToNow(new Date(postedComments.timestamp), {
+                  {formatDistanceToNow(new Date(postedComments.createdAt.seconds), {
                     addSuffix: true,
                   })}
                 </div>
@@ -66,7 +66,7 @@ export const Comments = ({ selectedResource }) => {
                 <CommentVotes />
                 </div>
               </div>
-              <div className="commentText">{postedComments.comment}</div>
+              <div className="commentText">{postedComments.content}</div>
             </div>
           </div>
         ))

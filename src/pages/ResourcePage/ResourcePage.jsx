@@ -179,8 +179,8 @@ export default function ResourcePage() {
     }
   };
 
-  console.log(resources)
-  console.log(selectedResource.id)
+  // console.log(resources)
+  // console.log(selectedResource.id)
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -192,8 +192,6 @@ export default function ResourcePage() {
 
     fetchComments();
   }, [selectedResource.id]);
-
-  console.log("Comments :", comments)
 
 
   // useEffect(() => {
@@ -230,6 +228,8 @@ export default function ResourcePage() {
     setSortAscending(!sortAscending);
   };
 
+  
+
   // const allResources = resources;
 
   return (
@@ -257,7 +257,7 @@ export default function ResourcePage() {
             handleToggleBookmarked={handleToggleBookmarked}
             savedBookmarks={savedBookmarks}
             isBookmarked={isBookmarked}
-            // comments = {comments}
+            comments = {comments}
           />
         )}
       </div>

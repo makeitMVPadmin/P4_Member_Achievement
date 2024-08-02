@@ -10,7 +10,7 @@ import ContributionsPage from "./pages/ContributionsPage/ContributionsPage.jsx";
 
 const App = () => {
   const [savedBookmarks, setSavedBookmarks] = useState([]);
-  const [currentUser, setCurrentUser] = useState("RwllAMynDyhdkRV2YnHT"); // Sample current userID
+  const [currentUser, setCurrentUser] = useState("lsIRi5Uu72sATQ7JLIu1"); // Sample current userID
 
   useEffect(() => {
     const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
@@ -33,7 +33,10 @@ const App = () => {
               element={<BookMarkedPage bookmarkedResources={savedBookmarks} />}
             />
             <Route path="/rewards" element={<RewardsPage />} />
-            <Route path="/contributions" element={<ContributionsPage currentUser={currentUser} />} />
+            <Route
+              path="/contributions"
+              element={<ContributionsPage currentUser={currentUser} />}
+            />
           </Routes>
         </BrowserRouter>
       </ChakraProvider>

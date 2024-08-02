@@ -15,7 +15,7 @@ export default function ResourceDetailCard({
   handleToggleBookmarked,
   savedBookmarks,
   isBookmarked,
-  // comments,
+  comments,
 }) {
   const [isRead, setIsRead] = useState(false);
   useEffect(() => {
@@ -43,6 +43,9 @@ export default function ResourceDetailCard({
     // }
   };
 
+
+  console.log(comments)
+
   return (
     <>
       <section className="resource-details">
@@ -61,7 +64,7 @@ export default function ResourceDetailCard({
         <div className="resource-details__heading-bottom">
           <h1 className="resource-details__title">{selectedResource.title}</h1>
         </div>
-        <p className="resource-details__level">{selectedResource.level}</p>
+        <p className="resource-details__level">{selectedResource.skillLevel}</p>
 
         <div className="resource-details__rating-timer-container">
           <div className="resource-details__rating-star-container">
@@ -71,7 +74,7 @@ export default function ResourceDetailCard({
           </div>
           <div className="resource-details__timer">
             <p className="resource-details__duration">
-              {selectedResource.duration}
+              {selectedResource.estDuration}
             </p>
             <img
               src={timerIcon}
@@ -84,7 +87,7 @@ export default function ResourceDetailCard({
 
         <div className="resource-details__about">
           <p className="resource-details__preview">
-            {selectedResource.preview}{" "}
+            {selectedResource.description}{" "}
           </p>
         </div>
         <div className="resource-details__tags-container" role="list">
@@ -109,7 +112,7 @@ export default function ResourceDetailCard({
             <div className="resource-details__author">
               <p>Submitted by: </p>
               <p className="resource-details__author-name">
-                {selectedResource.contributor}
+                {selectedResource.name}
               </p>
             </div>
           </div>
@@ -146,7 +149,7 @@ export default function ResourceDetailCard({
           </div>
         </div>
       </section>
-      <Comments selectedResource={selectedResource} />
+      <Comments comments={comments} />
     </>
   );
 }

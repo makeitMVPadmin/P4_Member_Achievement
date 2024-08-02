@@ -25,49 +25,59 @@ import {
   // useToast - will use when user tested and upload successful
 } from "@chakra-ui/react";
 import { color } from "framer-motion";
-
+import { collection, addDoc } from "firebase/firestore";
+import { storage, database } from "../../config/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { useForm } from "react-hook-form";
 // import { useForm } from "react-hook-form";
 
-function SubmissionDrawer({ onFormSubmit }) {
+export default function SubmissionDrawer({ onFormSubmit }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const firstField = React.useRef();
-  const formRef = useRef(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setValue,
+    watch,
+  } = useForm();
+  const [file, setFile] = useState(null);
+  const fileUrl = watch("url");
   const [selectedOptions, setSelectedOptions] = useState([]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
+    try {
+      if (file) {
+        const fileRef = ref(storage, `resourceUploads/${file.name}`);
+        await uploadBytes(fileRef, file);
+        data.url = await getDownloadURL(fileRef);
+      }
 
-    const formData = new FormData(formRef.current);
-    const tags = selectedOptions.map((option) => option.value);
+      if (!file && !data.url) {
+        throw new Error("Upload a file or provide a URL");
+      }
 
-    const newResource = {
-      title: formData.get("title"),
-      discipline: formData.get("discipline"),
-      type: formData.get("type"),
-      level: formData.get("level"),
-      duration: formData.get("duration"),
-      preview: formData.get("preview"),
-      url: formData.get("url"),
-      id: Date.now(),
-      description: "",
-      contributor: "Anonymous",
-      tag1: tags[0] || "",
-      tag2: tags[1] || "",
-      tag3: tags[2] || "",
-      tag4: tags[3] || "",
-      comments: [],
-    };
+      const docRef = await addDoc(collection(database, "Resources"), data);
+      onFormSubmit({ id: docRef.id, ...data });
 
-    // save to local
-    const existingResources =
-      JSON.parse(localStorage.getItem("resources")) || [];
-    existingResources.push(newResource);
-    localStorage.setItem("resources", JSON.stringify(existingResources));
+      console.log("Form submitted successfully:", data);
 
-    if (onFormSubmit) {
-      onFormSubmit(newResource);
+      // Clear the form and close the drawer
+      reset();
+      setFile(null);
+      onClose();
+    } catch (error) {
+      console.error("Error submitting form:", error);
     }
+  };
 
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleCancel = () => {
+    reset(); // Reset the form fields
+    setFile(null);
     onClose();
   };
 
@@ -83,8 +93,7 @@ function SubmissionDrawer({ onFormSubmit }) {
         <Drawer
           isOpen={isOpen}
           placement="right"
-          initialFocusRef={firstField}
-          onClose={onClose}
+          onClose={handleCancel}
           size="sm"
         >
           <DrawerOverlay />
@@ -97,13 +106,8 @@ function SubmissionDrawer({ onFormSubmit }) {
             <DrawerCloseButton
               sx={{ color: "#0099FF", fontSize: "20px", fontWeight: "bolder" }}
             />
-            {/* HEADER */}
-            <DrawerHeader
-              sx={{
-                iconColor: "#0099FF",
-              }}
-            >
-              <h1 className="submission__header-title">Submit a Resource </h1>
+            <DrawerHeader>
+              <h1 className="submission__header-title">Submit a Resource</h1>
               <p className="submission__small-text">
                 Share your learning resources with the community!
               </p>
@@ -113,118 +117,111 @@ function SubmissionDrawer({ onFormSubmit }) {
             </DrawerHeader>
 
             <DrawerBody className="submission__form-container">
-              <form as="form" ref={formRef} onSubmit={handleSubmit}>
-                <Stack className="submission__form-container">
-                  {/* TITLE */}
-                  <Box
-                    className="submission__form-column"
-                  // as="form"
-                  // ref={formRef}
-                  // onSubmit={handleSubmit}
-                  >
-                    <FormControl>
-                      <FormLabel
-                        className="submission__title"
-                        fontSize="20px"
-                        fontWeight="bold"
-                        _after={{ content: '" *"', color: "black" }}
-                      >
-                        Title
-                      </FormLabel>
-                      <Input
-                        ref={firstField}
-                        name="title"
-                        id="title"
-                        placeholder="Enter a resource title."
-                        border="3px solid black"
-                        className="submission__inputField"
-                        _hover="none"
-                        focusBorderColor="black"
-                        fontSize="20px"
-                        htmlFor="title"
-                      />
-                      <FormErrorMessage>
-                        Title is required for submission
-                      </FormErrorMessage>
-                    </FormControl>
-                  </Box>
+              <Stack className="submission__form-container">
+                {/* TITLE */}
+                <Box
+                  as="form"
+                  className="submission__form-column"
+                  onSubmit={handleSubmit(onSubmit)}
+                >
+                  <FormControl isInvalid={errors.title}>
+                    <FormLabel
+                      htmlFor="title"
+                      fontSize="20px"
+                      fontWeight="bold"
+                      _after={{ content: '" *"', color: "black" }}
+                    >
+                      Title
+                    </FormLabel>
+                    <Input
+                      id="title"
+                      placeholder="Enter a resource title."
+                      border="3px solid black"
+                      className="submission__inputField"
+                      _hover="none"
+                      focusBorderColor="black"
+                      fontSize="20px"
+                      {...register("title", { required: true })}
+                    />
+                    <FormErrorMessage>
+                      {errors.title && "Title is required for submission"}
+                    </FormErrorMessage>
+                  </FormControl>
 
-                  {/* DISCIPLINE  */}
-                  <Box className="submission__form-column">
-                    <FormControl>
-                      <FormLabel
-                        htmlFor="discipline"
-                        className="submission__title"
-                        fontSize="20px"
-                        fontWeight="bold"
-                        _after={{ content: '" *"', color: "black" }}
-                      >
-                        Discipline
-                      </FormLabel>
-                      <Select
-                        id="discipline"
-                        name="discipline"
-                        className="submission__inputField"
-                        border="3px solid black"
-                        _hover="none"
-                        color="grey"
-                        fontFamily="Poppins"
-                        fontWeight="bold"
-                        placeholder="Select"
-                        fontSize="20px"
-                        icon={<ChevronDownIcon />}
-                        iconSize="45px"
-                        iconColor="#0099FF"
-                        focusBorderColor="black"
-                      >
-                        <option value="Software Engineering">
-                          Software Engineering
-                        </option>
-                        <option value="UX/UI Design">UX/UI Design</option>
-                        <option value="Product Management">
-                          Product Management
-                        </option>
-                        <option value="Data Science">Data Science</option>
-                      </Select>
-                    </FormControl>
-                  </Box>
+                  {/* DISCIPLINE */}
+                  <FormControl isInvalid={errors.discipline}>
+                    <FormLabel
+                      htmlFor="discipline"
+                      fontSize="20px"
+                      fontWeight="bold"
+                      _after={{ content: '" *"', color: "black" }}
+                    >
+                      Discipline
+                    </FormLabel>
+                    <Select
+                      id="discipline"
+                      className="submission__inputField"
+                      border="3px solid black"
+                      _hover="none"
+                      fontFamily="Poppins"
+                      fontWeight="bold"
+                      placeholder="Select"
+                      fontSize="20px"
+                      icon={<ChevronDownIcon />}
+                      iconSize="45px"
+                      iconColor="#0099FF"
+                      focusBorderColor="black"
+                      {...register("discipline", { required: true })}
+                    >
+                      <option value="Software Engineering">
+                        Software Engineering
+                      </option>
+                      <option value="UX/UI Design">UX/UI Design</option>
+                      <option value="Product Management">
+                        Product Management
+                      </option>
+                      <option value="Data Science">Data Science</option>
+                    </Select>
+                    <FormErrorMessage>
+                      {errors.discipline && "Discipline is required"}
+                    </FormErrorMessage>
+                  </FormControl>
 
-                  {/* TYPE  */}
-                  <Box className="submission__form-column">
-                    <FormControl>
-                      <FormLabel
-                        htmlFor="type"
-                        className="submission__title"
-                        fontSize="20px"
-                        fontWeight="bold"
-                        _after={{ content: '" *"', color: "black" }}
-                      >
-                        Type
-                      </FormLabel>
-                      <Select
-                        id="type"
-                        name="type"
-                        className="submission__inputField"
-                        border="3px solid black"
-                        _hover="none"
-                        color="grey"
-                        fontFamily="Poppins"
-                        fontWeight="bold"
-                        placeholder="Select"
-                        fontSize="20px"
-                        icon={<ChevronDownIcon />}
-                        iconSize="45px"
-                        iconColor="#0099FF"
-                        focusBorderColor="black"
-                      >
-                        <option value="Article">Article</option>
-                        <option value="Blog">Blog</option>
-                        <option value="Video">Video</option>
-                        <option value="Course">Course</option>
-                        <option value="Quiz">Quiz</option>
-                      </Select>
-                    </FormControl>
-                  </Box>
+                  {/* TYPE */}
+                  <FormControl isInvalid={errors.type}>
+                    <FormLabel
+                      htmlFor="type"
+                      fontSize="20px"
+                      fontWeight="bold"
+                      _after={{ content: '" *"', color: "black" }}
+                    >
+                      Type
+                    </FormLabel>
+                    <Select
+                      id="type"
+                      className="submission__inputField"
+                      border="3px solid black"
+                      _hover="none"
+                      fontFamily="Poppins"
+                      fontWeight="bold"
+                      placeholder="Select"
+                      fontSize="20px"
+                      icon={<ChevronDownIcon />}
+                      iconSize="45px"
+                      iconColor="#0099FF"
+                      focusBorderColor="black"
+                      {...register("type", { required: true })}
+                    >
+                      <option value="Article">Article</option>
+                      <option value="Blog">Blog</option>
+                      <option value="Video">Video</option>
+                      <option value="Course">Course</option>
+                      <option value="Quiz">Quiz</option>
+                    </Select>
+                    <FormErrorMessage>
+                      {errors.type && "Type is required"}
+                    </FormErrorMessage>
+                  </FormControl>
 
                   {/* TAGS */}
                   <Box className="submission__form-column">
@@ -235,146 +232,139 @@ function SubmissionDrawer({ onFormSubmit }) {
                   </Box>
 
                   {/* SKILL LEVEL */}
-                  <Box className="submission__form-column">
-                    <FormControl>
-                      <FormLabel
-                        htmlFor="owner"
-                        className="submission__title"
-                        fontSize="20px"
-                        fontWeight="bold"
-                        _after={{ content: '" *"', color: "black" }}
-                      >
-                        Skill Level
-                      </FormLabel>
-                      <Select
-                        fontFamily="Poppins"
-                        fontWeight="bold"
-                        id="level"
-                        htmlFor="level"
-                        name="level"
-                        iconColor="#0099FF"
-                        className="submission__inputField"
-                        border="3px solid black"
-                        _hover="none"
-                        placeholder="Select"
-                        fontSize="20px"
-                        color="grey"
-                        icon={<ChevronDownIcon />}
-                        iconSize="45px"
-                        focusBorderColor="black"
-                      >
-                        <option value="Beginner Level">Beginner</option>
-                        <option value="Advanced Level">Advanced</option>
-                        <option value="Intermeidate Level">Intermediate</option>
-                      </Select>
-                    </FormControl>
-                  </Box>
+                  <FormControl isInvalid={errors.level}>
+                    <FormLabel
+                      htmlFor="level"
+                      fontSize="20px"
+                      fontWeight="bold"
+                      _after={{ content: '" *"', color: "black" }}
+                    >
+                      Skill Level
+                    </FormLabel>
+                    <Select
+                      id="level"
+                      className="submission__inputField"
+                      border="3px solid black"
+                      _hover="none"
+                      fontFamily="Poppins"
+                      fontWeight="bold"
+                      placeholder="Select"
+                      fontSize="20px"
+                      icon={<ChevronDownIcon />}
+                      iconSize="45px"
+                      iconColor="#0099FF"
+                      focusBorderColor="black"
+                      {...register("level", { required: true })}
+                    >
+                      <option value="Beginner">Beginner</option>
+                      <option value="Intermediate">Intermediate</option>
+                      <option value="Advanced">Advanced</option>
+                    </Select>
+                    <FormErrorMessage>
+                      {errors.level && "Skill Level is required"}
+                    </FormErrorMessage>
+                  </FormControl>
 
                   {/* ESTIMATED DURATION */}
-                  <Box className="submission__form-column">
-                    <FormControl>
-                      <FormLabel
-                        htmlFor="owner"
-                        className="submission__title"
-                        fontSize="20px"
-                        fontWeight="bold"
-                        _after={{ content: '" *"', color: "black" }}
-                      >
-                        Estimated Duration
-                      </FormLabel>
-                      <Select
-                        id="duration"
-                        name="duration"
-                        className="submission__inputField"
-                        border="3px solid black"
-                        placeholder="Select"
-                        fontSize="20px"
-                        _hover="none"
-                        color="grey"
-                        iconColor="#0099FF"
-                        focusBorderColor="black"
-                        fontFamily="Poppins"
-                        fontWeight="bold"
-                        icon={<ChevronDownIcon />}
-                        iconSize="45px"
-                      >
-                        <option value="3 min">3 min</option>
-                        <option value="5 min">5 min</option>
-                        <option value="7 min">7 min</option>
-                        <option value="10 min">10 min</option>
-                        <option value="20 min">20 min</option>
-                        <option value="30 min">30 min</option>
-                        <option value="40 min">40 min</option>
-                        <option value="50 min">50 min</option>
-                        <option value="60 min">60 min</option>
-                      </Select>
-                    </FormControl>
-                  </Box>
+                  <FormControl isInvalid={errors.estDuration}>
+                    <FormLabel
+                      htmlFor="estDuration"
+                      fontSize="20px"
+                      fontWeight="bold"
+                      _after={{ content: '" *"', color: "black" }}
+                    >
+                      Estimated Duration
+                    </FormLabel>
+                    <Select
+                      id="estDuration"
+                      className="submission__inputField"
+                      border="3px solid black"
+                      _hover="none"
+                      fontFamily="Poppins"
+                      fontWeight="bold"
+                      placeholder="Select"
+                      fontSize="20px"
+                      icon={<ChevronDownIcon />}
+                      iconSize="45px"
+                      iconColor="#0099FF"
+                      focusBorderColor="black"
+                      {...register("estDuration", { required: true })}
+                    >
+                      <option value="3 min">3 min</option>
+                      <option value="5 min">5 min</option>
+                      <option value="7 min">7 min</option>
+                      <option value="10 min">10 min</option>
+                      <option value="20 min">20 min</option>
+                      <option value="30 min">30 min</option>
+                      <option value="40 min">40 min</option>
+                      <option value="50 min">50 min</option>
+                      <option value="60 min">60 min</option>
+                    </Select>
+                    <FormErrorMessage>
+                      {errors.estDuration && "Estimated Duration is required"}
+                    </FormErrorMessage>
+                  </FormControl>
 
                   {/* DESCRIPTION */}
-                  <Box className="submission__form-column">
-                    <FormControl>
-                      <FormLabel
-                        htmlFor="preview"
-                        id="preview"
-                        name="preview"
-                        className="submission__title"
-                        fontSize="20px"
-                        fontWeight="bold"
-                        _after={{ content: '" *"', color: "black" }}
-                      >
-                        Description
-                      </FormLabel>
-                      <Textarea
-                        id="preview"
-                        name="preview"
-                        placeholder="The clearer and shorter the better."
-                        className="submission__inputField"
-                        border="3px solid black"
-                        _hover="none"
-                        focusBorderColor="black"
-                        fontSize="20px"
-                        height="200px"
-                      />
-                    </FormControl>
-                  </Box>
+                  <FormControl isInvalid={errors.description}>
+                    <FormLabel
+                      htmlFor="description"
+                      fontSize="20px"
+                      fontWeight="bold"
+                      _after={{ content: '" *"', color: "black" }}
+                    >
+                      Description
+                    </FormLabel>
+                    <Textarea
+                      id="description"
+                      placeholder="The clearer and shorter the better."
+                      className="submission__inputField"
+                      border="3px solid black"
+                      _hover="none"
+                      focusBorderColor="black"
+                      fontSize="20px"
+                      height="200px"
+                      {...register("description", { required: true })}
+                    />
+                    <FormErrorMessage>
+                      {errors.description && "Description is required"}
+                    </FormErrorMessage>
+                  </FormControl>
 
-                  {/* URL  */}
-                  <Box className="submission__form-column">
-                    <FormControl>
-                      <FormLabel
-                        htmlFor="url"
-                        className="submission__title"
-                        fontSize="20px"
-                        fontWeight="bold"
-                        _after={{ content: '" *"', color: "black" }}
-                      >
-                        Url
-                      </FormLabel>
-                      <Input
-                        type="url"
-                        id="url"
-                        name="url"
-                        fontSize="20px"
-                        placeholder="Enter the resource URL"
-                        className="submission__inputField"
-                        border="3px solid black"
-                        _hover="none"
-                        focusBorderColor="black"
-                      />
-                    </FormControl>
-                  </Box>
+                  {/* URL */}
+                  <FormControl isInvalid={errors.url} isRequired={!file}>
+                    <FormLabel
+                      htmlFor="url"
+                      fontSize="20px"
+                      fontWeight="bold"
+                      _after={{ content: '" *"', color: "black" }}
+                    >
+                      URL
+                    </FormLabel>
+                    <Input
+                      type="url"
+                      id="url"
+                      placeholder="Enter the resource URL"
+                      className="submission__inputField"
+                      border="3px solid black"
+                      _hover="none"
+                      focusBorderColor="black"
+                      fontSize="20px"
+                      {...register("url", { required: !file })}
+                    />
+                    <FormErrorMessage>
+                      {errors.url && "URL is required if no file is uploaded"}
+                    </FormErrorMessage>
+                  </FormControl>
 
                   <div className="submission__OR">
                     <p className="submission__upload">OR</p>
                   </div>
 
-                  {/* UPLOAD FILE  */}
-                  <Box className="submission__form-column">
-                    <UploadFile />
-                  </Box>
-                </Stack>
-              </form>
+                  {/* UPLOAD FILE */}
+                  <UploadFile onFileChange={handleFileChange} />
+                </Box>
+              </Stack>
             </DrawerBody>
 
             <DrawerFooter>
@@ -390,7 +380,7 @@ function SubmissionDrawer({ onFormSubmit }) {
                 border="3px solid black"
                 color="black"
                 _hover={{ bg: "gray.600" }}
-                onClick={onClose}
+                onClick={handleCancel}
                 className="submission__form-button"
               >
                 Cancel
@@ -406,10 +396,9 @@ function SubmissionDrawer({ onFormSubmit }) {
                 border="3px solid black"
                 color="black"
                 _hover={{ bg: "gray.600" }}
-                className="
-            submission_form-button"
+                className="submission_form-button"
                 type="submit"
-                onClick={(event) => handleSubmit(event)}
+                onClick={handleSubmit(onSubmit)}
               >
                 Submit
               </Button>
@@ -420,5 +409,3 @@ function SubmissionDrawer({ onFormSubmit }) {
     </>
   );
 }
-
-export default SubmissionDrawer;

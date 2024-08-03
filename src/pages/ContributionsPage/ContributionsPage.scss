@@ -6,7 +6,15 @@
 .contributions {
   &__container {
     display: flex;
+    z-index: 2
   }
+
+  &__img {
+    bottom: 0rem;
+    position: absolute;
+    width: 110%;
+    z-index: -1;
+    }
 
   &__cards {
     margin-right: 0.75rem;

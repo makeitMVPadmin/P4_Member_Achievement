@@ -87,12 +87,12 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, s
             <p className="nav__item-name">Rewards</p>
           </li>
         </NavLink>
-        {/* <NavLink to="/contributions"> */}
+        <NavLink to="/contributions">
         <li className="nav__item">
           <img src={uploadIcon2} alt="upload file icon" className="nav__icon" />
           <p className="nav__item-name">Contributions</p>
         </li>
-        {/* </NavLink> */}
+        </NavLink>
         <NavLink to="/bookmarked">
           <li className="nav__item">
             <img

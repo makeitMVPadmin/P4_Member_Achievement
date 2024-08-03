@@ -17,6 +17,12 @@ const App = () => {
     setSavedBookmarks(bookmarks);
   }, []);
 
+  const handleBookmarkUpdate = (updatedBookmarks) => {
+    setSavedBookmarks(updatedBookmarks);
+    localStorage.setItem("bookmarks", JSON.stringify(updatedBookmarks));
+  };
+
+
   return (
     <>
       <ChakraProvider>
@@ -26,7 +32,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route
               path="/resource"
-              element={<ResourcePage setSavedBookmarks={setSavedBookmarks} />}
+              element={<ResourcePage onBookmarkUpdate={handleBookmarkUpdate} />}
             />
             <Route
               path="/bookmarked"

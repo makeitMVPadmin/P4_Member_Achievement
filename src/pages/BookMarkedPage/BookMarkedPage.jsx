@@ -5,8 +5,10 @@ import "./BookMarkedPage.scss";
 import { collection, getDocs } from "firebase/firestore";
 import { database } from "../../config/firebase";
 import blueWaveImg from "../../assets/images/blue-wave.png";
+import { useNavigate } from "react-router-dom";
 
 export default function BookMarkedPage({ bookmarkedResources }) {
+  const navigate = useNavigate()
   const [displayedBookmarks, setDisplayedBookmarks] = useState([]);
   const [displaySelectedResource, setdisplaySelectedResource] = useState([]);
 
@@ -49,9 +51,10 @@ export default function BookMarkedPage({ bookmarkedResources }) {
       (resource) => clickedId === resource.id
     );
     setdisplaySelectedResource(foundResource)
+    navigate(`/resource/${clickedId}`)
   };
 
-  console.log(displaySelectedResource)
+
 
   return (
     <div className="resource__container">

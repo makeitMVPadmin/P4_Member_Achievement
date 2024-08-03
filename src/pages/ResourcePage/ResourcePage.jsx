@@ -6,6 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import "./ResourcePage.scss";
 import { collection, doc, getDoc, getDocs, query, setDoc, where, } from "firebase/firestore";
 import { database } from "../../config/firebase";
+
 // import { Comments } from "../../components/Comments/Comments";
 // import resourceData from "../../data/resource.json";
 // import resourceDetailsData from "../../data/resource-details.json";

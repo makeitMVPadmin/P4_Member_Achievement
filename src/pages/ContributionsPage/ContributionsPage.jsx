@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
+import { useNavigate } from "react-router-dom";
 import "./ContributionsPage.scss";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { database } from "../../config/firebase";
@@ -8,6 +9,7 @@ import ResourceList from "../../components/ResourceList/ResourceList";
 import blueWaveImg from "../../assets/images/blue-wave.png";
 
 function ContributionsPage({ currentUser }) {
+  const navigate = useNavigate()
   const [contributions, setContributions] = useState([]);
   const [displaySelectedResource, setdisplaySelectedResource] = useState([]);
 
@@ -44,9 +46,10 @@ function ContributionsPage({ currentUser }) {
       (resource) => clickedId === resource.id
     );
     setdisplaySelectedResource(foundResource)
+    navigate(`/resource/${clickedId}`)
   };
 
-  console.log(displaySelectedResource)
+  
 
 
   return (

@@ -3,10 +3,13 @@ import NavBar from "../../components/NavBar/NavBar";
 import "./ContributionsPage.scss";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { database } from "../../config/firebase";
-import Contribution from "../../components/Contributions/Contribution";
+// import Contribution from "../../components/Contributions/Contribution";
+import ResourceList from "../../components/ResourceList/ResourceList";
+import blueWaveImg from "../../assets/images/blue-wave.png";
 
 function ContributionsPage({ currentUser }) {
   const [contributions, setContributions] = useState([]);
+  const [displaySelectedResource, setdisplaySelectedResource] = useState([]);
 
   useEffect(() => {
     const getAllContributedResources = async () => {
@@ -36,20 +39,35 @@ function ContributionsPage({ currentUser }) {
     console.log(contributions);
   }, [contributions]);
 
+  const handleSelectResource = (clickedId) => {
+    const foundResource = contributions.find(
+      (resource) => clickedId === resource.id
+    );
+    setdisplaySelectedResource(foundResource)
+  };
+
+  console.log(displaySelectedResource)
+
+
   return (
     <div className="contributions__container">
+      <div className="resource__background">
+        <img
+          className="resource__container__img"
+          src={blueWaveImg}
+          alt="blue wave background"
+        />
+      </div>
+
       <div className="resource__navbar-container">
         <NavBar />
       </div>
 
       <div className="contributions__cards">
-        {/* <h1>These are the smaller resource cards</h1> */}
-        <Contribution /> 
-        {/* Contributions need to be rendered */}
-      </div>
-
-      <div className="contributions__details-container">
-        <h2>This is the expanded resource card</h2>
+        <ResourceList
+          resources={contributions}
+          selectResource={handleSelectResource}
+        />
       </div>
     </div>
   );

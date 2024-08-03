@@ -29,7 +29,7 @@ const durationMap = {
   '60 min': 60
 };
 
-export default function ResourcePage() {
+export default function ResourcePage({ onBookmarkUpdate }) {
   // const [resourceDetails, setResourceDetails] = useState(resourceDetailsData)
   // const [resources, setResources] = useState(resourceDetailsData); //1
   // const [selectedResource, setSelectedResource] = useState(resourceDetailsData[0]);
@@ -142,8 +142,7 @@ export default function ResourcePage() {
       );
     }
 
-    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-    setSavedBookmarks(bookmarks);
+    onBookmarkUpdate(bookmarks);
   };
 
   const handleSelectResource = (clickedId) => {
@@ -171,8 +170,7 @@ export default function ResourcePage() {
       querySnapshot.forEach((doc) => {
         results.push({ id: doc.id, ...doc.data() }); 
       });
-
-      console.log(results);
+      // console.log(results);
       return results;
     } catch (err) {
       console.error(err);

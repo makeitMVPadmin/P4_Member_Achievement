@@ -10,27 +10,14 @@
 .options-description {
   font-size: 0.75rem;
   color: gray;
-  margin-right: 0.75rem;
+  font-weight: 700;
+  line-height: 1.25;
 }
 
 .rewards-redemption-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0.75rem 0 0.5rem;
-
-  @include desktop {
-    font-size: 1.5rem;
-  }
-}
-
-.rewards-redemption-title2 {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
   margin: 0 0 0.5rem;
-
-  @include desktop {
-    font-size: 1.5rem;
-  }
 }
 
 .rewards-right-container {
@@ -44,6 +31,11 @@
     width: 125rem;
     margin: 0 1rem;
   }
+}
+
+.rewards-right-top {
+  display: flex;
+  align-items: center;
 }
 
 .rewards-redemption-cards {
@@ -69,5 +61,11 @@
 }
 
 .pointsBar {
-  margin: 2.5rem;
+  margin: 0;
+}
+
+.daily-redemption-options-container {
+  @include thin-border;
+  margin: 1rem 1rem 1rem 0.4rem;
+  padding: 0.65rem;
 }

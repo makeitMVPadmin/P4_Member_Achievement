@@ -69,7 +69,7 @@ export default function ResourceDetailCard({
         <div className="resource-details__rating-timer-container">
           <div className="resource-details__rating-star-container">
             <div className="resource-details__stars">
-            <Upvoting resourceId={selectedResource.id} />
+              <Upvoting resourceId={selectedResource.id} />
             </div>
           </div>
           <div className="resource-details__timer">

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormLabel, FormControl, Box } from "@chakra-ui/react";
+import "../SubmissionForm/SubmissionDrawer.scss"
 
 const UploadFile = ({ onFileChange }) => {
+ 
   return (
     <Box>
       <FormControl>
@@ -10,6 +12,7 @@ const UploadFile = ({ onFileChange }) => {
           fontSize="20px"
           fontWeight="bold"
           marginTop="-10px"
+          fontFamily="Poppins"
           _after={{ content: '" *"', color: "black" }}
         >
           File Upload

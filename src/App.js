@@ -35,6 +35,10 @@ const App = () => {
               element={<ResourcePage onBookmarkUpdate={handleBookmarkUpdate} />}
             />
             <Route
+              path="/resource/:id"
+              element={<ResourcePage onBookmarkUpdate={handleBookmarkUpdate} />}
+            />
+            <Route
               path="/bookmarked"
               element={<BookMarkedPage bookmarkedResources={savedBookmarks} />}
             />

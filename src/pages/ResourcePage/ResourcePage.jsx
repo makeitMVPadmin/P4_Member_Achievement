@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import ResourceDetailCard from "../../components/ResourceDetailCard/ResourceDetailCard";
 import ResourceList from "../../components/ResourceList/ResourceList";
+import { useParams, useNavigate } from "react-router-dom";
 import "./ResourcePage.scss";
 import { collection, doc, getDoc, getDocs, query, setDoc, where, } from "firebase/firestore";
 import { database } from "../../config/firebase";
@@ -46,6 +47,8 @@ export default function ResourcePage({ onBookmarkUpdate }) {
   const [sortField, setSortField] = useState(null)
   const [sortAscending, setSortAscending] = useState(true)
   const [comments, setComments] = useState([]);
+  const { id } = useParams(); 
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const getAllResourcesAndRatings = async () => {
@@ -59,8 +62,10 @@ export default function ResourcePage({ onBookmarkUpdate }) {
           }));
           setResources(resourcesCollection);
           if (resourcesCollection.length > 0) {
-            setSelectedResource(resourcesCollection[0]);
-            setActiveResourceId(resourcesCollection[0].id);
+            if (!id) {
+              setSelectedResource(resourcesCollection[0]);
+              setActiveResourceId(resourcesCollection[0].id);
+            }
           }
           // Set your resources here, and don't forget to option chain any dependant data (ex: selectedResource?.id)
           // setResources(resourcesCollection);
@@ -76,11 +81,36 @@ export default function ResourcePage({ onBookmarkUpdate }) {
   }, []);
 
   useEffect(() => {
+    const getResourceById = async () => {
+      try {
+        if (id) {
+          const docRef = doc(database, "Resources", id);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            setSelectedResource({ id: docSnap.id, ...docSnap.data() });
+            setActiveResourceId(docSnap.id);
+          } else {
+            console.log("No such document!");
+          }
+        }
+      } catch (err) {
+        console.error("Error fetching resource: ", err);
+      }
+    };
+
+    getResourceById();
+  }, [id]);
+
+  console.log(id)
+
+  useEffect(() => {
     const savedResources = JSON.parse(localStorage.getItem("resources")) || [];
     if (savedResources.length > 0) {
       setResources(savedResources);
-      setSelectedResource(savedResources[0]);
-      setActiveResourceId(savedResources[0]?.id);
+      if (!selectedResource) {
+        setSelectedResource(savedResources[0]);
+        setActiveResourceId(savedResources[0]?.id);
+      }
     }
   }, []);
 
@@ -153,6 +183,7 @@ export default function ResourcePage({ onBookmarkUpdate }) {
     if (foundResources) {
       setSelectedResource(foundResources);
       setActiveResourceId(clickedId);
+      navigate(`/resource/${clickedId}`)
     }
   };
 

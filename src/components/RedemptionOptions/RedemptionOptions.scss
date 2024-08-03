@@ -61,3 +61,16 @@
   margin: 0.5rem 1rem -1.25rem 0;
   height: 13rem;
 }
+
+.chakra-button.css-ufsted {
+  margin-right: 0.15rem;
+  margin-top: 5.15rem;
+
+  @include desktop {
+    margin-top: 8.25rem;
+  }
+
+  @include large-desktop {
+    margin-right: 1.15rem;
+  }
+}

@@ -1,3 +1,4 @@
+import "./RewardOptions.scss";
 import upvoteImg from "../../assets/images/upvote.png";
 import markAsRead from "../../assets/images/markAsRead.png";
 import bookmark from "../../assets/images/bookmark.png";
@@ -13,9 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 
-import "./RedemptionOptions.scss";
-
-export default function RedemptionOptions() {
+export default function RewardOptions() {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -28,8 +27,8 @@ export default function RedemptionOptions() {
           position="absolute"
           right={4}
           top={20}
-          // mt={{ md: "5.75rem", lg: "9rem", xl: "8.75rem" }}
-          // mr={{ md: "0.15rem", xl: "1.15rem" }}
+          mt="5.5rem"
+          mr="0.25rem"
           backgroundColor={"white"}
         />
         {/* {isOpen && ( */}
@@ -138,30 +137,4 @@ export default function RedemptionOptions() {
       </Box>
     </ChakraProvider>
   );
-}
-
-{
-  /* <div className="redemption-options-cards">
-        <div className="redemption-options-card">
-            <div class="option-icon">
-                <img src="thumb-icon.png" alt="Like a resource" width="24" height="24"/>
-                <span class="item-text">Like a resource</span>
-            </div>
-            <div class="points">+2 points<br/>Daily limit: 14 points</div>
-        </div>
-        <div className="redemption-options-card">
-            <div class="option-icon">
-                <img src="mark-icon.png" alt="Mark a resource as read" width="24" height="24"/>
-                <span class="item-text">Mark a resource as read</span>
-            </div>
-            <div class="points">+10 points<br/>No daily limit</div>
-        </div>
-        <div className="redemption-options-card">
-            <div class="option-icon">
-                <img src="suggest-icon.png" alt="Suggest a resource" width="24" height="24"/>
-                <span class="item-text">Suggest a resource</span>
-            </div>
-            <div class="points">+20 points<br/>No daily limit</div>
-        </div>
-    </div> */
 }

@@ -5,7 +5,7 @@
 
 .reward {
   @include thin-border;
-  width: 15rem;
+  width: 12rem;
   height: 9rem;
   margin-bottom: 1rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -31,16 +31,18 @@
     letter-spacing: -0.025rem;
     text-align: left;
     font-weight: 900;
-    margin-top: 6px;
+    margin-top: 4px;
     margin-left: 6px;
+    line-height: 1rem;
 
     @include desktop {
       font-size: 14px;
+      margin-top: 9px;
     }
 
     @include large-desktop {
       font-size: 18px;
-      margin-top: 0.65rem;
+      margin-top: 0.85rem;
       margin-left: 0.75rem;
     }
   }
@@ -48,24 +50,30 @@
   &__description {
     font-size: 0.65rem;
     margin-left: 7px;
-    margin-top: 7px;
+    margin-top: 5px;
     color: #505050;
 
     @include desktop {
       font-size: 11px;
+      margin-top: 7px;
     }
 
     @include large-desktop {
       font-size: 15px;
       margin-left: 0.75rem;
+      margin-right: 0.75rem;
     }
   }
 
   &__point-container {
     display: inline-flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 6px;
     margin-left: 10px;
+
+    @include desktop {
+      margin-top: 8px;
+    }
 
     @include large-desktop {
       margin-left: 0.75rem;
@@ -105,6 +113,7 @@
 .reward__required-points {
   margin-left: 8px;
   font-size: 0.75rem;
+  font-weight: 600;
 
   @include desktop {
     font-size: 12px;
@@ -146,18 +155,21 @@
 }
 
 .reward__claim-button-approve {
-  background-color: black;
-  color: white;
+  background-color: $light-blue;
+  color: $black;
   padding: 7px;
   font-size: 0.75rem;
   border-radius: 5px;
   width: 93%;
   margin-bottom: 1px;
+  @include very-thin-border;
+  @include button;
 
   @include desktop {
     font-size: 15px;
     width: 90%;
     margin-bottom: 2px;
+    margin-top: 2px;
   }
 
   @include large-desktop {

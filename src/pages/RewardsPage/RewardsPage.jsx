@@ -14,17 +14,18 @@ import {
   Circle,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import RewardOptions from "../../components/RewardOptions/RewardOptions";
 
-export default function RewardsPage() {
-  const [points, setPoints] = useState(280);
+export default function RewardsPage({ points, onPointsChange }) {
+  // const [points, setPoints] = useState(280);
   const maxPoints = 1000;
 
-  const handleSliderChange = (value) => {
-    setPoints(value);
-  };
+  // const handleSliderChange = (value) => {
+  //   setPoints(value);
+  // };
 
   const deductPoints = (deduction) => {
-    setPoints((prevPoints) => Math.max(prevPoints - deduction, 0));
+    onPointsChange((prevPoints) => Math.max(prevPoints - deduction, 0));
   };
 
   return (
@@ -50,21 +51,24 @@ export default function RewardsPage() {
                 min={0}
                 max={maxPoints}
                 step={10}
+                sx={{ paddingTop: "11px" }}
                 // onChange={handleSliderChange}
               >
                 <SliderTrack
                   style={{
                     "--slider-bg": "gray",
                   }}
+                  sx={{ paddingBottom: "5px" }}
                 >
                   <SliderFilledTrack
                     style={{
                       background: "#ffd22f",
                       "--slider-bg": "gray",
                     }}
+                    sx={{ paddingTop: "13px" }}
                   />
                 </SliderTrack>
-                <SliderThumb />
+                {/* <SliderThumb /> */}
               </Slider>
               {[0, 200, 400, 600, 800, 1000].map((value) => (
                 <Box
@@ -83,8 +87,8 @@ export default function RewardsPage() {
               {[200, 400, 600, 800, 1000].map((value) => (
                 <Circle
                   key={value}
-                  size="10px"
-                  bg="gray" // "#ffd22f"
+                  size="12px"
+                  bg={points >= value ? "#ffd22f" : "gray"}
                   position="absolute"
                   left={`${(value / maxPoints) * 100}%`}
                   top="50%"
@@ -97,31 +101,43 @@ export default function RewardsPage() {
 
         <div className="daily-redemption-options-container">
           <h2 className="rewards-redemption-title">How to Earn Points</h2>
-          <p className="options-description">
+          {/* <p className="options-description">
             Earn points by completing any of the actions listed below! Please
             note: certain actions have daily restrictions. You are welcome to
             continue completing these actions, but will only accumulate points
             up to the daily restriction.{" "}
-          </p>
+          </p> */}
           <div className="redemption-options">
             <RedemptionOptions />
           </div>
         </div>
 
         <div className="rewards-redemption__container">
-          <h2 className="rewards-redemption-title">
-            Reward Redemption Options
+          <h2 className="rewards-redemption-title rewards-redemption-title2">
+            Claim Now
           </h2>
+          <p className="options-description">
+            Congratulations on earning points! Here are the rewards you can
+            currently claim.{" "}
+          </p>
           <div className="rewards-redemption-cards">
             <RedemptionCardTest deductPoints={deductPoints} />
+            <RedemptionCardTest deductPoints={deductPoints} />
+            <RedemptionCardTest deductPoints={deductPoints} />
+            {/* <RedemptionCard />
             <RedemptionCard />
             <RedemptionCard />
             <RedemptionCard />
             <RedemptionCard />
             <RedemptionCard />
             <RedemptionCard />
-            <RedemptionCard />
-            <RedemptionCard />
+            <RedemptionCard /> */}
+          </div>
+
+          <div className="reward-options__container">
+            <h2 className="reward-options__title">Reward Options</h2>
+
+            <div className="reward-options">{/* <RewardOptions /> */}</div>
           </div>
         </div>
       </div>

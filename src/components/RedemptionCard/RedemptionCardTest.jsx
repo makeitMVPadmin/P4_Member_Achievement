@@ -19,12 +19,12 @@ export default function RedemptionCardTest({ deductPoints }) {
           </p>
           <div className="reward__point-container">
             <img src={Coin} alt="coin icon" className="coin-icon" />
-            <span className="reward__required-points">200 points</span>
+            <span className="reward__required-points">300 points</span>
           </div>
         </div>
         <div className="reward__button-container">
           {/* <RedemptionToast onClick={handleClaimReward} /> */}
-          <RedemptionToast onClick={() => deductPoints(200)} />
+          <RedemptionToast onClick={() => deductPoints(300)} />
         </div>
       </div>
     </section>

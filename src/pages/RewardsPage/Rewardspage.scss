@@ -17,7 +17,10 @@
 .rewards-redemption-title {
   font-size: 1rem;
   font-weight: 700;
-  margin: 0 0 0.5rem;
+}
+
+.rewards-redemption-title2 {
+  margin: 1rem 0 0.5rem;
 }
 
 .rewards-right-container {
@@ -43,7 +46,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: 0 0.5rem 0 0;
+  margin: 1rem 0.5rem 0 0;
 }
 
 .points-balance-container {
@@ -74,4 +77,25 @@
 
 :root {
   --slider-bg: gray;
+}
+
+.chakra-slider.css-1xfb6kw {
+  padding-top: 11px !important;
+}
+
+.reward-options {
+  &__container {
+    @include thin-border;
+    margin: 1rem 1rem 1rem 0.4rem;
+    padding: 0.65rem;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  &__title2 {
+    margin: 1rem 0 0.5rem;
+  }
 }

@@ -6,7 +6,6 @@
 .resource {
   margin: 0.75rem 0;
   padding: 0.5rem;
-  background-color: whitesmoke;
   @include border;
   // transition: transform 0.3s ease, box-shadow 0.3s ease;
 
@@ -43,9 +42,11 @@
     font-size: 0.95rem;
     letter-spacing: -0.05rem;
     line-height: 1.2;
+    width: 8rem;
 
     @include desktop {
       font-size: 1.15rem;
+      width: 10rem;
     }
   }
 
@@ -120,5 +121,25 @@
 
   &__forward-arrow-icon {
     width: 95.5%;
+  }
+
+  &__icons-container {
+    display: flex;
+  }
+
+  &__icons {
+    display: flex;
+    margin-left: 0.5rem;
+  }
+
+  &__icons-img {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  &__upvotes-total,
+  &__comments-total {
+    font-size: 0.85rem;
+    margin-left: 0.2rem;
   }
 }

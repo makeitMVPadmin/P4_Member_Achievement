@@ -1,6 +1,6 @@
 import "./ResourceDetailCard.scss";
 import arrowForwardIcon from "../../assets/icons/arrow-forward-svgrepo-com.png";
-import timerIcon from "../../assets/icons/timer-2-svgrepo-com.png";
+import timerIcon from "../../assets/icons/timer.png";
 import bookmarkIcon from "../../assets/icons/bookmark-svgrepo-com.svg";
 import bookmarkedIcon from "../../assets/icons/bookmarked.svg";
 import starIcon from "../../assets/icons/star-svgrepo-com.png";
@@ -43,8 +43,8 @@ export default function ResourceDetailCard({
     // }
   };
 
-
   // console.log(comments)
+  console.log(comments);
 
   return (
     <>
@@ -110,7 +110,7 @@ export default function ResourceDetailCard({
           <div className="resource-details__author-container">
             <div className="resource-details__avatar" aria-hidden="true"></div>
             <div className="resource-details__author">
-              <p>Submitted by: </p>
+              <p className="resource-details__submission">Submitted by: </p>
               <p className="resource-details__author-name">
                 {selectedResource.name}
               </p>

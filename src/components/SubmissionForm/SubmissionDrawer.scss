@@ -5,34 +5,31 @@
 
 @font-face {
   font-family: "Corben";
-  src: url('../../assets/fonts/Corben-Bold.ttf');
+  src: url("../../assets/fonts/Corben-Bold.ttf");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Corben";
-  src: url('../../assets/fonts/Corben-Regular.ttf');
+  src: url("../../assets/fonts/Corben-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Poppins";
-  src: url('../../assets/fonts/Poppins-Bold.ttf');
+  src: url("../../assets/fonts/Poppins-Bold.ttf");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Poppins";
-  src: url('../../assets/fonts/Poppins-Regular.ttf');
+  src: url("../../assets/fonts/Poppins-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
-
-
-
 
 .submission {
   // &__form-container {
@@ -51,7 +48,6 @@
 
   &__title {
     font-family: "Poppins";
-    
   }
 
   &__upload {
@@ -60,9 +56,10 @@
     color: black;
     font-weight: bold;
     font-family: "Poppins";
-    margin-top: 30px;
-    }
-  
+    margin-top: 2.5rem;
+  }
+
+
   &__header-title {
     font-family: "Corben";
     font-weight: bold;
@@ -79,7 +76,6 @@
     // margin-left: 40px;
   }
 
-
   &__file-button {
     color: grey;
     font-weight: bold;
@@ -88,10 +84,8 @@
     border: 3px solid black;
     border-radius: 5px;
     box-shadow: 1px 1px 0 black;
-    width:375px;
+    width: 375px;
   }
-
- 
 
   &__inputField {
     border-radius: 0.25rem;
@@ -105,14 +99,13 @@
   &__OR {
     margin-top: -20px;
     margin-bottom: 10px;
-  }  
+  }
 
   &__inputField::placeholder {
     color: black;
     font-size: 20px;
     font-weight: bold;
     font-family: "Poppins";
-  
   }
 
   &__inputField::selection {
@@ -120,4 +113,3 @@
   }
 
 }
-

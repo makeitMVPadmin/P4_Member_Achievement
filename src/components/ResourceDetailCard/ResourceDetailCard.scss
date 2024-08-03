@@ -48,7 +48,7 @@
   &__rating-timer-container {
     display: flex;
     justify-content: space-between;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
   }
 
   &__timer {
@@ -62,7 +62,7 @@
     font-size: 0.75rem;
   }
 
-  &__rainting-star-container {
+  &__rating-star-container {
     display: flex;
     align-items: center;
   }
@@ -73,9 +73,13 @@
   }
 
   &__stars {
-    width: 4.5rem;
+    width: 6rem;
     display: flex;
     flex-direction: row;
+
+    @include desktop {
+      width: 5.5rem;
+    }
   }
 
   &__star-icon {

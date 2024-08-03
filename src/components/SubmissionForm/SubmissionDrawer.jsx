@@ -31,7 +31,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useForm } from "react-hook-form";
 // import { useForm } from "react-hook-form";
 
-export default function SubmissionDrawer({ onFormSubmit }) {
+export default function SubmissionDrawer({ onFormSubmit, currentUserId }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     register,

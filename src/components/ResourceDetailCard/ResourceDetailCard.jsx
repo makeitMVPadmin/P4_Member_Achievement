@@ -9,6 +9,8 @@ import Upvoting from "../Upvoting/Upvoting";
 import { Link } from "react-router-dom";
 import { Comments } from "../Comments/Comments";
 import React, { useState, useEffect } from "react";
+import { database } from "../../config/firebase";
+import { doc, getDoc, collection } from "@firebase/firestore";
 
 export default function ResourceDetailCard({
   selectedResource,
@@ -16,8 +18,11 @@ export default function ResourceDetailCard({
   savedBookmarks,
   isBookmarked,
   comments,
+  currentUser,
 }) {
   const [isRead, setIsRead] = useState(false);
+  const [contributorName, setContributorName] = useState(""); 
+
   useEffect(() => {
     const savedReadState = localStorage.getItem(selectedResource.id);
     if (savedReadState) {
@@ -25,6 +30,28 @@ export default function ResourceDetailCard({
     }
     // console.log(selectedResource.id);
   }, [selectedResource.id]);
+
+  useEffect(() => {
+    const fetchContributorName = async () => {
+      console.log(currentUser.id)
+      if (selectedResource.userId) {
+        try {
+          const userRef = doc(database, "Users", selectedResource.userId);
+          const userDoc = await getDoc(userRef);
+          if (userDoc.exists()) {
+            setContributorName(userDoc.data().name || "Unknown User");
+          } else {
+            setContributorName("Unknown User");
+          }
+        } catch (error) {
+          console.error("Error fetching user data: ", error);
+          setContributorName("Unknown User");
+        }
+      }
+    };
+
+    fetchContributorName();
+  }, [selectedResource.userId]);
 
   const updatePoints = (pointsToAdd) => {
     const currentPoints = parseInt(localStorage.getItem("userPoints")) || 0;
@@ -64,7 +91,7 @@ export default function ResourceDetailCard({
         <div className="resource-details__heading-bottom">
           <h1 className="resource-details__title">{selectedResource.title}</h1>
         </div>
-        <p className="resource-details__level">{selectedResource.skillLevel}</p>
+        <p className="resource-details__level">{selectedResource.level}</p>
 
         <div className="resource-details__rating-timer-container">
           <div className="resource-details__rating-star-container">
@@ -112,7 +139,7 @@ export default function ResourceDetailCard({
             <div className="resource-details__author">
               <p>Submitted by: </p>
               <p className="resource-details__author-name">
-                {selectedResource.name}
+              {contributorName.name || "Anonymous"}
               </p>
             </div>
           </div>
@@ -149,7 +176,7 @@ export default function ResourceDetailCard({
           </div>
         </div>
       </section>
-      <Comments comments={comments} />
+      <Comments comments={comments} currentUser={currentUser} resourceId={selectedResource.id} />
     </>
   );
 }

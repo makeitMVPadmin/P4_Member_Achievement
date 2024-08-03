@@ -14,10 +14,10 @@
 .comments {
     contain: strict;
     width: 100%;
-    position: relative;
+    // position: relative;
     overflow: auto;
     height: 30rem;
-    -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch;   
 }
 
 .comments::-webkit-scrollbar {
@@ -32,11 +32,15 @@
     align-items: flex-start;
     gap: 0.5rem;
     align-self: stretch;
-    border-radius: 8px;
-    border-top: 3px solid #000;
-    border-right: 10px solid #000;
-    border-bottom: 10px solid #000;
-    border-left: 3px solid #000;
+    // border-radius: 8px;
+    // border-top: 3px solid #000;
+    // border-right: 10px solid #000;
+    // border-bottom: 10px solid #000;
+    // border-left: 3px solid #000;
+    margin: 0.75rem 0;
+    padding-bottom: 1rem;
+    padding: 0.5rem;
+    @include border;
     background: #FFF;
     margin-bottom: 1rem;
 }
@@ -96,11 +100,15 @@
     align-items: center;
     gap: 1rem;
     align-self: stretch;
-    border-radius: 8px;
-    border-top: 3px solid #000;
-    border-right: 10px solid #000;
-    border-bottom: 10px solid #000;
-    border-left: 3px solid #000;
+    // border-radius: 8px;
+    // border-top: 3px solid #000;
+    // border-right: 10px solid #000;
+    // border-bottom: 10px solid #000;
+    // border-left: 3px solid #000;
+    margin: 0.75rem;
+    padding-bottom: 1rem;
+    padding: 0 0.5rem;
+    @include border;
     background: #FFF;
     margin-top: 2rem;
 }

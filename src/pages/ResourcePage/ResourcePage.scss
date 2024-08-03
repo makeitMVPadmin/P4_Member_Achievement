@@ -6,12 +6,15 @@
 .resource {
   &__container {
     display: flex;
+    height: 100vh;
+    // background-color: pink;
   }
 
   &__cards {
     margin-right: 0.75rem;
     width: 55%;
-
+    // background-color: green;
+    overflow-y: auto; /* Enable vertical scrolling */
     @include desktop {
       width: 45%;
     }
@@ -27,7 +30,7 @@
     width: 19rem;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    // height: 100vh;
 
     @include desktop {
       width: 25rem;

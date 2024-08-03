@@ -1,3 +1,8 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
 .option-icon {
   display: flex;
   align-items: center;
@@ -33,6 +38,14 @@
 
 .redemption__img {
   width: 1rem;
+
+  &-bookmark {
+    padding: 0.15rem;
+  }
+
+  @include desktop {
+    width: 1.25rem;
+  }
 }
 
 .option-point-limits {

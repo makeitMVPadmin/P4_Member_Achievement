@@ -11,6 +11,7 @@ $font-stack-gilroy-bl: "PoppinsBold", serif;
   justify-content: space-between;
   background: #fff;
   padding: 0 0.25rem;
+  margin-top: 0.75rem;
 
   @include desktop {
     height: 11vh;
@@ -34,7 +35,7 @@ $font-stack-gilroy-bl: "PoppinsBold", serif;
       align-items: center;
       display: flex;
       justify-content: space-evenly;
-      width: 75vw;
+      width: 42rem;
     }
 
     &__main-icon {
@@ -51,12 +52,12 @@ $font-stack-gilroy-bl: "PoppinsBold", serif;
     }
 
     &__images {
-      height: 2vh;
+      height: 1rem;
     }
 
     &__icon-titles {
       font: 100% $font-stack-gilroy-bl;
-      font-size: 0.5rem;
+      font-size: 0.65rem;
     }
 
     &__user-container {
@@ -79,7 +80,11 @@ $font-stack-gilroy-bl: "PoppinsBold", serif;
 
   @include desktop {
     &__images {
-      height: 3vh;
+      height: 1.25rem;
+    }
+
+    &__navigation {
+      width: 50rem;
     }
 
     &__icon-titles {

@@ -50,10 +50,19 @@ export default function RewardsPage() {
                 min={0}
                 max={maxPoints}
                 step={10}
-                onChange={handleSliderChange}
+                // onChange={handleSliderChange}
               >
-                <SliderTrack>
-                  <SliderFilledTrack />
+                <SliderTrack
+                  style={{
+                    "--slider-bg": "gray",
+                  }}
+                >
+                  <SliderFilledTrack
+                    style={{
+                      background: "#ffd22f",
+                      "--slider-bg": "gray",
+                    }}
+                  />
                 </SliderTrack>
                 <SliderThumb />
               </Slider>
@@ -64,8 +73,9 @@ export default function RewardsPage() {
                   left={`${(value / maxPoints) * 100}%`}
                   top="20px"
                   transform="translateX(-50%)"
-                  color="teal.500"
+                  color="black"
                   fontSize="sm"
+                  fontWeight={700}
                 >
                   {value}
                 </Box>
@@ -74,7 +84,7 @@ export default function RewardsPage() {
                 <Circle
                   key={value}
                   size="10px"
-                  bg="teal.500"
+                  bg="gray" // "#ffd22f"
                   position="absolute"
                   left={`${(value / maxPoints) * 100}%`}
                   top="50%"

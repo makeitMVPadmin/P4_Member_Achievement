@@ -36,6 +36,7 @@
 .rewards-right-top {
   display: flex;
   align-items: center;
+  margin-top: 1.5rem;
 }
 
 .rewards-redemption-cards {
@@ -62,10 +63,15 @@
 
 .pointsBar {
   margin: 0;
+  margin-right: 1rem;
 }
 
 .daily-redemption-options-container {
   @include thin-border;
   margin: 1rem 1rem 1rem 0.4rem;
   padding: 0.65rem;
+}
+
+:root {
+  --slider-bg: gray;
 }

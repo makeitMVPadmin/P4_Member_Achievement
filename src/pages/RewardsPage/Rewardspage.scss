@@ -72,7 +72,7 @@
 .daily-redemption-options-container {
   @include thin-border;
   margin: 1rem 1rem 1rem 0.4rem;
-  padding: 0.65rem;
+  padding: 0 0.65rem 0.65rem;
 }
 
 :root {
@@ -87,7 +87,7 @@
   &__container {
     @include thin-border;
     margin: 1rem 1rem 1rem 0.4rem;
-    padding: 0.65rem;
+    padding: 0 0.65rem 0.65rem;
   }
 
   &__title {

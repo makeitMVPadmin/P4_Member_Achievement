@@ -8,7 +8,6 @@ import {
   Slider,
   SliderTrack,
   SliderFilledTrack,
-  SliderThumb,
   VStack,
   Box,
   Circle,
@@ -100,13 +99,7 @@ export default function RewardsPage({ points, onPointsChange }) {
         </div>
 
         <div className="daily-redemption-options-container">
-          <h2 className="rewards-redemption-title">How to Earn Points</h2>
-          {/* <p className="options-description">
-            Earn points by completing any of the actions listed below! Please
-            note: certain actions have daily restrictions. You are welcome to
-            continue completing these actions, but will only accumulate points
-            up to the daily restriction.{" "}
-          </p> */}
+          {/* <h2 className="rewards-redemption-title">How to Earn Points</h2> */}
           <div className="redemption-options">
             <RedemptionOptions />
           </div>
@@ -135,9 +128,10 @@ export default function RewardsPage({ points, onPointsChange }) {
           </div>
 
           <div className="reward-options__container">
-            <h2 className="reward-options__title">Reward Options</h2>
-
-            <div className="reward-options">{/* <RewardOptions /> */}</div>
+            {/* <h2 className="reward-options__title">Reward Options</h2> */}
+            <div className="reward-options">
+              <RewardOptions />
+            </div>
           </div>
         </div>
       </div>

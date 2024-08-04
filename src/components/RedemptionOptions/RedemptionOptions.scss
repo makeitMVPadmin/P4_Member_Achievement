@@ -31,7 +31,6 @@
   justify-content: space-between;
   padding: 0.5rem;
   border-radius: 8px;
-  // background-color: #f8f8f8;
   width: 49%;
   height: fit-content;
 }
@@ -62,15 +61,9 @@
   height: 13rem;
 }
 
-.chakra-button.css-ufsted {
-  margin-right: 0.15rem;
-  margin-top: 5.15rem;
-
-  @include desktop {
-    margin-top: 8.25rem;
-  }
-
-  @include large-desktop {
-    margin-right: 1.15rem;
-  }
+.css-0 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
 }

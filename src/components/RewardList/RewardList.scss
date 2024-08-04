@@ -1,0 +1,61 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.reward-list {
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2rem 0;
+    justify-content: space-between;
+
+    @include desktop {
+      gap: 1.5rem;
+    }
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__points {
+    display: flex;
+    align-items: center;
+  }
+
+  &__card {
+    width: 16.5rem;
+    height: 2.5rem;
+    font-size: 0.65rem;
+
+    @include desktop {
+      width: 22.5rem;
+      font-size: 0.75rem;
+    }
+
+    @include large-desktop {
+      width: 27.5rem;
+      font-size: 0.85rem;
+      height: 2.75rem;
+    }
+  }
+
+  &__name {
+    font-weight: 700;
+  }
+
+  &__icon {
+    width: 0.75rem;
+    height: 0.75rem;
+    margin-right: 0.2rem;
+
+    @include desktop {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+  }
+}

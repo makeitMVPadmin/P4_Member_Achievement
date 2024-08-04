@@ -16,13 +16,23 @@
     cursor: pointer;
   }
 
+  &--error {
+    transition: none;
+
+    &:hover {
+      transform: none;
+      @include thin-border;
+      cursor: default;
+    }
+  }
+
   @include desktop {
     width: 16rem;
     height: 9.5rem;
   }
 
   @include large-desktop {
-    width: 20rem;
+    width: 19.5rem;
     height: 12rem;
   }
 
@@ -56,6 +66,7 @@
     @include desktop {
       font-size: 11px;
       margin-top: 7px;
+      margin-right: 7px;
     }
 
     @include large-desktop {
@@ -133,12 +144,15 @@
 
 .reward__claim-button-error {
   background-color: #606060;
-  color: white;
+  color: $black;
   padding: 7px;
   font-size: 0.75rem;
   border-radius: 5px;
   width: 93%;
   margin-bottom: 1px;
+  @include very-thin-border;
+  @include button;
+  cursor: default;
 
   @include desktop {
     font-size: 15px;

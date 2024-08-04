@@ -21,21 +21,17 @@ export default function RedemptionOptions() {
   return (
     <ChakraProvider>
       <Box textAlign="left" mt={4}>
-        <IconButton
-          aria-label={isOpen ? "Hide Options" : "Show Options"}
-          icon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-          onClick={onToggle}
-          position="absolute"
-          right={4}
-          top={20}
-          // mt={{ md: "5.75rem", lg: "9rem", xl: "8.75rem" }}
-          // mr={{ md: "0.15rem", xl: "1.15rem" }}
-          backgroundColor={"white"}
-        />
+        <Box className="header-container" onClick={onToggle}>
+          <h2 className="rewards-redemption-title">How to Earn Points</h2>
+          <IconButton
+            aria-label={isOpen ? "Hide Options" : "Show Options"}
+            icon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+            backgroundColor={"white"}
+          />
+        </Box>
         {/* {isOpen && ( */}
         <Collapse in={isOpen}>
           <Box className="daily-redemption-options-container2" mt={4}>
-            {/* <h2 className="rewards-redemption-title">How to Earn Points</h2> */}
             <p className="options-description">
               Earn points by completing any of the actions listed below! Please
               note: certain actions have daily restrictions. You are welcome to
@@ -43,7 +39,6 @@ export default function RedemptionOptions() {
               up to the daily restriction.
             </p>
             <div className="redemption-options">
-              {/* Your existing RedemptionOptions content */}
               <div className="redemption-options-cards">
                 <div className="redemption-options-card">
                   <div className="option-icon">

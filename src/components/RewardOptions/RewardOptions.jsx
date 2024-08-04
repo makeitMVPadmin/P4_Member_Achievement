@@ -13,6 +13,8 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
+import RedemptionCard from "../RedemptionCard/RedemptionCard";
+import RewardList from "../RewardList/RewardList";
 
 export default function RewardOptions() {
   const { isOpen, onToggle } = useDisclosure();
@@ -20,31 +22,27 @@ export default function RewardOptions() {
   return (
     <ChakraProvider>
       <Box textAlign="left" mt={4}>
-        <IconButton
-          aria-label={isOpen ? "Hide Options" : "Show Options"}
-          icon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-          onClick={onToggle}
-          position="absolute"
-          right={4}
-          top={20}
-          mt="5.5rem"
-          mr="0.25rem"
-          backgroundColor={"white"}
-        />
-        {/* {isOpen && ( */}
+        <Box className="header-container" onClick={onToggle}>
+          <h2 className="rewards-redemption-title">Reward Options</h2>
+          <IconButton
+            aria-label={isOpen ? "Hide Options" : "Show Options"}
+            icon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+            backgroundColor={"white"}
+          />
+        </Box>
+
         <Collapse in={isOpen}>
-          <Box className="daily-redemption-options-container2" mt={4}>
-            {/* <h2 className="rewards-redemption-title">How to Earn Points</h2> */}
-            <p className="options-description">
-              Earn points by completing any of the actions listed below! Please
-              note: certain actions have daily restrictions. You are welcome to
-              continue completing these actions, but will only accumulate points
-              up to the daily restriction.
+          <Box className="reward-options__container2" mt={4}>
+            <p className="reward-options__description">
+              Keep saving those points! These are the rewards you can work
+              towards by earning more points.
             </p>
-            <div className="redemption-options">
-              {/* Your existing RedemptionOptions content */}
-              <div className="redemption-options-cards">
-                <div className="redemption-options-card">
+
+            <RewardList />
+
+            {/* <div className="reward-options">
+              <div className="redemption-options__cards">
+                <div className="redemption-options__card">
                   <div className="option-icon">
                     <img
                       className="redemption__img"
@@ -130,7 +128,9 @@ export default function RewardOptions() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
+
+            <RedemptionCard />
           </Box>
         </Collapse>
         {/* )} */}

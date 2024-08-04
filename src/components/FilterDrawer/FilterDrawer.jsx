@@ -7,16 +7,10 @@ import {
     DrawerCloseButton,
     DrawerHeader,
     DrawerBody,
-    Stack,
-    Box,
     FormLabel,
-    Input,
     Select,
-    Textarea,
     DrawerFooter,
-    FormControl,
-    FormErrorMessage,
-    filter,
+    Icon,
     // useToast - will use when user tested and upload successful
 } from "@chakra-ui/react";
 import { SettingsIcon } from "@chakra-ui/icons";
@@ -61,8 +55,8 @@ export default function FilterDrawer({ onFilterChange }) {
     return (
         <>
             <button className="filter__button" onClick={onOpen}>
-                {/* <div className="filter__empty-div"></div> */}
-                <SettingsIcon boxSize="1.4rem" />
+                <SettingsIcon boxSize="1.15rem" className="filter__icon" />
+                {/* <Icon as={SettingsIcon} className="filter__icon" /> */}
                 <p className="filter__button-name">Filter Options</p>
             </button>
             <div>

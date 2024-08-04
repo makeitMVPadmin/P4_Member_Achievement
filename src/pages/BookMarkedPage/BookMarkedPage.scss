@@ -6,12 +6,13 @@
 .resource {
   &__container {
     display: flex;
+
     &__img {
-        bottom: 0rem;
-        position: absolute;
-        width: 110%;
-        z-index: -1;
-      }
+      bottom: 0rem;
+      position: absolute;
+      width: 110%;
+      z-index: -1;
+    }
   }
 
   &__cards {
@@ -33,11 +34,11 @@
     min-width: 22%;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 90vh;
 
     @include desktop {
-      width: 20%;
-      min-width: 20%;
+      width: 15%;
+      min-width: 15%;
     }
   }
 }

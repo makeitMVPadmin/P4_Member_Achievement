@@ -1,0 +1,23 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.filter {
+    &__button {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        align-items: center;
+        // padding: 0.2rem 0;
+
+        &-name {
+            font-size: 0.65rem;
+            margin-left: 0.5rem;
+        }
+    }
+
+    &__icon {
+        width: 14%;
+    }
+}

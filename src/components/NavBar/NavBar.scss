@@ -10,7 +10,8 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding: 0 0.5rem;
+    padding: 0.5rem;
+    padding-top: 0.5rem;
     @include border;
     z-index: 99;
     background-color: $white;
@@ -29,14 +30,15 @@
     &:hover,
     &.active {
       cursor: pointer;
-      background-color: $black;
-      color: $white;
+      background-color: $yellow;
+      color: $black;
       @include thin-border;
       box-shadow: none;
+      border: none;
 
-      .nav__icon {
-        filter: invert(1);
-      }
+      // .nav__icon {
+      //   filter: invert(1);
+      // }
     }
   }
 
@@ -97,34 +99,34 @@
     }
   }
 
-  &__sorting {
-    &-item {
-      list-style-type: none;
-      padding-left: 0.5rem;
-    }
+  // &__sorting {
+  //   &-item {
+  //     list-style-type: none;
+  //     padding-left: 0.5rem;
+  //   }
 
-    &-types {
-      display: flex;
-      flex-direction: column;
-    }
+  //   &-types {
+  //     display: flex;
+  //     flex-direction: column;
+  //   }
 
-    &-type {
-      font-size: 0.65rem;
-      letter-spacing: -0.025rem;
-      margin: 0.25rem 0 0 0;
-      padding: 0.35rem;
-      padding-bottom: 0;
-    }
+  //   &-type {
+  //     font-size: 0.65rem;
+  //     letter-spacing: -0.025rem;
+  //     margin: 0.25rem 0 0 0;
+  //     padding: 0.35rem;
+  //     padding-bottom: 0;
+  //   }
 
-    &-subitem {
-      font-size: 0.55rem;
-      letter-spacing: -0.025rem;
-      padding-left: 0.3rem;
-    }
+  //   &-subitem {
+  //     font-size: 0.55rem;
+  //     letter-spacing: -0.025rem;
+  //     padding-left: 0.3rem;
+  //   }
 
-    &-checkbox {
-      vertical-align: middle;
-      margin-left: 0.5rem;
-    }
-  }
+  //   &-checkbox {
+  //     vertical-align: middle;
+  //     margin-left: 0.5rem;
+  //   }
+  // }
 }

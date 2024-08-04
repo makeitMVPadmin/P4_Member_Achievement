@@ -1,6 +1,6 @@
 import "./ResourceDetailCard.scss";
 import arrowForwardIcon from "../../assets/icons/arrow-forward-svgrepo-com.png";
-import timerIcon from "../../assets/icons/timer-2-svgrepo-com.png";
+import timerIcon from "../../assets/icons/timer.png";
 import bookmarkIcon from "../../assets/icons/bookmark-svgrepo-com.svg";
 import bookmarkedIcon from "../../assets/icons/bookmarked.svg";
 import starIcon from "../../assets/icons/star-svgrepo-com.png";

@@ -29,6 +29,7 @@ import { storage, database } from "../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useForm } from "react-hook-form";
 
+
 export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
   const selectTagsRef = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -204,6 +205,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       className="submission__inputField"
                       border="3px solid black"
                       _hover="none"
+                      color='black'
                       fontFamily="Poppins"
                       fontWeight="bold"
                       placeholder="Select"
@@ -212,8 +214,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       iconSize="45px"
                       iconColor="#0099FF"
                       focusBorderColor="black"
-                      {...register("discipline", { required: true })}
-                    >
+                      {...register("discipline", { required: true })}>
                       <option value="Software Engineering">
                         Software Engineering
                       </option>
@@ -302,6 +303,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       _hover="none"
                       fontFamily="Poppins"
                       fontWeight="bold"
+                      color='black'
                       placeholder="Select"
                       fontSize="20px"
                       icon={<ChevronDownIcon />}
@@ -334,6 +336,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       className="submission__inputField"
                       border="3px solid black"
                       _hover="none"
+                      color='black'
                       fontFamily="Poppins"
                       fontWeight="bold"
                       placeholder="Select"
@@ -386,7 +389,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                   </FormControl>
 
                   {/* URL */}
-                  <FormControl isInvalid={errors.url} isRequired={!file}>
+                  <FormControl isInvalid={errors.url} >
                     <FormLabel
                       htmlFor="url"
                       fontSize="20px"

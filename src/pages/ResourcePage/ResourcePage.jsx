@@ -25,16 +25,16 @@ const skillMap = {
 };
 
 const durationMap = {
-  '3 min': 3,
-  '5 min': 5,
-  '7 min': 7,
-  '8 min': 8,
-  '10 min': 10,
-  '20 min': 20,
-  '30 min': 30,
-  '40 min': 40,
-  '50 min': 50,
-  '60 min': 60
+  "3 min": 3,
+  "5 min": 5,
+  "7 min": 7,
+  "8 min": 8,
+  "10 min": 10,
+  "20 min": 20,
+  "30 min": 30,
+  "40 min": 40,
+  "50 min": 50,
+  "60 min": 60,
 };
 
 export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
@@ -49,10 +49,10 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
   const [savedBookmarks, setSavedBookmarks] = useState([]);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [category, setCategory] = useState("All");
-  const [type, setType] = useState([])
+  const [type, setType] = useState([]);
   const [activeResourceId, setActiveResourceId] = useState(null);
-  const [sortField, setSortField] = useState(null)
-  const [sortAscending, setSortAscending] = useState(true)
+  const [sortField, setSortField] = useState(null);
+  const [sortAscending, setSortAscending] = useState(true);
   const [comments, setComments] = useState([]);
   
   useEffect(() => {
@@ -266,6 +266,7 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
             isBookmarked={isBookmarked}
             comments = {comments}
             currentUser = {currentUser}
+
           />
         )}
       </div>

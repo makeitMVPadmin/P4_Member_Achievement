@@ -37,7 +37,7 @@ import { database } from "../../config/firebase";
 //   "60 min": 60,
 // };
 
-export default function ResourcePage({ onBookmarkUpdate }) {
+export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
   // const [resourceDetails, setResourceDetails] = useState(resourceDetailsData)
   // const [resources, setResources] = useState(resourceDetailsData); //1
   // const [selectedResource, setSelectedResource] = useState(resourceDetailsData[0]);
@@ -280,7 +280,9 @@ export default function ResourcePage({ onBookmarkUpdate }) {
             handleToggleBookmarked={handleToggleBookmarked}
             savedBookmarks={savedBookmarks}
             isBookmarked={isBookmarked}
-            comments={comments}
+            comments = {comments}
+            currentUser = {currentUser}
+
           />
         )}
       </div>

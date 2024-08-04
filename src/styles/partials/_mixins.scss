@@ -59,7 +59,7 @@
 }
 
 @mixin border {
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 0.25rem;
   box-shadow: 4px 4px 0 black;
 }
@@ -71,9 +71,15 @@
 }
 
 @mixin thin-border {
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 0.25rem;
   box-shadow: 2px 2px 0 black;
+}
+
+@mixin very-thin-border {
+  border: 2px solid black;
+  border-radius: 0.25rem;
+  box-shadow: 1px 1px 0 black;
 }
 
 @mixin button {

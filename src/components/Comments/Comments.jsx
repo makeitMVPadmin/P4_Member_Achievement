@@ -5,44 +5,76 @@ import blankProfile from "../../assets/icons/BlankProfile.png";
 import CommentVotes from '../CommentVotes/CommentVotes'
 import { CommentModal } from "../CommentModal/CommentModal";
 import { formatDistanceToNow } from "date-fns";
+import { database } from "../../config/firebase";
+import { collection, addDoc, Timestamp, query, where, getDocs } from "firebase/firestore";
 
 
-
-export const Comments = ({ comments }) => {
+export const Comments = ({ comments, currentUser, resourceId }) => {
   const [comment, setComment] = useState("");
   const [postedComments, setPostedComments] = useState(
     comments || []
   );
-  const [isClicked, setIsClicked] = useState(false);
+  // const [isClicked, setIsClicked] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
+  // useEffect(() => {
+  //   setPostedComments(comments || []);
+  // }, [comments]);
+
   useEffect(() => {
-    setPostedComments(comments || []);
-  }, [comments]);
+    const fetchComments = async () => {
+      if (!resourceId) return;
+      console.log("No resourceId provided");
+
+      const commentsRef = collection(database, 'Comments');
+      const q = query(commentsRef, where("resourceId", "==", resourceId));
+      const querySnapshot = await getDocs(q);
+
+      const comments = querySnapshot.docs.map(doc => ({
+        ...doc.data(),
+        commentId: doc.id 
+      }));
+
+      setPostedComments(comments);
+    };
+
+    fetchComments();
+  }, [resourceId]); 
 
   const CommentValue = (e) => {
     setComment(e.target.value);
   };
 
-  const submitComment = (e) => {
+  const submitComment = async (e) => {
     e.preventDefault();
-    if (comment.trim()) {
+    if (comment.trim() && currentUser) {
       const newComment = {
-        id: Date.now().toString(),
-        name: "Anonymous",
-        comment: comment,
+        commentId: Date.now().toString(),
+        content: comment,
+        createdAt: Timestamp.now(), //need this method for Firebase timestamp conversion
+        likedByUser: [],
         likes: 0,
-        timestamp: Date.now(),
+        name: currentUser.name || "Anonymous",
+        resourceId: resourceId || "",
+        userId: currentUser.id || "",
       };
-      setPostedComments([...postedComments, newComment]);
-      setComment("");
-      setShowModal(true);
+      console.log("New Comment Data: ", newComment)
+      try {
+        const commentsRef = collection(database, 'Comments');
+        await addDoc(commentsRef, newComment);
+        setPostedComments(postedComments => [...postedComments, newComment]);
+        setComment("");
+        setShowModal(true);
+      } catch (error) {
+        console.error("Error adding comment: ", error);
+      }
     }
   };
+  
 
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
+  // const handleClick = () => {
+  //   setIsClicked(!isClicked);
+  // };
 
   const closeModal = () => {
     setShowModal(false);
@@ -51,22 +83,22 @@ export const Comments = ({ comments }) => {
   return (
     <div className="comments">
       {postedComments.length > 0 ? (
-        postedComments.sort((a, b) => b.timestamp - a.timestamp).map((postedComments) => (
-          <div key={postedComments.id} className="commentDivs">
+        postedComments.sort((a, b) => b.createdAt.toDate() - a.createdAt.toDate()).map((postedComment) => (
+          <div key={postedComment.commentId} className="commentDivs">
             <img className="commentImg" src={blankProfile} alt="userprofile" aria-label="user profile image" />
             <div className="commentContext">
               <div className="commentHeader">
-                <div className="commenter">{postedComments.name}</div>
+                <div className="commenter">{postedComment.name}</div>
                 <div className="commentDate">
-                  {formatDistanceToNow(new Date(postedComments.createdAt.seconds), {
+                {formatDistanceToNow(postedComment.createdAt.toDate(), {
                     addSuffix: true,
                   })}
                 </div>
                 <div className="thumbsup" aria-label="thumbs up Comment button">
-                <CommentVotes />
+                <CommentVotes commentId={postedComment.commentId} currentUser={currentUser}/>
                 </div>
               </div>
-              <div className="commentText">{postedComments.content}</div>
+              <div className="commentText">{postedComment.content}</div>
             </div>
           </div>
         ))

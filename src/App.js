@@ -7,10 +7,35 @@ import { ChakraProvider } from "@chakra-ui/react";
 import RewardsPage from "./pages/RewardsPage/RewardsPage.jsx";
 import BookMarkedPage from "./pages/BookMarkedPage/BookMarkedPage.jsx";
 import ContributionsPage from "./pages/ContributionsPage/ContributionsPage.jsx";
+import { database } from "./config/firebase.js";
+import { doc, getDoc } from "@firebase/firestore";
 
 const App = () => {
   const [savedBookmarks, setSavedBookmarks] = useState([]);
   const [currentUser, setCurrentUser] = useState("lsIRi5Uu72sATQ7JLIu1"); // Sample current userID
+  const [points, setPoints] = useState(480);
+
+
+  useEffect(() => {
+    // Fetch user data from Firestore
+    const fetchUserData = async () => {
+      try {
+        // Assuming you have a way to get the user ID, replace `userId` with actual user ID.
+        const userId = "lsIRi5Uu72sATQ7JLIu1"; // Replace with actual user ID logic
+        const userDoc = doc(database, "Users", userId);
+        const userSnapshot = await getDoc(userDoc);
+        if (userSnapshot.exists()) {
+          setCurrentUser(userSnapshot.data());
+        } else {
+          console.log("No such user!");
+        }
+      } catch (error) {
+        console.error("Error fetching user data: ", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   useEffect(() => {
     const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
@@ -22,6 +47,9 @@ const App = () => {
     localStorage.setItem("bookmarks", JSON.stringify(updatedBookmarks));
   };
 
+  const handlePointsChange = (newPoints) => {
+    setPoints(newPoints);
+  };
 
   return (
     <>
@@ -32,13 +60,21 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route
               path="/resource"
-              element={<ResourcePage onBookmarkUpdate={handleBookmarkUpdate} />}
+              element={<ResourcePage onBookmarkUpdate={handleBookmarkUpdate} currentUser={currentUser} />}
             />
             <Route
               path="/bookmarked"
               element={<BookMarkedPage bookmarkedResources={savedBookmarks} />}
             />
-            <Route path="/rewards" element={<RewardsPage />} />
+            <Route
+              path="/rewards"
+              element={
+                <RewardsPage
+                  points={points}
+                  onPointsChange={handlePointsChange}
+                />
+              }
+            />
             <Route
               path="/contributions"
               element={<ContributionsPage currentUser={currentUser} />}

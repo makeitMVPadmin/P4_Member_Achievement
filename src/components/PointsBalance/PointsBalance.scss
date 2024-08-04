@@ -3,31 +3,40 @@
 .rewards {
   &__points-wrapper {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 23rem;
-    margin-top: 0.75rem;
   }
 
   &__points-img {
-    width: 2.5rem;
+    width: 2.25rem;
     padding: 0.5rem;
     border-radius: 8px;
     background-color: #f8f8f8;
-  }
+    margin: 1.25rem 0.5rem 0 0;
 
-  &__points-balance-wrapper {
-    display: flex;
-    align-items: center;
+    @include desktop {
+      width: 2.5rem;
+    }
   }
 
   &__points-subtitle {
-    font-size: 0.85rem;
+    font-size: 0.6rem;
+    font-weight: 700;
+
+    @include desktop {
+      font-size: 0.75rem;
+    }
   }
 
   &__points-number {
     font-size: 1rem;
     font-weight: 600;
+    font-family: "Corben";
+    font-size: 2rem;
+
+    @include desktop {
+      font-size: 3rem;
+    }
   }
 
   &__points-next-level {

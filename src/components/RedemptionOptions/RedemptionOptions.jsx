@@ -134,29 +134,3 @@ export default function RedemptionOptions() {
     </ChakraProvider>
   );
 }
-
-{
-  /* <div className="redemption-options-cards">
-        <div className="redemption-options-card">
-            <div class="option-icon">
-                <img src="thumb-icon.png" alt="Like a resource" width="24" height="24"/>
-                <span class="item-text">Like a resource</span>
-            </div>
-            <div class="points">+2 points<br/>Daily limit: 14 points</div>
-        </div>
-        <div className="redemption-options-card">
-            <div class="option-icon">
-                <img src="mark-icon.png" alt="Mark a resource as read" width="24" height="24"/>
-                <span class="item-text">Mark a resource as read</span>
-            </div>
-            <div class="points">+10 points<br/>No daily limit</div>
-        </div>
-        <div className="redemption-options-card">
-            <div class="option-icon">
-                <img src="suggest-icon.png" alt="Suggest a resource" width="24" height="24"/>
-                <span class="item-text">Suggest a resource</span>
-            </div>
-            <div class="points">+20 points<br/>No daily limit</div>
-        </div>
-    </div> */
-}

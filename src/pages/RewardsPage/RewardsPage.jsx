@@ -16,7 +16,6 @@ import { useState } from "react";
 import RewardOptions from "../../components/RewardOptions/RewardOptions";
 
 export default function RewardsPage({ points, onPointsChange }) {
-  // const [points, setPoints] = useState(280);
   const maxPoints = 1000;
 
   // const handleSliderChange = (value) => {
@@ -51,7 +50,6 @@ export default function RewardsPage({ points, onPointsChange }) {
                 max={maxPoints}
                 step={10}
                 sx={{ paddingTop: "11px" }}
-                // onChange={handleSliderChange}
               >
                 <SliderTrack
                   style={{
@@ -67,7 +65,6 @@ export default function RewardsPage({ points, onPointsChange }) {
                     sx={{ paddingTop: "13px" }}
                   />
                 </SliderTrack>
-                {/* <SliderThumb /> */}
               </Slider>
               {[0, 200, 400, 600, 800, 1000].map((value) => (
                 <Box
@@ -99,7 +96,6 @@ export default function RewardsPage({ points, onPointsChange }) {
         </div>
 
         <div className="daily-redemption-options-container">
-          {/* <h2 className="rewards-redemption-title">How to Earn Points</h2> */}
           <div className="redemption-options">
             <RedemptionOptions />
           </div>
@@ -117,18 +113,9 @@ export default function RewardsPage({ points, onPointsChange }) {
             <RedemptionCardTest deductPoints={deductPoints} />
             <RedemptionCardTest deductPoints={deductPoints} />
             <RedemptionCardTest deductPoints={deductPoints} />
-            {/* <RedemptionCard />
-            <RedemptionCard />
-            <RedemptionCard />
-            <RedemptionCard />
-            <RedemptionCard />
-            <RedemptionCard />
-            <RedemptionCard />
-            <RedemptionCard /> */}
           </div>
 
           <div className="reward-options__container">
-            {/* <h2 className="reward-options__title">Reward Options</h2> */}
             <div className="reward-options">
               <RewardOptions />
             </div>

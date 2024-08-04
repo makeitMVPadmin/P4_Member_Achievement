@@ -31,6 +31,8 @@ import { useForm } from "react-hook-form";
 
 
 export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
+
+
   const selectTagsRef = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {

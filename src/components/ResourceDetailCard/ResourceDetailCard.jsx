@@ -44,7 +44,6 @@ export default function ResourceDetailCard({
   };
 
   // console.log(comments)
-  console.log(comments);
 
   return (
     <>

@@ -16,6 +16,7 @@ export default function ResourceDetailCard({
   savedBookmarks,
   isBookmarked,
   comments,
+  currentUser,
 }) {
   const [isRead, setIsRead] = useState(false);
   useEffect(() => {
@@ -64,7 +65,7 @@ export default function ResourceDetailCard({
         <div className="resource-details__heading-bottom">
           <h1 className="resource-details__title">{selectedResource.title}</h1>
         </div>
-        <p className="resource-details__level">{selectedResource.skillLevel}</p>
+        <p className="resource-details__level">{selectedResource.level}</p>
 
         <div className="resource-details__rating-timer-container">
           <div className="resource-details__rating-star-container">
@@ -149,7 +150,7 @@ export default function ResourceDetailCard({
           </div>
         </div>
       </section>
-      <Comments comments={comments} />
+      <Comments comments={comments} currentUser={currentUser} resourceId={selectedResource.id} />
     </>
   );
 }

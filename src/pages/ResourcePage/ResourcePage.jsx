@@ -37,7 +37,7 @@ const durationMap = {
   "60 min": 60,
 };
 
-export default function ResourcePage({ onBookmarkUpdate }) {
+export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
   // const [resourceDetails, setResourceDetails] = useState(resourceDetailsData)
   // const [resources, setResources] = useState(resourceDetailsData); //1
   // const [selectedResource, setSelectedResource] = useState(resourceDetailsData[0]);
@@ -54,7 +54,7 @@ export default function ResourcePage({ onBookmarkUpdate }) {
   const [sortField, setSortField] = useState(null);
   const [sortAscending, setSortAscending] = useState(true);
   const [comments, setComments] = useState([]);
-
+  
   useEffect(() => {
     const getAllResourcesAndRatings = async () => {
       try {
@@ -264,7 +264,9 @@ export default function ResourcePage({ onBookmarkUpdate }) {
             handleToggleBookmarked={handleToggleBookmarked}
             savedBookmarks={savedBookmarks}
             isBookmarked={isBookmarked}
-            comments={comments}
+            comments = {comments}
+            currentUser = {currentUser}
+
           />
         )}
       </div>

@@ -24,6 +24,7 @@ export const Comments = ({ comments, currentUser, resourceId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       if (!resourceId) return;
+      console.log("No resourceId provided");
 
       const commentsRef = collection(database, 'Comments');
       const q = query(commentsRef, where("resourceId", "==", resourceId));

@@ -24,7 +24,6 @@ export default function ResourceDetailCard({
     if (savedReadState) {
       setIsRead(JSON.parse(savedReadState));
     }
-    // console.log(selectedResource.id);
   }, [selectedResource.id]);
 
   const updatePoints = (pointsToAdd) => {
@@ -70,7 +69,7 @@ export default function ResourceDetailCard({
         <div className="resource-details__rating-timer-container">
           <div className="resource-details__rating-star-container">
             <div className="resource-details__stars">
-            <Upvoting resourceId={selectedResource.id} />
+              <Upvoting resourceId={selectedResource.id} />
             </div>
           </div>
           <div className="resource-details__timer">
@@ -129,12 +128,6 @@ export default function ResourceDetailCard({
                 aria-label="Go to Resource"
               >
                 Go to Resource
-                {/* <img
-                  src={arrowForwardIcon}
-                  alt="arrow forward"
-                  className="resource-details__forward-arrow-icon"
-                  aria-hidden="true"
-                /> */}
               </button>
             </Link>
             <button

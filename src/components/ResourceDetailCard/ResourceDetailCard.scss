@@ -224,10 +224,6 @@
 
     &--read {
       background-color: $light-blue;
-
-      // &:hover {
-      //   // background-color: $yellow;
-      // }
     }
     @include thin-border;
   }

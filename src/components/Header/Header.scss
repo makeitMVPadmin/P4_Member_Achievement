@@ -11,6 +11,7 @@ $font-stack-gilroy-bl: "PoppinsBold", serif;
   justify-content: space-between;
   background: #fff;
   padding: 0 0.25rem;
+  margin-top: 0.75rem;
 
   @include desktop {
     height: 11vh;
@@ -24,9 +25,7 @@ $font-stack-gilroy-bl: "PoppinsBold", serif;
   &__main-image {
     height: 4vh;
   }
-  // &__page__link {
 
-  // }
   @include tablet {
     width: 100%;
 
@@ -34,7 +33,7 @@ $font-stack-gilroy-bl: "PoppinsBold", serif;
       align-items: center;
       display: flex;
       justify-content: space-evenly;
-      width: 75vw;
+      width: 42rem;
     }
 
     &__main-icon {
@@ -51,12 +50,12 @@ $font-stack-gilroy-bl: "PoppinsBold", serif;
     }
 
     &__images {
-      height: 2vh;
+      height: 1rem;
     }
 
     &__icon-titles {
       font: 100% $font-stack-gilroy-bl;
-      font-size: 0.5rem;
+      font-size: 0.65rem;
     }
 
     &__user-container {
@@ -79,7 +78,11 @@ $font-stack-gilroy-bl: "PoppinsBold", serif;
 
   @include desktop {
     &__images {
-      height: 3vh;
+      height: 1.25rem;
+    }
+
+    &__navigation {
+      width: 50rem;
     }
 
     &__icon-titles {
@@ -99,61 +102,4 @@ $font-stack-gilroy-bl: "PoppinsBold", serif;
       height: 4vh;
     }
   }
-
-  // @include desktop {
-  //   height: 13vh;
-  //   width: 100%;
-
-  //   &__navigation {
-  //     align-items: center;
-  //     display: flex;
-  //     justify-content: space-evenly;
-  //     width: 65vw;
-  //   }
-
-  //   &__main-icon {
-  //     margin-left: -15px;
-  //     margin-right: 2rem;
-  //   }
-
-  //   &__main-image {
-  //     height: 5vh;
-  //   }
-
-  //   &__icons {
-  //     display: flex;
-  //     flex-direction: column;
-  //     margin: 0.6rem;
-  //   }
-
-  //   &__images {
-  //     height: 2.8vh;
-  //   }
-
-  //   &__icon-titles {
-  //     font: 100% $font-stack-gilroy-bl;
-  //     font-size: 1rem;
-  //   }
-
-  //   &__icon-titles-library {
-  //     font: 100% $font-stack-gilroy-bl;
-  //     font-size: 0.8rem;
-  //   }
-
-  //   &__user-container {
-  //     align-items: center;
-  //     display: flex;
-  //     justify-content: space-between;
-  //   }
-
-  //   &__user-pic {
-  //     width: 5rem;
-  //     height: 5rem;
-  //   }
-
-  //   &__down-carrot {
-  //     height: 1.2vh;
-  //     margin: 0 1rem;
-  //   }
-  // }
 }

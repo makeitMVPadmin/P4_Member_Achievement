@@ -10,27 +10,17 @@
 .options-description {
   font-size: 0.75rem;
   color: gray;
-  margin-right: 0.75rem;
+  font-weight: 700;
+  line-height: 1.25;
 }
 
 .rewards-redemption-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0.75rem 0 0.5rem;
-
-  @include desktop {
-    font-size: 1.5rem;
-  }
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .rewards-redemption-title2 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0 0 0.5rem;
-
-  @include desktop {
-    font-size: 1.5rem;
-  }
+  margin: 1rem 0 0.5rem;
 }
 
 .rewards-right-container {
@@ -46,11 +36,17 @@
   }
 }
 
+.rewards-right-top {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
 .rewards-redemption-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: 0 0.5rem 0 0;
+  margin: 1rem 0.5rem 0 0;
 }
 
 .points-balance-container {
@@ -69,5 +65,37 @@
 }
 
 .pointsBar {
-  margin: 2.5rem;
+  margin: 0;
+  margin-right: 1rem;
+}
+
+.daily-redemption-options-container {
+  @include thin-border;
+  margin: 1rem 1rem 1rem 0.4rem;
+  padding: 0 0.65rem 0.65rem;
+}
+
+:root {
+  --slider-bg: gray;
+}
+
+.chakra-slider.css-1xfb6kw {
+  padding-top: 11px !important;
+}
+
+.reward-options {
+  &__container {
+    @include thin-border;
+    margin: 1rem 1rem 1rem 0.4rem;
+    padding: 0 0.65rem 0.65rem;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  &__title2 {
+    margin: 1rem 0 0.5rem;
+  }
 }

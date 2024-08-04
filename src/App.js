@@ -12,7 +12,9 @@ import { doc, getDoc } from "@firebase/firestore";
 
 const App = () => {
   const [savedBookmarks, setSavedBookmarks] = useState([]);
-  const [currentUser, setCurrentUser] = useState(null); // Sample current userID
+  const [currentUser, setCurrentUser] = useState("lsIRi5Uu72sATQ7JLIu1"); // Sample current userID
+  const [points, setPoints] = useState(480);
+
 
   useEffect(() => {
     // Fetch user data from Firestore
@@ -45,6 +47,9 @@ const App = () => {
     localStorage.setItem("bookmarks", JSON.stringify(updatedBookmarks));
   };
 
+  const handlePointsChange = (newPoints) => {
+    setPoints(newPoints);
+  };
 
   return (
     <>
@@ -61,7 +66,15 @@ const App = () => {
               path="/bookmarked"
               element={<BookMarkedPage bookmarkedResources={savedBookmarks} />}
             />
-            <Route path="/rewards" element={<RewardsPage />} />
+            <Route
+              path="/rewards"
+              element={
+                <RewardsPage
+                  points={points}
+                  onPointsChange={handlePointsChange}
+                />
+              }
+            />
             <Route
               path="/contributions"
               element={<ContributionsPage currentUser={currentUser} />}

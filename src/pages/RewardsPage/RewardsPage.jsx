@@ -14,6 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import RewardOptions from "../../components/RewardOptions/RewardOptions";
+import RedemptionCardTest2 from "../../components/RedemptionCard/RedemptionCardTest2";
+import RedemptionCardTest3 from "../../components/RedemptionCard/RedemptionCardTest3";
 
 export default function RewardsPage({ points, onPointsChange }) {
   const maxPoints = 1000;
@@ -111,8 +113,8 @@ export default function RewardsPage({ points, onPointsChange }) {
           </p>
           <div className="rewards-redemption-cards">
             <RedemptionCardTest deductPoints={deductPoints} />
-            <RedemptionCardTest deductPoints={deductPoints} />
-            <RedemptionCardTest deductPoints={deductPoints} />
+            <RedemptionCardTest2 deductPoints={deductPoints} />
+            <RedemptionCardTest3 deductPoints={deductPoints} />
           </div>
 
           <div className="reward-options__container">

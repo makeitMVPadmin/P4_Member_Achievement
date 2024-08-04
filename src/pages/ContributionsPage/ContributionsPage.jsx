@@ -8,8 +8,13 @@ import ResourceList from "../../components/ResourceList/ResourceList";
 import blueWaveImg from "../../assets/images/blue-wave.png";
 
 function ContributionsPage({ currentUser }) {
+
   const [contributions, setContributions] = useState([]);
   const [displaySelectedResource, setdisplaySelectedResource] = useState([]);
+  const currentUserId = currentUser.userId 
+
+  console.log(currentUserId)
+
 
   useEffect(() => {
     const getAllContributedResources = async () => {
@@ -17,7 +22,7 @@ function ContributionsPage({ currentUser }) {
         const resourcesCollectionRef = collection(database, "Resources");
         const userResourcesQuery = query(
           resourcesCollectionRef,
-          where("userID", "==", currentUser)
+          where("userID", "==", currentUserId)
         );
         const querySnapshot = await getDocs(userResourcesQuery);
         const resourcesData = querySnapshot.docs.map((doc) => ({
@@ -34,10 +39,12 @@ function ContributionsPage({ currentUser }) {
   }, [currentUser]);
 
   // Just to show the log of contributions update after it's been set. Can be deleted.
-  useEffect(() => {
-    console.log("Contributions:");
-    console.log(contributions);
-  }, [contributions]);
+  // useEffect(() => {
+  //   console.log("Contributions:");
+  //   console.log(contributions);
+  // }, [contributions]);
+
+  console.log(contributions);
 
   const handleSelectResource = (clickedId) => {
     const foundResource = contributions.find(
@@ -45,8 +52,6 @@ function ContributionsPage({ currentUser }) {
     );
     setdisplaySelectedResource(foundResource)
   };
-
-  console.log(displaySelectedResource)
 
 
   return (

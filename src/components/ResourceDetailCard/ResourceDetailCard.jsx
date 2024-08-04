@@ -23,7 +23,6 @@ export default function ResourceDetailCard({
     if (savedReadState) {
       setIsRead(JSON.parse(savedReadState));
     }
-    // console.log(selectedResource.id);
   }, [selectedResource.id]);
 
   const updatePoints = (pointsToAdd) => {
@@ -128,12 +127,6 @@ export default function ResourceDetailCard({
                 aria-label="Go to Resource"
               >
                 Go to Resource
-                {/* <img
-                  src={arrowForwardIcon}
-                  alt="arrow forward"
-                  className="resource-details__forward-arrow-icon"
-                  aria-hidden="true"
-                /> */}
               </button>
             </Link>
             <button

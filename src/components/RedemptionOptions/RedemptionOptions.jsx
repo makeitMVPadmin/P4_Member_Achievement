@@ -5,7 +5,6 @@ import commentsIcon from "../../assets/images/comments.png";
 import uploadIcon from "../../assets/images/upload-square-svgrepo-com.png";
 import {
   ChakraProvider,
-  Button,
   Box,
   useDisclosure,
   Collapse,
@@ -29,7 +28,7 @@ export default function RedemptionOptions() {
             backgroundColor={"white"}
           />
         </Box>
-        {/* {isOpen && ( */}
+
         <Collapse in={isOpen}>
           <Box className="daily-redemption-options-container2" mt={4}>
             <p className="options-description">
@@ -129,7 +128,6 @@ export default function RedemptionOptions() {
             </div>
           </Box>
         </Collapse>
-        {/* )} */}
       </Box>
     </ChakraProvider>
   );

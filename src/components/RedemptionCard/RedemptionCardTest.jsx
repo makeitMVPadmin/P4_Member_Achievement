@@ -23,7 +23,6 @@ export default function RedemptionCardTest({ deductPoints }) {
           </div>
         </div>
         <div className="reward__button-container">
-          {/* <RedemptionToast onClick={handleClaimReward} /> */}
           <RedemptionToast onClick={() => deductPoints(300)} />
         </div>
       </div>

@@ -209,6 +209,13 @@ export default function ResourcePage({ onBookmarkUpdate }) {
 
     fetchComments();
   }, [selectedResource.id]);
+
+  const handleFilterChange = ({ type, skill, duration }) => {
+    setType(type === "All" ? [] : [type]);
+    setSkill(skill === "All" ? [] : [skill]);
+    setDuration(duration === "All" ? [] : [duration]);
+  };
+
   // old code below
   // useEffect(() => {
   //   const sortResources = () => {
@@ -239,12 +246,10 @@ export default function ResourcePage({ onBookmarkUpdate }) {
   //   setSortAscending(!sortAscending);
   // };
 
-  const sortDuration = () => {
-    setSortField('duration');
-    setSortAscending(!sortAscending);
-  };
-
-
+  // const sortDuration = () => {
+  //   setSortField('duration');
+  //   setSortAscending(!sortAscending);
+  // };
 
   // const allResources = resources;
 

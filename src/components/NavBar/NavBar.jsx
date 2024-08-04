@@ -13,9 +13,9 @@ import FilterDrawer from "../FilterDrawer/FilterDrawer";
 
 export default function NavBar({ onCategoryChange, onFormSubmit, onFilterChange }) {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
-  const [isSortingOpen, setIsSortingOpen] = useState(false);
+  // const [isSortingOpen, setIsSortingOpen] = useState(false);
   const [category, setCategory] = useState("All");
-  const [types, setTypes] = useState([]);
+  // const [types, setTypes] = useState([]);
   // const [skill, setSkill] = useState('');
   // const [tag, setTags] = useState('')
 
@@ -139,10 +139,10 @@ export default function NavBar({ onCategoryChange, onFormSubmit, onFilterChange 
           </li>
         </NavLink>
         <NavLink to="/contributions">
-        <li className="nav__item">
-          <img src={uploadIcon2} alt="upload file icon" className="nav__icon" />
-          <p className="nav__item-name">Contributions</p>
-        </li>
+          <li className="nav__item">
+            <img src={uploadIcon2} alt="upload file icon" className="nav__icon" />
+            <p className="nav__item-name">Contributions</p>
+          </li>
         </NavLink>
         <NavLink to="/bookmarked">
           <li className="nav__item">

@@ -211,9 +211,9 @@ export default function ResourcePage({ onBookmarkUpdate }) {
   }, [selectedResource.id]);
 
   const handleFilterChange = ({ type, skill, duration }) => {
-    setType(type === "All" ? [] : [type]);
-    setSkill(skill === "All" ? [] : [skill]);
-    setDuration(duration === "All" ? [] : [duration]);
+    setType(type === "All" || type === "" ? [] : [type]);
+    setSkill(skill === "All" || skill === "" ? [] : [skill]);
+    setDuration(duration === "All" || duration === "" ? [] : [duration]);
   };
 
   // old code below

@@ -9,7 +9,6 @@ import { database } from "../../config/firebase";
 import { collection, addDoc, Timestamp, query, where, getDocs } from "firebase/firestore";
 
 
-
 export const Comments = ({ comments, currentUser, resourceId }) => {
   const [comment, setComment] = useState("");
   const [postedComments, setPostedComments] = useState(
@@ -32,15 +31,14 @@ export const Comments = ({ comments, currentUser, resourceId }) => {
 
       const comments = querySnapshot.docs.map(doc => ({
         ...doc.data(),
-        commentId: doc.id // Ensure the ID is included for key
+        commentId: doc.id 
       }));
 
       setPostedComments(comments);
     };
 
     fetchComments();
-  }, [resourceId]); // Fetch comments when resourceId changes
-
+  }, [resourceId]); 
 
   const CommentValue = (e) => {
     setComment(e.target.value);

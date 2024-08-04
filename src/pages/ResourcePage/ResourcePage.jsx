@@ -3,7 +3,15 @@ import NavBar from "../../components/NavBar/NavBar";
 import ResourceDetailCard from "../../components/ResourceDetailCard/ResourceDetailCard";
 import ResourceList from "../../components/ResourceList/ResourceList";
 import "./ResourcePage.scss";
-import { collection, doc, getDoc, getDocs, query, setDoc, where, } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import { database } from "../../config/firebase";
 // import { Comments } from "../../components/Comments/Comments";
 // import resourceData from "../../data/resource.json";
@@ -108,7 +116,8 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
 
   useEffect(() => {
     if (selectedResource) {
-      const savedBookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+      const savedBookmarks =
+        JSON.parse(localStorage.getItem("bookmarks")) || [];
       const isBookmarked = savedBookmarks.some(
         (bookmark) => bookmark.id === selectedResource.id
       );
@@ -118,10 +127,11 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
   }, [selectedResource]);
 
   const filteredResources = resources.filter((resource) => {
-    const currentCategory = category === "All" || resource.discipline === category;
+    const currentCategory =
+      category === "All" || resource.discipline === category;
     const currentType = type.length === 0 || type.includes(resource.type);
     return currentCategory && currentType;
-  })
+  });
 
   // category === "All"
   //   ? resources
@@ -156,7 +166,6 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
     }
   };
 
-
   const getCommentsForSpecificResource = async (resourceId) => {
     const q = query(
       collection(database, "Comments"),
@@ -164,11 +173,11 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
     );
 
     try {
-      const querySnapshot = await getDocs(q); 
+      const querySnapshot = await getDocs(q);
 
       const results = [];
       querySnapshot.forEach((doc) => {
-        results.push({ id: doc.id, ...doc.data() }); 
+        results.push({ id: doc.id, ...doc.data() });
       });
       // console.log(results);
       return results;
@@ -183,14 +192,15 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
   useEffect(() => {
     const fetchComments = async () => {
       if (selectedResource.id) {
-        const comments = await getCommentsForSpecificResource(selectedResource.id);
+        const comments = await getCommentsForSpecificResource(
+          selectedResource.id
+        );
         setComments(comments);
       }
     };
 
     fetchComments();
   }, [selectedResource.id]);
-
 
   // useEffect(() => {
   //   const sortResources = () => {
@@ -217,16 +227,14 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
   // }, [sortField, sortAscending, resources]);
 
   const sortSkill = () => {
-    setSortField('skill');
+    setSortField("skill");
     setSortAscending(!sortAscending);
   };
 
   const sortDuration = () => {
-    setSortField('duration');
+    setSortField("duration");
     setSortAscending(!sortAscending);
   };
-
-  
 
   // const allResources = resources;
 
@@ -246,6 +254,7 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
           resources={filteredResources}
           selectResource={handleSelectResource}
           activeResourceId={activeResourceId}
+          comments={comments}
         />
       </div>
       <div className="resource-details__container">

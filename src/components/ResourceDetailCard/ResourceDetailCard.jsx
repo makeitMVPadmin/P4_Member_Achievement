@@ -9,8 +9,6 @@ import Upvoting from "../Upvoting/Upvoting";
 import { Link } from "react-router-dom";
 import { Comments } from "../Comments/Comments";
 import React, { useState, useEffect } from "react";
-import { database } from "../../config/firebase";
-import { doc, getDoc, collection } from "@firebase/firestore";
 
 export default function ResourceDetailCard({
   selectedResource,
@@ -21,8 +19,6 @@ export default function ResourceDetailCard({
   currentUser,
 }) {
   const [isRead, setIsRead] = useState(false);
-  const [contributorName, setContributorName] = useState(""); 
-
   useEffect(() => {
     const savedReadState = localStorage.getItem(selectedResource.id);
     if (savedReadState) {
@@ -30,28 +26,6 @@ export default function ResourceDetailCard({
     }
     // console.log(selectedResource.id);
   }, [selectedResource.id]);
-
-  useEffect(() => {
-    const fetchContributorName = async () => {
-      console.log(currentUser.id)
-      if (selectedResource.userId) {
-        try {
-          const userRef = doc(database, "Users", selectedResource.userId);
-          const userDoc = await getDoc(userRef);
-          if (userDoc.exists()) {
-            setContributorName(userDoc.data().name || "Unknown User");
-          } else {
-            setContributorName("Unknown User");
-          }
-        } catch (error) {
-          console.error("Error fetching user data: ", error);
-          setContributorName("Unknown User");
-        }
-      }
-    };
-
-    fetchContributorName();
-  }, [selectedResource.userId]);
 
   const updatePoints = (pointsToAdd) => {
     const currentPoints = parseInt(localStorage.getItem("userPoints")) || 0;
@@ -70,8 +44,8 @@ export default function ResourceDetailCard({
     // }
   };
 
-
   // console.log(comments)
+  console.log(comments);
 
   return (
     <>
@@ -96,7 +70,7 @@ export default function ResourceDetailCard({
         <div className="resource-details__rating-timer-container">
           <div className="resource-details__rating-star-container">
             <div className="resource-details__stars">
-              <Upvoting />
+            <Upvoting resourceId={selectedResource.id} />
             </div>
           </div>
           <div className="resource-details__timer">
@@ -137,9 +111,9 @@ export default function ResourceDetailCard({
           <div className="resource-details__author-container">
             <div className="resource-details__avatar" aria-hidden="true"></div>
             <div className="resource-details__author">
-              <p>Submitted by: </p>
+              <p className="resource-details__submission">Submitted by: </p>
               <p className="resource-details__author-name">
-              {contributorName.name || "Anonymous"}
+                {selectedResource.name}
               </p>
             </div>
           </div>

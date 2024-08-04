@@ -25,7 +25,8 @@ export default function RewardsPage({ points, onPointsChange }) {
   // };
 
   const deductPoints = (deduction) => {
-    onPointsChange((prevPoints) => Math.max(prevPoints - deduction, 0));
+    if (points >= deduction)
+      onPointsChange((prevPoints) => Math.max(prevPoints - deduction, 0));
   };
 
   return (
@@ -112,9 +113,9 @@ export default function RewardsPage({ points, onPointsChange }) {
             currently claim.{" "}
           </p>
           <div className="rewards-redemption-cards">
-            <RedemptionCardTest deductPoints={deductPoints} />
-            <RedemptionCardTest2 deductPoints={deductPoints} />
-            <RedemptionCardTest3 deductPoints={deductPoints} />
+            <RedemptionCardTest deductPoints={deductPoints} points={points} />
+            <RedemptionCardTest2 deductPoints={deductPoints} points={points} />
+            <RedemptionCardTest3 deductPoints={deductPoints} points={points} />
           </div>
 
           <div className="reward-options__container">

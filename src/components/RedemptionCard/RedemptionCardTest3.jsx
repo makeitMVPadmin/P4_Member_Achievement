@@ -2,7 +2,9 @@ import Coin from "../../assets/icons/coin.png";
 import "./RedemptionCard.scss";
 import RedemptionToast from "./RedemptionToast";
 
-export default function RedemptionCardTest3({ deductPoints }) {
+export default function RedemptionCardTest3({ points, deductPoints }) {
+  const requiredPoints = 400;
+
   return (
     <section className="reward">
       <div className="reward__heading-top">
@@ -19,7 +21,10 @@ export default function RedemptionCardTest3({ deductPoints }) {
           </div>
         </div>
         <div className="reward__button-container">
-          <RedemptionToast onClick={() => deductPoints(400)} />
+          <RedemptionToast
+            onClick={() => deductPoints(requiredPoints)}
+            // disabled={points < requiredPoints}
+          />
         </div>
       </div>
     </section>

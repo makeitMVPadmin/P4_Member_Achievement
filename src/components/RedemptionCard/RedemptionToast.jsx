@@ -46,6 +46,7 @@ function RedemptionToast({ onClick }) {
           height={window.height}
           recycle={false}
           numberOfPieces={600}
+          style={{ position: "fixed", top: 10, left: 10, zIndex: 1000 }}
         />
       )}
       <button className="reward__claim-button-approve" onClick={handleClick}>

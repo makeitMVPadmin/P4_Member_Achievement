@@ -180,7 +180,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       placeholder="Enter a resource title."
                       border="3px solid black"
                       className="submission__inputField"
-                      _hover="none"
+                      _hover={{}}
                       focusBorderColor="black"
                       fontSize="20px"
                       {...register("title", { required: true })}
@@ -204,7 +204,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       id="discipline"
                       className="submission__inputField"
                       border="3px solid black"
-                      _hover="none"
+                      _hover={{}}
                       color='black'
                       fontFamily="Poppins"
                       fontWeight="bold"
@@ -243,7 +243,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       id="type"
                       className="submission__inputField"
                       border="3px solid black"
-                      _hover="none"
+                      _hover={{}}
                       fontFamily="Poppins"
                       fontWeight="bold"
                       placeholder="Select"
@@ -300,7 +300,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       id="level"
                       className="submission__inputField"
                       border="3px solid black"
-                      _hover="none"
+                      _hover={{}}
                       fontFamily="Poppins"
                       fontWeight="bold"
                       color='black'
@@ -335,7 +335,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       id="estDuration"
                       className="submission__inputField"
                       border="3px solid black"
-                      _hover="none"
+                      _hover={{}}
                       color='black'
                       fontFamily="Poppins"
                       fontWeight="bold"
@@ -377,7 +377,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       placeholder="The clearer and shorter the better."
                       className="submission__inputField"
                       border="3px solid black"
-                      _hover="none"
+                      _hover={{}}
                       focusBorderColor="black"
                       fontSize="20px"
                       height="200px"
@@ -404,7 +404,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       placeholder="Enter the resource URL"
                       className="submission__inputField"
                       border="3px solid black"
-                      _hover="none"
+                      _hover={{}}
                       focusBorderColor="black"
                       fontSize="20px"
                       {...register("url", { required: !file })}

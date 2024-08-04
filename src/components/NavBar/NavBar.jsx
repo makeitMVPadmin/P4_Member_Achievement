@@ -132,12 +132,6 @@ export default function NavBar({ onCategoryChange, onFormSubmit, onFilterChange 
         </ul>
       )}
       <div className="nav__container-top">
-        <NavLink to="/rewards">
-          <li className="nav__item">
-            <img src={trophyIcon} alt="trophy icon" className="nav__icon" />
-            <p className="nav__item-name">Rewards</p>
-          </li>
-        </NavLink>
         <NavLink to="/contributions">
           <li className="nav__item">
             <img src={uploadIcon2} alt="upload file icon" className="nav__icon" />
@@ -152,6 +146,12 @@ export default function NavBar({ onCategoryChange, onFormSubmit, onFilterChange 
               className="nav__icon"
             />
             <p className="nav__item-name">Bookmarked</p>
+          </li>
+        </NavLink>
+        <NavLink to="/rewards">
+          <li className="nav__item">
+            <img src={trophyIcon} alt="trophy icon" className="nav__icon" />
+            <p className="nav__item-name">Rewards</p>
           </li>
         </NavLink>
         {/* <ul className="nav__sorting">

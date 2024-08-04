@@ -10,7 +10,8 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding: 0 0.5rem;
+    padding: 0.5rem;
+    padding-top: 0.5rem;
     @include border;
     z-index: 99;
     // background-color: purple;
@@ -29,14 +30,15 @@
     &:hover,
     &.active {
       cursor: pointer;
-      background-color: $black;
-      color: $white;
+      background-color: $yellow;
+      color: $black;
       @include thin-border;
       box-shadow: none;
+      border: none;
 
-      .nav__icon {
-        filter: invert(1);
-      }
+      // .nav__icon {
+      //   filter: invert(1);
+      // }
     }
   }
 

@@ -10,24 +10,24 @@ import { database } from "../../config/firebase";
 // import resourceDetailsData from "../../data/resource-details.json";
 // import { useNavigate } from "react-router-dom";
 
-const skillMap = {
-  "Beginner Level": 1,
-  "Intermediate Level": 2,
-  "Advanced Level": 3,
-};
+// const skillMap = {
+//   "Beginner Level": 1,
+//   "Intermediate Level": 2,
+//   "Advanced Level": 3,
+// };
 
-const durationMap = {
-  '3 min': 3,
-  '5 min': 5,
-  '7 min': 7,
-  '8 min': 8,
-  '10 min': 10,
-  '20 min': 20,
-  '30 min': 30,
-  '40 min': 40,
-  '50 min': 50,
-  '60 min': 60
-};
+// const durationMap = {
+//   '3 min': 3,
+//   '5 min': 5,
+//   '7 min': 7,
+//   '8 min': 8,
+//   '10 min': 10,
+//   '20 min': 20,
+//   '30 min': 30,
+//   '40 min': 40,
+//   '50 min': 50,
+//   '60 min': 60
+// };
 
 export default function ResourcePage() {
   // const [resourceDetails, setResourceDetails] = useState(resourceDetailsData)
@@ -41,11 +41,14 @@ export default function ResourcePage() {
   const [savedBookmarks, setSavedBookmarks] = useState([]);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [category, setCategory] = useState("All");
-  const [type, setType] = useState([])
   const [activeResourceId, setActiveResourceId] = useState(null);
-  const [sortField, setSortField] = useState(null)
-  const [sortAscending, setSortAscending] = useState(true)
   const [comments, setComments] = useState([]);
+  // const [type, setType] = useState([])
+  // const [sortField, setSortField] = useState(null)
+  // const [sortAscending, setSortAscending] = useState(true)
+  const [type, setType] = useState("")
+  const [skill, setSkill] = useState("")
+  const [duration, setDuration] = useState("")
 
   useEffect(() => {
     const getAllResourcesAndRatings = async () => {
@@ -119,8 +122,13 @@ export default function ResourcePage() {
 
   const filteredResources = resources.filter((resource) => {
     const currentCategory = category === "All" || resource.discipline === category;
-    const currentType = type.length === 0 || type.includes(resource.type);
-    return currentCategory && currentType;
+    const matchesType = type.length === 0 || type.includes(resource.type);
+    const matchesSkill = skill.length === 0 || skill.includes(resource.level);
+    const matchesDuration = duration.length === 0 || duration.includes(resource.duration);
+    // const currentType = type.length === 0 || type.includes(resource.type);
+
+    return currentCategory && matchesType && matchesSkill && matchesDuration;
+    //  && currentType;
   })
 
   // category === "All"
@@ -193,7 +201,7 @@ export default function ResourcePage() {
     fetchComments();
   }, [selectedResource.id]);
 
-
+  // old code below
   // useEffect(() => {
   //   const sortResources = () => {
   //     let sortedResources = [...resources];
@@ -218,17 +226,22 @@ export default function ResourcePage() {
   //   sortResources();
   // }, [sortField, sortAscending, resources]);
 
-  const sortSkill = () => {
-    setSortField('skill');
-    setSortAscending(!sortAscending);
-  };
+  // const sortSkill = () => {
+  //   setSortField('skill');
+  //   setSortAscending(!sortAscending);
+  // };
 
-  const sortDuration = () => {
-    setSortField('duration');
-    setSortAscending(!sortAscending);
-  };
+  // const sortDuration = () => {
+  //   setSortField('duration');
+  //   setSortAscending(!sortAscending);
+  // };
+  // old code above
 
-
+  const handleFilterChange = ({ type, skill, duration }) => {
+    setType(type === "All" ? [] : [type])
+    setSkill(skill === "All" ? [] : [skill]);
+    setDuration(duration = "All" ? [] : [duration]);
+  }
 
   // const allResources = resources;
 
@@ -236,11 +249,12 @@ export default function ResourcePage() {
     <div className="resource__container">
       <div className="resource__navbar-container">
         <NavBar
-          onTypeChange={setType}
           onCategoryChange={setCategory}
           onFormSubmit={handleFormSubmit}
-          sortBySkill={sortSkill}
-          sortByDuration={sortDuration}
+          // onTypeChange={setType}
+          // sortBySkill={sortSkill}
+          // sortByDuration={sortDuration}
+          onFilterChange={handleFilterChange}
         />
       </div>
       <div className="resource__cards">

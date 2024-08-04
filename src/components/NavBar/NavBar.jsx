@@ -11,7 +11,7 @@ import "./NavBar.scss";
 import FilterDrawer from "../FilterDrawer/FilterDrawer";
 
 
-export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, sortBySkill, sortByDuration }) {
+export default function NavBar({ onCategoryChange, onFormSubmit, onFilterChange }) {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   const [isSortingOpen, setIsSortingOpen] = useState(false);
   const [category, setCategory] = useState("All");
@@ -47,31 +47,35 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, s
     setCategory(category);
   };
 
-  const handleSelectType = (type) => {
-    if (location.pathname !== "/resource") {
-      navigate("/resource");
-    }
-    const currentTypes = types.includes(type)
-      ? types.filter(t => t !== type) : [...types, type]
+  // old code blow
 
-    if (typeof onTypeChange === 'function') {
-      onTypeChange(currentTypes);
-    }
+  // const handleSelectType = (type) => {
+  //   if (location.pathname !== "/resource") {
+  //     navigate("/resource");
+  //   }
+  //   const currentTypes = types.includes(type)
+  //     ? types.filter(t => t !== type) : [...types, type]
 
-    setTypes(currentTypes);
-  }
+  //   if (typeof onTypeChange === 'function') {
+  //     onTypeChange(currentTypes);
+  //   }
 
-  const handleSortSkill = () => {
-    if (typeof sortBySkill === "function") {
-      sortBySkill();
-    }
-  }
+  //   setTypes(currentTypes);
+  // }
 
-  const handleSortDuration = () => {
-    if (typeof sortByDuration === "function") {
-      sortByDuration();
-    }
-  }
+  // const handleSortSkill = () => {
+  //   if (typeof sortBySkill === "function") {
+  //     sortBySkill();
+  //   }
+  // }
+
+  // const handleSortDuration = () => {
+  //   if (typeof sortByDuration === "function") {
+  //     sortByDuration();
+  //   }
+  // }
+
+  // old code above
 
   const checkLocation = () => {
     if (location.pathname !== "/resource") {
@@ -183,7 +187,7 @@ export default function NavBar({ onCategoryChange, onTypeChange, onFormSubmit, s
           </li>
         </ul> */}
         <div className="nav__item">
-          <FilterDrawer />
+          <FilterDrawer onFilterChange={onFilterChange} />
         </div>
       </div>
 

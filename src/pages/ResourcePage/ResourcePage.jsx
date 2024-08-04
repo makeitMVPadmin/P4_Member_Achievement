@@ -261,6 +261,7 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
         <NavBar
           onCategoryChange={setCategory}
           onFormSubmit={handleFormSubmit}
+          currentUser={currentUser}
           // onTypeChange={setType}
           // sortBySkill={sortSkill}
           // sortByDuration={sortDuration}

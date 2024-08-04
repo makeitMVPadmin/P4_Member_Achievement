@@ -31,8 +31,7 @@ import { useForm } from "react-hook-form";
 
 
 export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
-
-
+  console.log(currentUser)
   const selectTagsRef = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -80,6 +79,8 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
       const selectedTags = selectedOptions.map((option) => option.value);
 
       const newResource = {
+        name:currentUser.name,
+        userId: currentUser.userId,
         title: data.title,
         discipline: data.discipline,
         type: data.type,
@@ -88,7 +89,6 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
         description: data.description || "",
         url: data.url,
         id: Date.now(),
-        name: "Anonymous", //data.name??
         tag1: selectedTags[0] || "",
         tag2: selectedTags[1] || "",
         tag3: selectedTags[2] || "",

@@ -1,8 +1,9 @@
 import { Box, FormControl, FormLabel, Icon, position } from "@chakra-ui/react";
 import "./SubmissionDrawer.scss";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import React from "react";
+import React, { forwardRef } from "react";
 import Select, { components } from "react-select";
+import { useForm } from "react-hook-form";
 // import makeAnimated from "react-select/animated";
 // import { color, wrap } from "framer-motion";
 // import { hover } from "@testing-library/user-event/dist/hover";
@@ -25,6 +26,7 @@ const customStyles = {
     ...provided,
     // this changes width of entire container
     // maxWidth:"450px",
+    width: "373px",
     border: "3px solid black",
     // borderRadius: "0.25rem",
     boxShadow: "1px 1px 0 black",
@@ -45,7 +47,7 @@ const customStyles = {
     // maxWidth: '500px',
     padding: "0px",
     fontSize: "20px",
-    color: "grey",
+    color: "black",
     fontWeight: "bold",
     fontFamily: "Poppins",
     marginLeft: "14px",
@@ -87,7 +89,7 @@ const customStyles = {
   }),
   placeholder: (provided) => ({
     ...provided,
-    color: "grey",
+    color: "black",
     fontWeight: "bold",
   }),
   input: (provided) => ({
@@ -115,12 +117,14 @@ const options = [
   { value: "wireframes", label: "Wireframes" },
 ];
 
-export default function SelectTags({ selectedOptions, setSelectedOptions }) {
+const SelectTags = forwardRef(({ selectedOptions, setSelectedOptions }, ref) => {
   // const [selectedOptions, setSelectedOptions] = useState([]);
+  // const {
+  //   register,
+  // } = useForm();
 
   return (
-    <Box>
-      <FormControl>
+      <>
         <FormLabel
           htmlFor="owner"
           className="submission__title"
@@ -131,6 +135,7 @@ export default function SelectTags({ selectedOptions, setSelectedOptions }) {
           Tags
         </FormLabel>
         <Select
+      
           closeMenuOnSelect={false}
           components={customComponents}
           isMulti
@@ -142,9 +147,9 @@ export default function SelectTags({ selectedOptions, setSelectedOptions }) {
           id="tags"
           name="tags"
           styles={customStyles}
-          // className='submission__inputField'
         />
-      </FormControl>
-    </Box>
+      </>
   );
-}
+});
+
+export default SelectTags;

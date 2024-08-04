@@ -3,7 +3,15 @@ import NavBar from "../../components/NavBar/NavBar";
 import ResourceDetailCard from "../../components/ResourceDetailCard/ResourceDetailCard";
 import ResourceList from "../../components/ResourceList/ResourceList";
 import "./ResourcePage.scss";
-import { collection, doc, getDoc, getDocs, query, setDoc, where, } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import { database } from "../../config/firebase";
 // import { Comments } from "../../components/Comments/Comments";
 // import resourceData from "../../data/resource.json";
@@ -17,19 +25,19 @@ import { database } from "../../config/firebase";
 // };
 
 // const durationMap = {
-//   '3 min': 3,
-//   '5 min': 5,
-//   '7 min': 7,
-//   '8 min': 8,
-//   '10 min': 10,
-//   '20 min': 20,
-//   '30 min': 30,
-//   '40 min': 40,
-//   '50 min': 50,
-//   '60 min': 60
+//   "3 min": 3,
+//   "5 min": 5,
+//   "7 min": 7,
+//   "8 min": 8,
+//   "10 min": 10,
+//   "20 min": 20,
+//   "30 min": 30,
+//   "40 min": 40,
+//   "50 min": 50,
+//   "60 min": 60,
 // };
 
-export default function ResourcePage() {
+export default function ResourcePage({ onBookmarkUpdate }) {
   // const [resourceDetails, setResourceDetails] = useState(resourceDetailsData)
   // const [resources, setResources] = useState(resourceDetailsData); //1
   // const [selectedResource, setSelectedResource] = useState(resourceDetailsData[0]);
@@ -111,7 +119,8 @@ export default function ResourcePage() {
 
   useEffect(() => {
     if (selectedResource) {
-      const savedBookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+      const savedBookmarks =
+        JSON.parse(localStorage.getItem("bookmarks")) || [];
       const isBookmarked = savedBookmarks.some(
         (bookmark) => bookmark.id === selectedResource.id
       );
@@ -121,7 +130,8 @@ export default function ResourcePage() {
   }, [selectedResource]);
 
   const filteredResources = resources.filter((resource) => {
-    const currentCategory = category === "All" || resource.discipline === category;
+    const currentCategory =
+      category === "All" || resource.discipline === category;
     const matchesType = type.length === 0 || type.includes(resource.type);
     const matchesSkill = skill.length === 0 || skill.includes(resource.level);
     const matchesDuration = duration.length === 0 || duration.includes(resource.duration);
@@ -129,7 +139,7 @@ export default function ResourcePage() {
 
     return currentCategory && matchesType && matchesSkill && matchesDuration;
     //  && currentType;
-  })
+  });
 
   // category === "All"
   //   ? resources
@@ -150,8 +160,7 @@ export default function ResourcePage() {
       );
     }
 
-    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-    setSavedBookmarks(bookmarks);
+    onBookmarkUpdate(bookmarks);
   };
 
   const handleSelectResource = (clickedId) => {
@@ -164,7 +173,6 @@ export default function ResourcePage() {
       setActiveResourceId(clickedId);
     }
   };
-
 
   const getCommentsForSpecificResource = async (resourceId) => {
     const q = query(
@@ -179,8 +187,7 @@ export default function ResourcePage() {
       querySnapshot.forEach((doc) => {
         results.push({ id: doc.id, ...doc.data() });
       });
-
-      console.log(results);
+      // console.log(results);
       return results;
     } catch (err) {
       console.error(err);
@@ -193,14 +200,15 @@ export default function ResourcePage() {
   useEffect(() => {
     const fetchComments = async () => {
       if (selectedResource.id) {
-        const comments = await getCommentsForSpecificResource(selectedResource.id);
+        const comments = await getCommentsForSpecificResource(
+          selectedResource.id
+        );
         setComments(comments);
       }
     };
 
     fetchComments();
   }, [selectedResource.id]);
-
   // old code below
   // useEffect(() => {
   //   const sortResources = () => {
@@ -227,21 +235,16 @@ export default function ResourcePage() {
   // }, [sortField, sortAscending, resources]);
 
   // const sortSkill = () => {
-  //   setSortField('skill');
+  //   setSortField("skill");
   //   setSortAscending(!sortAscending);
   // };
 
-  // const sortDuration = () => {
-  //   setSortField('duration');
-  //   setSortAscending(!sortAscending);
-  // };
-  // old code above
+  const sortDuration = () => {
+    setSortField('duration');
+    setSortAscending(!sortAscending);
+  };
 
-  const handleFilterChange = ({ type, skill, duration }) => {
-    setType(type === "All" ? [] : [type])
-    setSkill(skill === "All" ? [] : [skill]);
-    setDuration(duration = "All" ? [] : [duration]);
-  }
+
 
   // const allResources = resources;
 
@@ -262,6 +265,7 @@ export default function ResourcePage() {
           resources={filteredResources}
           selectResource={handleSelectResource}
           activeResourceId={activeResourceId}
+          comments={comments}
         />
       </div>
       <div className="resource-details__container">

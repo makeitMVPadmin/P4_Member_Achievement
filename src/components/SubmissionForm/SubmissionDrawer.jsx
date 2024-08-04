@@ -22,16 +22,15 @@ import {
   DrawerFooter,
   FormControl,
   FormErrorMessage,
-  // useToast - will use when user tested and upload successful
 } from "@chakra-ui/react";
 import { color } from "framer-motion";
 import { collection, addDoc } from "firebase/firestore";
 import { storage, database } from "../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useForm } from "react-hook-form";
-// import { useForm } from "react-hook-form";
 
 export default function SubmissionDrawer({ onFormSubmit }) {
+  const selectTagsRef = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     register,
@@ -44,9 +43,26 @@ export default function SubmissionDrawer({ onFormSubmit }) {
   const [file, setFile] = useState(null);
   const fileUrl = watch("url");
   const [selectedOptions, setSelectedOptions] = useState([]);
+  
+  function handleSetSelectedOptions(options) {
+
+    setSelectedOptions(options)
+  }
 
   const onSubmit = async (data) => {
     try {
+      console.log("Form data before processing:", data);
+
+      // if (
+      //   !data.title ||
+      //   !data.discipline ||
+      //   !data.type ||
+      //   !data.level ||
+      //   !data.duration
+      // ) {
+      //   throw new Error("All fields are required"); // Example validation logic
+      // }
+
       if (file) {
         const fileRef = ref(storage, `resourceUploads/${file.name}`);
         await uploadBytes(fileRef, file);
@@ -57,10 +73,35 @@ export default function SubmissionDrawer({ onFormSubmit }) {
         throw new Error("Upload a file or provide a URL");
       }
 
-      const docRef = await addDoc(collection(database, "Resources"), data);
-      onFormSubmit({ id: docRef.id, ...data });
 
-      console.log("Form submitted successfully:", data);
+      const selectedTags = selectedOptions.map((option) => option.value);
+
+      const newResource = {
+        title: data.title,
+        discipline: data.discipline,
+        type: data.type,
+        level: data.level,
+        estDuration: data.estDuration,
+        description: data.description || "",
+        url: data.url,
+        id: Date.now(),
+        name: "Anonymous", //data.name??
+        tag1: selectedTags[0] || "",
+        tag2: selectedTags[1] || "",
+        tag3: selectedTags[2] || "",
+        tag4: selectedTags[3] || "",
+        comments: [],
+      };
+
+      const docRef = await addDoc(
+        collection(database, "Resources"),
+        newResource
+      );
+      onFormSubmit({ id: docRef.id, ...newResource });
+
+    
+
+      console.log("Form submitted successfully:", newResource);
 
       // Clear the form and close the drawer
       reset();
@@ -163,6 +204,7 @@ export default function SubmissionDrawer({ onFormSubmit }) {
                       className="submission__inputField"
                       border="3px solid black"
                       _hover="none"
+                      color='black'
                       fontFamily="Poppins"
                       fontWeight="bold"
                       placeholder="Select"
@@ -171,8 +213,7 @@ export default function SubmissionDrawer({ onFormSubmit }) {
                       iconSize="45px"
                       iconColor="#0099FF"
                       focusBorderColor="black"
-                      {...register("discipline", { required: true })}
-                    >
+                      {...register("discipline", { required: true })}>
                       <option value="Software Engineering">
                         Software Engineering
                       </option>
@@ -225,10 +266,23 @@ export default function SubmissionDrawer({ onFormSubmit }) {
 
                   {/* TAGS */}
                   <Box className="submission__form-column">
+                    <FormControl isInvalid={errors.tags}>
                     <SelectTags
+                      id="tags"
+                      ref={selectTagsRef}
                       selectedOptions={selectedOptions}
-                      setSelectedOptions={setSelectedOptions}
+                      setSelectedOptions={handleSetSelectedOptions}
+                      {...register("tags",
+                        {
+                          validate: () => {
+                            return selectedOptions.length > 0
+                          }
+                        })} 
                     />
+                    <FormErrorMessage>
+                      {errors.tags && "Atleast 1 tag is required"}
+                    </FormErrorMessage>
+                    </FormControl>
                   </Box>
 
                   {/* SKILL LEVEL */}
@@ -248,6 +302,7 @@ export default function SubmissionDrawer({ onFormSubmit }) {
                       _hover="none"
                       fontFamily="Poppins"
                       fontWeight="bold"
+                      color='black'
                       placeholder="Select"
                       fontSize="20px"
                       icon={<ChevronDownIcon />}
@@ -280,6 +335,7 @@ export default function SubmissionDrawer({ onFormSubmit }) {
                       className="submission__inputField"
                       border="3px solid black"
                       _hover="none"
+                      color='black'
                       fontFamily="Poppins"
                       fontWeight="bold"
                       placeholder="Select"
@@ -332,7 +388,7 @@ export default function SubmissionDrawer({ onFormSubmit }) {
                   </FormControl>
 
                   {/* URL */}
-                  <FormControl isInvalid={errors.url} isRequired={!file}>
+                  <FormControl isInvalid={errors.url} >
                     <FormLabel
                       htmlFor="url"
                       fontSize="20px"

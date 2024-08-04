@@ -48,13 +48,13 @@
   &__rating-timer-container {
     display: flex;
     justify-content: space-between;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
   }
 
   &__timer {
     display: flex;
     align-items: center;
-    width: 3.75rem;
+    width: 4.25rem;
     color: $black;
   }
 
@@ -62,7 +62,7 @@
     font-size: 0.75rem;
   }
 
-  &__rainting-star-container {
+  &__rating-star-container {
     display: flex;
     align-items: center;
   }
@@ -73,9 +73,13 @@
   }
 
   &__stars {
-    width: 4.5rem;
+    width: 6rem;
     display: flex;
     flex-direction: row;
+
+    @include desktop {
+      width: 5.5rem;
+    }
   }
 
   &__star-icon {
@@ -85,7 +89,7 @@
   }
 
   &__timer-icon {
-    width: 33.5%;
+    width: 28.5%;
     margin-left: 0.45rem;
   }
 
@@ -153,6 +157,10 @@
     align-items: end;
   }
 
+  &__submission {
+    font-size: 0.75rem;
+  }
+
   &__author-container {
     display: flex;
     align-items: center;
@@ -161,7 +169,7 @@
   &__author {
     font-size: 0.85rem;
     display: flex;
-    flex-direction: row;
+    align-items: center;
 
     &-name {
       color: $light-blue;
@@ -181,7 +189,7 @@
     border-radius: 50%;
     height: 2.25rem;
     width: 2.25rem;
-    margin-right: 1rem;
+    margin-right: 0.75rem;
   }
 
   &__buttons-container {

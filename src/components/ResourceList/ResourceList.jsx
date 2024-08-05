@@ -14,7 +14,7 @@ export default function ResourceList(props) {
               resource={resource}
               selectResource={selectResource}
               isActive={resource.id === activeResourceId}
-              comments={comments}
+              comments={comments || []}
             />
           ))
         ) : (

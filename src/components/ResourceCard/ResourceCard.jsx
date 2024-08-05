@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 // import arrowForwardIcon from "../../assets/icons/blue-arrow-forward-svgrepo-com.png";
 import arrowForwardIcon from "../../assets/icons/blue-arrow-forward-svgrepo-com.png";
 import timerIcon from "../../assets/icons/timer.png";
-import Upvoting from "../Upvoting/Upvoting";
 import "./ResourceCard.scss";
 import upvoteImg from "../../assets/images/upvote.png";
 import commentsImg from "../../assets/images/comments.png";
@@ -51,7 +50,7 @@ export default function ResourceCard(props) {
               src={upvoteImg}
               alt="upvote icon"
             />
-            <p className="resource__upvotes-total">0</p>
+            <p className="resource__upvotes-total">{resource.upvote}</p>
           </div>
           <div className="resource__icons">
             <img
@@ -62,8 +61,6 @@ export default function ResourceCard(props) {
             <p className="resource__comments-total">{comments.length}</p>
           </div>
         </div>
-
-        {/* <Upvoting /> */}
       </div>
       <p className="resource__level">{resource.level}</p>
       <div className="resource__about">

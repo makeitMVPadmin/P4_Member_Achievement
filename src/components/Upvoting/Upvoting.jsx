@@ -3,221 +3,183 @@
 ===============*/
 // src/components/Upvoting/Upvoting.jsx
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import "./Upvoting.scss";
+import { getFirestore, doc, getDoc, updateDoc, arrayUnion, arrayRemove, FieldValue } from "firebase/firestore";
+import ThumbIcon from "../../assets/icons/thumbsUpComments.svg";
+import ThumbIconActive from "../../assets/icons/thumbsUpCommentsActive.svg";
 
-/*=========================
-    RESPONSIVE ICON SIZE
-=========================*/
-const getIconSize = () => {
-  const width = window.innerWidth;
-  if (width < 768) return { width: "1rem", height: "1rem" }; // Mobile
-  return { width: "1.25rem", height: "1.25rem" }; // Tablet & Desktop
-};
-
-function Upvoting() {
-  const [upvotes, setUpvotes] = useState(0);
-  const [downvotes, setDownvotes] = useState(0);
-  const [voteStatus, setVoteStatus] = useState(null); // null, "upvoted", "downvoted"
-  const [iconSize, setIconSize] = useState(getIconSize());
-  const [upvoteColors, setUpvoteColors] = useState(
-    "primary:#000000,secondary:#ffffff,tertiary:#ffffff"
-  );
-  const [downvoteColors, setDownvoteColors] = useState(
-    "primary:#000000,secondary:#ffffff,tertiary:#ffffff"
-  );
-
-  const handleResize = useCallback(() => {
-    setIconSize(getIconSize());
-  }, []);
+function Upvoting(props) {
+  const { resourceId, currentUser, initialUpvotes, initialDownvotes, onVoteChange, likedByUser } = props;
+  const [resource, setResource] = useState({
+    upvotes: initialUpvotes,
+    downvotes: initialDownvotes,
+    likedByUser: likedByUser || [],
+    downvotedByUsers: []
+  });
+  const [voteStatus, setVoteStatus] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const db = getFirestore();
 
   useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
+    const fetchResource = async () => {
+      if (resourceId && currentUser) {
+        console.log("Fetching resource with ID:", resourceId);
+        console.log("Current user ID:", currentUser.id);
+        try {
+          const docRef = doc(db, "resources", resourceId);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            const resourceData = docSnap.data();
+            console.log("Document data:", resourceData);
+            setResource({
+              ...resourceData,
+              upvotes: resourceData.upvote || 0,
+              downvotes: resourceData.downvote || 0,
+              likedByUser: resourceData.likedByUser || [],
+              downvotedByUsers: resourceData.downvotedByUsers || []
+            });
+
+            if (resourceData.likedByUser?.includes(currentUser.id)) {
+              setVoteStatus('upvote');
+            } else if (resourceData.downvotedByUsers?.includes(currentUser.id)) {
+              setVoteStatus('downvote');
+            } else {
+              setVoteStatus(null);
+            }
+          } else {
+            console.log("No such document!");
+          }
+        } catch (error) {
+          console.error("Error fetching document:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      } else {
+        setIsLoading(false);
+      }
     };
-  }, [handleResize]);
 
-  /*============
-        UPVOTE
-    ============*/
-  const handleUpvote = () => {
-    if (voteStatus === "upvoted") {
-      setUpvotes(upvotes - 1);
-      setVoteStatus(null);
-      setUpvoteColors("primary:#000000,secondary:#ffffff,tertiary:#ffffff");
-    } else if (voteStatus === "downvoted") {
-      setDownvotes(downvotes - 1);
-      setUpvotes(upvotes + 1);
-      setVoteStatus("upvoted");
-      setUpvoteColors("primary:#000000,secondary:#000000,tertiary:#0099FF");
-      setDownvoteColors("primary:#000000,secondary:#ffffff,tertiary:#ffffff");
-    } else {
-      setUpvotes(upvotes + 1);
-      setVoteStatus("upvoted");
-      setUpvoteColors("primary:#000000,secondary:#000000,tertiary:#0099FF");
+    fetchResource();
+  }, [resourceId, db, currentUser]);
+
+  useEffect(() => {
+    setResource({
+      upvotes: initialUpvotes || 0,
+      downvotes: initialDownvotes || 0,
+      likedByUser: likedByUser || [],
+      downvotedByUsers: []
+    });
+    setVoteStatus(null);
+  }, [resourceId, initialUpvotes, initialDownvotes, likedByUser]);
+
+  const handleVote = async (voteType) => {
+    if (isLoading || !currentUser || !resourceId) {
+      console.error("Invalid state:", { isLoading, currentUser, resourceId });
+      return;
     }
-  };
-
-  /*=============
-        DOWNVOTE
-    =============*/
-  const handleDownvote = () => {
-    if (voteStatus === "downvoted") {
-      setDownvotes(downvotes - 1);
-      setVoteStatus(null);
-      setDownvoteColors("primary:#000000,secondary:#ffffff,tertiary:#ffffff");
-    } else if (voteStatus === "upvoted") {
-      setUpvotes(upvotes - 1);
-      setDownvotes(downvotes + 1);
-      setVoteStatus("downvoted");
-      setDownvoteColors("primary:#000000,secondary:#000000,tertiary:#0099FF");
-      setUpvoteColors("primary:#000000,secondary:#ffffff,tertiary:#ffffff");
-    } else {
-      setDownvotes(downvotes + 1);
-      setVoteStatus("downvoted");
-      setDownvoteColors("primary:#000000,secondary:#000000,tertiary:#0099FF");
+  
+    const userId = currentUser.id;
+    if (!userId) {
+      console.error("User ID is not defined");
+      return;
+    }
+  
+    console.log("ResourceId:", resourceId);
+    console.log("ResourceId type:", typeof resourceId);
+  
+    const docRef = doc(db, "Resources", resourceId);
+    console.log("Attempting to update document:", resourceId);
+  
+    try {
+      const docSnap = await getDoc(docRef);
+      if (!docSnap.exists()) {
+        console.error("Document does not exist:", resourceId);
+        return;
+      }
+  
+      const currentData = docSnap.data();
+      let updates = {};
+  
+      if (voteType === 'upvote') {
+        if (currentData.likedByUser && currentData.likedByUser.includes(userId)) {
+          updates = {
+            upvote: FieldValue.increment(-1),
+            likedByUser: arrayRemove(userId)
+          };
+        } else {
+          updates = {
+            upvote: FieldValue.increment(1),
+            likedByUser: arrayUnion(userId),
+            downvotedByUsers: arrayRemove(userId)
+          };
+          if (currentData.downvotedByUsers && currentData.downvotedByUsers.includes(userId)) {
+            updates.downvote = FieldValue.increment(-1);
+          }
+        }
+      } else if (voteType === 'downvote') {
+        if (currentData.downvotedByUsers && currentData.downvotedByUsers.includes(userId)) {
+          updates = {
+            downvote: FieldValue.increment(-1),
+            downvotedByUsers: arrayRemove(userId)
+          };
+        } else {
+          updates = {
+            downvote: FieldValue.increment(1),
+            downvotedByUsers: arrayUnion(userId),
+            likedByUser: arrayRemove(userId)
+          };
+          if (currentData.likedByUser && currentData.likedByUser.includes(userId)) {
+            updates.upvote = FieldValue.increment(-1);
+          }
+        }
+      }
+  
+      console.log("Updating document with:", updates);
+      await updateDoc(docRef, updates);
+  
+      // Fetch the updated document
+      const updatedDocSnap = await getDoc(docRef);
+      const updatedData = updatedDocSnap.data();
+  
+      const updatedResource = {
+        ...resource,
+        upvotes: updatedData.upvote || 0,
+        downvotes: updatedData.downvote || 0,
+        likedByUser: updatedData.likedByUser || [],
+        downvotedByUsers: updatedData.downvotedByUsers || []
+      };
+  
+      setResource(updatedResource);
+      setVoteStatus(voteType);
+      onVoteChange(updatedResource.upvotes, updatedResource.downvotes, resourceId);
+    } catch (error) {
+      console.error("Error updating vote:", error, { resourceId, userId, voteType });
     }
   };
 
   return (
-    <section className="voting">
+    <div className="voting">
       <div className="voting__container">
-        <lord-icon
-          className="voting__icon"
-          src="https://cdn.lordicon.com/ysheqztl.json"
-          trigger="click"
-          state="hover-up"
-          stroke="bold"
-          colors={upvoteColors}
-          onClick={handleUpvote}
-          aria-label="Upvote"
-          style={iconSize}
-        ></lord-icon>
-        {upvotes}
+        <img
+          src={voteStatus === "upvote" ? ThumbIconActive : ThumbIcon}
+          alt="Thumb up"
+          className={`voting__thumb voting__thumb--up ${voteStatus === "upvote" ? "voting__thumb--active" : ""}`}
+          onClick={() => handleVote("upvote")}
+        />
+        <span className="voting__count">{resource.upvotes}</span>
       </div>
       <div className="voting__container">
-        <lord-icon
-          className="voting__icon"
-          src="https://cdn.lordicon.com/ysheqztl.json"
-          trigger="click"
-          state="hover-down"
-          stroke="bold"
-          colors={downvoteColors}
-          onClick={handleDownvote}
-          aria-label="Downvote"
-          style={iconSize}
-        ></lord-icon>
-        {downvotes}
+        <img
+          src={voteStatus === "downvote" ? ThumbIconActive : ThumbIcon}
+          alt="Thumb down"
+          className={`voting__thumb voting__thumb--down ${voteStatus === "downvote" ? "voting__thumb--active" : ""}`}
+          onClick={() => handleVote("downvote")}
+        />
+        <span className="voting__count">{resource.downvotes}</span>
       </div>
-    </section>
+    </div>
   );
 }
 
 export default Upvoting;
-
-//-----------from LAP4MA-42-upvoting-MM //
-
-// /*===============
-//     UPVOTING
-// ===============*/
-// // src/components/Upvoting/Upvoting.jsx
-
-// import React, { useState, useEffect } from "react";
-// import "./Upvoting.scss";
-// import mockData from "../../data/resource-details.json";
-// import { ReactComponent as ThumbIcon } from "../../assets/icons/thumbsUpComments.svg";
-// import { ReactComponent as ThumbIconActive } from "../../assets/icons/thumbsUpCommentsActive.svg";
-
-// function Upvoting({ resourceId }) {
-//   const [resource, setResource] = useState(null);
-//   const [voteStatus, setVoteStatus] = useState(null);
-
-//   useEffect(() => {
-//     const foundData = mockData.find(item => item.id === resourceId);
-//     if (foundData) {
-//       setResource(foundData);
-//       setVoteStatus(null); // Reset vote status when resource changes
-//     }
-//   }, [resourceId]);
-
-//   if (!resource) {
-//     return null;
-//   }
-
-//   const updateVotes = (voteType) => {
-//     setResource(prevResource => {
-//       const newResource = { ...prevResource };
-
-//       if (voteType === 'upvote') {
-//         if (voteStatus === 'upvote') {
-//           newResource.upvotes -= 1;
-//           setVoteStatus(null);
-//         } else {
-//           if (voteStatus === 'downvote') {
-//             newResource.downvotes -= 1;
-//           }
-//           newResource.upvotes += 1;
-//           setVoteStatus('upvote');
-//         }
-//       } else if (voteType === 'downvote') {
-//         if (voteStatus === 'downvote') {
-//           newResource.downvotes -= 1;
-//           setVoteStatus(null);
-//         } else {
-//           if (voteStatus === 'upvote') {
-//             newResource.upvotes -= 1;
-//           }
-//           newResource.downvotes += 1;
-//           setVoteStatus('downvote');
-//         }
-//       }
-
-//       const index = mockData.findIndex(item => item.id === resourceId);
-//       if (index !== -1) {
-//         mockData[index] = newResource;
-//       }
-
-//       return newResource;
-//     });
-//   };
-
-//   const handleVote = (voteType) => {
-//     updateVotes(voteType);
-//   };
-
-//   return (
-//     <section className="voting">
-//       <div className="voting__container">
-//         {voteStatus === "upvote" ? (
-//           <ThumbIconActive
-//             className="voting__thumb voting__thumb--up voting__thumb--active"
-//             onClick={() => handleVote("upvote")}
-//           />
-//         ) : (
-//           <ThumbIcon
-//             className="voting__thumb voting__thumb--up"
-//             onClick={() => handleVote("upvote")}
-//           />
-//         )}
-//         <span className="voting__count">{resource.upvotes}</span>
-//       </div>
-//       <div className="voting__container">
-//         {voteStatus === "downvote" ? (
-//           <ThumbIconActive
-//             className="voting__thumb voting__thumb--down voting__thumb--active"
-//             onClick={() => handleVote("downvote")}
-//           />
-//         ) : (
-//           <ThumbIcon
-//             className="voting__thumb voting__thumb--down"
-//             onClick={() => handleVote("downvote")}
-//           />
-//         )}
-//         <span className="voting__count">{resource.downvotes}</span>
-//       </div>
-//     </section>
-//   );
-// }
-
-// export default Upvoting;

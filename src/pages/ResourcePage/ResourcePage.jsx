@@ -164,13 +164,13 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
   };
 
   const handleSelectResource = (clickedId) => {
-    const foundResources = resources.find(
-      (resource) => clickedId === resource.id
-    );
-
-    if (foundResources) {
-      setSelectedResource(foundResources);
+    const foundResource = resources.find(resource => resource.id === clickedId);
+    if (foundResource) {
+      console.log("Setting selected resource:", foundResource);
+      setSelectedResource(foundResource);
       setActiveResourceId(clickedId);
+    } else {
+      console.error("Resource not found for id:", clickedId);
     }
   };
 
@@ -194,8 +194,11 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
     }
   };
 
-  // console.log(resources)
-  // console.log(selectedResource.id)
+  useEffect(() => {
+    console.log("Resources:", resources);
+    console.log("Selected Resource:", selectedResource);
+    console.log("Comments:", comments);
+  }, [resources, selectedResource, comments]);
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -253,6 +256,15 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
 
   // const allResources = resources;
 
+  const handleResourceUpdate = (updatedResource) => {
+    setResources(prevResources =>
+      prevResources.map(resource =>
+        resource.id === updatedResource.id ? updatedResource : resource
+      )
+    );
+    setSelectedResource(updatedResource);
+  };
+
   return (
     <div className="resource__container">
       <div className="resource__navbar-container">
@@ -274,15 +286,15 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
         />
       </div>
       <div className="resource-details__container">
-        {selectedResource && (
+        {selectedResource && Object.keys(selectedResource).length > 0 && (
           <ResourceDetailCard
             selectedResource={selectedResource}
             handleToggleBookmarked={handleToggleBookmarked}
             savedBookmarks={savedBookmarks}
             isBookmarked={isBookmarked}
-            comments = {comments}
-            currentUser = {currentUser}
-
+            comments={comments}
+            currentUser={currentUser}
+            onResourceUpdate={handleResourceUpdate}
           />
         )}
       </div>

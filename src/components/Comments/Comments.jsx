@@ -8,7 +8,6 @@ import { formatDistanceToNow } from "date-fns";
 import { database } from "../../config/firebase";
 import { collection, addDoc, Timestamp, query, where, getDocs } from "firebase/firestore";
 
-
 export const Comments = ({ comments, currentUser, resourceId }) => {
   const [comment, setComment] = useState("");
   const [postedComments, setPostedComments] = useState(

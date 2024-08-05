@@ -54,8 +54,6 @@ export default function ResourceDetailCard({
     localStorage.setItem(selectedResource.id, JSON.stringify(newReadState));
   };
 
-  console.log("Passing resourceId to Upvoting:", localResource.id);
-
   return (
     <>
       <section className="resource-details">

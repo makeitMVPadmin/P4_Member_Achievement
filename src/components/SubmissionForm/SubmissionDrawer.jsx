@@ -31,6 +31,7 @@ import { useForm } from "react-hook-form";
 
 
 export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
+  console.log(currentUser)
   const selectTagsRef = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -44,7 +45,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
   const [file, setFile] = useState(null);
   const fileUrl = watch("url");
   const [selectedOptions, setSelectedOptions] = useState([]);
-  
+
   function handleSetSelectedOptions(options) {
 
     setSelectedOptions(options)
@@ -78,6 +79,8 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
       const selectedTags = selectedOptions.map((option) => option.value);
 
       const newResource = {
+        name:currentUser.name,
+        userId: currentUser.userId,
         title: data.title,
         discipline: data.discipline,
         type: data.type,
@@ -86,7 +89,6 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
         description: data.description || "",
         url: data.url,
         id: Date.now(),
-        name: "Anonymous", //data.name??
         tag1: selectedTags[0] || "",
         tag2: selectedTags[1] || "",
         tag3: selectedTags[2] || "",
@@ -100,7 +102,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
       );
       onFormSubmit({ id: docRef.id, ...newResource });
 
-    
+
 
       console.log("Form submitted successfully:", newResource);
 
@@ -127,7 +129,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
     <>
       {/* Upload Resource Button - pulled from navbar component */}
       <button className="nav__button" onClick={onOpen}>
-        <img src={uploadIcon} alt="upload file icon" className="nav__icon" />
+        <img src={uploadIcon} alt="upload file icon" className="nav__icon nav__icon-upload" />
         <p className="nav__button-name">Upload Resource</p>
       </button>
 
@@ -180,7 +182,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       placeholder="Enter a resource title."
                       border="3px solid black"
                       className="submission__inputField"
-                      _hover="none"
+                      _hover={{}}
                       focusBorderColor="black"
                       fontSize="20px"
                       {...register("title", { required: true })}
@@ -204,7 +206,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       id="discipline"
                       className="submission__inputField"
                       border="3px solid black"
-                      _hover="none"
+                      _hover={{}}
                       color='black'
                       fontFamily="Poppins"
                       fontWeight="bold"
@@ -243,7 +245,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       id="type"
                       className="submission__inputField"
                       border="3px solid black"
-                      _hover="none"
+                      _hover={{}}
                       fontFamily="Poppins"
                       fontWeight="bold"
                       placeholder="Select"
@@ -268,21 +270,21 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                   {/* TAGS */}
                   <Box className="submission__form-column">
                     <FormControl isInvalid={errors.tags}>
-                    <SelectTags
-                      id="tags"
-                      ref={selectTagsRef}
-                      selectedOptions={selectedOptions}
-                      setSelectedOptions={handleSetSelectedOptions}
-                      {...register("tags",
-                        {
-                          validate: () => {
-                            return selectedOptions.length > 0
-                          }
-                        })} 
-                    />
-                    <FormErrorMessage>
-                      {errors.tags && "Atleast 1 tag is required"}
-                    </FormErrorMessage>
+                      <SelectTags
+                        id="tags"
+                        ref={selectTagsRef}
+                        selectedOptions={selectedOptions}
+                        setSelectedOptions={handleSetSelectedOptions}
+                        {...register("tags",
+                          {
+                            validate: () => {
+                              return selectedOptions.length > 0
+                            }
+                          })}
+                      />
+                      <FormErrorMessage>
+                        {errors.tags && "Atleast 1 tag is required"}
+                      </FormErrorMessage>
                     </FormControl>
                   </Box>
 
@@ -300,7 +302,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       id="level"
                       className="submission__inputField"
                       border="3px solid black"
-                      _hover="none"
+                      _hover={{}}
                       fontFamily="Poppins"
                       fontWeight="bold"
                       color='black'
@@ -335,7 +337,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       id="estDuration"
                       className="submission__inputField"
                       border="3px solid black"
-                      _hover="none"
+                      _hover={{}}
                       color='black'
                       fontFamily="Poppins"
                       fontWeight="bold"
@@ -377,7 +379,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       placeholder="The clearer and shorter the better."
                       className="submission__inputField"
                       border="3px solid black"
-                      _hover="none"
+                      _hover={{}}
                       focusBorderColor="black"
                       fontSize="20px"
                       height="200px"
@@ -404,7 +406,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       placeholder="Enter the resource URL"
                       className="submission__inputField"
                       border="3px solid black"
-                      _hover="none"
+                      _hover={{}}
                       focusBorderColor="black"
                       fontSize="20px"
                       {...register("url", { required: !file })}

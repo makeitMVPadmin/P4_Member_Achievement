@@ -7,7 +7,10 @@ export default function RewardList() {
   return (
     <div className="reward-list__container">
       {rewardOptionsData.map((reward) => (
-        <section className="reward-list__card">
+        <section
+          key={reward.id}
+          className="reward-list__card"
+        >
           <div className="reward-list__top">
             <p className="reward-list__name">{reward.name}</p>
             <div className="reward-list__points">

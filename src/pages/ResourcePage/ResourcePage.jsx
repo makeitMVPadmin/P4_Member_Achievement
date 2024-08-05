@@ -253,12 +253,15 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
 
   // const allResources = resources;
 
+  console.log(filteredResources)
+
   return (
     <div className="resource__container">
       <div className="resource__navbar-container">
         <NavBar
           onCategoryChange={setCategory}
           onFormSubmit={handleFormSubmit}
+          currentUser={currentUser}
           // onTypeChange={setType}
           // sortBySkill={sortSkill}
           // sortByDuration={sortDuration}

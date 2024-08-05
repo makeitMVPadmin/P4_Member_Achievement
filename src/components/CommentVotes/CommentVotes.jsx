@@ -46,7 +46,7 @@ function Upvoting({ commentId="", currentUser}) {
       // Fetch the current like status when the component mounts
       const fetchCommentData = async () => {
         const commentRef = doc(database, 'Comments', commentId);
-        console.log("Fetching document with ID:", commentId);
+        // console.log("Fetching document with ID:", commentId);
 
       try {
         const commentDoc = await getDoc(commentRef);

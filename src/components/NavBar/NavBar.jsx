@@ -11,7 +11,7 @@ import "./NavBar.scss";
 import FilterDrawer from "../FilterDrawer/FilterDrawer";
 
 
-export default function NavBar({ onCategoryChange, onFormSubmit, onFilterChange }) {
+export default function NavBar({ onCategoryChange, onFormSubmit, onFilterChange, currentUser }) {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   // const [isSortingOpen, setIsSortingOpen] = useState(false);
   const [category, setCategory] = useState("All");
@@ -197,7 +197,7 @@ export default function NavBar({ onCategoryChange, onFormSubmit, onFilterChange 
           <img src={uploadIcon} alt="upload file icon" className="nav__icon" />
           <p className="nav__button-name">Upload Resource</p>
         </button> */}
-        <SubmissionDrawer onFormSubmit={onFormSubmit} />
+        <SubmissionDrawer onFormSubmit={onFormSubmit} currentUser={currentUser} />
       </div>
     </nav>
   );

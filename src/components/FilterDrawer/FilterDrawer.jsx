@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { SettingsIcon } from "@chakra-ui/icons";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router";
 import "./FilterDrawer.scss"
 
 export default function FilterDrawer({ onFilterChange }) {
@@ -25,6 +26,9 @@ export default function FilterDrawer({ onFilterChange }) {
         level: "",
         estDuration: ""
     });
+
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -38,9 +42,14 @@ export default function FilterDrawer({ onFilterChange }) {
     }
 
     const handleFilterChange = (event) => {
-        event.preventDefault();
-        onFilterChange(filters);
-        onClose();
+        if (location.pathname !== "/resource") {
+            navigate("/resource")
+        }
+        if (typeof onFilterChange === "function") {
+            event.preventDefault();
+            onFilterChange(filters);
+            onClose();
+        }
     };
 
     const handleCancel = () => {

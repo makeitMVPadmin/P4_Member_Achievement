@@ -44,7 +44,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
   const [file, setFile] = useState(null);
   const fileUrl = watch("url");
   const [selectedOptions, setSelectedOptions] = useState([]);
-  
+
   function handleSetSelectedOptions(options) {
 
     setSelectedOptions(options)
@@ -100,7 +100,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
       );
       onFormSubmit({ id: docRef.id, ...newResource });
 
-    
+
 
       console.log("Form submitted successfully:", newResource);
 
@@ -127,7 +127,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
     <>
       {/* Upload Resource Button - pulled from navbar component */}
       <button className="nav__button" onClick={onOpen}>
-        <img src={uploadIcon} alt="upload file icon" className="nav__icon" />
+        <img src={uploadIcon} alt="upload file icon" className="nav__icon nav__icon-upload" />
         <p className="nav__button-name">Upload Resource</p>
       </button>
 
@@ -268,21 +268,21 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                   {/* TAGS */}
                   <Box className="submission__form-column">
                     <FormControl isInvalid={errors.tags}>
-                    <SelectTags
-                      id="tags"
-                      ref={selectTagsRef}
-                      selectedOptions={selectedOptions}
-                      setSelectedOptions={handleSetSelectedOptions}
-                      {...register("tags",
-                        {
-                          validate: () => {
-                            return selectedOptions.length > 0
-                          }
-                        })} 
-                    />
-                    <FormErrorMessage>
-                      {errors.tags && "Atleast 1 tag is required"}
-                    </FormErrorMessage>
+                      <SelectTags
+                        id="tags"
+                        ref={selectTagsRef}
+                        selectedOptions={selectedOptions}
+                        setSelectedOptions={handleSetSelectedOptions}
+                        {...register("tags",
+                          {
+                            validate: () => {
+                              return selectedOptions.length > 0
+                            }
+                          })}
+                      />
+                      <FormErrorMessage>
+                        {errors.tags && "Atleast 1 tag is required"}
+                      </FormErrorMessage>
                     </FormControl>
                   </Box>
 

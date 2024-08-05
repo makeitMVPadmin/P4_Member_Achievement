@@ -22,8 +22,8 @@ export default function FilterDrawer({ onFilterChange }) {
 
     const [filters, setFilters] = useState({
         type: "",
-        skill: "",
-        duration: ""
+        level: "",
+        estDuration: ""
     });
 
     const handleChange = (event) => {
@@ -46,8 +46,8 @@ export default function FilterDrawer({ onFilterChange }) {
     const handleCancel = () => {
         setFilters({
             type: "",
-            skill: "",
-            duration: ""
+            level: "",
+            estDuration: ""
         })
         onClose();
     }
@@ -95,35 +95,35 @@ export default function FilterDrawer({ onFilterChange }) {
                                 <option value="All">All</option>
                             </Select>
                             <FormLabel
-                                htmlFor="skill"
+                                htmlFor="level"
                                 fontSize="20px"
                                 fontWeight="bold"
                                 pt={2}
                                 mb={0}
                             >Skill</FormLabel>
                             <Select
-                                id="skill"
-                                name="skill"
-                                value={filters.skill}
+                                id="level"
+                                name="level"
+                                value={filters.level}
                                 onChange={handleChange}
                             >
                                 <option value="" disabled >Select</option>
-                                <option value="Beginner Level">Beginner</option>
-                                <option value="Intermediate Level">Intermediate</option>
-                                <option value="Advanced Level">Advanced</option>
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
                                 <option value="All">All</option>
                             </Select>
                             <FormLabel
-                                htmlFor="duration"
+                                htmlFor="estDuration"
                                 fontSize="20px"
                                 fontWeight="bold"
                                 pt={2}
                                 mb={0}
                             >Duration</FormLabel>
                             <Select
-                                id="duration"
-                                name="duration"
-                                value={filters.duration}
+                                id="estDuration"
+                                name="estDuration"
+                                value={filters.estDuration}
                                 onChange={handleChange}
                             >
                                 <option value="" disabled >Select</option>

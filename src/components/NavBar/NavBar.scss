@@ -48,6 +48,10 @@
     @include desktop {
       width: 11%;
     }
+
+    &-upload {
+      filter: invert(1);
+    }
   }
 
   &__container {
@@ -62,10 +66,14 @@
 
   &__button {
     @include button;
-    background: $black;
-    color: white;
+    background: $light-blue;
+    color: black;
     border: 1px solid black;
     border-radius: 0.25rem;
+    border-top: 2px solid var(--Black, #000);
+    border-right: 4px solid var(--Black, #000);
+    border-bottom: 4px solid var(--Black, #000);
+    border-left: 2px solid var(--Black, #000);
 
     &-name {
       font-size: 0.65rem;

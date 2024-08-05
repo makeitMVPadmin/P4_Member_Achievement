@@ -55,8 +55,8 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
   // const [sortField, setSortField] = useState(null)
   // const [sortAscending, setSortAscending] = useState(true)
   const [type, setType] = useState("")
-  const [skill, setSkill] = useState("")
-  const [duration, setDuration] = useState("")
+  const [level, setLevel] = useState("")
+  const [estDuration, setEstDuration] = useState("")
 
   useEffect(() => {
     const getAllResourcesAndRatings = async () => {
@@ -133,8 +133,8 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
     const currentCategory =
       category === "All" || resource.discipline === category;
     const matchesType = type.length === 0 || type.includes(resource.type);
-    const matchesSkill = skill.length === 0 || skill.includes(resource.level);
-    const matchesDuration = duration.length === 0 || duration.includes(resource.duration);
+    const matchesSkill = level.length === 0 || level.includes(resource.level);
+    const matchesDuration = estDuration.length === 0 || estDuration.includes(resource.estDuration);
     // const currentType = type.length === 0 || type.includes(resource.type);
 
     return currentCategory && matchesType && matchesSkill && matchesDuration;
@@ -210,10 +210,10 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
     fetchComments();
   }, [selectedResource.id]);
 
-  const handleFilterChange = ({ type, skill, duration }) => {
+  const handleFilterChange = ({ type, level, estDuration }) => {
     setType(type === "All" || type === "" ? [] : [type]);
-    setSkill(skill === "All" || skill === "" ? [] : [skill]);
-    setDuration(duration === "All" || duration === "" ? [] : [duration]);
+    setLevel(level === "All" || level === "" ? [] : [level]);
+    setEstDuration(estDuration === "All" || estDuration === "" ? [] : [estDuration]);
   };
 
   // old code below
@@ -280,8 +280,8 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
             handleToggleBookmarked={handleToggleBookmarked}
             savedBookmarks={savedBookmarks}
             isBookmarked={isBookmarked}
-            comments = {comments}
-            currentUser = {currentUser}
+            comments={comments}
+            currentUser={currentUser}
 
           />
         )}

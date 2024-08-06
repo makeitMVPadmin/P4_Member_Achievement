@@ -14,6 +14,8 @@ import {
     // useToast - will use when user tested and upload successful
 } from "@chakra-ui/react";
 import { SettingsIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import uploadIcon from "../../assets/icons/upload-folder-svgrepo-com.png";
 import { useState } from "react";
 import "./FilterDrawer.scss"
 
@@ -77,16 +79,24 @@ export default function FilterDrawer({ onFilterChange }) {
                         <DrawerBody className="submission__form-container">
                             <FormLabel
                                 htmlFor="type"
+                                marginTop="10px"
                                 fontSize="20px"
                                 fontWeight="bold"
                                 pt={2}
-                                mb={0}
+                                mb={3}
                             >Type</FormLabel>
                             <Select
                                 id="type"
                                 name="type"
                                 value={filters.type}
                                 onChange={handleChange}
+                                _hover={{}}
+                                fontSize="20px"
+                                icon={<ChevronDownIcon />}
+                                iconSize="45px"
+                                iconColor="#0099FF"
+                                border="3px solid black"
+                                className="submission__inputField"
                             >
                                 <option value="" disabled >Select</option>
                                 <option value="Article">Article</option>
@@ -98,14 +108,22 @@ export default function FilterDrawer({ onFilterChange }) {
                                 htmlFor="skill"
                                 fontSize="20px"
                                 fontWeight="bold"
+                                marginTop="10px"
                                 pt={2}
-                                mb={0}
+                                mb={3}
                             >Skill</FormLabel>
                             <Select
                                 id="skill"
                                 name="skill"
                                 value={filters.skill}
                                 onChange={handleChange}
+                                _hover={{}}
+                                fontSize="20px"
+                                icon={<ChevronDownIcon />}
+                                iconSize="45px"
+                                iconColor="#0099FF"
+                                border="3px solid black"
+                                className="submission__inputField"
                             >
                                 <option value="" disabled >Select</option>
                                 <option value="Beginner Level">Beginner</option>
@@ -117,14 +135,22 @@ export default function FilterDrawer({ onFilterChange }) {
                                 htmlFor="duration"
                                 fontSize="20px"
                                 fontWeight="bold"
+                                marginTop="10px"
                                 pt={2}
-                                mb={0}
+                                mb={3}
                             >Duration</FormLabel>
                             <Select
                                 id="duration"
                                 name="duration"
                                 value={filters.duration}
                                 onChange={handleChange}
+                                _hover={{}}
+                                icon={<ChevronDownIcon />}
+                                fontSize="20px"
+                                iconSize="45px"
+                                iconColor="#0099FF"
+                                border="3px solid black"
+                                className="submission__inputField"
                             >
                                 <option value="" disabled >Select</option>
                                 <option value="3 min">3 min</option>

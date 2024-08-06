@@ -78,6 +78,8 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
       const selectedTags = selectedOptions.map((option) => option.value);
 
       const newResource = {
+        name:currentUser.name,
+        userID: currentUser.userId,
         title: data.title,
         discipline: data.discipline,
         type: data.type,
@@ -85,8 +87,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
         estDuration: data.estDuration,
         description: data.description || "",
         url: data.url,
-        id: Date.now(),
-        name: "Anonymous", //data.name??
+        // id: Date.now(),
         tag1: selectedTags[0] || "",
         tag2: selectedTags[1] || "",
         tag3: selectedTags[2] || "",
@@ -171,13 +172,12 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       htmlFor="title"
                       fontSize="20px"
                       fontWeight="bold"
-                      _after={{ content: '" *"', color: "black" }}
-                    >
-                      Title
+                      _after={{ content: '" *"', color: "black" }}>Title
                     </FormLabel>
                     <Input
                       id="title"
                       placeholder="Enter a resource title."
+                      _placeholder={{ color: 'grey' }}
                       border="3px solid black"
                       className="submission__inputField"
                       _hover="none"
@@ -197,6 +197,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       fontSize="20px"
                       fontWeight="bold"
                       _after={{ content: '" *"', color: "black" }}
+                      marginTop="10px"
                     >
                       Discipline
                     </FormLabel>
@@ -204,11 +205,12 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       id="discipline"
                       className="submission__inputField"
                       border="3px solid black"
-                      _hover="none"
-                      color='black'
+                      _hover={{}}
+                      // color='black'
                       fontFamily="Poppins"
                       fontWeight="bold"
                       placeholder="Select"
+                      _placeholder={{ color: "grey"}}
                       fontSize="20px"
                       icon={<ChevronDownIcon />}
                       iconSize="45px"
@@ -236,6 +238,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       fontSize="20px"
                       fontWeight="bold"
                       _after={{ content: '" *"', color: "black" }}
+                      marginTop="10px"
                     >
                       Type
                     </FormLabel>
@@ -264,28 +267,6 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       {errors.type && "Type is required"}
                     </FormErrorMessage>
                   </FormControl>
-
-                  {/* TAGS */}
-                  <Box className="submission__form-column">
-                    <FormControl isInvalid={errors.tags}>
-                    <SelectTags
-                      id="tags"
-                      ref={selectTagsRef}
-                      selectedOptions={selectedOptions}
-                      setSelectedOptions={handleSetSelectedOptions}
-                      {...register("tags",
-                        {
-                          validate: () => {
-                            return selectedOptions.length > 0
-                          }
-                        })} 
-                    />
-                    <FormErrorMessage>
-                      {errors.tags && "Atleast 1 tag is required"}
-                    </FormErrorMessage>
-                    </FormControl>
-                  </Box>
-
                   {/* SKILL LEVEL */}
                   <FormControl isInvalid={errors.level}>
                     <FormLabel
@@ -293,6 +274,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       fontSize="20px"
                       fontWeight="bold"
                       _after={{ content: '" *"', color: "black" }}
+                      marginTop="10px"
                     >
                       Skill Level
                     </FormLabel>
@@ -328,6 +310,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       fontSize="20px"
                       fontWeight="bold"
                       _after={{ content: '" *"', color: "black" }}
+                      marginTop="10px"
                     >
                       Estimated Duration
                     </FormLabel>
@@ -335,11 +318,11 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       id="estDuration"
                       className="submission__inputField"
                       border="3px solid black"
-                      _hover="none"
-                      color='black'
+                      _hover={{}}
                       fontFamily="Poppins"
                       fontWeight="bold"
                       placeholder="Select"
+                      _placeholder={{ opacity: 4, color: 'gray.500' }}
                       fontSize="20px"
                       icon={<ChevronDownIcon />}
                       iconSize="45px"
@@ -362,6 +345,27 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                     </FormErrorMessage>
                   </FormControl>
 
+                  {/* TAGS */}
+                  <Box className="submission__form-column">
+                    <FormControl isInvalid={errors.tags}>
+                      <SelectTags
+                        id="tags"
+                        ref={selectTagsRef}
+                        selectedOptions={selectedOptions}
+                        setSelectedOptions={handleSetSelectedOptions}
+                        {...register("tags",
+                          {
+                            validate: () => {
+                              return selectedOptions.length > 0
+                            }
+                          })}
+                      />
+                      <FormErrorMessage>
+                        {errors.tags && "Atleast 1 tag is required"}
+                      </FormErrorMessage>
+                    </FormControl>
+                  </Box>
+
                   {/* DESCRIPTION */}
                   <FormControl isInvalid={errors.description}>
                     <FormLabel
@@ -369,12 +373,14 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       fontSize="20px"
                       fontWeight="bold"
                       _after={{ content: '" *"', color: "black" }}
+                      marginTop="-14px"
                     >
                       Description
                     </FormLabel>
                     <Textarea
                       id="description"
                       placeholder="The clearer and shorter the better."
+                      _placeholder={{ color: 'grey' }}
                       className="submission__inputField"
                       border="3px solid black"
                       _hover="none"
@@ -395,6 +401,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       fontSize="20px"
                       fontWeight="bold"
                       _after={{ content: '" *"', color: "black" }}
+                      marginTop="10px"
                     >
                       URL
                     </FormLabel>
@@ -402,6 +409,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       type="url"
                       id="url"
                       placeholder="Enter the resource URL"
+                      _placeholder={{ color: 'grey' }}
                       className="submission__inputField"
                       border="3px solid black"
                       _hover="none"

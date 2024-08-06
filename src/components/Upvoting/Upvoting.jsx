@@ -3,93 +3,58 @@
 ===============*/
 // src/components/Upvoting/Upvoting.jsx
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./Upvoting.scss";
 import { getFirestore, doc, getDoc, updateDoc, arrayUnion, arrayRemove, increment } from "firebase/firestore";
 import ThumbIcon from "../../assets/icons/thumbsUpComments.svg";
 import ThumbIconActive from "../../assets/icons/thumbsUpCommentsActive.svg";
 
-function Upvoting(props) {
-  const { resourceId, currentUser, initialUpvotes, initialDownvotes, onVoteChange, likedByUser } = props;
-  const [resource, setResource] = useState({
-    upvotes: initialUpvotes,
-    downvotes: initialDownvotes,
-    likedByUser: likedByUser || [],
-    downvotedByUsers: []
-  });
+const Upvoting = React.memo(({ resourceId, currentUser, initialUpvotes, initialDownvotes, onVoteChange }) => {
+  const [upvotes, setUpvotes] = useState(initialUpvotes);
+  const [downvotes, setDownvotes] = useState(initialDownvotes);
   const [voteStatus, setVoteStatus] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const db = getFirestore();
 
   useEffect(() => {
-    const fetchResource = async () => {
-      if (resourceId && currentUser) {
-        console.log("Fetching resource with ID:", resourceId);
-        console.log("Current user ID:", currentUser.id);
-        try {
-          const docRef = doc(db, "Resources", resourceId.toString());
-          const docSnap = await getDoc(docRef);
-          if (docSnap.exists()) {
-            const resourceData = docSnap.data();
-            console.log("Document data:", resourceData);
-            setResource({
-              ...resourceData,
-              upvotes: resourceData.upvote || 0,
-              downvotes: resourceData.downvote || 0,
-              likedByUser: resourceData.likedByUser || [],
-              downvotedByUsers: resourceData.downvotedByUsers || []
-            });
+    const fetchVoteStatus = async () => {
+      if (!currentUser || !resourceId) return;
 
-            if (resourceData.likedByUser?.includes(currentUser.id)) {
-              setVoteStatus('upvote');
-            } else if (resourceData.downvotedByUsers?.includes(currentUser.id)) {
-              setVoteStatus('downvote');
-            } else {
-              setVoteStatus(null);
-            }
+      try {
+        const docRef = doc(db, "Resources", resourceId.toString());
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setUpvotes(data.upvote || 0);
+          setDownvotes(data.downvote || 0);
+
+          if (data.likedByUser && data.likedByUser.includes(currentUser.id)) {
+            setVoteStatus('upvote');
+          } else if (data.downvotedByUsers && data.downvotedByUsers.includes(currentUser.id)) {
+            setVoteStatus('downvote');
           } else {
-            console.log("No such document!");
+            setVoteStatus(null);
           }
-        } catch (error) {
-          console.error("Error fetching document:", error);
-        } finally {
-          setIsLoading(false);
         }
-      } else {
+      } catch (error) {
+        console.error("Error fetching vote status:", error);
+      } finally {
         setIsLoading(false);
       }
     };
 
-    fetchResource();
-  }, [resourceId, db, currentUser]);
+    fetchVoteStatus();
+  }, [resourceId, currentUser, db]);
 
-  useEffect(() => {
-    setResource({
-      upvotes: initialUpvotes || 0,
-      downvotes: initialDownvotes || 0,
-      likedByUser: likedByUser || [],
-      downvotedByUsers: []
-    });
-    setVoteStatus(null);
-  }, [resourceId, initialUpvotes, initialDownvotes, likedByUser]);
-
-  const handleVote = async (voteType) => {
+  const handleVote = useCallback(async (voteType) => {
     if (isLoading || !currentUser || !resourceId) {
-      console.error("Invalid state:", { isLoading, currentUser, resourceId });
       return;
     }
 
+    setIsLoading(true);
     const userId = currentUser.id;
-    if (!userId) {
-      console.error("User ID is not defined");
-      return;
-    }
-
-    console.log("ResourceId:", resourceId);
-    console.log("ResourceId type:", typeof resourceId);
-
     const docRef = doc(db, "Resources", resourceId.toString());
-    console.log("Attempting to update document:", resourceId);
 
     try {
       const docSnap = await getDoc(docRef);
@@ -135,30 +100,23 @@ function Upvoting(props) {
         }
       }
 
-      console.log("Before Firestore update");
       await updateDoc(docRef, updates);
-      console.log("After Firestore update");
 
-      // Fetch the updated document
       const updatedDocSnap = await getDoc(docRef);
       const updatedData = updatedDocSnap.data();
-      console.log("Updated document data:", updatedData);
 
-      const updatedResource = {
-        ...resource,
-        upvotes: updatedData.upvote || 0,
-        downvotes: updatedData.downvote || 0,
-        likedByUser: updatedData.likedByUser || [],
-        downvotedByUsers: updatedData.downvotedByUsers || []
-      };
+      setUpvotes(updatedData.upvote || 0);
+      setDownvotes(updatedData.downvote || 0);
+      setVoteStatus(updatedData.likedByUser?.includes(userId) ? 'upvote' : 
+                    updatedData.downvotedByUsers?.includes(userId) ? 'downvote' : null);
 
-      setResource(updatedResource);
-      setVoteStatus(voteType);
-      onVoteChange(updatedResource.upvotes, updatedResource.downvotes, resourceId);
+      onVoteChange(resourceId, updatedData.upvote || 0, updatedData.downvote || 0);
     } catch (error) {
-      console.error("Error updating vote:", error, { resourceId, userId, voteType });
+      console.error("Error updating vote:", error);
+    } finally {
+      setIsLoading(false);
     }
-  };
+  }, [isLoading, currentUser, resourceId, db, onVoteChange]);
 
   return (
     <div className="voting">
@@ -173,7 +131,7 @@ function Upvoting(props) {
             handleVote("upvote");
           }}
         />
-        <span className="voting__count">{resource.upvotes}</span>
+        <span className="voting__count">{upvotes}</span>
       </div>
       <div className="voting__container">
         <img
@@ -186,10 +144,10 @@ function Upvoting(props) {
             handleVote("downvote");
           }}
         />
-        <span className="voting__count">{resource.downvotes}</span>
+        <span className="voting__count">{downvotes}</span>
       </div>
     </div>
   );
-}
+});
 
 export default Upvoting;

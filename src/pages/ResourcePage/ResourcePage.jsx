@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import ResourceDetailCard from "../../components/ResourceDetailCard/ResourceDetailCard";
 import ResourceList from "../../components/ResourceList/ResourceList";
@@ -101,14 +101,14 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
   };
 
   useEffect(() => {
-    if (resources.length > 0) {
+    if (resources.length > 0 && !activeResourceId) {
       const firstResourceId = resources[0].id;
       setActiveResourceId(firstResourceId);
       setSelectedResource(
         resources.find((resource) => resource.id === firstResourceId)
       );
     }
-  }, [resources]);
+  }, [resources, activeResourceId]);
 
   useEffect(() => {
     if (selectedResource) {
@@ -170,15 +170,14 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
     setDuration(duration === "All" || duration === "" ? [] : [duration]);
   };
 
-  const handleResourceUpdate = (updatedResource) => {
-    console.log('handleResourceUpdate called', updatedResource);
-    setResources((prevResources) =>
-      prevResources.map((resource) =>
-        resource.id === updatedResource.id ? updatedResource : resource
+  const handleResourceUpdate = useCallback((updatedResource) => {
+    setResources(prevResources =>
+      prevResources.map(resource =>
+        resource.id === updatedResource.id ? { ...resource, ...updatedResource } : resource
       )
     );
-    setSelectedResource(updatedResource);
-  };
+    setSelectedResource(prev => ({ ...prev, ...updatedResource }));
+  }, []);
 
   return (
     <div className="resource__container">

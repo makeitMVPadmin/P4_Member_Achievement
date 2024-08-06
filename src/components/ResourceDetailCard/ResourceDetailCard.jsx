@@ -5,10 +5,10 @@ import bookmarkedIcon from "../../assets/icons/bookmarked.svg";
 import Upvoting from "../Upvoting/Upvoting";
 import { Link } from "react-router-dom";
 import { Comments } from "../Comments/Comments";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 // ResourceDetailCard.jsx
-export default function ResourceDetailCard({
+const ResourceDetailCard = React.memo(({
   selectedResource,
   handleToggleBookmarked,
   savedBookmarks,
@@ -16,26 +16,28 @@ export default function ResourceDetailCard({
   comments,
   currentUser,
   onResourceUpdate,
-}) {
+}) => {
   const [localResource, setLocalResource] = useState(selectedResource);
 
   useEffect(() => {
     setLocalResource(selectedResource);
   }, [selectedResource]);
 
-  const handleVoteChange = (upvotes, downvotes, resourceId) => {
-    setLocalResource(prev => {
-      const updatedResource = {
-        ...prev,
-        upvotes,
-        downvotes
-      };
-      if (onResourceUpdate) {
-        onResourceUpdate(updatedResource);
-      }
-      return updatedResource;
-    });
-  };
+  const handleVoteChange = useCallback((resourceId, upvotes, downvotes) => {
+    setLocalResource(prev => ({
+      ...prev,
+      upvote: upvotes,
+      downvote: downvotes
+    }));
+    if (onResourceUpdate) {
+      onResourceUpdate({
+        ...localResource,
+        id: resourceId,
+        upvote: upvotes,
+        downvote: downvotes
+      });
+    }
+  }, [localResource, onResourceUpdate]);
 
   const [isRead, setIsRead] = useState(false);
   useEffect(() => {
@@ -85,13 +87,12 @@ export default function ResourceDetailCard({
         <div className="resource-details__rating-timer-container">
           <div className="resource-details__rating-star-container">
             <div className="resource-details__stars">
-            <Upvoting
+              <Upvoting
                 resourceId={localResource.id}
                 currentUser={currentUser}
                 initialUpvotes={localResource.upvote}
                 initialDownvotes={localResource.downvote}
                 onVoteChange={handleVoteChange}
-                likedByUser={localResource.likedByUser}
               />
             </div>
           </div>
@@ -169,4 +170,6 @@ export default function ResourceDetailCard({
       <Comments comments={comments} currentUser={currentUser} resourceId={selectedResource.id} />
     </>
   );
-}
+});
+
+export default ResourceDetailCard;

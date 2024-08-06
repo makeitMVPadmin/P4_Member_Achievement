@@ -4,6 +4,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import React, { forwardRef } from "react";
 import Select, { components } from "react-select";
 import { useForm } from "react-hook-form";
+import { color } from "framer-motion";
 // import makeAnimated from "react-select/animated";
 // import { color, wrap } from "framer-motion";
 // import { hover } from "@testing-library/user-event/dist/hover";
@@ -30,13 +31,14 @@ const customStyles = {
     border: "3px solid black",
     // borderRadius: "0.25rem",
     boxShadow: "1px 1px 0 black",
-    borderRadius: "6px",
+    borderRadius: "5px",
     // height: '43px',
     ":hover": { 
       borderColor: "black",
     },
     "&:focus": { outline: "none" },
   }),
+
   valueContainer: (provided) => ({
     ...provided,
     display: "flex",
@@ -89,7 +91,7 @@ const customStyles = {
   }),
   placeholder: (provided) => ({
     ...provided,
-    color: "black",
+    color: "grey",
     fontWeight: "bold",
   }),
   input: (provided) => ({
@@ -129,13 +131,14 @@ const SelectTags = forwardRef(({ selectedOptions, setSelectedOptions }, ref) => 
           htmlFor="owner"
           className="submission__title"
           fontSize="20px"
+          fontFamily="Poppins"
           fontWeight="bold"
+          marginTop="10px"
           _after={{ content: '" *"', color: "black" }}
         >
           Tags
         </FormLabel>
         <Select
-      
           closeMenuOnSelect={false}
           components={customComponents}
           isMulti
@@ -144,6 +147,7 @@ const SelectTags = forwardRef(({ selectedOptions, setSelectedOptions }, ref) => 
           onChange={(o) => setSelectedOptions(o)}
           isOptionDisabled={() => selectedOptions.length >= 4}
           placeholder="Select up to 4 tags"
+          _placeHolder={{ color: "gray.500"}}
           id="tags"
           name="tags"
           styles={customStyles}

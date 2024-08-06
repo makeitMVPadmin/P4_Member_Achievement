@@ -1,15 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// import arrowForwardIcon from "../../assets/icons/blue-arrow-forward-svgrepo-com.png";
+import { query, collection, where, getDocs } from "firebase/firestore";
+import { database } from "../../config/firebase";
 import arrowForwardIcon from "../../assets/icons/blue-arrow-forward-svgrepo-com.png";
 import timerIcon from "../../assets/icons/timer.png";
-import Upvoting from "../Upvoting/Upvoting";
 import "./ResourceCard.scss";
 import upvoteImg from "../../assets/images/upvote.png";
 import commentsImg from "../../assets/images/comments.png";
 
-export default function ResourceCard(props) {
-  const { resource, selectResource, isActive, comments } = props;
+export default function ResourceCard({ resource, selectResource, isActive }) {
+  const [commentsCount, setCommentsCount] = useState(0);
+
+  useEffect(() => {
+    const fetchCommentsCount = async () => {
+      try {
+        const commentsRef = collection(database, 'Comments');
+        const q = query(commentsRef, where("resourceId", "==", resource.id));
+        const querySnapshot = await getDocs(q);
+        
+        const validCommentsCount = querySnapshot.size;
+        setCommentsCount(validCommentsCount);
+
+        console.log("Valid comments count:", validCommentsCount);
+
+      } catch (error) {
+        console.error("Error fetching comments count:", error);
+      }
+    };
+
+    fetchCommentsCount();
+  }, [resource.id]);
 
   const handleClickCard = () => {
     selectResource(resource.id);
@@ -51,7 +71,7 @@ export default function ResourceCard(props) {
               src={upvoteImg}
               alt="upvote icon"
             />
-            <p className="resource__upvotes-total">0</p>
+            <p className="resource__upvotes-total">{resource.upvote || "0"}</p>
           </div>
           <div className="resource__icons">
             <img
@@ -59,11 +79,9 @@ export default function ResourceCard(props) {
               src={commentsImg}
               alt="comments icon"
             />
-            <p className="resource__comments-total">{comments.length}</p>
+            <p className="resource__comments-total">{commentsCount}</p>
           </div>
         </div>
-
-        {/* <Upvoting /> */}
       </div>
       <p className="resource__level">{resource.level}</p>
       <div className="resource__about">

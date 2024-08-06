@@ -1,23 +1,44 @@
 import "./ResourceDetailCard.scss";
-import arrowForwardIcon from "../../assets/icons/arrow-forward-svgrepo-com.png";
 import timerIcon from "../../assets/icons/timer.png";
 import bookmarkIcon from "../../assets/icons/bookmark-svgrepo-com.svg";
 import bookmarkedIcon from "../../assets/icons/bookmarked.svg";
-import starIcon from "../../assets/icons/star-svgrepo-com.png";
-import savedIcon from "../../assets/icons/saved-svgrepo-com.png";
 import Upvoting from "../Upvoting/Upvoting";
 import { Link } from "react-router-dom";
 import { Comments } from "../Comments/Comments";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
-export default function ResourceDetailCard({
+// ResourceDetailCard.jsx
+const ResourceDetailCard = React.memo(({
   selectedResource,
   handleToggleBookmarked,
   savedBookmarks,
   isBookmarked,
   comments,
   currentUser,
-}) {
+  onResourceUpdate,
+}) => {
+  const [localResource, setLocalResource] = useState(selectedResource);
+
+  useEffect(() => {
+    setLocalResource(selectedResource);
+  }, [selectedResource]);
+
+  const handleVoteChange = useCallback((resourceId, upvotes, downvotes) => {
+    setLocalResource(prev => ({
+      ...prev,
+      upvote: upvotes,
+      downvote: downvotes
+    }));
+    if (onResourceUpdate) {
+      onResourceUpdate({
+        ...localResource,
+        id: resourceId,
+        upvote: upvotes,
+        downvote: downvotes
+      });
+    }
+  }, [localResource, onResourceUpdate]);
+
   const [isRead, setIsRead] = useState(false);
   useEffect(() => {
     const savedReadState = localStorage.getItem(selectedResource.id);
@@ -26,11 +47,11 @@ export default function ResourceDetailCard({
     }
   }, [selectedResource.id]);
 
-  const updatePoints = (pointsToAdd) => {
-    const currentPoints = parseInt(localStorage.getItem("userPoints")) || 0;
-    const newPoints = currentPoints + pointsToAdd;
-    localStorage.setItem("userPoints", newPoints);
-  };
+  // const updatePoints = (pointsToAdd) => {
+  //   const currentPoints = parseInt(localStorage.getItem("userPoints")) || 0;
+  //   const newPoints = currentPoints + pointsToAdd;
+  //   localStorage.setItem("userPoints", newPoints);
+  // };
 
   const handleToggleRead = () => {
     const newReadState = !isRead;
@@ -42,8 +63,6 @@ export default function ResourceDetailCard({
     //   updatePoints(-10);
     // }
   };
-
-  // console.log(comments)
 
   return (
     <>
@@ -68,9 +87,16 @@ export default function ResourceDetailCard({
         <div className="resource-details__rating-timer-container">
           <div className="resource-details__rating-star-container">
             <div className="resource-details__stars">
-              <Upvoting resourceId={selectedResource.id} />
+              <Upvoting
+                resourceId={localResource.id}
+                currentUser={currentUser}
+                initialUpvotes={localResource.upvote}
+                initialDownvotes={localResource.downvote}
+                onVoteChange={handleVoteChange}
+              />
             </div>
           </div>
+
           <div className="resource-details__timer">
             <p className="resource-details__duration">
               {selectedResource.estDuration}
@@ -130,9 +156,8 @@ export default function ResourceDetailCard({
               </button>
             </Link>
             <button
-              className={`resource-details__button ${
-                isRead ? "resource-details__button--read" : ""
-              }`}
+              className={`resource-details__button ${isRead ? "resource-details__button--read" : ""
+                }`}
               onClick={handleToggleRead}
               aria-pressed={isRead}
               aria-label={isRead ? "Read!" : "Mark as Read"}
@@ -145,4 +170,6 @@ export default function ResourceDetailCard({
       <Comments comments={comments} currentUser={currentUser} resourceId={selectedResource.id} />
     </>
   );
-}
+});
+
+export default ResourceDetailCard;

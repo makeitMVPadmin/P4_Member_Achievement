@@ -79,8 +79,8 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
       const selectedTags = selectedOptions.map((option) => option.value);
 
       const newResource = {
-        name:currentUser.name,
-        userID: currentUser.userId,
+        name: currentUser ? `${currentUser.firstName} ${currentUser.lastName.charAt(0)}.` : "Anonymous",
+        userID: currentUser,
         title: data.title,
         discipline: data.discipline,
         type: data.type,
@@ -88,12 +88,16 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
         estDuration: data.estDuration,
         description: data.description || "",
         url: data.url,
-        // id: Date.now(),
         tag1: selectedTags[0] || "",
         tag2: selectedTags[1] || "",
         tag3: selectedTags[2] || "",
         tag4: selectedTags[3] || "",
         comments: [],
+        commentsCount: 0,
+        likedByUser: [],
+        downvotedByUsers: [],
+        firstName: currentUser ? currentUser.firstName : "",
+        lastName: currentUser ? currentUser.lastName : "",
       };
 
       const docRef = await addDoc(
@@ -211,7 +215,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       fontFamily="Poppins"
                       fontWeight="bold"
                       placeholder="Select"
-                      _placeholder={{ color: "grey"}}
+                      _placeholder={{ color: "grey" }}
                       fontSize="20px"
                       icon={<ChevronDownIcon />}
                       iconSize="45px"

@@ -6,7 +6,7 @@ export default function RedemptionCard() {
   return (
     <div className="reward-options__cards2">
       {rewardOptionsData.map((reward) => (
-        <section className="reward reward--error">
+        <section key={reward.id}  className="reward reward--error">
           <div className="reward__heading-top">
             <div className="reward__heading-top-container">
               <h1 className="reward__title">{reward.name}</h1>

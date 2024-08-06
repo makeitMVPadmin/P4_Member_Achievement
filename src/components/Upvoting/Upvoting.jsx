@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect } from "react";
 import "./Upvoting.scss";
-import { getFirestore, doc, getDoc, updateDoc, arrayUnion, arrayRemove, FieldValue } from "firebase/firestore";
+import { getFirestore, doc, getDoc, updateDoc, arrayUnion, arrayRemove, increment } from "firebase/firestore";
 import ThumbIcon from "../../assets/icons/thumbsUpComments.svg";
 import ThumbIconActive from "../../assets/icons/thumbsUpCommentsActive.svg";
 
@@ -27,7 +27,7 @@ function Upvoting(props) {
         console.log("Fetching resource with ID:", resourceId);
         console.log("Current user ID:", currentUser.id);
         try {
-          const docRef = doc(db, "resources", resourceId);
+          const docRef = doc(db, "Resources", resourceId.toString());
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
             const resourceData = docSnap.data();
@@ -78,70 +78,72 @@ function Upvoting(props) {
       console.error("Invalid state:", { isLoading, currentUser, resourceId });
       return;
     }
-  
+
     const userId = currentUser.id;
     if (!userId) {
       console.error("User ID is not defined");
       return;
     }
-  
+
     console.log("ResourceId:", resourceId);
     console.log("ResourceId type:", typeof resourceId);
-  
-    const docRef = doc(db, "Resources", resourceId);
+
+    const docRef = doc(db, "Resources", resourceId.toString());
     console.log("Attempting to update document:", resourceId);
-  
+
     try {
       const docSnap = await getDoc(docRef);
       if (!docSnap.exists()) {
         console.error("Document does not exist:", resourceId);
         return;
       }
-  
+
       const currentData = docSnap.data();
       let updates = {};
-  
+
       if (voteType === 'upvote') {
         if (currentData.likedByUser && currentData.likedByUser.includes(userId)) {
           updates = {
-            upvote: FieldValue.increment(-1),
+            upvote: increment(-1),
             likedByUser: arrayRemove(userId)
           };
         } else {
           updates = {
-            upvote: FieldValue.increment(1),
+            upvote: increment(1),
             likedByUser: arrayUnion(userId),
             downvotedByUsers: arrayRemove(userId)
           };
           if (currentData.downvotedByUsers && currentData.downvotedByUsers.includes(userId)) {
-            updates.downvote = FieldValue.increment(-1);
+            updates.downvote = increment(-1);
           }
         }
       } else if (voteType === 'downvote') {
         if (currentData.downvotedByUsers && currentData.downvotedByUsers.includes(userId)) {
           updates = {
-            downvote: FieldValue.increment(-1),
+            downvote: increment(-1),
             downvotedByUsers: arrayRemove(userId)
           };
         } else {
           updates = {
-            downvote: FieldValue.increment(1),
+            downvote: increment(1),
             downvotedByUsers: arrayUnion(userId),
             likedByUser: arrayRemove(userId)
           };
           if (currentData.likedByUser && currentData.likedByUser.includes(userId)) {
-            updates.upvote = FieldValue.increment(-1);
+            updates.upvote = increment(-1);
           }
         }
       }
-  
-      console.log("Updating document with:", updates);
+
+      console.log("Before Firestore update");
       await updateDoc(docRef, updates);
-  
+      console.log("After Firestore update");
+
       // Fetch the updated document
       const updatedDocSnap = await getDoc(docRef);
       const updatedData = updatedDocSnap.data();
-  
+      console.log("Updated document data:", updatedData);
+
       const updatedResource = {
         ...resource,
         upvotes: updatedData.upvote || 0,
@@ -149,7 +151,7 @@ function Upvoting(props) {
         likedByUser: updatedData.likedByUser || [],
         downvotedByUsers: updatedData.downvotedByUsers || []
       };
-  
+
       setResource(updatedResource);
       setVoteStatus(voteType);
       onVoteChange(updatedResource.upvotes, updatedResource.downvotes, resourceId);
@@ -165,7 +167,11 @@ function Upvoting(props) {
           src={voteStatus === "upvote" ? ThumbIconActive : ThumbIcon}
           alt="Thumb up"
           className={`voting__thumb voting__thumb--up ${voteStatus === "upvote" ? "voting__thumb--active" : ""}`}
-          onClick={() => handleVote("upvote")}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleVote("upvote");
+          }}
         />
         <span className="voting__count">{resource.upvotes}</span>
       </div>
@@ -174,7 +180,11 @@ function Upvoting(props) {
           src={voteStatus === "downvote" ? ThumbIconActive : ThumbIcon}
           alt="Thumb down"
           className={`voting__thumb voting__thumb--down ${voteStatus === "downvote" ? "voting__thumb--active" : ""}`}
-          onClick={() => handleVote("downvote")}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleVote("downvote");
+          }}
         />
         <span className="voting__count">{resource.downvotes}</span>
       </div>

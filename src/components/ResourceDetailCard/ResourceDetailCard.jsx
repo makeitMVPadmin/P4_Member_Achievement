@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Comments } from "../Comments/Comments";
 import React, { useState, useEffect } from "react";
 
+// ResourceDetailCard.jsx
 export default function ResourceDetailCard({
   selectedResource,
   handleToggleBookmarked,
@@ -19,25 +20,21 @@ export default function ResourceDetailCard({
   const [localResource, setLocalResource] = useState(selectedResource);
 
   useEffect(() => {
-    console.log("Selected resource:", selectedResource); // Debug log
     setLocalResource(selectedResource);
   }, [selectedResource]);
 
   const handleVoteChange = (upvotes, downvotes, resourceId) => {
-    console.log("Vote change:", upvotes, downvotes, resourceId); // Debug log
-    setLocalResource(prev => ({
-      ...prev,
-      upvotes,
-      downvotes
-    }));
-    if (onResourceUpdate) {
-      onResourceUpdate({
-        ...localResource,
-        id: resourceId,
+    setLocalResource(prev => {
+      const updatedResource = {
+        ...prev,
         upvotes,
         downvotes
-      });
-    }
+      };
+      if (onResourceUpdate) {
+        onResourceUpdate(updatedResource);
+      }
+      return updatedResource;
+    });
   };
 
   const [isRead, setIsRead] = useState(false);
@@ -48,13 +45,22 @@ export default function ResourceDetailCard({
     }
   }, [selectedResource.id]);
 
+  // const updatePoints = (pointsToAdd) => {
+  //   const currentPoints = parseInt(localStorage.getItem("userPoints")) || 0;
+  //   const newPoints = currentPoints + pointsToAdd;
+  //   localStorage.setItem("userPoints", newPoints);
+  // };
+
   const handleToggleRead = () => {
     const newReadState = !isRead;
     setIsRead(newReadState);
     localStorage.setItem(selectedResource.id, JSON.stringify(newReadState));
+    // if (newReadState) {
+    //   updatePoints(10);
+    // } else {
+    //   updatePoints(-10);
+    // }
   };
-
-  console.log("Passing resourceId to Upvoting:", localResource.id);
 
   return (
     <>
@@ -79,7 +85,7 @@ export default function ResourceDetailCard({
         <div className="resource-details__rating-timer-container">
           <div className="resource-details__rating-star-container">
             <div className="resource-details__stars">
-              <Upvoting
+            <Upvoting
                 resourceId={localResource.id}
                 currentUser={currentUser}
                 initialUpvotes={localResource.upvote}
@@ -89,40 +95,78 @@ export default function ResourceDetailCard({
               />
             </div>
           </div>
-          <div className="resource-details__timer-container">
+
+          <div className="resource-details__timer">
+            <p className="resource-details__duration">
+              {selectedResource.estDuration}
+            </p>
             <img
               src={timerIcon}
               alt="timer icon"
               className="resource-details__timer-icon"
+              aria-hidden="true"
             />
-            <p className="resource-details__time">
-              {selectedResource.timeToComplete}
-            </p>
           </div>
         </div>
-        <p className="resource-details__description">
-          {selectedResource.description}
-        </p>
-        <div className="resource-details__buttons-container">
-          <Link to={selectedResource.link}>
-            <button className="resource-details__button" type="button">
-              Go to resource
+
+        <div className="resource-details__about">
+          <p className="resource-details__preview">
+            {selectedResource.description}{" "}
+          </p>
+        </div>
+        <div className="resource-details__tags-container" role="list">
+          {[
+            selectedResource.tag1,
+            selectedResource.tag2,
+            selectedResource.tag3,
+            selectedResource.tag4,
+          ].map((tag, index) => (
+            <div key={index} className="resource-details__tag" role="listitem">
+              {tag}
+            </div>
+          ))}
+          {/* <p className="resource-details__tag">{selectedResource.tag1}</p>
+        <p className="resource-details__tag">{selectedResource.tag2}</p>
+        <p className="resource-details__tag">{selectedResource.tag3}</p>
+        <p className="resource-details__tag">{selectedResource.tag4}</p> */}
+        </div>
+        <div className="resource-details__bottom-container">
+          <div className="resource-details__author-container">
+            <div className="resource-details__avatar" aria-hidden="true"></div>
+            <div className="resource-details__author">
+              <p className="resource-details__submission">Submitted by: </p>
+              <p className="resource-details__author-name">
+                {selectedResource.name}
+              </p>
+            </div>
+          </div>
+          <div className="resource-details__buttons-container">
+            <Link
+              to={selectedResource.url}
+              key=""
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button
+                className="resource-details__resource-button"
+                aria-label="Go to Resource"
+              >
+                Go to Resource
+              </button>
+            </Link>
+            <button
+              className={`resource-details__button ${isRead ? "resource-details__button--read" : ""
+                }`}
+              onClick={handleToggleRead}
+              aria-pressed={isRead}
+              aria-label={isRead ? "Read!" : "Mark as Read"}
+            >
+              {isRead ? "Read!" : "Mark as Read"}
             </button>
-          </Link>
-          <button
-            className={`resource-details__button ${isRead ? "resource-details__button--active" : ""
-              }`}
-            onClick={handleToggleRead}
-          >
-            {isRead ? "Mark as unread" : "Mark as read"}
-          </button>
+          </div>
         </div>
       </section>
-      <Comments
-        resourceId={selectedResource.id}
-        comments={comments}
-        currentUser={currentUser}
-      />
+      <Comments comments={comments} currentUser={currentUser} resourceId={selectedResource.id} />
     </>
   );
 }

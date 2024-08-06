@@ -3,60 +3,39 @@ import NavBar from "../../components/NavBar/NavBar";
 import ResourceDetailCard from "../../components/ResourceDetailCard/ResourceDetailCard";
 import ResourceList from "../../components/ResourceList/ResourceList";
 import "./ResourcePage.scss";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  setDoc,
-  where,
-} from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { database } from "../../config/firebase";
-// import { Comments } from "../../components/Comments/Comments";
-// import resourceData from "../../data/resource.json";
-// import resourceDetailsData from "../../data/resource-details.json";
-// import { useNavigate } from "react-router-dom";
-
-// const skillMap = {
-//   "Beginner Level": 1,
-//   "Intermediate Level": 2,
-//   "Advanced Level": 3,
-// };
-
-// const durationMap = {
-//   "3 min": 3,
-//   "5 min": 5,
-//   "7 min": 7,
-//   "8 min": 8,
-//   "10 min": 10,
-//   "20 min": 20,
-//   "30 min": 30,
-//   "40 min": 40,
-//   "50 min": 50,
-//   "60 min": 60,
-// };
 
 export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
-  // const [resourceDetails, setResourceDetails] = useState(resourceDetailsData)
-  // const [resources, setResources] = useState(resourceDetailsData); //1
-  // const [selectedResource, setSelectedResource] = useState(resourceDetailsData[0]);
-  // const [activeResourceId, setActiveResourceId] = useState(resourceDetailsData[0].id);
-  // const [comments, setComments] = useState([]);
-  // const storedResources =JSON.parse(localStorage.getItem("resources")) || resourceDetailsData;
   const [resources, setResources] = useState([]);
-  const [selectedResource, setSelectedResource] = useState([]);
+  const [selectedResource, setSelectedResource] = useState(null);
   const [savedBookmarks, setSavedBookmarks] = useState([]);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [category, setCategory] = useState("All");
   const [activeResourceId, setActiveResourceId] = useState(null);
+  const [type, setType] = useState("");
+  const [skill, setSkill] = useState("");
+  const [duration, setDuration] = useState("");
   const [comments, setComments] = useState([]);
-  // const [type, setType] = useState([])
-  // const [sortField, setSortField] = useState(null)
-  // const [sortAscending, setSortAscending] = useState(true)
-  const [type, setType] = useState("")
-  const [skill, setSkill] = useState("")
-  const [duration, setDuration] = useState("")
+
+  const getCommentsForSpecificResource = async (resourceId) => {
+    const q = query(
+      collection(database, "Comments"),
+      where("resourceID", "==", resourceId)
+    );
+
+    try {
+      const querySnapshot = await getDocs(q);
+      const results = [];
+      querySnapshot.forEach((doc) => {
+        results.push({ id: doc.id, ...doc.data() });
+      });
+      return results;
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
+  };
 
   useEffect(() => {
     const getAllResourcesAndRatings = async () => {
@@ -64,17 +43,18 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
         const resourcesCollectionRef = collection(database, "Resources");
         const resourcesSnapshot = await getDocs(resourcesCollectionRef);
         if (!resourcesSnapshot.empty) {
-          const resourcesCollection = resourcesSnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
+          const resourcesCollection = await Promise.all(
+            resourcesSnapshot.docs.map(async (doc) => {
+              const resourceData = { id: doc.id, ...doc.data() };
+              const comments = await getCommentsForSpecificResource(doc.id);
+              return { ...resourceData, commentsCount: comments.length };
+            })
+          );
           setResources(resourcesCollection);
           if (resourcesCollection.length > 0) {
             setSelectedResource(resourcesCollection[0]);
             setActiveResourceId(resourcesCollection[0].id);
           }
-          // Set your resources here, and don't forget to option chain any dependant data (ex: selectedResource?.id)
-          // setResources(resourcesCollection);
         } else {
           console.log("No collection for resources found.");
         }
@@ -94,6 +74,19 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
       setActiveResourceId(savedResources[0]?.id);
     }
   }, []);
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      if (selectedResource) {
+        const resourceComments = await getCommentsForSpecificResource(
+          selectedResource.id
+        );
+        setComments(resourceComments);
+      }
+    };
+
+    fetchComments();
+  }, [selectedResource]);
 
   const handleFormSubmit = (newResource) => {
     const updatedResources = [...resources, newResource];
@@ -135,17 +128,9 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
     const matchesType = type.length === 0 || type.includes(resource.type);
     const matchesSkill = skill.length === 0 || skill.includes(resource.level);
     const matchesDuration = duration.length === 0 || duration.includes(resource.duration);
-    // const currentType = type.length === 0 || type.includes(resource.type);
 
     return currentCategory && matchesType && matchesSkill && matchesDuration;
-    //  && currentType;
   });
-
-  // category === "All"
-  //   ? resources
-  //   : resources.filter((resource) =>
-  //     [resource.discipline].includes(category)
-  //   );
 
   const handleToggleBookmarked = () => {
     const newBookmarkedState = !isBookmarked;
@@ -164,7 +149,7 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
   };
 
   const handleSelectResource = (clickedId) => {
-    const foundResource = resources.find(resource => resource.id === clickedId);
+    const foundResource = resources.find((resource) => resource.id === clickedId);
     if (foundResource) {
       console.log("Setting selected resource:", foundResource);
       setSelectedResource(foundResource);
@@ -174,44 +159,10 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
     }
   };
 
-  const getCommentsForSpecificResource = async (resourceId) => {
-    const q = query(
-      collection(database, "Comments"),
-      where("resourceID", "==", resourceId)
-    );
-
-    try {
-      const querySnapshot = await getDocs(q);
-
-      const results = [];
-      querySnapshot.forEach((doc) => {
-        results.push({ id: doc.id, ...doc.data() });
-      });
-      // console.log(results);
-      return results;
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   useEffect(() => {
     console.log("Resources:", resources);
     console.log("Selected Resource:", selectedResource);
-    console.log("Comments:", comments);
-  }, [resources, selectedResource, comments]);
-
-  useEffect(() => {
-    const fetchComments = async () => {
-      if (selectedResource.id) {
-        const comments = await getCommentsForSpecificResource(
-          selectedResource.id
-        );
-        setComments(comments);
-      }
-    };
-
-    fetchComments();
-  }, [selectedResource.id]);
+  }, [resources, selectedResource]);
 
   const handleFilterChange = ({ type, skill, duration }) => {
     setType(type === "All" || type === "" ? [] : [type]);
@@ -219,46 +170,10 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
     setDuration(duration === "All" || duration === "" ? [] : [duration]);
   };
 
-  // old code below
-  // useEffect(() => {
-  //   const sortResources = () => {
-  //     let sortedResources = [...resources];
-
-  //     if (sortField === 'skill') {
-  //       sortedResources = sortedResources.sort((a, b) => {
-  //         const levelA = skillMap[a.level] || 0;
-  //         const levelB = skillMap[b.level] || 0;
-  //         return sortAscending ? levelA - levelB : levelB - levelA;
-  //       });
-  //     } else if (sortField === 'duration') {
-  //       sortedResources = sortedResources.sort((a, b) => {
-  //         const durationA = durationMap[a.duration] || 0;
-  //         const durationB = durationMap[b.duration] || 0;
-  //         return sortAscending ? durationA - durationB : durationB - durationA;
-  //       });
-  //     }
-
-  //     setResources(sortedResources);
-  //   };
-
-  //   sortResources();
-  // }, [sortField, sortAscending, resources]);
-
-  // const sortSkill = () => {
-  //   setSortField("skill");
-  //   setSortAscending(!sortAscending);
-  // };
-
-  // const sortDuration = () => {
-  //   setSortField('duration');
-  //   setSortAscending(!sortAscending);
-  // };
-
-  // const allResources = resources;
-
   const handleResourceUpdate = (updatedResource) => {
-    setResources(prevResources =>
-      prevResources.map(resource =>
+    console.log('handleResourceUpdate called', updatedResource);
+    setResources((prevResources) =>
+      prevResources.map((resource) =>
         resource.id === updatedResource.id ? updatedResource : resource
       )
     );
@@ -271,9 +186,6 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
         <NavBar
           onCategoryChange={setCategory}
           onFormSubmit={handleFormSubmit}
-          // onTypeChange={setType}
-          // sortBySkill={sortSkill}
-          // sortByDuration={sortDuration}
           onFilterChange={handleFilterChange}
         />
       </div>
@@ -282,7 +194,6 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
           resources={filteredResources}
           selectResource={handleSelectResource}
           activeResourceId={activeResourceId}
-          comments={comments}
         />
       </div>
       <div className="resource-details__container">

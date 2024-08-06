@@ -80,7 +80,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
 
       const newResource = {
         name:currentUser.name,
-        userId: currentUser.userId,
+        userID: currentUser.userId,
         title: data.title,
         discipline: data.discipline,
         type: data.type,
@@ -88,7 +88,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
         estDuration: data.estDuration,
         description: data.description || "",
         url: data.url,
-        id: Date.now(),
+        // id: Date.now(),
         tag1: selectedTags[0] || "",
         tag2: selectedTags[1] || "",
         tag3: selectedTags[2] || "",

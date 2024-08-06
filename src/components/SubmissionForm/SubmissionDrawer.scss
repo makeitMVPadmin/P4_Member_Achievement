@@ -59,7 +59,6 @@
     margin-top: 2.5rem;
   }
 
-
   &__header-title {
     font-family: "Corben";
     font-weight: bold;
@@ -102,7 +101,7 @@
   }
 
   &__inputField::placeholder {
-    color: black;
+    color: gray;
     font-size: 20px;
     font-weight: bold;
     font-family: "Poppins";
@@ -111,5 +110,4 @@
   &__inputField::selection {
     color: black;
   }
-
 }

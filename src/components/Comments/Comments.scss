@@ -14,36 +14,17 @@
 .comments {
     contain: strict;
     width: 100%;
+    margin-bottom: 0px;
     // position: relative;
     overflow: auto;
-    height: 30rem;
+    height: 282px;
+
     -webkit-overflow-scrolling: touch;   
 }
 
 .comments::-webkit-scrollbar {
     display: none;
 } 
-
-.commentDivs {
-    position: relative;
-    display: flex;
-    padding: 14px;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 0.5rem;
-    align-self: stretch;
-    // border-radius: 8px;
-    // border-top: 3px solid #000;
-    // border-right: 10px solid #000;
-    // border-bottom: 10px solid #000;
-    // border-left: 3px solid #000;
-    margin: 0.75rem 0;
-    padding-bottom: 1rem;
-    padding: 0.5rem;
-    @include border;
-    background: #FFF;
-    margin-bottom: 1rem;
-}
 
 .commentContext {
     display: flex;
@@ -82,8 +63,13 @@
     height: 17.5px;
 }
 
+.commentsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
 .commentText {
-    color: #5E6D82;
+    color: black;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -91,26 +77,46 @@
     align-self: stretch;
 }
 
+.noCommentText {
+    font-family: "Poppins";
+}
+
 .newComment {
-    position: sticky;
+    // position: sticky;
     bottom: 0;
     display: flex;
     height: 107px;
-    padding: 14px;
+    margin-top: -5px;
     align-items: center;
     gap: 1rem;
-    align-self: stretch;
-    // border-radius: 8px;
-    // border-top: 3px solid #000;
-    // border-right: 10px solid #000;
-    // border-bottom: 10px solid #000;
-    // border-left: 3px solid #000;
     margin: 0.75rem;
-    padding-bottom: 1rem;
-    padding: 0 0.5rem;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 1rem;
     @include border;
     background: #FFF;
     margin-top: 2rem;
+    box-shadow: 4px 4px 0 black;
+   
+}
+
+.commentDivs {
+    position: relative;
+    display: flex;
+    padding: 14px;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.5rem;
+    align-self: stretch;
+    margin: 0.75rem;
+    margin-left: 0px;
+    margin-right: 4px;
+    padding-bottom: 1rem;
+    padding: 0.5rem;
+    @include border;
+    background: #FFF;
+    margin-bottom: 1rem;
+    box-shadow: 4px 4px 0 black;
 }
 
 

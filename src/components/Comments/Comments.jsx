@@ -80,6 +80,7 @@ export const Comments = ({ comments, currentUser, resourceId }) => {
   };
 
   return (
+    <div className="commentsContainer">
     <div className="comments">
       {postedComments.length > 0 ? (
         postedComments.sort((a, b) => b.createdAt.toDate() - a.createdAt.toDate()).map((postedComment) => (
@@ -102,9 +103,11 @@ export const Comments = ({ comments, currentUser, resourceId }) => {
           </div>
         ))
       ) : (
-        <p>No comments yet.</p>
+        <p className="noCommentText">No comments yet.</p>
       )}
+      </div>
 
+      <div className="newCommentContainer">
       <form className="newComment" onSubmit={submitComment}>
         <img className="commentImg" src={blankProfile} alt="userprofile" aria-label="your profile image" />
         <Input
@@ -121,6 +124,7 @@ export const Comments = ({ comments, currentUser, resourceId }) => {
         <button type="submit" aria-label="submit comment" style={{color:'#0099ff'}}>Post</button>
         {showModal && <CommentModal closeModal={closeModal} />}
       </form>
-    </div>
+      </div>
+      </div>
   );
 };

@@ -90,8 +90,9 @@
   &__inputField {
     border-radius: 0.25rem;
     box-shadow: 1px 1px 0 black;
-    font-weight: bolder;
+    font-weight: bold;
     font-size: 20px;
+    color: black;
     // width: 100%;
     // max-width: 500px;
   }
@@ -102,14 +103,15 @@
   }
 
   &__inputField::placeholder {
-    color: black;
+    color: grey;
+    opacity: 1;
     font-size: 20px;
     font-weight: bold;
     font-family: "Poppins";
   }
 
-  &__inputField::selection {
-    color: black;
-  }
+  // &__inputField::selection {
+  //   color: grey;
+  // }
 
 }

@@ -20,6 +20,7 @@ const UploadFile = ({ onFileChange }) => {
         <input
           className="submission__file-button"
           type="file"
+          color="black"
           onChange={onFileChange}
         />
       </FormControl>

@@ -186,6 +186,7 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
           onCategoryChange={setCategory}
           onFormSubmit={handleFormSubmit}
           onFilterChange={handleFilterChange}
+          currentUser={currentUser}
         />
       </div>
       <div className="resource__cards">

@@ -17,6 +17,7 @@ function CommentVotes({ commentId = "", currentUser }) {
       UPVOTE
   ============*/
   useEffect(() => {
+    console.log("Current commentId:", commentId);
     if (!commentId) {
       console.error("commentId is undefined or null");
       return;
@@ -58,6 +59,13 @@ function CommentVotes({ commentId = "", currentUser }) {
     const userId = currentUser.id;
 
     try {
+      const docSnap = await getDoc(commentRef);
+
+      if (!docSnap.exists()) {
+        console.error("Comment document does not exist");
+        return;
+      }
+      
       if (voteStatus === "upvoted") {
         await updateDoc(commentRef, {
           likedByUser: arrayRemove(userId),

@@ -8,7 +8,7 @@ import "./ResourceCard.scss";
 import upvoteImg from "../../assets/images/upvote.png";
 import commentsImg from "../../assets/images/comments.png";
 
-export default function ResourceCard({ resource, selectResource, isActive }) {
+export default function ResourceCard({ resource, selectResource, isActive, commentCount }) {
   const [commentsCount, setCommentsCount] = useState(0);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function ResourceCard({ resource, selectResource, isActive }) {
         const commentsRef = collection(database, 'Comments');
         const q = query(commentsRef, where("resourceId", "==", resource.id));
         const querySnapshot = await getDocs(q);
-        
+
         const validCommentsCount = querySnapshot.size;
         setCommentsCount(validCommentsCount);
 
@@ -79,7 +79,7 @@ export default function ResourceCard({ resource, selectResource, isActive }) {
               src={commentsImg}
               alt="comments icon"
             />
-            <p className="resource__comments-total">{commentsCount}</p>
+            <p className="resource__comments-total">{commentCount}</p>
           </div>
         </div>
       </div>

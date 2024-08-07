@@ -17,6 +17,7 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
   const [skill, setSkill] = useState("");
   const [duration, setDuration] = useState("");
   const [comments, setComments] = useState([]);
+  const [commentCounts, setCommentCounts] = useState({});
 
   const getCommentsForSpecificResource = async (resourceId) => {
     const q = query(
@@ -179,6 +180,28 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
     setSelectedResource(prev => ({ ...prev, ...updatedResource }));
   }, []);
 
+  // Update comment counts when resources change
+  const updateCommentCounts = useCallback(async () => {
+    const commentsRef = collection(database, 'Comments');
+    const newCommentCounts = {};
+
+    for (const resource of resources) {
+      const q = query(commentsRef, where("resourceId", "==", resource.id));
+      const querySnapshot = await getDocs(q);
+      newCommentCounts[resource.id] = querySnapshot.size;
+    }
+
+    setCommentCounts(newCommentCounts);
+  }, [resources]);
+
+  const handleCommentAdded = useCallback(() => {
+    updateCommentCounts();
+  }, [updateCommentCounts]);
+
+  useEffect(() => {
+    updateCommentCounts();
+  }, [resources, updateCommentCounts]);
+
   return (
     <div className="resource__container">
       <div className="resource__navbar-container">
@@ -194,19 +217,21 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
           resources={filteredResources}
           selectResource={handleSelectResource}
           activeResourceId={activeResourceId}
+          commentCounts={commentCounts}
         />
       </div>
       <div className="resource-details__container">
         {selectedResource && Object.keys(selectedResource).length > 0 && (
           <ResourceDetailCard
-            selectedResource={selectedResource}
-            handleToggleBookmarked={handleToggleBookmarked}
-            savedBookmarks={savedBookmarks}
-            isBookmarked={isBookmarked}
-            comments={comments}
-            currentUser={currentUser}
-            onResourceUpdate={handleResourceUpdate}
-          />
+          selectedResource={selectedResource}
+          handleToggleBookmarked={handleToggleBookmarked}
+          savedBookmarks={savedBookmarks}
+          isBookmarked={isBookmarked}
+          comments={comments}
+          currentUser={currentUser}
+          onResourceUpdate={handleResourceUpdate}
+          onCommentAdded={handleCommentAdded}
+        />
         )}
       </div>
     </div>

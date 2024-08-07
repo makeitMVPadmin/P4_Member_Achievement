@@ -1,9 +1,7 @@
 import ResourceCard from "../ResourceCard/ResourceCard";
 import "./ResourceList.scss";
 
-export default function ResourceList(props) {
-  const { resources, selectResource, activeResourceId, comments } = props;
-
+export default function ResourceList({ resources, selectResource, activeResourceId, commentCounts }) {
   return (
     <section className="resourceList" aria-label="Resource List">
       <div className="resourceList__wrapper" role="list">
@@ -14,6 +12,7 @@ export default function ResourceList(props) {
               resource={resource}
               selectResource={selectResource}
               isActive={resource.id === activeResourceId}
+              commentCount={commentCounts[resource.id] || 0}
             />
           ))
         ) : (

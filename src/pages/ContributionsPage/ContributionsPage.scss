@@ -6,27 +6,34 @@
 .contributions {
   &__container {
     display: flex;
-    z-index: 2
+    height: 100vh;
   }
-
-  &__img {
-    bottom: 0rem;
-    position: absolute;
-    width: 110%;
-    z-index: -1;
-    }
 
   &__cards {
     margin-right: 0.75rem;
-    width: 65%;
-
+    width: 55%;
+    height: 88vh;
+    overflow-y: auto;
     @include desktop {
-      width: 55%;
+      width: 45%;
     }
   }
 
-  &__details-container {
+  &-details__container {
     width: 90%;
+    height: 88vh;
     margin: 0 0.75rem 0.75rem 0;
+    @include desktop {
+      width: 25rem;
+    }
+  }
+  &__navbar-container {
+    width: 19rem;
+    display: flex;
+    flex-direction: column;
+    // background-color: green;
+    @include desktop {
+      width: 25rem;
+    }
   }
 }

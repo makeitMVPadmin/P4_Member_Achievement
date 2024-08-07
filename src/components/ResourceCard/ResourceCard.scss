@@ -6,7 +6,6 @@
 .resource {
   margin: 0.75rem 0.75rem 0.75rem 0;
   padding: 0.5rem;
-  background-color: $white;
   @include border;
 
   &--active {
@@ -19,6 +18,7 @@
   }
 
   &:hover {
+
     .resource__title,
     .resource__type {
       color: $light-blue;
@@ -42,16 +42,16 @@
     font-size: 0.95rem;
     letter-spacing: -0.05rem;
     line-height: 1.2;
-    width: 8rem;
+    width: 80%;
 
     @include desktop {
       font-size: 1.15rem;
-      width: 10rem;
     }
   }
 
   &__rating {
     max-width: 3rem;
+
     @include tablet {
       width: 4.5rem;
     }
@@ -124,16 +124,28 @@
 
   &__icons-container {
     display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    
+    @include desktop {
+      flex-wrap: nowrap;
+    }
   }
 
   &__icons {
     display: flex;
-    margin-left: 0.5rem;
+    align-items: center;
+    margin: 0.125rem 0.5rem;
   }
 
   &__icons-img {
-    width: 1rem;
-    height: 1rem;
+    width: 0.75rem;
+    height: 0.75rem;
+
+    @include desktop {
+      width: 1rem;
+      height: 1rem;
+    }
   }
 
   &__upvotes-total,

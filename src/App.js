@@ -66,7 +66,7 @@ const App = () => {
             />
             <Route
               path="/bookmarked"
-              element={<BookMarkedPage bookmarkedResources={savedBookmarks} />}
+              element={<BookMarkedPage onBookmarkUpdate={handleBookmarkUpdate} bookmarkedResources={savedBookmarks} currentUser={currentUser} />}
             />
             <Route
               path="/rewards"

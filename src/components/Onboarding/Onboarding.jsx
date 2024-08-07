@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import "./Onboarding.scss";
 import {
   Modal,
@@ -14,6 +14,7 @@ import {
 import checkImg from "../../assets/images/check.png";
 import documentImg from "../../assets/images/document.png";
 import trophyImg from "../../assets/images/trophy.png";
+import bookshelfImg from "../../assets/images/bookshelf.png";
 
 export default function Onboarding({ isOpen, onClose }) {
   const [step, setStep] = useState(1);
@@ -61,8 +62,8 @@ export default function Onboarding({ isOpen, onClose }) {
             </div>
             <img
               className="onboarding__img"
-              src={documentImg}
-              alt="document file"
+              src={bookshelfImg}
+              alt="bookshelf image"
             />
           </div>
         );
@@ -93,7 +94,7 @@ export default function Onboarding({ isOpen, onClose }) {
             </div>
             <img
               className="onboarding__img"
-              src={checkImg}
+              src={documentImg}
               alt="check mark"
             />
           </div>
@@ -123,11 +124,7 @@ export default function Onboarding({ isOpen, onClose }) {
                 opportunities.
               </Text>
             </div>
-            <img
-              className="onboarding__img"
-              src={trophyImg}
-              alt="trophy"
-            />
+            <img className="onboarding__img" src={trophyImg} alt="trophy" />
           </div>
         );
       default:

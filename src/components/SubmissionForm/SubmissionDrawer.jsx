@@ -29,9 +29,8 @@ import { storage, database } from "../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useForm } from "react-hook-form";
 
-
 export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
-  console.log(currentUser)
+  console.log(currentUser);
   const selectTagsRef = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -47,8 +46,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   function handleSetSelectedOptions(options) {
-
-    setSelectedOptions(options)
+    setSelectedOptions(options);
   }
 
   const onSubmit = async (data) => {
@@ -75,11 +73,12 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
         throw new Error("Upload a file or provide a URL");
       }
 
-
       const selectedTags = selectedOptions.map((option) => option.value);
 
       const newResource = {
-        name: currentUser ? `${currentUser.firstName} ${currentUser.lastName.charAt(0)}.` : "Anonymous",
+        name: currentUser
+          ? `${currentUser.firstName} ${currentUser.lastName.charAt(0)}.`
+          : "Anonymous",
         userID: currentUser,
         title: data.title,
         discipline: data.discipline,
@@ -106,8 +105,6 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
       );
       onFormSubmit({ id: docRef.id, ...newResource });
 
-
-
       console.log("Form submitted successfully:", newResource);
 
       // Clear the form and close the drawer
@@ -133,7 +130,11 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
     <>
       {/* Upload Resource Button - pulled from navbar component */}
       <button className="nav__button" onClick={onOpen}>
-        <img src={uploadIcon} alt="upload file icon" className="nav__icon nav__icon-upload" />
+        <img
+          src={uploadIcon}
+          alt="upload file icon"
+          className="nav__icon nav__icon-upload"
+        />
         <p className="nav__button-name">Upload Resource</p>
       </button>
 
@@ -177,12 +178,14 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       htmlFor="title"
                       fontSize="20px"
                       fontWeight="bold"
-                      _after={{ content: '" *"', color: "black" }}>Title
+                      _after={{ content: '" *"', color: "black" }}
+                    >
+                      Title
                     </FormLabel>
                     <Input
                       id="title"
                       placeholder="Enter a resource title."
-                      _placeholder={{ color: 'grey' }}
+                      _placeholder={{ color: "grey" }}
                       border="3px solid black"
                       className="submission__inputField"
                       _hover={{}}
@@ -221,7 +224,8 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       iconSize="45px"
                       iconColor="#0099FF"
                       focusBorderColor="black"
-                      {...register("discipline", { required: true })}>
+                      {...register("discipline", { required: true })}
+                    >
                       <option value="Software Engineering">
                         Software Engineering
                       </option>
@@ -291,7 +295,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       _hover={{}}
                       fontFamily="Poppins"
                       fontWeight="bold"
-                      color='black'
+                      color="black"
                       placeholder="Select"
                       fontSize="20px"
                       icon={<ChevronDownIcon />}
@@ -328,7 +332,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       fontFamily="Poppins"
                       fontWeight="bold"
                       placeholder="Select"
-                      _placeholder={{ opacity: 4, color: 'gray.500' }}
+                      _placeholder={{ opacity: 4, color: "gray.500" }}
                       fontSize="20px"
                       icon={<ChevronDownIcon />}
                       iconSize="45px"
@@ -359,12 +363,11 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                         ref={selectTagsRef}
                         selectedOptions={selectedOptions}
                         setSelectedOptions={handleSetSelectedOptions}
-                        {...register("tags",
-                          {
-                            validate: () => {
-                              return selectedOptions.length > 0
-                            }
-                          })}
+                        {...register("tags", {
+                          validate: () => {
+                            return selectedOptions.length > 0;
+                          },
+                        })}
                       />
                       <FormErrorMessage>
                         {errors.tags && "Atleast 1 tag is required"}
@@ -386,7 +389,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                     <Textarea
                       id="description"
                       placeholder="The clearer and shorter the better."
-                      _placeholder={{ color: 'grey' }}
+                      _placeholder={{ color: "grey" }}
                       className="submission__inputField"
                       border="3px solid black"
                       _hover={{}}
@@ -401,7 +404,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                   </FormControl>
 
                   {/* URL */}
-                  <FormControl isInvalid={errors.url} >
+                  <FormControl isInvalid={errors.url}>
                     <FormLabel
                       htmlFor="url"
                       fontSize="20px"
@@ -415,7 +418,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       type="url"
                       id="url"
                       placeholder="Enter the resource URL"
-                      _placeholder={{ color: 'grey' }}
+                      _placeholder={{ color: "grey" }}
                       className="submission__inputField"
                       border="3px solid black"
                       _hover={{}}

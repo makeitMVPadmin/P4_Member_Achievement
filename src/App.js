@@ -79,7 +79,7 @@ const App = () => {
             />
             <Route
               path="/contributions"
-              element={<ContributionsPage currentUser={currentUser} />}
+              element={<ContributionsPage onBookmarkUpdate={handleBookmarkUpdate} currentUser={currentUser} />}
             />
           </Routes>
         </BrowserRouter>

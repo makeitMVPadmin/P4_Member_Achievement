@@ -14,18 +14,22 @@ const HomePage = () => {
   const [activeResourceId, setActiveResourceId] = useState(null);
   const [sortField, setSortField] = useState(null);
   const [sortAscending, setSortAscending] = useState(true);
+  const [onboardingCompleted, setOnboardingCompleted] = useState(false);
 
   useEffect(() => {
     const hasSeenModal = sessionStorage.getItem("hasSeenOnboardingModal");
 
     if (!hasSeenModal) {
       setIsModalOpen(true);
+    } else {
+      setOnboardingCompleted(true);
     }
   }, []);
 
   const handleModalClose = () => {
     setIsModalOpen(false);
     sessionStorage.setItem("hasSeenOnboardingModal", "true");
+    setOnboardingCompleted(true);
   };
 
   const handleFormSubmit = (newResource) => {
@@ -67,7 +71,6 @@ const HomePage = () => {
         />
       </div>
       <Onboarding
-        // className="homepage__onboarding"
         isOpen={isModalOpen}
         onClose={handleModalClose}
         style={{
@@ -77,12 +80,9 @@ const HomePage = () => {
       />
       <div>
         <h1 className="homepage__title">
-          Welcome to the Communiti <br />
-          Resource Library
+          Welcome to the Communiti Resource Library
         </h1>
-        <div>
-          <Instructions />
-        </div>
+        <div>{onboardingCompleted && <Instructions />}</div>
       </div>
     </div>
   );

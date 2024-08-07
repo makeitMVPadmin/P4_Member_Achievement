@@ -5,14 +5,21 @@
 
 .homepage {
   display: flex;
-  flex-direction: row;
 
   &__title {
     font-family: "Corben";
     font-weight: 600;
     font-size: 1.25rem;
-    margin: 2rem auto;
+    margin: 2rem 7.5rem;
     text-align: center;
+
+    @include desktop {
+      margin: 2rem 16rem;
+    }
+
+    @include large-desktop {
+      margin: 2rem 22rem;
+    }
   }
 
   &__img {

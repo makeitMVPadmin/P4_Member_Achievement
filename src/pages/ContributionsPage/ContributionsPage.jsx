@@ -16,6 +16,10 @@ function ContributionsPage({ currentUser, onBookmarkUpdate }) {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [activeResourceId, setActiveResourceId] = useState(null);
   const [comments, setComments] = useState([]);
+  const [category, setCategory] = useState("All");
+  const [type, setType] = useState("");
+  const [skill, setSkill] = useState("");
+  const [duration, setDuration] = useState("");
 
 
   useEffect(() => {
@@ -112,6 +116,24 @@ function ContributionsPage({ currentUser, onBookmarkUpdate }) {
     }
   }, [selectedResource]);
 
+  const filteredResources = resources.filter((resource) => {
+    const currentCategory =
+      category === "All" || resource.discipline === category;
+    const matchesType = type.length === 0 || type.includes(resource.type);
+    const matchesSkill = skill.length === 0 || skill.includes(resource.level);
+    const matchesDuration = duration.length === 0 || duration.includes(resource.duration);
+
+    return currentCategory && matchesType && matchesSkill && matchesDuration;
+  });
+
+  const handleFilterChange = ({ type, skill, duration }) => {
+    setType(type === "All" || type === "" ? [] : [type]);
+    setSkill(skill === "All" || skill === "" ? [] : [skill]);
+    setDuration(duration === "All" || duration === "" ? [] : [duration]);
+  };
+  
+
+
   const handleToggleBookmarked = () => {
     const newBookmarkedState = !isBookmarked;
     setIsBookmarked(newBookmarkedState);
@@ -153,11 +175,27 @@ function ContributionsPage({ currentUser, onBookmarkUpdate }) {
     setSelectedResource(prev => ({ ...prev, ...updatedResource }));
   }, []);
 
+  const handleFormSubmit = (newResource) => {
+    const updatedResources = [...resources, newResource];
+    setResources(updatedResources);
+    console.log("Updated Resources:", updatedResources);
+    localStorage.setItem("resources", JSON.stringify(updatedResources));
+
+    if (!selectedResource) {
+      setSelectedResource(newResource);
+      setActiveResourceId(newResource.id);
+    }
+  };
+
 
   return (
     <div className="resource__container">
       <div className="resource__navbar-container">
         <NavBar
+          onCategoryChange={setCategory}
+          onFormSubmit={handleFormSubmit}
+          onFilterChange={handleFilterChange}
+          currentUser={currentUser}
         />
       </div>
       <div className="resource__cards">

@@ -3,6 +3,7 @@ import Onboarding from "../../components/Onboarding/Onboarding";
 import { useState, useEffect } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import blueWaveImg from "../../assets/images/blue-wave.png";
+import Instructions from "../../components/Instructions/Instructions";
 
 const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); //
@@ -74,9 +75,15 @@ const HomePage = () => {
           width: "40rem",
         }}
       />
-      <h1 className="homepage__title">
-        Welcome to the Communiti Resource Library
-      </h1>
+      <div>
+        <h1 className="homepage__title">
+          Welcome to the Communiti <br />
+          Resource Library
+        </h1>
+        <div>
+          <Instructions />
+        </div>
+      </div>
     </div>
   );
 };

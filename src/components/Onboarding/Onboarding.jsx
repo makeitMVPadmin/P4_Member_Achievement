@@ -63,7 +63,7 @@ export default function Onboarding({ isOpen, onClose }) {
             <img
               className="onboarding__img"
               src={bookshelfImg}
-              alt="document file"
+              alt="bookshelf image"
             />
           </div>
         );

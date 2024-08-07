@@ -16,6 +16,7 @@ const ResourceDetailCard = React.memo(({
   comments,
   currentUser,
   onResourceUpdate,
+  onCommentAdded,
 }) => {
   const [localResource, setLocalResource] = useState(selectedResource);
 
@@ -167,7 +168,12 @@ const ResourceDetailCard = React.memo(({
           </div>
         </div>
       </section>
-      <Comments comments={comments} currentUser={currentUser} resourceId={selectedResource.id} />
+      <Comments
+        comments={comments}
+        currentUser={currentUser}
+        resourceId={selectedResource.id}
+        onCommentAdded={onCommentAdded}
+      />
     </>
   );
 });

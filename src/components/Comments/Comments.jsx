@@ -8,7 +8,7 @@ import { formatDistanceToNow } from "date-fns";
 import { database } from "../../config/firebase";
 import { collection, addDoc, Timestamp, query, where, getDocs } from "firebase/firestore";
 
-export const Comments = ({ comments, currentUser, resourceId }) => {
+export const Comments = ({ comments, currentUser, resourceId, onCommentAdded }) => {
   const [comment, setComment] = useState("");
   const [postedComments, setPostedComments] = useState(
     comments || []
@@ -50,7 +50,7 @@ export const Comments = ({ comments, currentUser, resourceId }) => {
       const newComment = {
         commentId: Date.now().toString(),
         content: comment,
-        createdAt: Timestamp.now(), //need this method for Firebase timestamp conversion
+        createdAt: Timestamp.now(),
         likedByUser: [],
         likes: 0,
         name: currentUser.name || "Anonymous",
@@ -64,6 +64,10 @@ export const Comments = ({ comments, currentUser, resourceId }) => {
         setPostedComments(postedComments => [...postedComments, newComment]);
         setComment("");
         setShowModal(true);
+        // Notify parent component that a comment was added
+        if (typeof onCommentAdded === 'function') {
+          onCommentAdded();
+        }
       } catch (error) {
         console.error("Error adding comment: ", error);
       }

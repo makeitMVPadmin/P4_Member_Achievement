@@ -6,19 +6,17 @@
 .resource {
   &__container {
     display: flex;
-
-    &__img {
-      bottom: 0rem;
-      position: absolute;
-      width: 110%;
-      z-index: -1;
-    }
+    height: 100vh;
   }
 
   &__cards {
     margin-right: 0.75rem;
     width: 55%;
+    // background-color: purple;
+    height: 88vh;
+    overflow-y: auto;
 
+    /* Enable vertical scrolling */
     @include desktop {
       width: 45%;
     }
@@ -26,19 +24,24 @@
 
   &-details__container {
     width: 90%;
+    height: 88vh;
+    // margin-left: 0px;
     margin: 0 0.75rem 0.75rem 0;
+
+    // background-color: orange;
+    @include desktop {
+      width: 25rem;
+    }
   }
 
   &__navbar-container {
-    width: 22%;
-    min-width: 22%;
+    width: 19rem;
     display: flex;
     flex-direction: column;
-    height: 88vh;
 
+    // background-color: green;
     @include desktop {
-      width: 15%;
-      min-width: 15%;
+      width: 25rem;
     }
   }
 }

@@ -36,6 +36,7 @@ function ContributionsPage({ currentUser, onBookmarkUpdate }) {
           ...doc.data(),
         }));
         setContributions(resourcesData);
+        setResources(resourcesData)
       } catch (error) {
         console.error("Error fetching user resources: ", error);
       }

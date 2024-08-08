@@ -123,11 +123,7 @@
   }
 
   &__forward-arrow-icon {
-    width: 9.5%;
-
-    @include desktop {
-      width: 7.5%;
-    }
+    width: 2rem;
   }
 
   &__tags-container {

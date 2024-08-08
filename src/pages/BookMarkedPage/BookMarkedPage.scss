@@ -17,10 +17,15 @@
 
   &__cards {
     margin-right: 0.75rem;
-    width: 55%;
+    margin-left: 0.75rem;
+    width: 48%;
 
     @include desktop {
-      width: 45%;
+      width: 38%;
+    }
+
+    @include large-desktop {
+      width: 35%;
     }
   }
 

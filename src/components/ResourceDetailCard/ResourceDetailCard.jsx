@@ -138,22 +138,7 @@ const ResourceDetailCard = React.memo(
               {selectedResource.description}{" "}
             </p>
           </div>
-          {/* <div className="resource-details__tags-container" role="list">
-            {[
-              selectedResource.tag1,
-              selectedResource.tag2,
-              selectedResource.tag3,
-              selectedResource.tag4,
-            ].map((tag, index) => (
-              <div
-                key={index}
-                className="resource-details__tag"
-                role="listitem"
-              >
-                {tag}
-              </div>
-            ))}
-          </div> */}
+
           <div className="resource-details__bottom-container">
             <div className="resource-details__author-container">
               <div
@@ -173,6 +158,7 @@ const ResourceDetailCard = React.memo(
                 key=""
                 target="_blank"
                 rel="noopener noreferrer"
+                className="resource-details__link"
               >
                 <button
                   className="resource-details__resource-button"

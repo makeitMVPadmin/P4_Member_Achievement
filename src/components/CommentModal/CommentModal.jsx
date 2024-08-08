@@ -13,7 +13,7 @@ export const CommentModal = ({ closeModal }) => {
         aria-label="close modal"
       />
       <h2 className="modalHeader">Success!</h2>
-      <p className="modalText">Thank you for! Your comment has been posted.</p>
+      <p className="modalText">Thank you! Your comment has been posted.</p>
     </div>
   );
 };

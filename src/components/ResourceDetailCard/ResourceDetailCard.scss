@@ -150,18 +150,14 @@
     }
   }
 
-  &__bottom-container {
-    display: flex;
-    align-items: end;
-  }
-
   &__submission {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
   }
 
   &__author-container {
     display: flex;
     align-items: center;
+    margin-bottom: 2.5rem;
   }
 
   &__author {
@@ -185,16 +181,17 @@
   &__avatar {
     background-color: #e1e1e1;
     border-radius: 50%;
-    height: 2.25rem;
-    width: 2.25rem;
+    height: 2.75rem;
+    width: 2.75rem;
     margin-right: 0.75rem;
   }
 
   &__buttons-container {
     display: flex;
-    flex-direction: column;
-    width: 33%;
+    flex-direction: row;
+    width: 68%;
     margin-left: auto;
+    justify-content: end;
   }
 
   &__resource-button {
@@ -203,6 +200,7 @@
     background-color: $light-blue;
     width: 100%;
     font-size: 0.84rem;
+    margin-bottom: 0;
 
     &:hover {
       transform: scale(1.025);
@@ -215,6 +213,15 @@
     @include button;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin-bottom: 0;
+    width: 8rem;
+
+    @include desktop {
+      width: 9rem;
+    }
+
+    @include large-desktop {
+      width: 10rem;
+    }
 
     &:hover {
       transform: scale(1.025);
@@ -224,5 +231,18 @@
       background-color: $light-blue;
     }
     @include thin-border;
+  }
+
+  &__link {
+    width: 8rem;
+    margin-right: 0.5rem;
+
+    @include desktop {
+      width: 9rem;
+    }
+
+    @include large-desktop {
+      width: 10rem;
+    }
   }
 }

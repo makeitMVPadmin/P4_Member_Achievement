@@ -2,6 +2,7 @@ import trophyIcon from "../../assets/icons/nav-trophy.png";
 import uploadIcon2 from "../../assets/icons/nav-folder.png";
 import savedIcon from "../../assets/icons/nav-bookmark.png";
 import libraryIcon from "../../assets/icons/nav-library.png";
+import arrowDownIcon from "../../assets/icons/arrow-down.png";
 import { useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer";
@@ -87,14 +88,26 @@ export default function NavBar({
   return (
     <nav className="nav__list">
       <li
-        className={`nav__item ${isLibraryOpen ? "active" : ""}`}
+        className={`nav__item nav__item-first ${isLibraryOpen ? "active" : ""}`}
         onClick={toggleLibraryMenu}
         // onMouseEnter={handleMouseEnter}
       >
-        <img src={libraryIcon} alt="library books icon" className="nav__icon" />
-        <p className="nav__item-name" onClick={checkLocation}>
-          Learning Library
-        </p>
+        <div className="nav__item-wrapper">
+          <img
+            src={libraryIcon}
+            alt="library books icon"
+            className="nav__icon"
+          />
+          <p className="nav__item-name" onClick={checkLocation}>
+            Learning Library
+          </p>
+        </div>
+
+        <img
+          src={arrowDownIcon}
+          alt="arrow down icon"
+          className="nav__icon nav__icon-arrow-down"
+        />
       </li>
       {isLibraryOpen && (
         <ul className="nav__library-sublist">

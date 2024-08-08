@@ -19,12 +19,27 @@
 
   &__item {
     display: flex;
-    padding: 0.5rem 0.25rem;
+    padding: 0.75rem 0.25rem 1.25rem;
     align-items: center;
 
     &-name {
       font-size: 0.65rem;
       margin-left: 0.5rem;
+      font-weight: 800;
+
+      @include desktop {
+        font-size: 0.75rem;
+      }
+    }
+
+    &-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    &-first {
+      justify-content: space-between;
+      align-items: center;
     }
 
     &:hover,
@@ -44,9 +59,16 @@
 
   &__icon {
     width: 1.15rem;
+    height: 1.15rem;
 
     &-upload {
       filter: invert(1);
+    }
+
+    &-arrow-down {
+      width: 0.85rem;
+      height: 0.85rem;
+      margin-left: 0.25rem;
     }
   }
 
@@ -77,6 +99,10 @@
       font-size: 0.65rem;
       margin-left: 0.05rem;
       letter-spacing: -0.015rem;
+
+      @include large-desktop {
+        font-size: 0.75rem;
+      }
     }
   }
 
@@ -85,8 +111,12 @@
       list-style-type: none;
       display: flex;
       flex-direction: column;
-      margin-left: 2rem;
+      margin-left: 1.5rem;
       padding: 0 0 0 0.5rem;
+
+      @include desktop {
+        margin-left: 1.25rem;
+      }
     }
 
     &-subitem {
@@ -94,13 +124,19 @@
       letter-spacing: -0.025rem;
       margin: 0.25rem 0;
       padding: 0.35rem;
+      font-weight: 800;
 
       &:hover {
         cursor: pointer;
-        background-color: $black;
-        color: $white;
+        background-color: $yellow;
+        color: $black;
         @include thin-border;
         box-shadow: none;
+        border-color: $yellow;
+      }
+
+      @include desktop {
+        font-size: 0.75rem;
       }
     }
   }

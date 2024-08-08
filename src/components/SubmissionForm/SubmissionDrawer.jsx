@@ -1,4 +1,5 @@
 import SelectTags from "./SelectTags";
+import { CommentModal } from "../CommentModal/CommentModal.jsx";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import UploadFile from "./UploadFile";
 import React, { useState, useRef } from "react";
@@ -18,6 +19,7 @@ import {
   FormLabel,
   Input,
   Select,
+  Text,
   Textarea,
   DrawerFooter,
   FormControl,
@@ -30,8 +32,11 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useForm } from "react-hook-form";
 
 export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
-  console.log(currentUser);
+  console.log(currentUser)
+  const MAX_WORD_COUNT = 50;
+  // const [text, setText] = useState('');
   const selectTagsRef = useRef(null);
+  const [inputValue, setInputValue] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     register,
@@ -44,6 +49,8 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
   const [file, setFile] = useState(null);
   const fileUrl = watch("url");
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [wordCount, setWordCount] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   function handleSetSelectedOptions(options) {
     setSelectedOptions(options);
@@ -52,16 +59,6 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
   const onSubmit = async (data) => {
     try {
       console.log("Form data before processing:", data);
-
-      // if (
-      //   !data.title ||
-      //   !data.discipline ||
-      //   !data.type ||
-      //   !data.level ||
-      //   !data.duration
-      // ) {
-      //   throw new Error("All fields are required"); // Example validation logic
-      // }
 
       if (file) {
         const fileRef = ref(storage, `resourceUploads/${file.name}`);
@@ -111,10 +108,12 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
       reset();
       setFile(null);
       onClose();
+      setShowModal(true);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
+
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -126,6 +125,30 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
     onClose();
   };
 
+  const countWords = (str) => {
+    if (typeof str !== 'string') {
+      return 0;
+    }
+    return str.trim().split(/\s+/).filter(word => word.length > 50).length;
+  };
+
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+    setWordCount(countWords(setInputValue))
+  };
+
+  // const handleInputChange = (e) => {
+  //   const value = e.target.value;
+  //   setInputValue(value);
+  //   setWordCount(countWords(value));
+  // };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+ 
   return (
     <>
       {/* Upload Resource Button - pulled from navbar component */}
@@ -191,7 +214,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       _hover={{}}
                       focusBorderColor="black"
                       fontSize="20px"
-                      {...register("title", { required: true })}
+                      {...register("title",  { required: true })}
                     />
                     <FormErrorMessage>
                       {errors.title && "Title is required for submission"}
@@ -362,14 +385,16 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                         ref={selectTagsRef}
                         selectedOptions={selectedOptions}
                         setSelectedOptions={handleSetSelectedOptions}
-                        {...register("tags", {
-                          validate: () => {
-                            return selectedOptions.length > 0;
-                          },
-                        })}
+
+                        {...register("tags",
+                          {
+                            validate: () => {
+                              return selectedOptions.length > 3
+                            }
+                          })}
                       />
                       <FormErrorMessage>
-                        {errors.tags && "Atleast 1 tag is required"}
+                        {errors.tags && "Atleast 4 tag is required"}
                       </FormErrorMessage>
                     </FormControl>
                   </Box>
@@ -395,10 +420,23 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       focusBorderColor="black"
                       fontSize="20px"
                       height="200px"
-                      {...register("description", { required: true })}
+                      onChange={handleInputChange}
+                      {...register("description", { 
+                        required: true,
+                        validate: () => countWords(setInputValue) <= MAX_WORD_COUNT
+                       })}
+                      // onChange={handleInputChange}
+                      // value={inputValue} // Bind the Textarea value to inputValue
+                      // {...register("description", { 
+                      //   required: true,
+                      //   validate: (value) => countWords(value) <= MAX_WORD_COUNT // Validate based on the value of the Textarea
+                      //  })}
                     />
+                    <Text mt={2} color={wordCount > MAX_WORD_COUNT ? 'red.500' : 'black'}>
+                    {wordCount} / {MAX_WORD_COUNT} words
+                    </Text>
                     <FormErrorMessage>
-                      {errors.description && "Description is required"}
+                      {errors.description && `Text must be ${MAX_WORD_COUNT} words or less`}
                     </FormErrorMessage>
                   </FormControl>
 
@@ -478,6 +516,9 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
+      </div>
+      <div className="submission__modal">
+      {showModal && <CommentModal closeModal={closeModal} />}
       </div>
     </>
   );

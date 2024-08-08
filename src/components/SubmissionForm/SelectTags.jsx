@@ -120,10 +120,6 @@ const options = [
 ];
 
 const SelectTags = forwardRef(({ selectedOptions, setSelectedOptions }, ref) => {
-  // const [selectedOptions, setSelectedOptions] = useState([]);
-  // const {
-  //   register,
-  // } = useForm();
 
   return (
       <>
@@ -146,7 +142,7 @@ const SelectTags = forwardRef(({ selectedOptions, setSelectedOptions }, ref) => 
           options={options}
           onChange={(o) => setSelectedOptions(o)}
           isOptionDisabled={() => selectedOptions.length >= 4}
-          placeholder="Select up to 4 tags"
+          placeholder="Select 4 tags"
           _placeHolder={{ color: "gray.500"}}
           id="tags"
           name="tags"

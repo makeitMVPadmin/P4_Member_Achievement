@@ -148,7 +148,7 @@ export const Comments = ({
             maxLength={800}
             value={comment}
             onChange={CommentValue}
-            placeholder="Contribute your experience"
+            placeholder="Add a comment"
             size="md"
             sx={{
               borderRadius: "50px",

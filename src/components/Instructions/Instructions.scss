@@ -8,16 +8,15 @@
     border: 1px solid #b3e1ff;
     border-radius: 10px;
     background-color: #b3e1ff;
-    // position: absolute;
-    // z-index: 99;
-    margin: 2rem 6rem;
+    position: absolute;
+    margin: 0rem 6rem;
 
     @include desktop {
-      margin: 2rem 15rem;
+      margin: 0rem 15rem;
     }
 
     @include large-desktop {
-      margin: 2rem 23rem;
+      margin: 0rem 23rem;
     }
   }
 

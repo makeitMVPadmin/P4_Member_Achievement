@@ -43,11 +43,7 @@
   }
 
   &__icon {
-    width: 14%;
-
-    @include desktop {
-      width: 11%;
-    }
+    width: 1.15rem;
 
     &-upload {
       filter: invert(1);
@@ -74,8 +70,8 @@
     border-right: 4px solid var(--Black, #000);
     border-bottom: 4px solid var(--Black, #000);
     border-left: 2px solid var(--Black, #000);
-
     margin-bottom: 0;
+    width: 100%;
 
     &-name {
       font-size: 0.65rem;

@@ -11,12 +11,15 @@
 
   &__cards {
     margin-right: 0.75rem;
-    width: 55%;
+    width: 48%;
     // background-color: purple;
     height: 88vh;
     overflow-y: auto; /* Enable vertical scrolling */
     @include desktop {
-      width: 45%;
+      width: 38%;
+    }
+    @include large-desktop {
+      width: 35%;
     }
   }
 

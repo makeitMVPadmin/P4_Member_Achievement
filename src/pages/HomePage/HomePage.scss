@@ -10,12 +10,23 @@
     font-family: "Corben";
     font-weight: 600;
     font-size: 1.25rem;
-    margin: 2rem auto;
+    margin: 2rem 7.5rem;
+    text-align: center;
+
+    @include desktop {
+      margin: 2rem 16rem;
+    }
+
+    @include large-desktop {
+      margin: 2rem 22rem;
+    }
   }
 
   &__img {
-    bottom: 0rem;
+    bottom: -1rem;
     position: absolute;
     width: 110%;
+    overflow: hidden;
+    height: 10rem;
   }
 }

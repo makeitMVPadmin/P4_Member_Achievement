@@ -4,20 +4,25 @@
 @use "../../styles/partials/global" as *;
 
 .filter {
-    &__button {
-        display: flex;
-        flex-direction: row;
-        flex-grow: 1;
-        align-items: center;
-        // padding: 0.2rem 0;
+  &__button {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    align-items: center;
+    // padding: 0.2rem 0;
 
-        &-name {
-            font-size: 0.65rem;
-            margin-left: 0.5rem;
-        }
-    }
+    &-name {
+      font-size: 0.65rem;
+      margin-left: 0.5rem;
+      font-weight: 800;
 
-    &__icon {
-        width: 14%;
+      @include desktop {
+        font-size: 0.75rem;
+      }
     }
+  }
+
+  &__icon {
+    width: 14%;
+  }
 }

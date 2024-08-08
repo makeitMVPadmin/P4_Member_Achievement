@@ -11,14 +11,13 @@
 }
 
 .comments {
-  contain: strict;
-  width: 100%;
-  margin-bottom: 0px;
-  // position: relative;
-  overflow: auto;
-  height: 282px;
-
-  -webkit-overflow-scrolling: touch;
+    contain: strict;
+    width: 100%;
+    margin-bottom: 0px;
+    // position: relative;
+    overflow: auto;
+    height: 283px;
+    -webkit-overflow-scrolling: touch;  
 }
 
 .comments::-webkit-scrollbar {

@@ -120,13 +120,14 @@
       margin: 0.25rem 0;
       padding: 0.35rem;
       font-weight: 800;
+      @include thin-border;
+      border-color: transparent;
+      box-shadow: none;
 
       &:hover {
         cursor: pointer;
         background-color: $yellow;
         color: $black;
-        @include thin-border;
-        box-shadow: none;
         border-color: $yellow;
       }
 

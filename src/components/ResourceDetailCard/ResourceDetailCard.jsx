@@ -180,7 +180,7 @@ const ResourceDetailCard = React.memo(
             </div>
           </div>
         </section>
-        <div>
+        <div className="resource-details__comments">
           <Comments
             comments={comments}
             currentUser={currentUser}

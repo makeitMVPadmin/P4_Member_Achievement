@@ -16,8 +16,6 @@
   margin-bottom: 0px;
   // position: relative;
   overflow: auto;
-  height: 282px;
-
   -webkit-overflow-scrolling: touch;
 }
 
@@ -65,6 +63,7 @@
 .commentsContainer {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .commentText {

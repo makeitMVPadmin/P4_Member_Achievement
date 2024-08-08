@@ -48,7 +48,7 @@
   &__rating-timer-container {
     display: flex;
     justify-content: space-between;
-    margin: 0.5rem 0;
+    margin: 0 0 1rem;
   }
 
   &__timer {
@@ -132,11 +132,9 @@
 
   &__tags-container {
     display: flex;
-    margin-bottom: 1rem;
   }
 
   &__tag {
-    // border: 0.75px solid black;
     border-radius: 0.25rem;
     background-color: $tag-blue;
     padding: 0.2rem 0.5rem;
@@ -202,7 +200,7 @@
   &__resource-button {
     @include button;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: $yellow;
+    background-color: $light-blue;
     width: 100%;
     font-size: 0.84rem;
 

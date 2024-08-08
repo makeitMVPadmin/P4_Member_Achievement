@@ -90,6 +90,22 @@ const ResourceDetailCard = React.memo(
             </h1>
           </div>
           <p className="resource-details__level">{selectedResource.level}</p>
+          <div className="resource-details__tags-container" role="list">
+            {[
+              selectedResource.tag1,
+              selectedResource.tag2,
+              selectedResource.tag3,
+              selectedResource.tag4,
+            ].map((tag, index) => (
+              <div
+                key={index}
+                className="resource-details__tag"
+                role="listitem"
+              >
+                {tag}
+              </div>
+            ))}
+          </div>
 
           <div className="resource-details__rating-timer-container">
             <div className="resource-details__rating-star-container">
@@ -122,7 +138,7 @@ const ResourceDetailCard = React.memo(
               {selectedResource.description}{" "}
             </p>
           </div>
-          <div className="resource-details__tags-container" role="list">
+          {/* <div className="resource-details__tags-container" role="list">
             {[
               selectedResource.tag1,
               selectedResource.tag2,
@@ -137,11 +153,7 @@ const ResourceDetailCard = React.memo(
                 {tag}
               </div>
             ))}
-            {/* <p className="resource-details__tag">{selectedResource.tag1}</p>
-        <p className="resource-details__tag">{selectedResource.tag2}</p>
-        <p className="resource-details__tag">{selectedResource.tag3}</p>
-        <p className="resource-details__tag">{selectedResource.tag4}</p> */}
-          </div>
+          </div> */}
           <div className="resource-details__bottom-container">
             <div className="resource-details__author-container">
               <div

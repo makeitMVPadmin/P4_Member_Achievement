@@ -12,7 +12,7 @@ export default function ResourceList({ resources, selectResource, activeResource
               resource={resource}
               selectResource={selectResource}
               isActive={resource.id === activeResourceId}
-              commentCount={commentCounts[resource.id] || 0}
+              commentCount={(commentCounts && commentCounts[resource.id]) || 0}
             />
           ))
         ) : (

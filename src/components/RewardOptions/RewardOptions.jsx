@@ -35,7 +35,7 @@ export default function RewardOptions() {
 
             <RewardList />
 
-            <RedemptionCard />
+            {/* <RedemptionCard /> */}
           </Box>
         </Collapse>
         {/* )} */}

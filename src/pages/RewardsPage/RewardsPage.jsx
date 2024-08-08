@@ -116,6 +116,7 @@ export default function RewardsPage({ points, onPointsChange }) {
             <RedemptionCardTest deductPoints={deductPoints} points={points} />
             <RedemptionCardTest2 deductPoints={deductPoints} points={points} />
             <RedemptionCardTest3 deductPoints={deductPoints} points={points} />
+            <RedemptionCard />
           </div>
 
           <div className="reward-options__container">

@@ -1,4 +1,7 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
 @use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
 
 .rewards {
   &__points-wrapper {
@@ -33,6 +36,7 @@
     font-weight: 600;
     font-family: "Corben";
     font-size: 2rem;
+    color: $dark-blue;
 
     @include desktop {
       font-size: 3rem;

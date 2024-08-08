@@ -5,13 +5,13 @@ import { Box, Progress } from "@chakra-ui/react";
 export default function PointsBalance({ points, maxPoints }) {
   return (
     <>
-      <section>
+      {/* <section>
         <img
           className="rewards__points-img"
           src={piggy}
           alt="piggy bank icon"
         />
-      </section>
+      </section> */}
       <section>
         <div>
           <h1 className="rewards__points-number">{points}</h1>

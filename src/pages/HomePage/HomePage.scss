@@ -23,20 +23,10 @@
   }
 
   &__img {
-    bottom: -8rem;
+    bottom: -1rem;
     position: absolute;
     width: 110%;
     overflow: hidden;
-    height: 15rem;
-
-    @include desktop {
-      bottom: -12rem;
-      height: 20rem;
-    }
-
-    @include large-desktop {
-      bottom: -14rem;
-      height: 23rem;
-    }
+    height: 10rem;
   }
 }

@@ -130,11 +130,11 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
     <>
       {/* Upload Resource Button - pulled from navbar component */}
       <button className="nav__button" onClick={onOpen}>
-        <img
+        {/* <img
           src={uploadIcon}
           alt="upload file icon"
           className="nav__icon nav__icon-upload"
-        />
+        /> */}
         <p className="nav__button-name">Upload Resource</p>
       </button>
 

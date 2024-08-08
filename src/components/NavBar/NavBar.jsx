@@ -1,8 +1,8 @@
-import trophyIcon from "../../assets/icons/trophy-01-svgrepo-com.png";
-import uploadIcon from "../../assets/icons/upload-folder-svgrepo-com.png";
-import uploadIcon2 from "../../assets/icons/upload-folder-svgrepo-com2.png";
-import savedIcon from "../../assets/icons/saved-svgrepo-com.png";
-import libraryIcon from "../../assets/icons/library-book-svgrepo-com.png";
+import trophyIcon from "../../assets/icons/nav-trophy.png";
+import uploadIcon2 from "../../assets/icons/nav-folder.png";
+import savedIcon from "../../assets/icons/nav-bookmark.png";
+import libraryIcon from "../../assets/icons/nav-library.png";
+import arrowDownIcon from "../../assets/icons/arrow-down.png";
 import { useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import SubmissionDrawer from "../../components/SubmissionForm/SubmissionDrawer";
@@ -10,8 +10,12 @@ import { SettingsIcon } from "@chakra-ui/icons";
 import "./NavBar.scss";
 import FilterDrawer from "../FilterDrawer/FilterDrawer";
 
-
-export default function NavBar({ onCategoryChange, onFormSubmit, onFilterChange, currentUser }) {
+export default function NavBar({
+  onCategoryChange,
+  onFormSubmit,
+  onFilterChange,
+  currentUser,
+}) {
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
   // const [isSortingOpen, setIsSortingOpen] = useState(false);
   const [category, setCategory] = useState("All");
@@ -29,8 +33,6 @@ export default function NavBar({ onCategoryChange, onFormSubmit, onFilterChange,
     setCategory("All");
     setIsLibraryOpen(!isLibraryOpen);
   };
-
-
 
   const handleMouseEnter = () => {
     setIsLibraryOpen(true);
@@ -86,45 +88,57 @@ export default function NavBar({ onCategoryChange, onFormSubmit, onFilterChange,
   return (
     <nav className="nav__list">
       <li
-        className={`nav__item ${isLibraryOpen ? "active" : ""}`}
+        className={`nav__item nav__item-first ${isLibraryOpen ? "active" : ""}`}
         onClick={toggleLibraryMenu}
-      // onMouseEnter={handleMouseEnter}
+        // onMouseEnter={handleMouseEnter}
       >
+        <div className="nav__item-wrapper">
+          <img
+            src={libraryIcon}
+            alt="library books icon"
+            className="nav__icon"
+          />
+          <p className="nav__item-name" onClick={checkLocation}>
+            Learning Library
+          </p>
+        </div>
+
         <img
-          src={libraryIcon}
-          alt="library books icon"
-          className="nav__icon"
+          src={arrowDownIcon}
+          alt="arrow down icon"
+          className="nav__icon nav__icon-arrow-down"
         />
-        <p className="nav__item-name" onClick={checkLocation}>
-          Learning Library
-        </p>
       </li>
       {isLibraryOpen && (
         <ul className="nav__library-sublist">
           <li
-            className={`nav__library-subitem ${category === "Software Engineering" ? "active" : ""
-              }`}
+            className={`nav__library-subitem ${
+              category === "Software Engineering" ? "active" : ""
+            }`}
             onClick={() => handleSelectCategory("Software Engineering")}
           >
             Software Engineering
           </li>
           <li
-            className={`nav__library-subitem ${category === "UX/UI Design" ? "active" : ""
-              }`}
+            className={`nav__library-subitem ${
+              category === "UX/UI Design" ? "active" : ""
+            }`}
             onClick={() => handleSelectCategory("UX/UI Design")}
           >
             UX/UI Design
           </li>
           <li
-            className={`nav__library-subitem ${category === "Product" ? "active" : ""
-              }`}
+            className={`nav__library-subitem ${
+              category === "Product" ? "active" : ""
+            }`}
             onClick={() => handleSelectCategory("Product")}
           >
             Product
           </li>
           <li
-            className={`nav__library-subitem ${category === "Data Science" ? "active" : ""
-              }`}
+            className={`nav__library-subitem ${
+              category === "Data Science" ? "active" : ""
+            }`}
             onClick={() => handleSelectCategory("Data Science")}
           >
             Data Science
@@ -134,7 +148,11 @@ export default function NavBar({ onCategoryChange, onFormSubmit, onFilterChange,
       <div className="nav__container-top">
         <NavLink to="/contributions">
           <li className="nav__item">
-            <img src={uploadIcon2} alt="upload file icon" className="nav__icon" />
+            <img
+              src={uploadIcon2}
+              alt="upload file icon"
+              className="nav__icon"
+            />
             <p className="nav__item-name">Contributions</p>
           </li>
         </NavLink>
@@ -197,7 +215,10 @@ export default function NavBar({ onCategoryChange, onFormSubmit, onFilterChange,
           <img src={uploadIcon} alt="upload file icon" className="nav__icon" />
           <p className="nav__button-name">Upload Resource</p>
         </button> */}
-        <SubmissionDrawer onFormSubmit={onFormSubmit} currentUser={currentUser} />
+        <SubmissionDrawer
+          onFormSubmit={onFormSubmit}
+          currentUser={currentUser}
+        />
       </div>
     </nav>
   );

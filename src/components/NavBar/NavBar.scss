@@ -6,7 +6,6 @@
 .nav {
   &__list {
     margin: 0.75rem;
-    // margin-right: 0;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -19,12 +18,27 @@
 
   &__item {
     display: flex;
-    padding: 0.5rem 0.25rem;
+    padding: 0.75rem 0.25rem 1.25rem;
     align-items: center;
 
     &-name {
       font-size: 0.65rem;
       margin-left: 0.5rem;
+      font-weight: 800;
+
+      @include desktop {
+        font-size: 0.75rem;
+      }
+    }
+
+    &-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    &-first {
+      justify-content: space-between;
+      align-items: center;
     }
 
     &:hover,
@@ -35,22 +49,21 @@
       @include thin-border;
       box-shadow: none;
       border: none;
-
-      // .nav__icon {
-      //   filter: invert(1);
-      // }
     }
   }
 
   &__icon {
-    width: 14%;
-
-    @include desktop {
-      width: 11%;
-    }
+    width: 1.15rem;
+    height: 1.15rem;
 
     &-upload {
       filter: invert(1);
+    }
+
+    &-arrow-down {
+      width: 0.85rem;
+      height: 0.85rem;
+      margin-left: 0.25rem;
     }
   }
 
@@ -74,13 +87,17 @@
     border-right: 4px solid var(--Black, #000);
     border-bottom: 4px solid var(--Black, #000);
     border-left: 2px solid var(--Black, #000);
-
     margin-bottom: 0;
+    width: 100%;
 
     &-name {
       font-size: 0.65rem;
       margin-left: 0.05rem;
       letter-spacing: -0.015rem;
+
+      @include large-desktop {
+        font-size: 0.75rem;
+      }
     }
   }
 
@@ -89,8 +106,12 @@
       list-style-type: none;
       display: flex;
       flex-direction: column;
-      margin-left: 2rem;
+      margin-left: 1.5rem;
       padding: 0 0 0 0.5rem;
+
+      @include desktop {
+        margin-left: 1.25rem;
+      }
     }
 
     &-subitem {
@@ -98,45 +119,20 @@
       letter-spacing: -0.025rem;
       margin: 0.25rem 0;
       padding: 0.35rem;
+      font-weight: 800;
 
       &:hover {
         cursor: pointer;
-        background-color: $black;
-        color: $white;
+        background-color: $yellow;
+        color: $black;
         @include thin-border;
         box-shadow: none;
+        border-color: $yellow;
+      }
+
+      @include desktop {
+        font-size: 0.75rem;
       }
     }
   }
-
-  // &__sorting {
-  //   &-item {
-  //     list-style-type: none;
-  //     padding-left: 0.5rem;
-  //   }
-
-  //   &-types {
-  //     display: flex;
-  //     flex-direction: column;
-  //   }
-
-  //   &-type {
-  //     font-size: 0.65rem;
-  //     letter-spacing: -0.025rem;
-  //     margin: 0.25rem 0 0 0;
-  //     padding: 0.35rem;
-  //     padding-bottom: 0;
-  //   }
-
-  //   &-subitem {
-  //     font-size: 0.55rem;
-  //     letter-spacing: -0.025rem;
-  //     padding-left: 0.3rem;
-  //   }
-
-  //   &-checkbox {
-  //     vertical-align: middle;
-  //     margin-left: 0.5rem;
-  //   }
-  // }
 }

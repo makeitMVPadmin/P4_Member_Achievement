@@ -8,13 +8,18 @@ import "./ResourceCard.scss";
 import upvoteImg from "../../assets/images/upvote.png";
 import commentsImg from "../../assets/images/comments.png";
 
-export default function ResourceCard({ resource, selectResource, isActive, commentCount }) {
+export default function ResourceCard({
+  resource,
+  selectResource,
+  isActive,
+  commentCount,
+}) {
   const [commentsCount, setCommentsCount] = useState(0);
 
   useEffect(() => {
     const fetchCommentsCount = async () => {
       try {
-        const commentsRef = collection(database, 'Comments');
+        const commentsRef = collection(database, "Comments");
         const q = query(commentsRef, where("resourceId", "==", resource.id));
         const querySnapshot = await getDocs(q);
 
@@ -22,7 +27,6 @@ export default function ResourceCard({ resource, selectResource, isActive, comme
         setCommentsCount(validCommentsCount);
 
         console.log("Valid comments count:", validCommentsCount);
-
       } catch (error) {
         console.error("Error fetching comments count:", error);
       }
@@ -52,7 +56,7 @@ export default function ResourceCard({ resource, selectResource, isActive, comme
         <div className="resource__heading-top-container">
           <p className="resource__type">{resource.type}</p>
         </div>
-        <div className="resource__timer">
+        {/* <div className="resource__timer">
           <p className="resource__duration">{resource.estDuration}</p>
           <img
             src={timerIcon}
@@ -60,12 +64,12 @@ export default function ResourceCard({ resource, selectResource, isActive, comme
             className="resource__timer-icon"
             aria-hidden="true"
           />
-        </div>
+        </div> */}
       </div>
       <div className="resource__heading-bottom">
         <h1 className="resource__title">{resource.title}</h1>
         <div className="resource__icons-container">
-          <div className="resource__icons">
+          <div className="resource__icons resource__icons-img-upvote">
             <img
               className="resource__icons-img"
               src={upvoteImg}
@@ -81,10 +85,19 @@ export default function ResourceCard({ resource, selectResource, isActive, comme
             />
             <p className="resource__comments-total">{commentCount}</p>
           </div>
+          <div className="resource__timer">
+            <img
+              src={timerIcon}
+              alt="timer icon"
+              className="resource__timer-icon"
+              aria-hidden="true"
+            />
+            <p className="resource__duration">{resource.estDuration}</p>
+          </div>
         </div>
       </div>
       <p className="resource__level">{resource.level}</p>
-      <div className="resource__about">
+      {/* <div className="resource__about">
         <p className="resource__preview">{resource.description}</p>
         <Link className="resource__link" aria-label="Go to resource details">
           <img
@@ -94,7 +107,7 @@ export default function ResourceCard({ resource, selectResource, isActive, comme
             aria-hidden="true"
           />
         </Link>
-      </div>
+      </div> */}
     </section>
   );
 }

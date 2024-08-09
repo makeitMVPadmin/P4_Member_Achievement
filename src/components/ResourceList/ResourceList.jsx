@@ -1,5 +1,6 @@
 import ResourceCard from "../ResourceCard/ResourceCard";
 import "./ResourceList.scss";
+import { useEffect } from "react";
 
 export default function ResourceList({
   resources,
@@ -7,6 +8,12 @@ export default function ResourceList({
   activeResourceId,
   commentCounts,
 }) {
+  useEffect(() => {
+    resources.forEach((resource) => {
+      resource.commentCount = commentCounts[resource.id] || 0;
+    });
+  }, [resources, commentCounts]);
+
   return (
     <section className="resourceList" aria-label="Resource List">
       <div className="resourceList__wrapper" role="list">
@@ -17,7 +24,7 @@ export default function ResourceList({
               resource={resource}
               selectResource={selectResource}
               isActive={resource.id === activeResourceId}
-              commentCount={(commentCounts && commentCounts[resource.id]) || 0}
+              commentCount={resource.commentCount}
             />
           ))
         ) : (

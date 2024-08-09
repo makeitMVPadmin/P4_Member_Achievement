@@ -91,7 +91,7 @@
     box-shadow: 1px 1px 0 black;
     font-weight: bold;
     font-size: 20px;
-    color: black;
+    // color: black;
     // width: 100%;
     // max-width: 500px;
   }
@@ -114,4 +114,8 @@
   // &__inputField::selection {
   //   color: grey;
   // }
+}
+
+#option__value {
+  color: black;
 }

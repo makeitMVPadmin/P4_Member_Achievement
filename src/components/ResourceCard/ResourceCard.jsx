@@ -14,27 +14,6 @@ export default function ResourceCard({
   isActive,
   commentCount,
 }) {
-  const [commentsCount, setCommentsCount] = useState(0);
-
-  useEffect(() => {
-    const fetchCommentsCount = async () => {
-      try {
-        const commentsRef = collection(database, "Comments");
-        const q = query(commentsRef, where("resourceId", "==", resource.id));
-        const querySnapshot = await getDocs(q);
-
-        const validCommentsCount = querySnapshot.size;
-        setCommentsCount(validCommentsCount);
-
-        console.log("Valid comments count:", validCommentsCount);
-      } catch (error) {
-        console.error("Error fetching comments count:", error);
-      }
-    };
-
-    fetchCommentsCount();
-  }, [resource.id]);
-
   const handleClickCard = () => {
     selectResource(resource.id);
   };
@@ -83,7 +62,7 @@ export default function ResourceCard({
               src={commentsImg}
               alt="comments icon"
             />
-            <p className="resource__comments-total">{commentCount}</p>
+            <p className="resource__comments-total">{resource.commentsCount}</p>
           </div>
           <div className="resource__timer">
             <img

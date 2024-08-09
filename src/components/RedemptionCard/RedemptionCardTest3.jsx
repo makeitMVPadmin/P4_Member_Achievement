@@ -13,7 +13,8 @@ export default function RedemptionCardTest3({ points, deductPoints }) {
         </div>
         <div className="reward__content">
           <p className="reward__description">
-            Receive help finding and securing internship opportunities.
+            Get a professional and thorough review and enhancement of your
+            resume.
           </p>
           <div className="reward__point-container">
             <img src={Coin} alt="coin icon" className="coin-icon" />

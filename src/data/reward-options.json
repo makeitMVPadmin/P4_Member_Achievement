@@ -2,7 +2,7 @@
   {
     "id": "1",
     "name": "Internship Placement Assistance",
-    "detail": "Receive help finding and securing internship opportunities.",
+    "detail": "Receive help finding internship opportunities.",
     "points": "300 Points"
   },
   {
@@ -14,13 +14,13 @@
   {
     "id": "3",
     "name": "Resume Review",
-    "detail": "Get a professional review and enhancement of your resume.",
+    "detail": "Get a professional and thorough review and enhancement of your resume.",
     "points": "400 Points"
   },
   {
     "id": "4",
     "name": "Personalized Skill Assessment",
-    "detail": "Get a detailed assessment of your skills and areas for improvement.",
+    "detail": "Get a detailed assessment of your skills for improvement.",
     "points": "500 Points"
   },
   {
@@ -32,7 +32,7 @@
   {
     "id": "6",
     "name": "Job Search Strategy Workshop",
-    "detail": "Workshop on resume writing, interview tips, and networking strategies.",
+    "detail": "Workshop on resume writing, interview tips, and networking.",
     "points": "600 Points"
   },
   {
@@ -44,13 +44,13 @@
   {
     "id": "8",
     "name": "Portfolio Review Session",
-    "detail": "Receive meaningful feedback on your portfolio.",
+    "detail": "Receive valuable and meaningful feedback on your portfolio presentation.",
     "points": "800 Points"
   },
   {
     "id": "9",
-    "name": "Design Tools Subscription",
-    "detail": "Access premium design tools, resources, and more.",
+    "name": "Member Subscription",
+    "detail": "Access premium design tools, resources for exclusive benefits and more.",
     "points": "900 Points"
   }
 ]

@@ -24,14 +24,14 @@
 }
 
 .rewards-right-container {
-  width: 70rem;
+  width: 78%;
 
   @include desktop {
-    width: 95rem;
+    width: 85%;
   }
 
   @include large-desktop {
-    width: 125rem;
+    width: 83%;
     margin: 0 1rem;
   }
 }
@@ -44,10 +44,16 @@
 }
 
 .rewards-redemption-cards {
+  // margin: 1rem 0.5rem 0 0;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin: 1rem 0.5rem 0 0;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+  padding: 1rem;
+  gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .points-balance-container {

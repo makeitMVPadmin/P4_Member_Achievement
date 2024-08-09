@@ -28,12 +28,12 @@
 
   @include desktop {
     width: 16rem;
-    height: 9.5rem;
+    height: 10rem;
   }
 
   @include large-desktop {
     width: 19.5rem;
-    height: 12rem;
+    height: 13rem;
   }
 
   &__title {
@@ -54,13 +54,13 @@
       font-size: 18px;
       margin-top: 0.85rem;
       margin-left: 0.75rem;
+      line-height: normal;
     }
   }
 
   &__description {
     font-size: 0.65rem;
-    margin-left: 7px;
-    margin-top: 5px;
+    margin: 5px 7px 0;
     color: #505050;
 
     @include desktop {
@@ -88,6 +88,18 @@
 
     @include large-desktop {
       margin-left: 0.75rem;
+    }
+  }
+
+  &__heading-top {
+    width: 11rem;
+
+    @include desktop {
+      width: 13rem;
+    }
+
+    @include large-desktop {
+      width: 17rem;
     }
   }
 }

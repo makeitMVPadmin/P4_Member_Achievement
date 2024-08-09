@@ -157,213 +157,119 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       <FormLabel htmlFor="title" fontSize="20px" fontWeight="bold" _after={{ content: '" *"', color: "black" }} > Title </FormLabel>
                         <Input id="title" placeholder="Enter a resource title." _placeholder={{ color: "grey" }} border="3px solid black" className="submission__inputField" _hover={{}} focusBorderColor="black" fontSize="20px"
                           {...register("title", { required: true })} />
-                      <FormErrorMessage>
-                        {errors.title && "Title is required for submission"}
-                      </FormErrorMessage>
+                      <FormErrorMessage>{errors.title && "Title is required for submission"}</FormErrorMessage>
                     </FormControl>
                   </Box>
 
                   {/* DISCIPLINE */}
-                  <FormControl isInvalid={errors.discipline}>
-                    <FormLabel
-                      htmlFor="discipline"
-                      fontSize="20px"
-                      fontWeight="bold"
-                      _after={{ content: '" *"', color: "black" }}
-                      marginTop="10px"
-                    >
-                      Discipline
-                    </FormLabel>
-                    <Select
-                      id="discipline"
-                      className="submission__inputField"
-                      border="3px solid black"
-                      _hover={{}}
-                      fontFamily="Poppins"
-                      fontWeight="bold"
-                      placeholder="Select"
-                      fontSize="20px"
-                      icon={<ChevronDownIcon />}
-                      iconSize="45px"
-                      iconColor="#0099FF"
-                      focusBorderColor="black"
-                      color={selectColors.discipline}
-                      onChange={handleColorChange}
-                      // sx is the styling for the dropdown menu
-                      sx={{
-                        '& option': {
-                          color: 'black',
-                        },
-                        '& option:first-of-type': {
-                          color: 'grey',
-                        },
-                      }}
-                      {...register("discipline", {
-                        required: true,
-                        onChange: handleColorChange
-                      })}
-                    >
-                      <option value="Software Engineering">Software Engineering</option>
-                      <option value="UX/UI Design">UX/UI Design</option>
-                      <option value="Product Management">Product Management</option>
-                      <option value="Data Science">Data Science</option>
-                    </Select>
-                    <FormErrorMessage>
-                      {errors.discipline && "Discipline is required"}
-                    </FormErrorMessage>
-                  </FormControl>
+                  <Box>
+                    <FormControl isInvalid={errors.discipline}>
+                      <FormLabel htmlFor="discipline" fontSize="20px" fontWeight="bold"  _after={{ content: '" *"', color: "black" }} marginTop="10px" > Discipline </FormLabel>
+                        <Select id="discipline" className="submission__inputField" border="3px solid black" _hover={{}} fontFamily="Poppins" fontWeight="bold" placeholder="Select" fontSize="20px" icon={<ChevronDownIcon />} iconSize="45px" iconColor="#0099FF" focusBorderColor="black" color={selectColors.discipline} onChange={handleColorChange}
+                          // sx is the styling for the dropdown menu
+                          sx={{
+                            '& option': {
+                              color: 'black',
+                            },
+                            '& option:first-of-type': {
+                              color: 'grey',
+                            },
+                          }}
+                          {...register("discipline", {
+                            required: true,
+                            onChange: handleColorChange
+                          })}>
+                          <option value="Software Engineering">Software Engineering</option>
+                          <option value="UX/UI Design">UX/UI Design</option>
+                          <option value="Product Management">Product Management</option>
+                          <option value="Data Science">Data Science</option>
+                        </Select>
+                      <FormErrorMessage>{errors.discipline && "Discipline is required"}</FormErrorMessage>
+                    </FormControl>
+                  </Box>
 
                   {/* TYPE */}
-                  <FormControl isInvalid={errors.type}>
-                    <FormLabel
-                      htmlFor="type"
-                      fontSize="20px"
-                      fontWeight="bold"
-                      _after={{ content: '" *"', color: "black" }}
-                      marginTop="10px"
-                    >
-                      Type
-                    </FormLabel>
-                    <Select
-                      id="type"
-                      className="submission__inputField"
-                      border="3px solid black"
-                      _hover={{}}
-                      fontFamily="Poppins"
-                      fontWeight="bold"
-                      placeholder="Select"
-                      fontSize="20px"
-                      icon={<ChevronDownIcon />}
-                      iconSize="45px"
-                      iconColor="#0099FF"
-                      focusBorderColor="black"
-                      color={selectColors.type}
-                      onChange={handleColorChange}
-                      // sx: styling for the dropdown menu
-                      sx={{
-                        '& option': {
-                          color: 'black',
-                        },
-                        '& option:first-of-type': {
-                          color: 'grey',
-                        },
-                      }}
-                      {...register("type", {
-                        required: true,
-                        onChange: handleColorChange
-                      })}
-                    >
-                      <option value="Article">Article</option>
-                      <option value="Blog">Blog</option>
-                      <option value="Video">Video</option>
-                      <option value="Course">Course</option>
-                    </Select>
-                    <FormErrorMessage>
-                      {errors.type && "Type is required"}
-                    </FormErrorMessage>
-                  </FormControl>
+                  <Box>
+                    <FormControl isInvalid={errors.type}>
+                      <FormLabel htmlFor="type" fontSize="20px" fontWeight="bold" _after={{ content: '" *"', color: "black" }} marginTop="10px" > Type </FormLabel>
+                        <Select id="type" className="submission__inputField" border="3px solid black" _hover={{}} fontFamily="Poppins" fontWeight="bold" placeholder="Select" fontSize="20px" icon={<ChevronDownIcon />} iconSize="45px" iconColor="#0099FF" focusBorderColor="black" color={selectColors.type} onChange={handleColorChange}
+                          // sx: styling for the dropdown menu
+                          sx={{
+                            '& option': {
+                              color: 'black',
+                            },
+                            '& option:first-of-type': {
+                              color: 'grey',
+                            },
+                          }}
+                          {...register("type", {
+                            required: true,
+                            onChange: handleColorChange
+                          })}>
+                          <option value="Article">Article</option>
+                          <option value="Blog">Blog</option>
+                          <option value="Video">Video</option>
+                          <option value="Course">Course</option>
+                        </Select>
+                      <FormErrorMessage>{errors.type && "Type is required"}</FormErrorMessage>
+                    </FormControl>
+                  </Box>
 
                   {/* SKILL LEVEL */}
-                  <FormControl isInvalid={errors.level}>
-                    <FormLabel
-                      htmlFor="level"
-                      fontSize="20px"
-                      fontWeight="bold"
-                      _after={{ content: '" *"', color: "black" }}
-                      marginTop="10px"
-                    >
-                      Skill Level
-                    </FormLabel>
-                    <Select
-                      id="level"
-                      className="submission__inputField"
-                      border="3px solid black"
-                      _hover={{}}
-                      fontFamily="Poppins"
-                      fontWeight="bold"
-                      placeholder="Select"
-                      fontSize="20px"
-                      icon={<ChevronDownIcon />}
-                      iconSize="45px"
-                      iconColor="#0099FF"
-                      focusBorderColor="black"
-                      color={selectColors.level}
-                      onChange={handleColorChange}
-                      sx={{
-                        '& option': {
-                          color: 'black',
-                        },
-                        '& option:first-of-type': {
-                          color: 'grey',
-                        },
-                      }}
-                      {...register("level", {
-                        required: true,
-                        onChange: handleColorChange
-                      })}
-                    >
-                      <option value="Beginner">Beginner</option>
-                      <option value="Intermediate">Intermediate</option>
-                      <option value="Advanced">Advanced</option>
-                    </Select>
-                    <FormErrorMessage>
-                      {errors.level && "Skill Level is required"}
-                    </FormErrorMessage>
-                  </FormControl>
+                  <Box>
+                    <FormControl isInvalid={errors.level}>
+                      <FormLabel htmlFor="level" fontSize="20px" fontWeight="bold" _after={{ content: '" *"', color: "black" }} marginTop="10px" > Skill Level </FormLabel>
+                        <Select id="level" className="submission__inputField" border="3px solid black" _hover={{}} fontFamily="Poppins" fontWeight="bold" placeholder="Select" fontSize="20px" icon={<ChevronDownIcon />} iconSize="45px" iconColor="#0099FF" focusBorderColor="black" color={selectColors.level} onChange={handleColorChange}
+                          sx={{
+                            '& option': {
+                              color: 'black',
+                            },
+                            '& option:first-of-type': {
+                              color: 'grey',
+                            },
+                          }}
+                          {...register("level", {
+                            required: true,
+                            onChange: handleColorChange
+                          })}>
+                          <option value="Beginner">Beginner</option>
+                          <option value="Intermediate">Intermediate</option>
+                          <option value="Advanced">Advanced</option>
+                        </Select>
+                      <FormErrorMessage>{errors.level && "Skill Level is required"}</FormErrorMessage>
+                    </FormControl>
+                  </Box>
 
                   {/* ESTIMATED DURATION */}
-                  <FormControl isInvalid={errors.estDuration}>
-                    <FormLabel
-                      htmlFor="estDuration"
-                      fontSize="20px"
-                      fontWeight="bold"
-                      _after={{ content: '" *"', color: "black" }}
-                      marginTop="10px"
-                    >
-                      Estimated Duration
-                    </FormLabel>
-                    <Select
-                      id="estDuration"
-                      className="submission__inputField"
-                      border="3px solid black"
-                      _hover={{}}
-                      fontFamily="Poppins"
-                      fontWeight="bold"
-                      placeholder="Select"
-                      fontSize="20px"
-                      icon={<ChevronDownIcon />}
-                      iconSize="45px"
-                      iconColor="#0099FF"
-                      focusBorderColor="black"
-                      color={selectColors.estDuration}
-                      onChange={handleColorChange}
-                      sx={{
-                        '& option': {
-                          color: 'black',
-                        },
-                        '& option:first-of-type': {
-                          color: 'grey',
-                        },
-                      }}
-                      {...register("estDuration", {
-                        required: true,
-                        onChange: handleColorChange
-                      })}
-                    >
-                      <option value="3 min">3 min</option>
-                      <option value="5 min">5 min</option>
-                      <option value="7 min">7 min</option>
-                      <option value="10 min">10 min</option>
-                      <option value="20 min">20 min</option>
-                      <option value="30 min">30 min</option>
-                      <option value="40 min">40 min</option>
-                      <option value="50 min">50 min</option>
-                      <option value="60 min">60 min</option>
-                    </Select>
-                    <FormErrorMessage>
-                      {errors.estDuration && "Estimated Duration is required"}
-                    </FormErrorMessage>
-                  </FormControl>
+                  <Box>
+                    <FormControl isInvalid={errors.estDuration}>
+                      <FormLabel htmlFor="estDuration" fontSize="20px" fontWeight="bold" _after={{ content: '" *"', color: "black" }} marginTop="10px"> Estimated Duration </FormLabel>
+                        <Select id="estDuration" className="submission__inputField" border="3px solid black" _hover={{}} fontFamily="Poppins" fontWeight="bold" placeholder="Select" fontSize="20px" icon={<ChevronDownIcon />} iconSize="45px" iconColor="#0099FF" focusBorderColor="black" color={selectColors.estDuration} onChange={handleColorChange}
+                          sx={{
+                            '& option': {
+                              color: 'black',
+                            },
+                            '& option:first-of-type': {
+                              color: 'grey',
+                            },
+                          }}
+                          {...register("estDuration", {
+                            required: true,
+                            onChange: handleColorChange
+                          })}>
+                          <option value="3 min">3 min</option>
+                          <option value="5 min">5 min</option>
+                          <option value="7 min">7 min</option>
+                          <option value="10 min">10 min</option>
+                          <option value="20 min">20 min</option>
+                          <option value="30 min">30 min</option>
+                          <option value="40 min">40 min</option>
+                          <option value="50 min">50 min</option>
+                          <option value="60 min">60 min</option>
+                        </Select>
+                      <FormErrorMessage>{errors.estDuration && "Estimated Duration is required"}</FormErrorMessage>
+                    </FormControl>
+                  </Box>
 
                   {/* TAGS */}
                   <Box>
@@ -376,9 +282,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                                 return selectedOptions.length > 3
                               }
                             })} />
-                      <FormErrorMessage>
-                        {errors.tags && "Atleast 4 tags are required"}
-                      </FormErrorMessage>
+                      <FormErrorMessage>{errors.tags && "Atleast 4 tags are required"}</FormErrorMessage>
                     </FormControl>
                   </Box>
 
@@ -399,9 +303,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                               return wordCount <= MAX_WORD_COUNT || `Text must be ${MAX_WORD_COUNT} words or less`;
                             }
                           })} />
-                        <FormErrorMessage>
-                        {errors.description && `Text must be ${MAX_WORD_COUNT} words or less`}
-                        </FormErrorMessage>
+                        <FormErrorMessage>{errors.description && `Text must be ${MAX_WORD_COUNT} words or less`}</FormErrorMessage>
                     </FormControl>
                   </Box>
 
@@ -411,9 +313,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       <FormLabel htmlFor="url" fontSize="20px" fontWeight="bold" _after={{ content: '" *"', color: "black" }} marginTop="10px" > URL </FormLabel>
                         <Input type="url" id="url" placeholder="Enter the resource URL" _placeholder={{ color: "grey" }} className="submission__inputField" border="3px solid black" _hover={{}} focusBorderColor="black" fontSize="20px"
                           {...register("url", { required: !file })} />
-                      <FormErrorMessage>
-                      {errors.url && "URL is required if no file is uploaded"}
-                      </FormErrorMessage>
+                      <FormErrorMessage>{errors.url && "URL is required if no file is uploaded"}</FormErrorMessage>
                     </FormControl>
                   </Box>
 

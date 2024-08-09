@@ -80,7 +80,7 @@ export default function FilterDrawer({ onFilterChange }) {
           <DrawerOverlay />
           <DrawerContent
             sx={{
-              borderRadius: "0px 30px 30px 0px",
+              borderRadius: "30px 0px 0px 30px",
               border: "4px solid black",
             }}
           >

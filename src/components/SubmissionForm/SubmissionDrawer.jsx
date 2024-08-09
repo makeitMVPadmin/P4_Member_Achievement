@@ -3,7 +3,6 @@ import { CommentModal } from "../CommentModal/CommentModal.jsx";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import UploadFile from "./UploadFile";
 import React, { useState, useRef } from "react";
-import uploadIcon from "../../assets/icons/upload-folder-svgrepo-com.png";
 import "./SubmissionDrawer.scss";
 import {
   Button,
@@ -25,7 +24,6 @@ import {
   FormControl,
   FormErrorMessage,
 } from "@chakra-ui/react";
-import { color } from "framer-motion";
 import { collection, addDoc } from "firebase/firestore";
 import { storage, database } from "../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -36,21 +34,27 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
   const MAX_WORD_COUNT = 50;
   // const [text, setText] = useState('');
   const selectTagsRef = useRef(null);
-  const [inputValue, setInputValue] = useState('');
+  // const [inputValue, setInputValue] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    setValue,
+    // setValue,
     watch,
   } = useForm();
   const [file, setFile] = useState(null);
-  const fileUrl = watch("url");
+  // const fileUrl = watch("url");
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [wordCount, setWordCount] = useState(0);
+  // const [wordCount, setWordCount] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [selectColors, setSelectColors] = useState({
+    discipline: 'grey',
+    type: 'grey',
+    level: 'grey',
+    estDuration: 'grey'
+  });
 
   function handleSetSelectedOptions(options) {
     setSelectedOptions(options);
@@ -164,6 +168,14 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
 
   compareNumbers();
 
+  const handleColorChange = (e) => {
+    const { id, value } = e.target;
+    setSelectColors(prevColors => ({
+      ...prevColors,
+      [id]: value ? 'black' : 'grey'
+    }));
+  };
+
   return (
     <>
       {/* Upload Resource Button - pulled from navbar component */}
@@ -252,7 +264,6 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       className="submission__inputField"
                       border="3px solid black"
                       _hover={{}}
-                      color='grey'
                       fontFamily="Poppins"
                       fontWeight="bold"
                       placeholder="Select"
@@ -261,16 +272,26 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       iconSize="45px"
                       iconColor="#0099FF"
                       focusBorderColor="black"
-                      {...register("discipline", { required: true })}
+                      color={selectColors.discipline}
+                      onChange={handleColorChange}
+                      // sx is the styling for the dropdown menu
+                      sx={{
+                        '& option': {
+                          color: 'black',
+                        },
+                        '& option:first-of-type': {
+                          color: 'grey',
+                        },
+                      }}
+                      {...register("discipline", {
+                        required: true,
+                        onChange: handleColorChange
+                      })}
                     >
-                      <option id="option__value" value="Software Engineering">
-                        Software Engineering
-                      </option>
-                      <option id="option__value" value="UX/UI Design">UX/UI Design</option>
-                      <option id="option__value" value="Product Management">
-                        Product Management
-                      </option>
-                      <option id="option__value" value="Data Science">Data Science</option>
+                      <option value="Software Engineering">Software Engineering</option>
+                      <option value="UX/UI Design">UX/UI Design</option>
+                      <option value="Product Management">Product Management</option>
+                      <option value="Data Science">Data Science</option>
                     </Select>
                     <FormErrorMessage>
                       {errors.discipline && "Discipline is required"}
@@ -296,18 +317,31 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       fontFamily="Poppins"
                       fontWeight="bold"
                       placeholder="Select"
-                      color='grey'
                       fontSize="20px"
                       icon={<ChevronDownIcon />}
                       iconSize="45px"
                       iconColor="#0099FF"
                       focusBorderColor="black"
-                      {...register("type", { required: true })}
+                      color={selectColors.type}
+                      onChange={handleColorChange}
+                      // sx: styling for the dropdown menu
+                      sx={{
+                        '& option': {
+                          color: 'black',
+                        },
+                        '& option:first-of-type': {
+                          color: 'grey',
+                        },
+                      }}
+                      {...register("type", {
+                        required: true,
+                        onChange: handleColorChange
+                      })}
                     >
-                      <option id="option__value" value="Article">Article</option>
-                      <option id="option__value" value="Blog">Blog</option>
-                      <option id="option__value" value="Video">Video</option>
-                      <option id="option__value" value="Course">Course</option>
+                      <option value="Article">Article</option>
+                      <option value="Blog">Blog</option>
+                      <option value="Video">Video</option>
+                      <option value="Course">Course</option>
                     </Select>
                     <FormErrorMessage>
                       {errors.type && "Type is required"}
@@ -332,18 +366,30 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       _hover={{}}
                       fontFamily="Poppins"
                       fontWeight="bold"
-                      color='grey'
                       placeholder="Select"
                       fontSize="20px"
                       icon={<ChevronDownIcon />}
                       iconSize="45px"
                       iconColor="#0099FF"
                       focusBorderColor="black"
-                      {...register("level", { required: true })}
+                      color={selectColors.level}
+                      onChange={handleColorChange}
+                      sx={{
+                        '& option': {
+                          color: 'black',
+                        },
+                        '& option:first-of-type': {
+                          color: 'grey',
+                        },
+                      }}
+                      {...register("level", {
+                        required: true,
+                        onChange: handleColorChange
+                      })}
                     >
-                      <option id="option__value" value="Beginner">Beginner</option>
-                      <option id="option__value" value="Intermediate">Intermediate</option>
-                      <option id="option__value" value="Advanced">Advanced</option>
+                      <option value="Beginner">Beginner</option>
+                      <option value="Intermediate">Intermediate</option>
+                      <option value="Advanced">Advanced</option>
                     </Select>
                     <FormErrorMessage>
                       {errors.level && "Skill Level is required"}
@@ -369,23 +415,35 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       fontFamily="Poppins"
                       fontWeight="bold"
                       placeholder="Select"
-                      color='grey'
                       fontSize="20px"
                       icon={<ChevronDownIcon />}
                       iconSize="45px"
                       iconColor="#0099FF"
                       focusBorderColor="black"
-                      {...register("estDuration", { required: true })}
+                      color={selectColors.estDuration}
+                      onChange={handleColorChange}
+                      sx={{
+                        '& option': {
+                          color: 'black',
+                        },
+                        '& option:first-of-type': {
+                          color: 'grey',
+                        },
+                      }}
+                      {...register("estDuration", {
+                        required: true,
+                        onChange: handleColorChange
+                      })}
                     >
-                      <option id="option__value" value="3 min">3 min</option>
-                      <option id="option__value" value="5 min">5 min</option>
-                      <option id="option__value" value="7 min">7 min</option>
-                      <option id="option__value" value="10 min">10 min</option>
-                      <option id="option__value" value="20 min">20 min</option>
-                      <option id="option__value" value="30 min">30 min</option>
-                      <option id="option__value" value="40 min">40 min</option>
-                      <option id="option__value" value="50 min">50 min</option>
-                      <option id="option__value" value="60 min">60 min</option>
+                      <option value="3 min">3 min</option>
+                      <option value="5 min">5 min</option>
+                      <option value="7 min">7 min</option>
+                      <option value="10 min">10 min</option>
+                      <option value="20 min">20 min</option>
+                      <option value="30 min">30 min</option>
+                      <option value="40 min">40 min</option>
+                      <option value="50 min">50 min</option>
+                      <option value="60 min">60 min</option>
                     </Select>
                     <FormErrorMessage>
                       {errors.estDuration && "Estimated Duration is required"}

@@ -4,10 +4,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import React, { forwardRef } from "react";
 import Select, { components } from "react-select";
 import { useForm } from "react-hook-form";
-import { color } from "framer-motion";
-// import makeAnimated from "react-select/animated";
-// import { color, wrap } from "framer-motion";
-// import { hover } from "@testing-library/user-event/dist/hover";
+
 
 // const animatedComponents = makeAnimated();
 const CustomDropdownIndicator = (props) => {
@@ -25,14 +22,10 @@ const customComponents = {
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
-    // this changes width of entire container
-    // maxWidth:"450px",
     width: "373px",
     border: "3px solid black",
-    // borderRadius: "0.25rem",
     boxShadow: "1px 1px 0 black",
     borderRadius: "5px",
-    // height: '43px',
     ":hover": { 
       borderColor: "black",
     },
@@ -45,8 +38,6 @@ const customStyles = {
     flexWrap: "nowrap",
     overflowX: "auto",
     whiteSpace: "nowrap",
-    // this changes the width of inner container
-    // maxWidth: '500px',
     padding: "0px",
     fontSize: "20px",
     color: "black",
@@ -72,7 +63,6 @@ const customStyles = {
     "& svg": {
       position: "relative",
       right: "-5px",
-      // bottom: '4px',
       width: "45px",
       height: "45px",
     },
@@ -122,18 +112,6 @@ const options = [
 const SelectTags = forwardRef(({ selectedOptions, setSelectedOptions }, ref) => {
 
   return (
-      <>
-        <FormLabel
-          htmlFor="owner"
-          className="submission__title"
-          fontSize="20px"
-          fontFamily="Poppins"
-          fontWeight="bold"
-          marginTop="10px"
-          _after={{ content: '" *"', color: "black" }}
-        >
-          Tags
-        </FormLabel>
         <Select
           closeMenuOnSelect={false}
           components={customComponents}
@@ -148,7 +126,6 @@ const SelectTags = forwardRef(({ selectedOptions, setSelectedOptions }, ref) => 
           name="tags"
           styles={customStyles}
         />
-      </>
   );
 });
 

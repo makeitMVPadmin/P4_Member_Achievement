@@ -73,7 +73,7 @@ export default function FilterDrawer({ onFilterChange }) {
       <div>
         <Drawer
           isOpen={isOpen}
-          placement="left"
+          placement="right"
           onClose={handleCancel}
           size="sm"
         >

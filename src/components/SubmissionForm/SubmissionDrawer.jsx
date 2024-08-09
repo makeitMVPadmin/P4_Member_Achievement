@@ -129,14 +129,17 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
     if (typeof str !== 'string') {
       return 0;
     }
-    return str.trim().split(/\s+/).filter(word => word.length > 50).length;
+    const trimmedStr = str.trim();
+    return trimmedStr.length === 0 ? 0 : trimmedStr.split(/\s+/).length;
+    // return str.trim().split(/\s+/).length === 0 ? 0 : str.trim().split(/\s+/).length;
   };
 
 
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-    setWordCount(countWords(setInputValue))
-  };
+  // const handleInputChange = (e) => {
+  //   setInputValue(e.target.value);
+  //   console.log(inputValue)
+  //   setWordCount(countWords(e.target.value))
+  // };
 
   // const handleInputChange = (e) => {
   //   const value = e.target.value;
@@ -148,7 +151,19 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
     setShowModal(false);
   };
 
- 
+  const test = countWords(watch("description"));
+
+  console.log("description type", typeof test)
+  console.log("the actual description:", test)
+
+  const compareNumbers = () => {
+    if (test < MAX_WORD_COUNT) {
+      console.log("true")
+    }
+  }
+
+  compareNumbers();
+
   return (
     <>
       {/* Upload Resource Button - pulled from navbar component */}
@@ -214,7 +229,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       _hover={{}}
                       focusBorderColor="black"
                       fontSize="20px"
-                      {...register("title",  { required: true })}
+                      {...register("title", { required: true })}
                     />
                     <FormErrorMessage>
                       {errors.title && "Title is required for submission"}
@@ -421,20 +436,24 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                       focusBorderColor="black"
                       fontSize="20px"
                       height="200px"
-                      onChange={handleInputChange}
-                      {...register("description", { 
-                        required: true,
-                        validate: () => countWords(setInputValue) <= MAX_WORD_COUNT
-                       })}
                       // onChange={handleInputChange}
-                      // value={inputValue} // Bind the Textarea value to inputValue
-                      // {...register("description", { 
-                      //   required: true,
-                      //   validate: (value) => countWords(value) <= MAX_WORD_COUNT // Validate based on the value of the Textarea
-                      //  })}
+
+                      {...register("description", {
+                        required: true,
+                        validate: (value) => {
+                          const wordCount = countWords(value);
+                          return wordCount <= MAX_WORD_COUNT || `Text must be ${MAX_WORD_COUNT} words or less`;
+                        }
+                      })}
+                    // onChange={handleInputChange}
+                    // value={inputValue} // Bind the Textarea value to inputValue
+                    // {...register("description", { 
+                    //   required: true,
+                    //   validate: (value) => countWords(value) <= MAX_WORD_COUNT // Validate based on the value of the Textarea
+                    //  })}
                     />
-                    <Text mt={2} color={wordCount > MAX_WORD_COUNT ? 'red.500' : 'black'}>
-                    {wordCount} / {MAX_WORD_COUNT} words
+                    <Text mt={2} color={countWords(watch("description")) > MAX_WORD_COUNT ? 'red.500' : 'black'}>
+                      {countWords(watch("description"))} / {MAX_WORD_COUNT} words
                     </Text>
                     <FormErrorMessage>
                       {errors.description && `Text must be ${MAX_WORD_COUNT} words or less`}
@@ -519,7 +538,7 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
         </Drawer>
       </div>
       <div className="submission__modal">
-      {showModal && <CommentModal closeModal={closeModal} />}
+        {showModal && <CommentModal closeModal={closeModal} />}
       </div>
     </>
   );

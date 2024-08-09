@@ -4,26 +4,6 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import UploadFile from "./UploadFile";
 import React, { useState, useRef } from "react";
 import "./SubmissionDrawer.scss";
-import {
-  Button,
-  useDisclosure,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  DrawerHeader,
-  DrawerBody,
-  Stack,
-  Box,
-  FormLabel,
-  Input,
-  Select,
-  Text,
-  Textarea,
-  DrawerFooter,
-  FormControl,
-  FormErrorMessage,
-} from "@chakra-ui/react";
 import { collection, addDoc } from "firebase/firestore";
 import { storage, database } from "../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";

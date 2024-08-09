@@ -13,10 +13,9 @@ import { doc, getDoc } from "@firebase/firestore";
 const App = () => {
   const [savedBookmarks, setSavedBookmarks] = useState([]);
   const [currentUser, setCurrentUser] = useState({}); // Sample current userID
-  const [points, setPoints] = useState(480);
+  const [points, setPoints] = useState(600);
 
-  console.log(currentUser)
-
+  console.log(currentUser);
 
   useEffect(() => {
     // Fetch user data from Firestore
@@ -62,11 +61,22 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route
               path="/resource"
-              element={<ResourcePage onBookmarkUpdate={handleBookmarkUpdate} currentUser={currentUser} />}
+              element={
+                <ResourcePage
+                  onBookmarkUpdate={handleBookmarkUpdate}
+                  currentUser={currentUser}
+                />
+              }
             />
             <Route
               path="/bookmarked"
-              element={<BookMarkedPage onBookmarkUpdate={handleBookmarkUpdate} bookmarkedResources={savedBookmarks} currentUser={currentUser} />}
+              element={
+                <BookMarkedPage
+                  onBookmarkUpdate={handleBookmarkUpdate}
+                  bookmarkedResources={savedBookmarks}
+                  currentUser={currentUser}
+                />
+              }
             />
             <Route
               path="/rewards"
@@ -79,7 +89,12 @@ const App = () => {
             />
             <Route
               path="/contributions"
-              element={<ContributionsPage onBookmarkUpdate={handleBookmarkUpdate} currentUser={currentUser} />}
+              element={
+                <ContributionsPage
+                  onBookmarkUpdate={handleBookmarkUpdate}
+                  currentUser={currentUser}
+                />
+              }
             />
           </Routes>
         </BrowserRouter>

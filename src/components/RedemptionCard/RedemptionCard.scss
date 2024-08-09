@@ -162,7 +162,7 @@
   border-radius: 5px;
   width: 93%;
   margin-bottom: 1px;
-  @include very-thin-border;
+  @include thin-border;
   @include button;
   cursor: default;
 
@@ -188,8 +188,15 @@
   border-radius: 5px;
   width: 93%;
   margin-bottom: 1px;
-  @include very-thin-border;
+  @include thin-border;
   @include button;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.025);
+    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
 
   @include desktop {
     font-size: 15px;

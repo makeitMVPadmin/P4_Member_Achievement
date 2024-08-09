@@ -3,54 +3,54 @@
     "id": "1",
     "name": "Internship Placement Assistance",
     "detail": "Receive help finding internship opportunities.",
-    "points": "300 Points"
+    "points": "300"
   },
   {
     "id": "2",
     "name": "Resume Template",
     "detail": "Access a professionally designed resume template to create a standout CV.",
-    "points": "300 Points"
+    "points": "300"
   },
   {
     "id": "3",
     "name": "Resume Review",
     "detail": "Get a professional and thorough review and enhancement of your resume.",
-    "points": "400 Points"
+    "points": "400"
   },
   {
     "id": "4",
     "name": "Personalized Skill Assessment",
     "detail": "Get a detailed assessment of your skills for improvement.",
-    "points": "500 Points"
+    "points": "500"
   },
   {
     "id": "5",
     "name": "Mentorship and Guidance Session",
     "detail": "Receive guidance from an experienced mentor.",
-    "points": "500 Points"
+    "points": "500"
   },
   {
     "id": "6",
     "name": "Job Search Strategy Workshop",
     "detail": "Workshop on resume writing, interview tips, and networking.",
-    "points": "600 Points"
+    "points": "600"
   },
   {
     "id": "7",
     "name": "One-on-one Coaching Session",
     "detail": "Personalized coaching to advance your career.",
-    "points": "800 Points"
+    "points": "800"
   },
   {
     "id": "8",
     "name": "Portfolio Review Session",
     "detail": "Receive valuable and meaningful feedback on your portfolio presentation.",
-    "points": "800 Points"
+    "points": "800"
   },
   {
     "id": "9",
     "name": "Member Subscription",
     "detail": "Access premium design tools, resources for exclusive benefits and more.",
-    "points": "900 Points"
+    "points": "900"
   }
 ]

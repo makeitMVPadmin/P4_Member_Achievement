@@ -4,6 +4,26 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import UploadFile from "./UploadFile";
 import React, { useState, useRef } from "react";
 import "./SubmissionDrawer.scss";
+import {
+  Button,
+  useDisclosure,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerBody,
+  Stack,
+  Box,
+  FormLabel,
+  Input,
+  Select,
+  Text,
+  Textarea,
+  DrawerFooter,
+  FormControl,
+  FormErrorMessage,
+} from "@chakra-ui/react";
 import { collection, addDoc } from "firebase/firestore";
 import { storage, database } from "../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -18,9 +38,15 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, formState: { errors }, reset, setValue, watch } = useForm();
   const [file, setFile] = useState(null);
-  const fileUrl = watch("url");
+  // const fileUrl = watch("url");
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [selectColors, setSelectColors] = useState({
+    discipline: 'grey',
+    type: 'grey',
+    level: 'grey',
+    estDuration: 'grey'
+  });
 
   function handleSetSelectedOptions(options) {
     setSelectedOptions(options);
@@ -117,6 +143,14 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
   }
   compareNumbers();
 
+  const handleColorChange = (e) => {
+    const { id, value } = e.target;
+    setSelectColors(prevColors => ({
+      ...prevColors,
+      [id]: value ? 'black' : 'grey'
+    }));
+  };
+
   return (
     <>
       <button className="nav__button" onClick={onOpen}>
@@ -150,76 +184,206 @@ export default function SubmissionDrawer({ onFormSubmit, currentUser }) {
                   </Box>
 
                   {/* DISCIPLINE */}
-                  <Box>
-                    <FormControl isInvalid={errors.discipline}>
-                      <FormLabel htmlFor="discipline" fontSize="20px" fontWeight="bold" _after={{ content: '" *"', color: "black" }} marginTop="10px" > Discipline </FormLabel>
-                        <Select id="discipline" className="submission__inputField" border="3px solid black" _hover={{}} color='grey' fontFamily="Poppins" fontWeight="bold" placeholder="Select" fontSize="20px" icon={<ChevronDownIcon />} iconSize="45px" iconColor="#0099FF" focusBorderColor="black"
-                          {...register("discipline", { required: true })} >
-                          <option id="option__value" value="Software Engineering">Software Engineering </option>
-                          <option id="option__value" value="UX/UI Design">UX/UI Design </option>
-                          <option id="option__value" value="Product Management">Product Management </option>
-                          <option id="option__value" value="Data Science">Data Science </option>
-                        </Select>
-                      <FormErrorMessage>
-                        {errors.discipline && "Discipline is required"}
-                      </FormErrorMessage>
-                    </FormControl>
-                  </Box>
+                  <FormControl isInvalid={errors.discipline}>
+                    <FormLabel
+                      htmlFor="discipline"
+                      fontSize="20px"
+                      fontWeight="bold"
+                      _after={{ content: '" *"', color: "black" }}
+                      marginTop="10px"
+                    >
+                      Discipline
+                    </FormLabel>
+                    <Select
+                      id="discipline"
+                      className="submission__inputField"
+                      border="3px solid black"
+                      _hover={{}}
+                      fontFamily="Poppins"
+                      fontWeight="bold"
+                      placeholder="Select"
+                      fontSize="20px"
+                      icon={<ChevronDownIcon />}
+                      iconSize="45px"
+                      iconColor="#0099FF"
+                      focusBorderColor="black"
+                      color={selectColors.discipline}
+                      onChange={handleColorChange}
+                      // sx is the styling for the dropdown menu
+                      sx={{
+                        '& option': {
+                          color: 'black',
+                        },
+                        '& option:first-of-type': {
+                          color: 'grey',
+                        },
+                      }}
+                      {...register("discipline", {
+                        required: true,
+                        onChange: handleColorChange
+                      })}
+                    >
+                      <option value="Software Engineering">Software Engineering</option>
+                      <option value="UX/UI Design">UX/UI Design</option>
+                      <option value="Product Management">Product Management</option>
+                      <option value="Data Science">Data Science</option>
+                    </Select>
+                    <FormErrorMessage>
+                      {errors.discipline && "Discipline is required"}
+                    </FormErrorMessage>
+                  </FormControl>
 
                   {/* TYPE */}
-                  <Box>
-                    <FormControl isInvalid={errors.type}>
-                      <FormLabel htmlFor="type" fontSize="20px" fontWeight="bold" _after={{ content: '" *"', color: "black" }} marginTop="10px" > Type </FormLabel>
-                        <Select id="type" className="submission__inputField" border="3px solid black" _hover={{}} fontFamily="Poppins" fontWeight="bold" placeholder="Select" color='grey' fontSize="20px" icon={<ChevronDownIcon />} iconSize="45px" iconColor="#0099FF" focusBorderColor="black"
-                          {...register("type", { required: true })} >
-                          <option id="option__value" value="Article">Article </option>
-                          <option id="option__value" value="Blog">Blog </option>
-                          <option id="option__value" value="Video">Video </option>
-                          <option id="option__value" value="Course">Course </option>
-                        </Select>
-                      <FormErrorMessage>
-                        {errors.type && "Type is required"}
-                      </FormErrorMessage>
-                    </FormControl>
-                  </Box>
+                  <FormControl isInvalid={errors.type}>
+                    <FormLabel
+                      htmlFor="type"
+                      fontSize="20px"
+                      fontWeight="bold"
+                      _after={{ content: '" *"', color: "black" }}
+                      marginTop="10px"
+                    >
+                      Type
+                    </FormLabel>
+                    <Select
+                      id="type"
+                      className="submission__inputField"
+                      border="3px solid black"
+                      _hover={{}}
+                      fontFamily="Poppins"
+                      fontWeight="bold"
+                      placeholder="Select"
+                      fontSize="20px"
+                      icon={<ChevronDownIcon />}
+                      iconSize="45px"
+                      iconColor="#0099FF"
+                      focusBorderColor="black"
+                      color={selectColors.type}
+                      onChange={handleColorChange}
+                      // sx: styling for the dropdown menu
+                      sx={{
+                        '& option': {
+                          color: 'black',
+                        },
+                        '& option:first-of-type': {
+                          color: 'grey',
+                        },
+                      }}
+                      {...register("type", {
+                        required: true,
+                        onChange: handleColorChange
+                      })}
+                    >
+                      <option value="Article">Article</option>
+                      <option value="Blog">Blog</option>
+                      <option value="Video">Video</option>
+                      <option value="Course">Course</option>
+                    </Select>
+                    <FormErrorMessage>
+                      {errors.type && "Type is required"}
+                    </FormErrorMessage>
+                  </FormControl>
 
                   {/* SKILL LEVEL */}
-                  <Box>
-                    <FormControl isInvalid={errors.level}>
-                      <FormLabel htmlFor="level" fontSize="20px" fontWeight="bold" _after={{ content: '" *"', color: "black" }} marginTop="10px" > Skill Level </FormLabel>
-                        <Select id="level" className="submission__inputField" border="3px solid black" _hover={{}} fontFamily="Poppins" fontWeight="bold" placeholder="Select" color='grey' fontSize="20px" icon={<ChevronDownIcon />} iconSize="45px" iconColor="#0099FF" focusBorderColor="black"
-                          {...register("level", { required: true })} >
-                          <option id="option__value" value="Beginner">Beginner </option>
-                          <option id="option__value" value="Intermediate">Intermediate </option>
-                          <option id="option__value" value="Advanced">Advanced </option>
-                        </Select>
-                      <FormErrorMessage>
-                        {errors.level && "Skill Level is required"}
-                      </FormErrorMessage>
-                    </FormControl>
-                  </Box>
+                  <FormControl isInvalid={errors.level}>
+                    <FormLabel
+                      htmlFor="level"
+                      fontSize="20px"
+                      fontWeight="bold"
+                      _after={{ content: '" *"', color: "black" }}
+                      marginTop="10px"
+                    >
+                      Skill Level
+                    </FormLabel>
+                    <Select
+                      id="level"
+                      className="submission__inputField"
+                      border="3px solid black"
+                      _hover={{}}
+                      fontFamily="Poppins"
+                      fontWeight="bold"
+                      placeholder="Select"
+                      fontSize="20px"
+                      icon={<ChevronDownIcon />}
+                      iconSize="45px"
+                      iconColor="#0099FF"
+                      focusBorderColor="black"
+                      color={selectColors.level}
+                      onChange={handleColorChange}
+                      sx={{
+                        '& option': {
+                          color: 'black',
+                        },
+                        '& option:first-of-type': {
+                          color: 'grey',
+                        },
+                      }}
+                      {...register("level", {
+                        required: true,
+                        onChange: handleColorChange
+                      })}
+                    >
+                      <option value="Beginner">Beginner</option>
+                      <option value="Intermediate">Intermediate</option>
+                      <option value="Advanced">Advanced</option>
+                    </Select>
+                    <FormErrorMessage>
+                      {errors.level && "Skill Level is required"}
+                    </FormErrorMessage>
+                  </FormControl>
 
                   {/* ESTIMATED DURATION */}
-                  <Box>
-                    <FormControl isInvalid={errors.estDuration}>
-                      <FormLabel htmlFor="estDuration" fontSize="20px" fontWeight="bold" _after={{ content: '" *"', color: "black" }} marginTop="10px" > Estimated Duration </FormLabel>
-                        <Select id="estDuration" className="submission__inputField" border="3px solid black" _hover={{}} fontFamily="Poppins" fontWeight="bold" placeholder="Select" color='grey' fontSize="20px" icon={<ChevronDownIcon />} iconSize="45px" iconColor="#0099FF" focusBorderColor="black"
-                          {...register("estDuration", { required: true })} >
-                          <option id="option__value" value="3 min">3 min</option>
-                          <option id="option__value" value="5 min">5 min</option>
-                          <option id="option__value" value="7 min">7 min</option>
-                          <option id="option__value" value="10 min">10 min</option>
-                          <option id="option__value" value="20 min">20 min</option>
-                          <option id="option__value" value="30 min">30 min</option>
-                          <option id="option__value" value="40 min">40 min</option>
-                          <option id="option__value" value="50 min">50 min</option>
-                          <option id="option__value" value="60 min">60 min</option>
-                        </Select>
-                      <FormErrorMessage>
-                        {errors.estDuration && "Estimated Duration is required"}
-                      </FormErrorMessage>
-                    </FormControl>
-                  </Box>
+                  <FormControl isInvalid={errors.estDuration}>
+                    <FormLabel
+                      htmlFor="estDuration"
+                      fontSize="20px"
+                      fontWeight="bold"
+                      _after={{ content: '" *"', color: "black" }}
+                      marginTop="10px"
+                    >
+                      Estimated Duration
+                    </FormLabel>
+                    <Select
+                      id="estDuration"
+                      className="submission__inputField"
+                      border="3px solid black"
+                      _hover={{}}
+                      fontFamily="Poppins"
+                      fontWeight="bold"
+                      placeholder="Select"
+                      fontSize="20px"
+                      icon={<ChevronDownIcon />}
+                      iconSize="45px"
+                      iconColor="#0099FF"
+                      focusBorderColor="black"
+                      color={selectColors.estDuration}
+                      onChange={handleColorChange}
+                      sx={{
+                        '& option': {
+                          color: 'black',
+                        },
+                        '& option:first-of-type': {
+                          color: 'grey',
+                        },
+                      }}
+                      {...register("estDuration", {
+                        required: true,
+                        onChange: handleColorChange
+                      })}
+                    >
+                      <option value="3 min">3 min</option>
+                      <option value="5 min">5 min</option>
+                      <option value="7 min">7 min</option>
+                      <option value="10 min">10 min</option>
+                      <option value="20 min">20 min</option>
+                      <option value="30 min">30 min</option>
+                      <option value="40 min">40 min</option>
+                      <option value="50 min">50 min</option>
+                      <option value="60 min">60 min</option>
+                    </Select>
+                    <FormErrorMessage>
+                      {errors.estDuration && "Estimated Duration is required"}
+                    </FormErrorMessage>
+                  </FormControl>
 
                   {/* TAGS */}
                   <Box>

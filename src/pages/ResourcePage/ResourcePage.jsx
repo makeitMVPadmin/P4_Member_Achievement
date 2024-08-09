@@ -128,7 +128,7 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
       category === "All" || resource.discipline === category;
     const matchesType = type.length === 0 || type.includes(resource.type);
     const matchesSkill = skill.length === 0 || skill.includes(resource.level);
-    const matchesDuration = duration.length === 0 || duration.includes(resource.duration);
+    const matchesDuration = duration.length === 0 || duration.includes(resource.estDuration);
 
     return currentCategory && matchesType && matchesSkill && matchesDuration;
   });
@@ -165,10 +165,10 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
     console.log("Selected Resource:", selectedResource);
   }, [resources, selectedResource]);
 
-  const handleFilterChange = ({ type, skill, duration }) => {
+  const handleFilterChange = ({ type, level, estDuration }) => {
     setType(type === "All" || type === "" ? [] : [type]);
-    setSkill(skill === "All" || skill === "" ? [] : [skill]);
-    setDuration(duration === "All" || duration === "" ? [] : [duration]);
+    setSkill(level === "All" || level === "" ? [] : [level]);
+    setDuration(estDuration === "All" || estDuration === "" ? [] : [estDuration]);
   };
 
   const handleResourceUpdate = useCallback((updatedResource) => {
@@ -223,15 +223,15 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
       <div className="resource-details__container">
         {selectedResource && Object.keys(selectedResource).length > 0 && (
           <ResourceDetailCard
-          selectedResource={selectedResource}
-          handleToggleBookmarked={handleToggleBookmarked}
-          savedBookmarks={savedBookmarks}
-          isBookmarked={isBookmarked}
-          comments={comments}
-          currentUser={currentUser}
-          onResourceUpdate={handleResourceUpdate}
-          onCommentAdded={handleCommentAdded}
-        />
+            selectedResource={selectedResource}
+            handleToggleBookmarked={handleToggleBookmarked}
+            savedBookmarks={savedBookmarks}
+            isBookmarked={isBookmarked}
+            comments={comments}
+            currentUser={currentUser}
+            onResourceUpdate={handleResourceUpdate}
+            onCommentAdded={handleCommentAdded}
+          />
         )}
       </div>
     </div>

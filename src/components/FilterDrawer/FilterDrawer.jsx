@@ -39,8 +39,6 @@ export default function FilterDrawer({ onFilterChange }) {
       ...filters,
       [name]: value,
     }));
-
-    console.log(name, value);
   };
 
   const handleFilterChange = (event) => {

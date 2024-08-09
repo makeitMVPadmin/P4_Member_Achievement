@@ -39,8 +39,6 @@ export default function FilterDrawer({ onFilterChange }) {
       ...filters,
       [name]: value,
     }));
-
-    console.log(name, value);
   };
 
   const handleFilterChange = (event) => {
@@ -73,14 +71,14 @@ export default function FilterDrawer({ onFilterChange }) {
       <div>
         <Drawer
           isOpen={isOpen}
-          placement="left"
+          placement="right"
           onClose={handleCancel}
           size="sm"
         >
           <DrawerOverlay />
           <DrawerContent
             sx={{
-              borderRadius: "0px 30px 30px 0px",
+              borderRadius: "30px 0px 0px 30px",
               border: "4px solid black",
             }}
           >

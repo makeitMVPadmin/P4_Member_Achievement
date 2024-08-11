@@ -14,8 +14,8 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
   const [category, setCategory] = useState("All");
   const [activeResourceId, setActiveResourceId] = useState(null);
   const [type, setType] = useState("");
-  const [skill, setSkill] = useState("");
-  const [duration, setDuration] = useState("");
+  const [level, setLevel] = useState("");
+  const [estDuration, setEstDuration] = useState("");
   const [comments, setComments] = useState([]);
   const [commentCounts, setCommentCounts] = useState({});
 
@@ -130,10 +130,10 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
     const currentCategory =
       category === "All" || resource.discipline === category;
     const matchesType = type.length === 0 || type.includes(resource.type);
-    const matchesSkill = skill.length === 0 || skill.includes(resource.level);
-    const matchesDuration = duration.length === 0 || duration.includes(resource.duration);
+    const matchesLevel = level.length === 0 || level.includes(resource.level);
+    const matchesDuration = estDuration.length === 0 || estDuration.includes(resource.estDuration);
 
-    return currentCategory && matchesType && matchesSkill && matchesDuration;
+    return currentCategory && matchesType && matchesLevel && matchesDuration;
   });
 
   const handleToggleBookmarked = () => {
@@ -169,10 +169,10 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
   //   console.log("Selected Resource:", selectedResource);
   // }, [resources, selectedResource]);
 
-  const handleFilterChange = ({ type, skill, duration }) => {
+  const handleFilterChange = ({ type, level, estDuration }) => {
     setType(type === "All" || type === "" ? [] : [type]);
-    setSkill(skill === "All" || skill === "" ? [] : [skill]);
-    setDuration(duration === "All" || duration === "" ? [] : [duration]);
+    setLevel(level === "All" || level === "" ? [] : [level]);
+    setEstDuration(estDuration === "All" || estDuration === "" ? [] : [estDuration]);
   };
 
   const handleResourceUpdate = useCallback((updatedResource) => {

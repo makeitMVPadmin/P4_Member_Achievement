@@ -116,6 +116,7 @@ export default function FilterDrawer({ onFilterChange }) {
                   Select
                 </option>
                 <option value="Article">Article</option>
+                <option value="Blog">Blog</option>
                 <option value="Course">Course</option>
                 <option value="Video">Video</option>
                 <option value="All">All</option>

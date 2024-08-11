@@ -131,9 +131,9 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
       category === "All" || resource.discipline === category;
     const matchesType = type.length === 0 || type.includes(resource.type);
     const matchesLevel = level.length === 0 || level.includes(resource.level);
-    const matchesDuration = estDuration.length === 0 || estDuration.includes(resource.estDuration);
+    const matchesEstDuration = estDuration.length === 0 || estDuration.includes(resource.estDuration);
 
-    return currentCategory && matchesType && matchesLevel && matchesDuration;
+    return currentCategory && matchesType && matchesLevel && matchesEstDuration;
   });
 
   const handleToggleBookmarked = () => {

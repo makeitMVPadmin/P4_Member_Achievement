@@ -1,7 +1,8 @@
 {
   "projects": {
     "default": "memberdatap3",
-    "library": "memberdatap3"
+    "library": "memberdatap3",
+    "launch": "launchacademybackend"
   },
   "targets": {
     "memberdatap3": {

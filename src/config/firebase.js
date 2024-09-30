@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 // import { getAnalytics } from "firebase/analytics";
 
@@ -15,6 +15,12 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const database = getFirestore(app);
-export const storage = getStorage(app);
-// const analytics = getAnalytics(app);
+const database = getFirestore(app);
+const storage = getStorage(app);
+
+// Use Firestore emulator in development
+// if (window.location.hostname === "localhost") {
+//   connectFirestoreEmulator(database, "127.0.0.1", 8080);
+// }
+
+export { database, storage };

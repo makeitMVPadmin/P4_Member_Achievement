@@ -16,15 +16,18 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
   const [estDuration, setEstDuration] = useState("");
   const [commentCounts, setCommentCounts] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  console.log('ResourcePageOIAHDSGUIAHGJKADSFJAKJSF');
 
   // Fetching all resources and comments only once
   useEffect(() => {
     const getAllResourcesAndComments = async () => {
       setIsLoading(true);
       try {
-        const resourcesSnapshot = await getDocs(collection(database, "Resources"));
-        const commentsSnapshot = await getDocs(collection(database, "Comments"));
+        const resourcesSnapshot = await getDocs(
+          collection(database, "Resources")
+        );
+        const commentsSnapshot = await getDocs(
+          collection(database, "Comments")
+        );
 
         const resourcesCollection = resourcesSnapshot.docs.map((doc) => {
           const resourceData = { id: doc.id, ...doc.data() };
@@ -46,7 +49,8 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
         }
 
         // Initialize bookmarked resources from local storage
-        const savedBookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+        const savedBookmarks =
+          JSON.parse(localStorage.getItem("bookmarks")) || [];
         const bookmarkedState = savedBookmarks.reduce((acc, resource) => {
           acc[resource.id] = true;
           return acc;
@@ -65,7 +69,9 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
 
   const handleSelectResource = useCallback(
     (clickedId) => {
-      const foundResource = resources.find((resource) => resource.id === clickedId);
+      const foundResource = resources.find(
+        (resource) => resource.id === clickedId
+      );
       if (foundResource) {
         setSelectedResource(foundResource);
       } else {
@@ -81,7 +87,7 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
     const newBookmarkedState = !bookmarkedResources[selectedResource.id];
     setBookmarkedResources((prev) => ({
       ...prev,
-      [selectedResource.id]: newBookmarkedState
+      [selectedResource.id]: newBookmarkedState,
     }));
 
     let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
@@ -89,7 +95,9 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
     if (newBookmarkedState) {
       bookmarks.push(selectedResource);
     } else {
-      bookmarks = bookmarks.filter((bookmark) => bookmark.id !== selectedResource.id);
+      bookmarks = bookmarks.filter(
+        (bookmark) => bookmark.id !== selectedResource.id
+      );
     }
 
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
@@ -99,7 +107,9 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
   const handleFilterChange = ({ type, level, estDuration }) => {
     setType(type === "All" || type === "" ? [] : [type]);
     setLevel(level === "All" || level === "" ? [] : [level]);
-    setEstDuration(estDuration === "All" || estDuration === "" ? [] : [estDuration]);
+    setEstDuration(
+      estDuration === "All" || estDuration === "" ? [] : [estDuration]
+    );
   };
 
   const handleResourceUpdate = useCallback((updatedResource) => {
@@ -118,10 +128,10 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
       prevResources.map((resource) =>
         resource.id === resourceId
           ? {
-            ...resource,
-            comments: [...(resource.comments || []), newComment],
-            commentsCount: (resource.commentsCount || 0) + 1,
-          }
+              ...resource,
+              comments: [...(resource.comments || []), newComment],
+              commentsCount: (resource.commentsCount || 0) + 1,
+            }
           : resource
       )
     );
@@ -142,9 +152,12 @@ export default function ResourcePage({ currentUser, onBookmarkUpdate }) {
       const matchesType = type.length === 0 || type.includes(resource.type);
 
       const matchesLevel = level.length === 0 || level.includes(resource.level);
-      const matchesEstDuration = estDuration.length === 0 || estDuration.includes(resource.estDuration);
+      const matchesEstDuration =
+        estDuration.length === 0 || estDuration.includes(resource.estDuration);
 
-      return currentCategory && matchesType && matchesLevel && matchesEstDuration;
+      return (
+        currentCategory && matchesType && matchesLevel && matchesEstDuration
+      );
     });
   }, [resources, category, type, level, estDuration]);
 

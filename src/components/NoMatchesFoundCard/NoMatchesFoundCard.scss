@@ -1,0 +1,54 @@
+@use "../../styles/partials/_typography" as *;
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+@use "../../styles/partials/global" as *;
+
+section {
+  margin: 1rem;
+  padding: 1rem;
+  width: 100%;
+  height: fit-content;
+  line-height: 1.1;
+  letter-spacing: -0.05rem;
+  font-family: "Poppins", sans-serif;
+  @include border;
+
+  h1 {
+    font-weight: 700;
+    font-size: 0.95rem;
+    width: 100%;
+
+    @include desktop {
+      font-size: 1.15rem;
+    }
+
+    @include large-desktop {
+      font-size: 1.35rem;
+    }
+  }
+
+  .title {
+    color: $dark-blue;
+    padding-bottom: 0.5rem;
+  }
+
+  h4 {
+    color: $dark-blue;
+    font-size: 0.8rem;
+    font-weight: 400;
+
+    width: 100%;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  ul {
+    color: $black;
+    list-style-position: inside;
+    font-size: 1rem;
+    font-weight: 400;
+    width: 100%;
+    margin-left: 0.5rem;
+    padding-bottom: 1.5rem;
+  }
+}

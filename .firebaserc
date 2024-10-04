@@ -1,10 +1,11 @@
 {
   "projects": {
-    "default": "memberdatap3",
-    "library": "memberdatap3"
+    "default": "LaunchAcademyBackend",
+    "library": "LaunchAcademyBackend",
+    "LaunchAcademyBackend": "launchacademybackend"
   },
   "targets": {
-    "memberdatap3": {
+    "launchacademybackend": {
       "hosting": {
         "library": [
           "communiti-learninghub"

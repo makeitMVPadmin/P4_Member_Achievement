@@ -57,6 +57,8 @@ const App = () => {
   useEffect(() => {
     // Fetch user data from Firestore
     const fetchUserData = async () => {
+      console.log("fetch data running");
+      
       try {
         // Assuming you have a way to get the user ID, replace `userId` with actual user ID.
         const userId = "lsIRi5Uu72sATQ7JLIu1"; // Replace with actual user ID logic
